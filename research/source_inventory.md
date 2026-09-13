@@ -7,7 +7,7 @@ numbers refer to the local files captured in `source_snapshot.json`.
 
 | Source | Lines | Reading status |
 |---|---:|---|
-| [G1Pilot](../../g1pilot/running_notes.md) | 1,328 | Not yet read sequentially; first reading pass starts here. |
+| [G1Pilot](../../g1pilot/running_notes.md) | 1,328 | Complete: lines 1–1,328 read sequentially on 2026-09-13. [Reading notes](g1pilot-reading.md). |
 | [Calibration prototype](../../robot-calibration-aprilcube-prototype/running_notes.md) | 1,864 | Pending. Lines 2–1,864 match tabletop lines 359–2,221. |
 | [G1 Dex3 tabletop](../../g1-dex3-tabletop/running_notes.md) | 7,403 | Pending; earlier heading inventory is not sequential reading. |
 | [AprilCube notes](../../g1-dex3-tabletop/third_party/aprilcube/running_notes.md) | 126 | Pending; check provenance before attributing work. |
@@ -33,6 +33,13 @@ numbers refer to the local files captured in `source_snapshot.json`.
 - `GR00T-WholeBodyControl`, `Isaac-GR00T`, and `g1pilot_ws` are present locally.
   Their presence alone does not establish original author contributions or
   completed experiments. Find local evidence before including them as summer work.
+- G1Pilot's `docs/LAB_G1_ONBOARD_PROFILE.md`, `docs/LAB_LAPTOP_SETUP_HUMBLE.md`,
+  `docs/DEX3_PRESSURE_VISUALIZATION.md`, and `static_review.md` are located;
+  full reading pending.
+- `GR00T-WholeBodyControl` contains tracked MuJoCo simulation code. The initial
+  scan found no tracked MuJoCo-named files in G1Pilot or Isaac-GR00T. This does not
+  locate or establish the author's digital twin; the source-location question is
+  pending. No need to infer ownership from an upstream simulation directory.
 
 ## Reading method
 
