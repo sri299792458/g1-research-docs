@@ -6,6 +6,7 @@ it changes the interpretation of earlier calibration and manipulation results.
 | Period | Work and turning point | Outcome |
 |---|---|---|
 | June 21 | G1Pilot dependencies, dry mode, topic/TF and command repairs; camera/LiDAR diagnosis | Development base; physical camera USB fault identified |
+| June 25 | Passive Dex3 raw audit, baseline, free-touch study and RViz mapping | 33 active taxels on the inspected right hand; raw counts remain uncalibrated |
 | June 30–July 1 | MuJoCo G1/Dex3 and OpenHomie | Initial backend and two demos |
 | July 13–15 | AprilCube rounding and H2D printing | Compact 40 mm/R3 print selected |
 | July 18–21 | Dex3 descriptor and batched grasp tests | Conditioning error isolated with crossed-hand and factorial tests |
