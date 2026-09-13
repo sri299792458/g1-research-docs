@@ -1,33 +1,35 @@
 # Source inventory and reading coverage
 
-This is an internal research index, not the documentation navigation. Line
-numbers refer to the local files captured in `source_snapshot.json`.
+This is the working research index, not the final documentation navigation. Line
+numbers refer to the source files captured in `source_snapshot.json`. Source
+paths below identify the repository directory and file, not a required filesystem
+layout. Some evidence is local and has not been published with these notes.
 
 ## Primary running notes
 
 | Source | Lines | Reading status |
 |---|---:|---|
-| [G1Pilot, local June 21 log](../../g1pilot/running_notes.md) | 1,328 | Complete: lines 1–1,328 read sequentially on 2026-09-13. [Reading notes](g1pilot-reading.md). Remote `dev` adds later code; see below. |
-| [Calibration prototype](../../robot-calibration-aprilcube-prototype/running_notes.md) | 1,864 | Pending. Lines 2–1,864 match tabletop lines 359–2,221. |
-| [G1 Dex3 tabletop](../../g1-dex3-tabletop/running_notes.md) | 7,403 | Pending; earlier heading inventory is not sequential reading. |
-| [AprilCube notes](../../g1-dex3-tabletop/third_party/aprilcube/running_notes.md) | 126 | Pending; check provenance before attributing work. |
+| [G1Pilot, June 21 log](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/running_notes.md) | 1,328 | Complete: lines 1–1,328 read sequentially on 2026-09-13. [Reading notes](g1pilot-reading.md). Remote `dev` adds later code; see below. |
+| `robot-calibration-aprilcube-prototype/running_notes.md` | 1,864 | Local evidence; pending reading. Lines 2–1,864 match tabletop lines 359–2,221. |
+| `g1-dex3-tabletop/running_notes.md` | 7,403 | Local evidence includes uncommitted notes; pending. Heading inventory is not sequential reading. |
+| `g1-dex3-tabletop/third_party/aprilcube/running_notes.md` | 126 | Local evidence; pending. Check provenance before attributing work. |
 
 ## Supporting evidence already located
 
-- [Calibration investigation ledger](../../g1-dex3-tabletop/docs/calibration-investigation-ledger.md):
+- `g1-dex3-tabletop/docs/calibration-investigation-ledger.md`:
   read in the reference-review phase. Contains completed investigations and current
   operator corrections. Reconcile older findings against it.
-- [Dex3 observations](../../dex3_pressure_tools/docs/OBSERVATIONS.md) and
-  [README](../../dex3_pressure_tools/README.md): read in the reference-review phase.
+- `dex3_pressure_tools/docs/OBSERVATIONS.md` and
+  `dex3_pressure_tools/README.md`: read in the reference-review phase.
   Include local active-slot, idle-noise, topic-rate, and joint-order observations.
   Raw pressure deltas are not calibrated physical forces.
-- [Tabletop recording contract](../../g1-dex3-tabletop/docs/data-recording.md):
+- `g1-dex3-tabletop/docs/data-recording.md`:
   located; full reading pending.
-- [Prototype research documents](../../robot-calibration-aprilcube-prototype/docs/):
+- `robot-calibration-aprilcube-prototype/docs/`:
   located; read individual linked studies as their claims are examined.
-- [Spark documentation source](../../spark-data-collection/data_pipeline/docs/),
-  [MkDocs configuration](../../spark-data-collection/mkdocs.yml), and
-  [Pages workflow](../../spark-data-collection/.github/workflows/docs-pages.yml):
+- The [published Spark documentation](https://rpm-lab-umn.github.io/spark-data-collection/),
+  plus the local `spark-data-collection/data_pipeline/docs/`, `mkdocs.yml`, and
+  `.github/workflows/docs-pages.yml`:
   reference structure and representative content reviewed. No G1 site technology
   or publication workflow has been selected.
 - `GR00T-WholeBodyControl`, `Isaac-GR00T`, and `g1pilot_ws` are present locally.

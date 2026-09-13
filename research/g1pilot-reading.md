@@ -1,7 +1,7 @@
 # G1Pilot: first complete reading
 
 Read on 2026-09-13: every line (1–1,328) of
-[`g1pilot/running_notes.md`](../../g1pilot/running_notes.md), in consecutive ranges
+[`g1pilot/running_notes.md`](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/running_notes.md), in consecutive ranges
 1–340, 341–680, 681–1,015, and 1,016–1,328. File identity is recorded in
 `source_snapshot.json`.
 

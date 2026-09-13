@@ -21,5 +21,10 @@ Read `running_notes.md` and `research/source_inventory.md` before continuing.
 - Maintain this repository's running notes and Git history as work progresses.
 - Keep a record of missing information and media needs. Ask focused questions
   during discussion rather than inventing details or requesting every asset at once.
-- Initial source paths and machine details are internal research references.
-  Resolve appropriate links and presentation when preparing reader-facing pages.
+- The user authorized a public repository in their personal GitHub account,
+  `sri299792458`, with a later lab-organization copy after completion. Preserve
+  personal portfolio attribution and the ability to maintain the lab copy.
+- Keep machine-specific source locations in ignored `.local/` files. The public
+  source snapshot uses repository directory names and hashes. Use public source
+  URLs only when they refer to the exact available material; label local-only
+  evidence explicitly rather than publishing broken sibling-checkout links.

@@ -22,7 +22,7 @@
     "identical_to_local_reading": true,
     "removed_at_commit": "6b5af59b109e2ee687920fdf66ded6182725e945"
   },
-  "inspection_checkout": "/home/kanth042/g1-research-docs/.sources/g1pilot-dev",
+  "inspection_checkout": ".sources/g1pilot-dev",
   "files": [
     {
       "path": "README.md",

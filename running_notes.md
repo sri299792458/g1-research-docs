@@ -41,7 +41,7 @@ explain the development process, failures, and physical results.
 
 ### Work started
 
-Created `/home/kanth042/g1-research-docs` as a separate local Git repository on
+Created `g1-research-docs` as a separate local Git repository on
 `main`. This is an internal documentation workspace, with no site publication or
 reader-facing chapters yet. No source-repository files or Git state were changed.
 
@@ -203,3 +203,40 @@ Official GitHub documentation checked September 13:
   site workflow is proposed here.
 
 No media was uploaded, copied to a public host, or altered during this discussion.
+
+## 2026-09-13 — Public personal repository and future lab maintenance agreed
+
+The author emphasized ease of maintenance and extension by future lab members.
+They requested that documentation start as a public repository in their personal
+GitHub account. After completion, the lab's GitHub organization should receive a
+copy for continued development. The author wants to retain their personal copy
+for their resume/portfolio.
+
+Recorded this ownership plan in the README and `CONTRIBUTING.md`. Preserve Git
+history and attribution during the future handoff and tag the completed summer
+version so subsequent lab extensions remain distinguishable. Exact organization
+repository, tag, site technology, and final documentation navigation remain open.
+
+Prepared the repository for public readers: added the project introduction and
+maintenance guidance, replaced broken sibling-checkout links with exact public
+references or explicitly labeled source paths, and made source provenance
+portable. Absolute checkout locations now live in ignored
+`.local/source_locations.json`; source-file hashes and commit IDs are unchanged.
+Earlier local setup commits remain historical records; no Git history was rewritten.
+
+GitHub's connected account is confirmed as `sri299792458`. The intended name is
+`g1-research-docs`, matching the existing workspace. A repository lookup returned
+404. The available GitHub connector can manipulate files, commits, and refs in
+existing repositories, but exposes no repository-creation action. This shell has
+no GitHub CLI, configured Git credential helper, or GitHub token environment.
+Publication therefore requires the author to create the public repository first.
+The documentation is prepared locally; no public repository or site has yet
+been created through this session. No additional permission to publish is needed:
+the user's request already supplies it.
+
+Preparation checks passed: all relative Markdown links resolve within the
+repository, research JSON parses, all nine original source hashes still match,
+and `.local/` plus `.sources/` are excluded from the public candidate. A targeted
+scan of tracked history and current files found no GitHub token or private-key
+patterns. `git diff --check` passes. These checks prepare the files for the
+requested publication; they are not a claim that a remote upload has occurred.
