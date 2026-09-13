@@ -2,3 +2,39 @@ article { line-height: 1.65; }
 article video { width: 100%; max-height: 36rem; background: #172327; }
 article img { height: auto; }
 article table { font-size: 0.91rem; }
+
+/* Preserve readable labels on narrow screens instead of shrinking the graph. */
+article .mermaid-container {
+    display: block;
+    overflow-x: auto;
+    margin-block: 1.25rem;
+    padding-top: 2.25rem;
+}
+article .mermaid-container > pre.mermaid {
+    min-width: 38rem;
+    margin: 0;
+    padding: 0;
+}
+article .mermaid-container > .mermaid-fullscreen-btn {
+    top: 0 !important;
+    right: 0 !important;
+    width: auto;
+    height: auto;
+    min-height: 2rem;
+    padding: 0.25rem 0.65rem;
+    font: inherit;
+    font-size: 0.875rem;
+}
+article .mermaid-fullscreen-btn:focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 2px;
+}
+.mermaid-fullscreen-modal .mermaid-container-fullscreen {
+    justify-content: flex-start;
+}
+.mermaid-fullscreen-modal pre.mermaid {
+    min-width: 38rem;
+}
+.mermaid-fullscreen-modal .mermaid-container-fullscreen .mermaid svg {
+    height: auto !important;
+}

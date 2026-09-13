@@ -39,20 +39,36 @@ in the [review queue](reference/review.md).
 
 ## How the pieces connect
 
-```{mermaid}
-flowchart TD
-  H[Robot, camera and printed targets] --> P[Measured state and object observations]
-  C[Calibration bundle] --> P
-  G[Offline grasp proposals and qualification] --> M[CuRobo scene and complete routes]
-  P --> M
-  M --> E[Fixed-rate execution and grasp checks]
-  E --> H
-  W[Independent PC2 watchdog] --> E
-  H --> R[Raw MCAP recording]
-  E --> R
-  R --> A[Offline analysis and LeRobot]
-  A --> C
+During a manipulation task, measured robot state and object observations feed
+route planning, then the fixed-rate controller executes the checked motion.
+On a narrow screen, scroll diagrams horizontally or select **Expand**.
+
+```mermaid
+flowchart LR
+  accTitle: From observation to execution
+  accDescr: Observe the robot and scene, plan the approach and return, then execute motion and check the grasp.
+  O["Observe robot<br/>and scene"] --> P["Plan approach<br/>and return"]
+  P --> E["Execute motion<br/>and check grasp"]
 ```
+
+[Calibration](calibration/workflow.md) supplies the camera/arm model;
+the [grasp library](manipulation/grasp-atlas.md) supplies qualified candidates.
+The independent [PC2 watchdog](control/ownership.md) handles its defined fault
+recovery, while the recorder preserves robot state and commands through cleanup.
+
+After the run, the retained evidence supports two separate uses:
+
+```mermaid
+flowchart LR
+  accTitle: Using the recorded evidence
+  accDescr: Raw recordings and task records support failure analysis and model or tooling improvements. An offline conversion also creates LeRobot training episodes.
+  R["Raw recordings<br/>and task records"] --> A["Analyze outcomes<br/>and failures"]
+  A --> I["Refine models<br/>and tooling"]
+  R --> D["Convert to LeRobot<br/>training episodes"]
+```
+
+The [recording chapter](data/recording.md) explains what survives conversion
+and why the raw evidence remains useful.
 
 The [G1Pilot digital twin](simulation/mujoco.md) is a separate early development
 path. It offers familiar SDK interfaces in MuJoCo; it does not reproduce the
@@ -129,5 +145,6 @@ Debugging from evidence <reference/debugging>
 Sources and attribution <reference/sources>
 Media catalog <reference/media>
 Maintaining this guide <reference/maintenance>
+Writing diagrams <reference/diagrams>
 Draft review queue <reference/review>
 ```

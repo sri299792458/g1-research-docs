@@ -14,6 +14,22 @@ root_doc = "index"
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 myst_heading_anchors = 3
 myst_enable_extensions = ["colon_fence"]
+myst_fence_as_directive = ["mermaid"]
+
+# Keep diagram source compatible with ordinary GitHub Markdown fences.
+# Pin the browser renderer separately from the Sphinx extension.
+mermaid_version = "11.12.1"
+mermaid_height = "auto"
+mermaid_light_theme = "neutral"
+mermaid_dark_theme = "dark"
+mermaid_fullscreen_button = "Expand"
+mermaid_fullscreen_button_opacity = "100"
+mermaid_init_config = {
+    "startOnLoad": False,
+    "fontFamily": "system-ui, sans-serif",
+    "themeVariables": {"fontSize": "18px"},
+    "flowchart": {"curve": "linear", "nodeSpacing": 30, "rankSpacing": 42},
+}
 html_theme = "furo"
 html_title = "Working with the G1"
 html_baseurl = "https://sri299792458.github.io/g1-research-docs/"

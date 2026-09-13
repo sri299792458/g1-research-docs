@@ -35,6 +35,9 @@ of inventing a custom component. The hidden `toctree` blocks at the bottom of
 `docs/index.md` define the sidebar groups. Add a new page there and link it
 from the appropriate reading path.
 
+Use Mermaid for code diagrams; the [diagram guide](diagrams.md) gives the
+shared syntax, diagram types and rendering checks.
+
 Keep procedure prerequisites and expected observations near the instructions.
 Date hardware results and identify their configuration. Preserve the reason
 for a step when a failed experiment explains it. New research should update
