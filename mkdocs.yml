@@ -1,0 +1,64 @@
+site_name: G1 Research Guide
+site_description: Summer research, practical tools, and lessons from the Unitree G1 and Dex3 hands.
+theme:
+  name: material
+  font: false
+  palette:
+    primary: teal
+    accent: orange
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+extra_css:
+  - assets/stylesheets/extra.css
+nav:
+  - Home: index.md
+  - Start here:
+      - Reading paths and results: start/overview.md
+      - Summer timeline: start/timeline.md
+      - Repositories and setup: start/setup.md
+  - Hardware and control:
+      - The lab robot: hardware/robot.md
+      - Camera and network: hardware/camera.md
+      - Ownership and safety: control/ownership.md
+      - Operating and recovering: control/runbook.md
+      - G1Pilot bring-up: control/g1pilot.md
+  - Perception and calibration:
+      - Printed targets and mounts: perception/targets.md
+      - Object pose estimation: perception/object-pose.md
+      - Calibration model and workflow: calibration/workflow.md
+      - Calibration results and limits: calibration/results.md
+      - Investigation record: calibration/investigation.md
+      - Body motion and state estimation: perception/state-estimation.md
+  - Grasping and planning:
+      - GraspGen-X and the grasp atlas: manipulation/grasp-atlas.md
+      - Assembly experiments: manipulation/assembly.md
+      - CuRobo planning contracts: manipulation/planning.md
+      - Pickup and stacking: manipulation/tasks.md
+      - Moving-target MPC: manipulation/mpc.md
+  - Sensing, simulation, and data:
+      - Dex3 pressure: sensing/pressure.md
+      - MuJoCo digital twin: simulation/mujoco.md
+      - Recording and LeRobot: data/recording.md
+  - Reference and maintenance:
+      - Debugging from evidence: reference/debugging.md
+      - Sources and attribution: reference/sources.md
+      - Media catalog: reference/media.md
+      - Maintaining this guide: reference/maintenance.md
+      - Draft review queue: reference/review.md
