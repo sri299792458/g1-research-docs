@@ -33,6 +33,9 @@ Read `running_notes.md` and `research/source_inventory.md` before continuing.
   Material's maintenance status and the UW Lab/cuRobo sites. Keep customization
   minimal. The author wants a straightforward lab guide with specific evidence,
   not language implying the scope or maturity of cuRobo.
+- Mermaid is the agreed standard for code diagrams. Use ordinary `mermaid`
+  Markdown fences, focused flow/sequence/state diagrams, accessible descriptions
+  and the shared site style. Check browser rendering as well as the Sphinx build.
 - Keep machine-specific source locations in ignored `.local/` files. The public
   source snapshot uses repository directory names and hashes. Use public source
   URLs only when they refer to the exact available material; label local-only

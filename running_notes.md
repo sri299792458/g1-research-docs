@@ -376,3 +376,28 @@ https://mermaid.js.org/syntax/sequenceDiagram.html,
 https://mermaid.js.org/syntax/stateDiagram.html,
 https://d2lang.com/tour/layouts/,
 https://www.drawio.com/docs/manual/export/export-to-svg/.
+
+## 2026-09-13 — Mermaid adopted for the guide
+
+The author approved Mermaid for the documentation. Recorded it in AGENTS.md
+and added `docs/reference/diagrams.md` with flow/sequence/state selection,
+ordinary Markdown fence syntax, accessible descriptions and browser checks.
+MyST now recognizes ordinary `mermaid` fences, so the same diagram source can
+render on GitHub. Explicitly pinned the already tested browser renderer to
+11.12.1; this change does not adopt a new renderer major version.
+
+Replaced the mixed homepage graph with two focused diagrams: observation to
+planning/execution, and the separate analysis/conversion uses of retained
+recordings. Supporting prose preserves the calibration, grasp-library and
+watchdog relationships. Removed the fixed 500 px height, used a neutral light
+theme and dark theme, made Expand a readable text control, and retained diagram
+width through horizontal scrolling on narrow screens and in the larger viewer.
+
+Strict Sphinx build passes for all 29 pages. Checked 1,508 local links/assets
+with no missing targets. Chromium checks cover both rendered overview diagrams,
+accessible SVG titles/descriptions, 390 px viewport without document overflow,
+horizontal scrolling, Expand/Escape, initial dark rendering and switching back
+to light. A test probe needed to wait for the replacement SVG during theme
+rerender; the corrected check passed. Sequence/state syntax examples also parse
+with the pinned renderer. Desktop labels are approximately 18–19 px instead of
+the former roughly 10 px. Changes are ready for the existing Pages workflow.
