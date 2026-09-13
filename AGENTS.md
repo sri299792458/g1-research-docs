@@ -27,7 +27,12 @@ Read `running_notes.md` and `research/source_inventory.md` before continuing.
   `sri299792458`, with a later lab-organization copy after completion. Preserve
   personal portfolio attribution and the ability to maintain the lab copy.
 - The user subsequently deferred connecting a remote. Continue locally with Git;
-  do not treat remote creation or authentication as a blocker or keep requesting it.
+  later, they created `sri299792458/g1-research-docs` and authorized connecting
+  and publishing the draft so they can read it. `origin` now points there.
+- The chosen site stack is Sphinx + MyST Markdown + Furo, after reviewing
+  Material's maintenance status and the UW Lab/cuRobo sites. Keep customization
+  minimal. The author wants a straightforward lab guide with specific evidence,
+  not language implying the scope or maturity of cuRobo.
 - Keep machine-specific source locations in ignored `.local/` files. The public
   source snapshot uses repository directory names and hashes. Use public source
   URLs only when they refer to the exact available material; label local-only

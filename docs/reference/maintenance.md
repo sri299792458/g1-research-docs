@@ -1,0 +1,77 @@
+# Maintaining this guide
+
+The guide uses **Sphinx, MyST Markdown and Furo**. Most contributions change
+a Markdown page under `docs/`, an image/caption, or an entry in the navigation.
+Building the guide does not require ROS, CUDA, robot repositories or hardware.
+
+## Install and preview
+
+From the repository root, with Python 3.10 or newer:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-docs.txt
+.venv/bin/sphinx-build -n -W --keep-going -b html docs site
+.venv/bin/python -m http.server 8000 --directory site --bind 127.0.0.1
+```
+
+Open `http://127.0.0.1:8000`. Rebuild after changing a page, then refresh the
+browser. If the system Python lacks `venv`/`ensurepip` and you already use uv:
+
+```bash
+uv venv --python 3.10 .venv
+uv pip install --python .venv/bin/python -r requirements-docs.txt
+```
+
+The dependency input is `requirements-docs.in`; `requirements-docs.txt` pins
+the resolved build. Update deliberately, rebuild and review before committing
+a new lock. The first draft was built with Python 3.10.
+
+## Edit a page
+
+Use normal headings, links, fenced code and Markdown tables. MyST adds
+directives for notes, figures and navigation. Copy a nearby example instead
+of inventing a custom component. The hidden `toctree` blocks at the bottom of
+`docs/index.md` define the sidebar groups. Add a new page there and link it
+from the appropriate reading path.
+
+Keep procedure prerequisites and expected observations near the instructions.
+Date hardware results and identify their configuration. Preserve the reason
+for a step when a failed experiment explains it. New research should update
+the current procedure while leaving the historical correction traceable.
+
+Run the strict build above and `git diff --check`. Sphinx treats warnings,
+including missing internal references, as failures. The GitHub workflow runs
+the same build for pull requests and publishes successful main-branch builds
+to Pages.
+
+## Why this framework
+
+Material for MkDocs matched SPARK, but its maintainers announced maintenance
+mode and a move toward Zensical. Zensical preserves much of that authoring
+experience but was still labelled alpha when reviewed on September 13, 2026.
+The author also pointed to UW Lab and cuRobo: both use Sphinx; UW Lab uses
+Sphinx Book Theme, and cuRobo uses Furo. Both enable MyST Markdown.
+
+For this project, the selected tradeoff is an established Python documentation
+builder, Markdown authoring and minimal theme customization. Furo gives a
+compact technical reading layout and Sphinx can add API references later.
+There is no need to install every extension used by those much larger projects.
+
+Decision sources: [Material announcement](https://squidfunk.github.io/mkdocs-material/blog/2025/11/11/insiders-now-free-for-everyone/),
+[Zensical status](https://zensical.org/about/roadmap/),
+[UW Lab configuration](https://github.com/uw-lab/UWLab/blob/main/docs/conf.py),
+[cuRobo configuration](https://github.com/NVlabs/curobo/blob/main/docs/conf.py).
+
+## Publication and handoff
+
+The author created `sri299792458/g1-research-docs` for following the draft.
+The Pages workflow builds static HTML and deploys it through GitHub Actions;
+repository Pages settings must use **GitHub Actions** as their source. The
+README records the live link once publication is verified.
+
+For the later lab copy, preserve Git history and tag the reviewed summer
+version. Update `html_baseurl` and repository/edit links in `docs/conf.py`,
+enable Pages, and check media access. Link the personal portfolio version
+and the lab's maintained version from both READMEs. Date later lab additions
+so the original summer contribution remains identifiable.

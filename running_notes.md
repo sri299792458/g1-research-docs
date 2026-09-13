@@ -287,3 +287,31 @@ No new hardware experiment or remote publication is part of this request.
 ## 2026-09-13 — Complete primary-source reading and first-draft site
 
 Read all tabletop 7,403 lines and the identical inherited prototype block, AprilCube126 lines, plus newly located public grasp-demo3,209 lines. Combined with G1Pilot1,328 already read, all located primary running notes are covered. Detailed reading records preserve retractions, physical/offline distinctions and current calibration limits. Added MkDocs Material navigation and initial chapters, using an isolated docs venv and frozen requirements. System venv lacked ensurepip; uv created the environment without system changes. No source repository, robot, or remote was modified. Remaining work: complete every chapter, media/provenance catalog, render/build/link verification, final Git checkpoint.
+
+## 2026-09-13 — Full chapter draft and framework decision
+
+Prepared all 28 reader-facing pages covering the located summer work. Pages
+retain failures, current operating boundaries, calibration model limits and
+physical versus simulated outcomes. Added three visually inspected, unchanged
+grasp-demo PNGs and a media catalog. The two MuJoCo videos remain metadata-only
+references; no claim of reviewed playback was added.
+
+The author asked whether MkDocs Material was still a good current choice.
+Official sources showed maintenance mode and the Zensical successor, still
+labelled alpha. After the author supplied UW Lab and cuRobo examples, inspected
+their actual configuration: Sphinx Book Theme and Furo respectively, both with
+MyST support. Selected Sphinx + MyST Markdown + Furo, with minimal CSS, a pinned
+Python 3.10-compatible environment and a strict build. Removed the temporary
+MkDocs configuration and dependencies. Initial strict Sphinx build passed.
+
+The author clarified that using the same framework should not make the work
+appear pretentious or imply cuRobo's scope. Treat it as a readable practical
+lab guide; use specific results and limits rather than inflated maturity claims.
+
+The author created the public `sri299792458/g1-research-docs` repository and
+asked to see the draft there. This supersedes the earlier local-only decision.
+Connected origin, found no existing remote commits, and prepared a Pages
+workflow. HTTPS/SSH initially lacked authentication. Installed GitHub CLI in
+the user's local tools directory after verifying the official archive checksum;
+the author completed browser authentication. Confirmed the intended account
+and a successful dry-run push. Actual publication and browser checks follow.

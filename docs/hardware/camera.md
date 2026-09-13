@@ -1,0 +1,82 @@
+# Camera and network
+
+The camera must be a dependable measurement source before it can support
+calibration or planning. USB acquisition, service ownership, DDS discovery,
+image freshness, and geometric calibration are separate checks.
+
+## Recorded topology
+
+The onboard audit found Ubuntu 20.04 ARM64/Tegra with ROS Foxy and CycloneDDS;
+the later research laptop used Ubuntu 22.04/Humble. PC2's recorded Ethernet
+address was `192.168.123.164` on `eth0`. The laptop interface varied with
+the adapter; `enp134s0` is a lab example, not a required interface name.
+
+The audit also found an incorrect robot clock in 1970. An archive filename
+from that audit is not wall-clock evidence. Later analysis keeps sensor header
+time and bag receipt time separately; merely enabling NTP does not prove
+synchronization.
+
+Unitree DDS channels such as `rt/lowstate` appear on the ROS graph as
+`/lowstate`. Recording `/rt/lowstate` produced an RGB-only bag with empty
+robot topics. Topic discovery also does not imply that the current Python
+environment can deserialize `unitree_hg`; source the matching message workspace.
+
+## One camera owner
+
+The factory `video_hub_pc4` process can own the RGB device while no standard
+ROS camera topics exist. TeleImager and the ROS RealSense driver are alternative
+consumers of the same hardware.
+
+The focused repository's `tools/g1_realsense_pc2.sh` carries the commissioned
+camera lifecycle: lock the ownership change, release the factory video service,
+start and verify the intended driver, and restore the service on stop or a
+failed start. Camera-dependent hardware launchers use it. A tracked driver
+process that is alive but produces no frames is not a healthy camera; a clean
+stop/start recovered one such case.
+
+Use the repository's ownership helper rather than starting several camera
+applications. Its actions change PC2 services even though they do not command
+robot joints.
+
+## Profiles used at different stages
+
+| Stage | Profile and evidence |
+|---|---|
+| June direct USB/TeleImager | 640 × 480 color at 30 FPS; laptop ZMQ client received about 30 FPS |
+| Focused calibration/manipulation | RGB8 1280 × 720 at 15 FPS, matching frozen CameraInfo |
+| Native depth recording | Unaligned Z16 640 × 480 at 15 FPS |
+| Motion streams | Separate raw gyro and accelerometer; no synthesized orientation |
+| Offline alignment | Depth/color intrinsics and factory static transforms retained |
+
+A black WebRTC preview in June remained a separate playback issue after the
+Python/ZMQ path worked. It did not invalidate the successful camera acquisition.
+The original USB/UVC failure was resolved by moving the cable to another PC2
+port; the exact good/bad port photograph is still needed.
+
+## Calibration stream semantics
+
+The optimizer assumes rectified color coordinates and uses the projection
+matrix `P[:3, :3]`. It does not silently combine raw distorted pixels with a
+rectified model. Topic names alone are insufficient: inspect the actual
+CameraInfo, profile, dimensions, distortion contract, and frozen hashes.
+
+The D435i's factory depth-to-color transform is internal sensor calibration.
+The robot-to-color transform is a different quantity. The manually adjustable
+head makes a nominal URDF camera transform an initialization, not a measured
+extrinsic. Mark and preserve the head angle within a dataset; after adjustment,
+obtain a new camera registration.
+
+## Freshness and pairing
+
+Keep the sensor header timestamp, local monotonic receipt time, complete
+measured-state window, and selected frame. Calibration captures are stationary,
+with state samples bracketing each image. One early buffered-image incident
+showed why receipt proximity alone cannot prove exposure freshness.
+
+For moving or continuous analysis, map producer clocks explicitly. The seat
+study found substantial offsets and different RGB/depth phases. Treating all
+header stamps as one synchronized clock can manufacture motion.
+
+Evidence: G1Pilot June camera postmortem/onboard audit; tabletop August 13–16
+camera and recording entries; [recording contract](../data/recording.md).
+

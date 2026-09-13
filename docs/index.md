@@ -3,7 +3,6 @@
 During the summer, I used the Unitree G1 to understand what it would take to
 make the robot useful for research: what it could do, where its models and
 interfaces fell short, and what tooling would let someone else build on the work.
-{ .lead }
 
 The work grew from G1Pilot bring-up and an initial MuJoCo backend into printed
 fiducial targets, Dex3 sensing, camera and arm calibration, offline grasp
@@ -17,12 +16,15 @@ experiments that changed them, including approaches that looked reasonable
 but failed on the real system. The aim is for the next lab member to start
 from that experience and extend it with confidence.
 
-!!! note "First draft · summer work with follow-up through September 7, 2026"
-    This draft awaits the author's review. Procedures and results have different
-    evidence levels. The latest manually preclosed calibration workflow still
-    needs new route generation and physical validation; moving-target MPC
-    remains experimental. Missing installation details and media are collected
-    in the [review queue](reference/review.md).
+```{admonition} First draft · summer work with follow-up through September 7, 2026
+:class: note
+
+This draft awaits the author's review. Procedures and results have different
+evidence levels. The latest manually preclosed calibration workflow still
+needs new route generation and physical validation; moving-target MPC
+remains experimental. Missing installation details and media are collected
+in the [review queue](reference/review.md).
+```
 
 ## Where to begin
 
@@ -37,7 +39,7 @@ from that experience and extend it with confidence.
 
 ## How the pieces connect
 
-```mermaid
+```{mermaid}
 flowchart TD
   H[Robot, camera and printed targets] --> P[Measured state and object observations]
   C[Calibration bundle] --> P
@@ -60,3 +62,72 @@ This guide follows the practical style of the earlier
 [SPARK documentation](https://rpm-lab-umn.github.io/spark-data-collection/).
 The [source catalog](reference/sources.md) explains which supporting records
 are public and which still require a lab archive.
+
+```{toctree}
+:hidden:
+:caption: Start here
+:maxdepth: 1
+
+Reading paths and results <start/overview>
+Summer timeline <start/timeline>
+Repositories and setup <start/setup>
+```
+
+```{toctree}
+:hidden:
+:caption: Hardware and control
+:maxdepth: 1
+
+The lab robot <hardware/robot>
+Camera and network <hardware/camera>
+Ownership and safety <control/ownership>
+Operating and recovering <control/runbook>
+G1Pilot bring-up <control/g1pilot>
+```
+
+```{toctree}
+:hidden:
+:caption: Perception and calibration
+:maxdepth: 1
+
+Printed targets and mounts <perception/targets>
+Object pose estimation <perception/object-pose>
+Calibration model and workflow <calibration/workflow>
+Calibration results and limits <calibration/results>
+Investigation record <calibration/investigation>
+Body motion and state estimation <perception/state-estimation>
+```
+
+```{toctree}
+:hidden:
+:caption: Grasping and planning
+:maxdepth: 1
+
+GraspGen-X and the grasp atlas <manipulation/grasp-atlas>
+Assembly experiments <manipulation/assembly>
+CuRobo planning contracts <manipulation/planning>
+Pickup and stacking <manipulation/tasks>
+Moving-target MPC <manipulation/mpc>
+```
+
+```{toctree}
+:hidden:
+:caption: Sensing, simulation, and data
+:maxdepth: 1
+
+Dex3 pressure <sensing/pressure>
+MuJoCo digital twin <simulation/mujoco>
+Recording and LeRobot <data/recording>
+```
+
+```{toctree}
+:hidden:
+:caption: Reference and maintenance
+:maxdepth: 1
+
+Debugging from evidence <reference/debugging>
+Sources and attribution <reference/sources>
+Media catalog <reference/media>
+Maintaining this guide <reference/maintenance>
+Draft review queue <reference/review>
+```

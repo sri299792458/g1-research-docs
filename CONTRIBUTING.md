@@ -1,69 +1,54 @@
-# Maintaining and extending the documentation
+# Maintaining and extending the guide
 
-The purpose of this repository is to make G1 research work understandable and
-reusable by future lab members. Favor plain Markdown, clear file names, relative
-links within this repository, and source references that another person can
-follow. The website technology and final chapter structure remain open.
+Edit ordinary Markdown under `docs/`. The site uses Sphinx, MyST and Furo with
+minimal customization. Follow the [local build instructions](README.md) and
+[maintenance guide](docs/reference/maintenance.md).
 
-## Make changes that another researcher can assess
+## Make a change another researcher can assess
 
-1. Read the relevant page and its evidence before editing. The source inventory
-   records what has been read and which material still needs examination.
-2. Keep a change focused on one procedure, result, correction, or topic. Explain
-   what changed and why in the commit or pull request.
-3. State prerequisites and expected observations for procedures. Preserve the
-   reason for a step when a previous failure explains it.
-4. Distinguish proposed work, software inspection, offline tests, simulation,
-   physical experiments, and deployed behavior. Link the relevant source/run
-   and record the date and hardware/software configuration where available.
-5. Preserve corrections and unsuccessful experiments that explain the current
-   procedure. Historical next steps are not automatically current recommendations.
-6. Add a dated entry to `running_notes.md` for material decisions or corrections.
-   Update the source inventory when reading coverage changes.
+1. Read the relevant page and evidence. The [source inventory](research/source_inventory.md)
+   records coverage; the [snapshot](research/source_snapshot.json) records identity.
+2. Keep the change focused on one procedure, result, correction or topic.
+3. State prerequisites and expected observations. Preserve the reason for a
+   step when a previous failure explains it.
+4. Distinguish proposals, static inspection, offline tests, simulation, physical
+   experiments and deployed behavior. Give the run/date/configuration where known.
+5. Keep later corrections traceable. An old note's next step is not automatically
+   a current recommendation, and a completed recording is not a scored success.
+6. Update `running_notes.md` for material decisions and the source inventory
+   when reading coverage changes.
+7. Run `.venv/bin/sphinx-build -n -W --keep-going -b html docs site` and
+   `git diff --check`; review the rendered page, including mobile-width tables/media.
 
-Before submitting, check local links, run `git diff --check`, and review rendered
-Markdown. Once a site build is added, document its exact preview/build command
-here so every maintainer can use the same workflow.
+Add new pages to the hidden MyST `toctree` blocks in `docs/index.md`. The CI
+workflow runs the strict build and deploys main to Pages. A documentation edit
+does not require running any robot experiment.
 
-## Source references
+## Evidence and attribution
 
-Use a commit-pinned public URL when that exact source is available. Some early
-research relies on local notes and uncommitted experiment records. Identify those
-as local evidence and retain their file hashes; do not substitute a GitHub link
-that points to different contents.
+Use commit-pinned URLs where the exact source is public. Identify local or
+uncommitted evidence by path, hash and status rather than substituting a public
+link with different contents. Absolute machine paths belong in ignored `.local/`
+files. The source snapshot is not a backup; archive the underlying evidence
+as part of the lab handoff.
 
-`research/source_snapshot.json` identifies source repositories by directory name,
-plus source-file paths, commits, and hashes. Machine-specific checkout locations
-belong in ignored `.local/` files. Those locations are useful during research but
-are not required to read this repository's public notes.
+For calibration, read the source repository's `AGENTS.md` and
+`docs/calibration-investigation-ledger.md` first. Preserve operator corrections,
+completed experiments and held actions. The documentation task does not
+authorize reopening hardware investigations or modifying source repositories.
 
-Check which parts came from upstream projects and which changes were made during
-the summer work. A dependency's presence does not establish original authorship.
+Give upstream tools/models their credit. Keep claims proportional to the
+reported evidence and write in a direct lab-guide voice.
 
-## Media
+## Media and the future lab copy
 
-Keep selected, optimized images and diagrams with the pages that use them. Larger
-videos can be published as versioned Release assets; retain original media in
-backed-up lab storage. Record the subject, date, simulation/physical context,
-source experiment, published location, and checksum as assets are incorporated.
+Add selected publication images with meaningful alt text and captions. Update
+`docs/assets/media.json` with the source, context, review status and checksum.
+Keep larger videos in versioned releases and originals in backed-up lab storage.
+Test playback independently from download links. Do not commit raw bags,
+credentials or expiring share URLs.
 
-Describe what a photo or video establishes in its caption. Check embedded
-playback as well as download links when the site is built. Do not commit raw
-recording directories or credentials used to access storage.
-
-## Personal repository and later lab copy
-
-Development currently takes place in the local Git repository. The first remote
-will be in the author's personal GitHub account; connecting it is deferred and
-does not block documentation work. When the summer documentation is ready:
-
-1. Tag the completed summer version and record its date and scope.
-2. Create the lab copy with Git history and attribution preserved.
-3. Confirm that media, source references, site configuration, and build instructions
-   work from the lab copy. Account for externally hosted assets during the handoff.
-4. Link the personal portfolio version and the lab's maintained version from their
-   respective READMEs. Record where ongoing fixes and contributions should go.
-5. Date later extensions and retain the original summer tag as a stable reference.
-
-The lab repository, final tag, and publication workflow have not been created.
-This records the agreed ownership plan without fixing the final site structure.
+Before the lab handoff, tag the reviewed summer version, preserve Git history,
+update repository/site/edit links, confirm media ownership/access, and cross-link
+the personal portfolio and maintained lab copy. Date later extensions. The
+license, lab destination and tag remain author-review decisions.
