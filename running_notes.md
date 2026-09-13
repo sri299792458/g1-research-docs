@@ -270,3 +270,20 @@ decision about the voice of all future technical pages. No detailed procedure,
 experiment result, or calibration conclusion was inferred from unread source
 logs. Prototype/tabletop sequential reading remains pending. No site framework,
 final navigation, or remote publication was added.
+
+## 2026-09-13 — Complete first draft authorized
+
+The author changed the writing process: prepare the complete first draft now,
+then review and deepen particular sections together. They explicitly allow the
+time needed for a difficult, thorough task. This supersedes the earlier
+restriction against drafting the complete documentation in one pass.
+
+Continue locally with Git. Read the remaining source logs fully, reconcile later
+corrections, and produce a navigable documentation draft with practical guides,
+design explanations, experimental results, and maintenance guidance. Mark missing
+installation details, media, and unresolved evidence instead of inventing them.
+No new hardware experiment or remote publication is part of this request.
+
+## 2026-09-13 — Complete primary-source reading and first-draft site
+
+Read all tabletop 7,403 lines and the identical inherited prototype block, AprilCube126 lines, plus newly located public grasp-demo3,209 lines. Combined with G1Pilot1,328 already read, all located primary running notes are covered. Detailed reading records preserve retractions, physical/offline distinctions and current calibration limits. Added MkDocs Material navigation and initial chapters, using an isolated docs venv and frozen requirements. System venv lacked ensurepip; uv created the environment without system changes. No source repository, robot, or remote was modified. Remaining work: complete every chapter, media/provenance catalog, render/build/link verification, final Git checkpoint.

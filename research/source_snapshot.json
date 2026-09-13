@@ -118,6 +118,29 @@
       "branch": "main",
       "tracked_changes_present": false,
       "files": []
+    },
+    {
+      "path": "g1-aprilcube-demo",
+      "head": "f190470742f43101e9a22affaca80554722706ac",
+      "branch": "main",
+      "tracked_changes_present": false,
+      "inspection_only": true,
+      "files": [
+        {
+          "path": "running_notes.md",
+          "sha256": "65d44a29674f2b1e0b74988eac854a49d4c09c598acf5f349d13c8c50e1b4cdb",
+          "bytes": 166906,
+          "lines": 3209,
+          "reading": "complete"
+        },
+        {
+          "path": "README.md",
+          "sha256": "12543128e947cdf000ba9378d039558942145d53b10ec1b1f202c4e2ae735c41",
+          "bytes": 8638,
+          "lines": 204,
+          "reading": "complete"
+        }
+      ]
     }
   ],
   "path_basis": "Repository directory names; machine-specific checkout paths are kept in ignored .local/source_locations.json."

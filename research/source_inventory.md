@@ -10,9 +10,9 @@ layout. Some evidence is local and has not been published with these notes.
 | Source | Lines | Reading status |
 |---|---:|---|
 | [G1Pilot, June 21 log](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/running_notes.md) | 1,328 | Complete: lines 1–1,328 read sequentially on 2026-09-13. [Reading notes](g1pilot-reading.md). Remote `dev` adds later code; see below. |
-| `robot-calibration-aprilcube-prototype/running_notes.md` | 1,864 | Local evidence; pending reading. Lines 2–1,864 match tabletop lines 359–2,221. |
-| `g1-dex3-tabletop/running_notes.md` | 7,403 | Local evidence includes uncommitted notes; pending. Heading inventory is not sequential reading. |
-| `g1-dex3-tabletop/third_party/aprilcube/running_notes.md` | 126 | Local evidence; pending. Check provenance before attributing work. |
+| `robot-calibration-aprilcube-prototype/running_notes.md` | 1,864 | Complete through the identical shared block: lines 2–1,864 match tabletop lines 359–2,221; title inspected. |
+| `g1-dex3-tabletop/running_notes.md` | 7,403 | Complete: lines 1–7,403 read sequentially. Includes uncommitted material. See tabletop-reading.md. |
+| `g1-dex3-tabletop/third_party/aprilcube/running_notes.md` | 126 | Complete: all 126 lines. Fork changes above upstream, July 13–15. |
 
 ## Supporting evidence already located
 
@@ -30,8 +30,7 @@ layout. Some evidence is local and has not been published with these notes.
 - The [published Spark documentation](https://rpm-lab-umn.github.io/spark-data-collection/),
   plus the local `spark-data-collection/data_pipeline/docs/`, `mkdocs.yml`, and
   `.github/workflows/docs-pages.yml`:
-  reference structure and representative content reviewed. No G1 site technology
-  or publication workflow has been selected.
+  reference structure and representative content reviewed. MkDocs Material selected for the first draft; publication remains deferred.
 - `GR00T-WholeBodyControl`, `Isaac-GR00T`, and `g1pilot_ws` are present locally.
   Their presence alone does not establish original author contributions or
   completed experiments. Find local evidence before including them as summer work.
@@ -72,3 +71,9 @@ at `6b5af59b109e2ee687920fdf66ded6182725e945` in an isolated, ignored clone unde
 3. Distinguish source-reported checks from independent inspection performed here.
 4. Keep physical knowledge and media gaps visible for focused author discussion.
 5. Update the working notes and commit meaningful documentation progress.
+
+## Additional public grasp-generation source
+
+`g1-aprilcube-demo` at `f190470742f43101e9a22affaca80554722706ac`: all 3,209 running-note lines and 204 README lines read. See [reading notes](grasp-demo-reading.md). This fills the July descriptor, intrinsic/support qualification, and assembly history. Later tabletop notes supersede its hardware-close and tripod guidance.
+
+Supporting reads completed for the draft: pressure LAB_PROTOCOLS, MATH_AND_SIGNALS, MAPPING_AND_MARKERS, DEPENDENCIES; G1Pilot onboard and native Humble profiles; prototype control/recovery and dorsal mount documents; tabletop recording contract and relevant README sections. Source prose is reconciled against later dated log entries.

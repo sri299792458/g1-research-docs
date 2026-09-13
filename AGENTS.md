@@ -2,8 +2,10 @@
 
 Read `running_notes.md` and `research/source_inventory.md` before continuing.
 
-- Work through discussion with the author. Do not write the complete documentation
-  in one pass or treat a suggested structure as accepted.
+- The author now requests a complete first draft, followed by deeper review of
+  individual sections. This supersedes the earlier section-by-section drafting
+  restriction. Make reasonable structural choices, finish the draft, and keep
+  uncertainty and remaining author/media input explicit.
 - Preserve the summer work across repositories. The scope is broader than
   `g1-dex3-tabletop` and is intended to help future G1 researchers build on it.
 - Read source running notes line by line. Track exact coverage and source hashes;
