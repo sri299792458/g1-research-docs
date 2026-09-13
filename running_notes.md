@@ -252,3 +252,21 @@ The eventual personal portfolio repository and later lab copy remain the
 ownership plan. Updated the README, contribution guidance, and agent continuity
 instructions to reflect local development. No remote is configured. All prior
 reading records, source hashes, and commits are retained.
+
+## 2026-09-13 — Installation discussion deferred; short opening draft started
+
+The author declined starting with the physical setup/Dex3 installation interview,
+preferring to build momentum and return to those details later. Keep that topic
+in scope, but do not repeat the JST-extension question as the immediate next step.
+
+Prepared a short opening draft in `docs/index.md` from the author's already stated
+motivation and summary of the summer work. This gives the discussion a concrete
+piece of prose to refine without requiring more hardware recollection first.
+The overview is an assistant-proposed starting point, not an author-approved
+chapter order. The draft has not yet been reviewed or approved by the author.
+
+The first-person voice is proposed for the summer introduction; it is not a
+decision about the voice of all future technical pages. No detailed procedure,
+experiment result, or calibration conclusion was inferred from unread source
+logs. Prototype/tabletop sequential reading remains pending. No site framework,
+final navigation, or remote publication was added.
