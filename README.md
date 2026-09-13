@@ -1,40 +1,60 @@
-# G1 research documentation
+# Working with the G1
 
-Practical documentation for researchers working with the Unitree G1. This project
-preserves the tooling, operating procedures, experiments, and lessons developed
-by [sri299792458](https://github.com/sri299792458) during summer 2026, with the aim
-of helping future lab members understand the robot and build on that work.
+A practical record of [sri299792458](https://github.com/sri299792458)'s summer
+2026 work with the lab's Unitree G1: setup, internal tools, control procedures,
+experiments and lessons for the next person working with the robot.
 
-**Work in progress:** source reading and discussion are underway. The research
-notes are working evidence summaries; the documentation chapters and website are
-still being developed with the author. A completed operator guide is not yet
-available.
+**[Read the guide](https://sri299792458.github.io/g1-research-docs/)** ·
+[Review queue](docs/reference/review.md) · [Contributing](CONTRIBUTING.md)
 
-The work spans hardware setup, Dex3 pressure sensing, an initial MuJoCo backend,
-AprilCube pose estimation, camera/kinematic calibration, control and safety
-tooling, grasp proposals, CuRobo planning, and recording.
+This is a complete first draft awaiting the author's review. It covers G1Pilot,
+an initial MuJoCo backend, Dex3 sensing, printed targets, camera/arm calibration,
+GraspGen-X, CuRobo, physical cube manipulation and recording/LeRobot conversion.
+The narrative retains later corrections through September 7. Reported offline,
+simulation and hardware outcomes are distinguished; unresolved procedures are
+labelled at their point of use.
 
-- [Opening page draft](docs/index.md): first prose draft, awaiting discussion with the author.
-- [Running notes](running_notes.md): author intent, decisions, corrections, and progress.
-- [Source inventory](research/source_inventory.md): reading coverage and evidence locations.
-- [Source snapshot](research/source_snapshot.json): local source revisions and file hashes.
-- [G1Pilot reading](research/g1pilot-reading.md): early integration and operating lessons.
-- [MuJoCo backend reading](research/g1pilot-mujoco-reading.md): the later simulation work.
-- [Maintenance and contributions](CONTRIBUTING.md): how to preserve evidence and make updates.
+## Preview locally
 
-The author's [Spark Data Collection documentation](https://rpm-lab-umn.github.io/spark-data-collection/)
-is a reference for depth, practical procedures, explanations, and supporting media.
-The G1 documentation's organization is still open.
+The site uses **Sphinx + MyST Markdown + Furo**. No ROS, CUDA or robot access
+is needed to build it. From the repository root, with Python 3.10 or newer:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-docs.txt
+.venv/bin/sphinx-build -n -W --keep-going -b html docs site
+.venv/bin/python -m http.server 8000 --directory site --bind 127.0.0.1
+```
+
+Open `http://127.0.0.1:8000`. Rebuild and refresh after editing. The
+[maintenance page](docs/reference/maintenance.md) includes the uv alternative,
+dependency updates, navigation and GitHub Pages setup.
+
+## Repository map
+
+| Path | Purpose |
+|---|---|
+| `docs/` | Markdown chapters and site configuration |
+| `docs/assets/` | Selected images, captions/provenance catalog and minimal CSS |
+| `research/` | Sequential source-reading records, revisions and hashes |
+| `running_notes.md` | Documentation decisions, corrections and progress |
+| `requirements-docs.in` / `.txt` | Direct dependencies and pinned build environment |
+| `.github/workflows/docs.yml` | Strict build on changes; Pages deployment from main |
+
+Source reading covers all located primary running notes. Some supporting
+research is still local/uncommitted in its original repository; the
+[source catalog](docs/reference/sources.md) makes those limits explicit.
+Hashes identify that evidence but are not an archive of it.
 
 ## Ownership and continuity
 
-Development is currently local, with Git history maintained here. Connection to
-the author's personal GitHub account is deferred until later. Once the summer
-documentation is complete, a copy with its Git history will be established in
-the lab's GitHub organization for future lab members to maintain and extend.
-The planned personal repository will remain available as the author's portfolio record.
+The personal repository lets the author review the draft and retain the summer
+portfolio record. When reviewed, a lab-organization copy should preserve Git
+history and a tagged summer version, then accept dated lab extensions. The
+handoff must include media and access to supporting evidence, not just HTML.
+The lab destination and final tag remain to be chosen.
 
-The handoff should preserve a tagged summer version, attribution, source
-references, and media access. Later lab contributions should be dated so readers
-can distinguish the original summer work from subsequent development. The lab
-copy and its maintenance location will be linked here when they exist.
+The author's earlier [SPARK documentation](https://rpm-lab-umn.github.io/spark-data-collection/)
+is a reference for practical explanations. The documentation license and final
+asset attribution review remain in the review queue; existing upstream notices
+must be preserved.

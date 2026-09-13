@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "dex3-descriptor-states",
+      "path": "assets/images/dex3_rev1_descriptor_states.png",
+      "source_repository": "https://github.com/sri299792458/g1-aprilcube-demo",
+      "source_commit": "f190470742f43101e9a22affaca80554722706ac",
+      "source_path": "docs/assets/dex3_rev1_descriptor_states.png",
+      "sha256": "be7a48dddab284c2bcc857d16bb876f003bb2b99888af68e9614497faaf5973e",
+      "bytes": 216024,
+      "context": "render",
+      "review": "visually inspected 2026-09-13; copied unchanged",
+      "caption": "Rendered Dex3 descriptor states; proxy boxes condition the network and are not literal finger-gap volumes.",
+      "creator": "sri299792458; underlying models retain upstream attribution",
+      "original_archive_location": null
+    },
+    {
+      "id": "u-support-orientations",
+      "path": "assets/images/u_legs_six_tabletop_supports.png",
+      "source_repository": "https://github.com/sri299792458/g1-aprilcube-demo",
+      "source_commit": "f190470742f43101e9a22affaca80554722706ac",
+      "source_path": "docs/assets/u_legs_six_tabletop_supports.png",
+      "sha256": "8577b96aee1ef6abea9e320e19ba574f159ddbdda7e32579973a66dbd4502d64",
+      "bytes": 89332,
+      "context": "render",
+      "review": "visually inspected 2026-09-13; copied unchanged",
+      "caption": "Six U support orientations. Counts label geometric candidates, not physical-simulation successes.",
+      "creator": "sri299792458; underlying models retain upstream attribution",
+      "original_archive_location": null
+    },
+    {
+      "id": "assembly-scene",
+      "path": "assets/images/unibot_seated_aprilcube_scene_v1.png",
+      "source_repository": "https://github.com/sri299792458/g1-aprilcube-demo",
+      "source_commit": "f190470742f43101e9a22affaca80554722706ac",
+      "source_path": "docs/assets/unibot_seated_aprilcube_scene_v1.png",
+      "sha256": "e63d7d90856c8c3808063eff116963364ba9e9941098f1e2363a4a0219b24bde",
+      "bytes": 154520,
+      "context": "render",
+      "review": "visually inspected 2026-09-13; copied unchanged",
+      "caption": "Rendered G1 assembly planning scene with 45 mm voxel parts; not physical-robot footage.",
+      "creator": "sri299792458; underlying models retain upstream attribution",
+      "original_archive_location": null
+    },
+    {
+      "id": "g1pilot-mujoco-rviz-arm-demo",
+      "public_url": "https://github.com/sri299792458/g1pilot/releases/download/mujoco-demo-media-2026-07-01/g1pilot-mujoco-rviz-arm-demo.mp4",
+      "bytes": 12915563,
+      "sha256": null,
+      "context": "simulation",
+      "review": "release metadata only; content and browser playback not reviewed",
+      "original_archive_location": null
+    },
+    {
+      "id": "g1pilot-mujoco-dex3-open-close-demo",
+      "public_url": "https://github.com/sri299792458/g1pilot/releases/download/mujoco-demo-media-2026-07-01/g1pilot-mujoco-dex3-open-close-demo.mp4",
+      "bytes": 1649508,
+      "sha256": null,
+      "context": "simulation",
+      "review": "release metadata only; content and browser playback not reviewed",
+      "original_archive_location": null
+    }
+  ]
+}
