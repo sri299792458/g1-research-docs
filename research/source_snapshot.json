@@ -1,0 +1,123 @@
+{
+  "captured_at_utc": "2026-09-13T20:45:01.451523+00:00",
+  "purpose": "Read-only provenance for local documentation source reading; not a backup or attribution of authorship.",
+  "repositories": [
+    {
+      "path": "/home/kanth042/g1pilot",
+      "head": "72acc803edefe583c24f53e76a21d8d4ed10ed14",
+      "branch": "dev",
+      "tracked_changes_present": true,
+      "files": [
+        {
+          "path": "running_notes.md",
+          "sha256": "9cc8316d60d8e83f7fb68d6bf5b1bf5e9d9913eac62c1a3df91d9ea6a5378f6a",
+          "bytes": 74902,
+          "lines": 1328,
+          "git_status": ""
+        }
+      ]
+    },
+    {
+      "path": "/home/kanth042/robot-calibration-aprilcube-prototype",
+      "head": "97a78a5c9c48701400820922f0966cc3d3a9b7bc",
+      "branch": "feature/dex3-aruco-calibration",
+      "tracked_changes_present": false,
+      "files": [
+        {
+          "path": "running_notes.md",
+          "sha256": "73f2777a4d4985d2997a6918ee854fa6eff3e32b2a8f8a3e62620aa8cc1175f7",
+          "bytes": 106959,
+          "lines": 1864,
+          "git_status": ""
+        }
+      ]
+    },
+    {
+      "path": "/home/kanth042/g1-dex3-tabletop",
+      "head": "cf1b27704c82d877d23ff5a3c157df3218f02402",
+      "branch": "feature/friday-stack-rebuild",
+      "tracked_changes_present": true,
+      "files": [
+        {
+          "path": "running_notes.md",
+          "sha256": "9b159c235fd6fdb086249d9025c3083f439292fe3a884c6f6ae4ffcfddcc3d91",
+          "bytes": 481914,
+          "lines": 7403,
+          "git_status": "M running_notes.md"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "08f9e92a91a35454ef78efa856e175e8134ab83f736e0a035f04aa34a10cfacf",
+          "bytes": 1722,
+          "lines": 28,
+          "git_status": "?? AGENTS.md"
+        },
+        {
+          "path": "docs/calibration-investigation-ledger.md",
+          "sha256": "1acfd5b1ec9e9a626f918cb33cbc4bc0f59763d57f2fda7c1d1557d6bd5039d8",
+          "bytes": 47603,
+          "lines": 368,
+          "git_status": "?? docs/calibration-investigation-ledger.md"
+        },
+        {
+          "path": "third_party/aprilcube/running_notes.md",
+          "sha256": "ab7ef57a2d3b90e7918af8497c93275feb9dc3018d195d5612cee9afc46beeb8",
+          "bytes": 13666,
+          "lines": 126,
+          "git_status": ""
+        }
+      ]
+    },
+    {
+      "path": "/home/kanth042/dex3_pressure_tools",
+      "head": "e0b706df507160799b70732c7cc3244924ce8f5e",
+      "branch": "main",
+      "tracked_changes_present": false,
+      "files": [
+        {
+          "path": "README.md",
+          "sha256": "d761d43ba3eba35cd3d54c26dc57e44e559314e3fab942782662a19ab17aa2a8",
+          "bytes": 4212,
+          "lines": 121,
+          "git_status": ""
+        },
+        {
+          "path": "docs/OBSERVATIONS.md",
+          "sha256": "93c984246d37f71b45104ae0a24109dc7e42a177d8198e0a0ccec1d0a7b6eb08",
+          "bytes": 4965,
+          "lines": 227,
+          "git_status": ""
+        }
+      ]
+    },
+    {
+      "path": "/home/kanth042/spark-data-collection",
+      "head": "a7fbd8de12be54c963026cd247bb42d34c7c6952",
+      "branch": "main",
+      "tracked_changes_present": true,
+      "files": [
+        {
+          "path": "mkdocs.yml",
+          "sha256": "f98057e1defbf2c2132dd84c64112b02f125fa3d130a807c93534fdb257f4950",
+          "bytes": 2316,
+          "lines": 74,
+          "git_status": ""
+        }
+      ]
+    },
+    {
+      "path": "/home/kanth042/GR00T-WholeBodyControl",
+      "head": "1983e88888217f6c69283cf3a9d1af01e87f07af",
+      "branch": "main",
+      "tracked_changes_present": false,
+      "files": []
+    },
+    {
+      "path": "/home/kanth042/Isaac-GR00T",
+      "head": "376ba890cff8c9de64d71d982772a9c36185fdd7",
+      "branch": "main",
+      "tracked_changes_present": false,
+      "files": []
+    }
+  ]
+}
