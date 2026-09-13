@@ -9,6 +9,13 @@ These are research notes for discussion, not a current operating procedure.
 Verification below means verification reported in the original log. No ROS nodes,
 robot commands, installations, or experiment reruns were launched for this reading.
 
+**Source update, 2026-09-13:** the author supplied the newer GitHub `dev` branch,
+which adds the MuJoCo backend in two commits after this local checkout. Its last
+tracked running notes are identical to the log read here, then removed in the
+July 1 commit. See the [remote MuJoCo reading](g1pilot-mujoco-reading.md). The
+findings below concern the June 21 log; its missing digital-twin coverage does
+not mean that work is absent from the remote repository.
+
 ## What this part of the work contributes
 
 The log begins with the June 21 environment and G1Pilot integration work. It
@@ -193,9 +200,10 @@ do not present all initial hypotheses as equally open.
 
 ## Evidence and discussion gaps
 
-- This file does not describe the author's initial MuJoCo digital twin. Installing
-  MuJoCo or running offline RViz/OpenSoT does not establish that twin's scope.
-  A source-location question is pending with the author.
+- This file does not describe the author's initial MuJoCo digital twin. The
+  subsequent remote-branch reading locates the implementation. Later iteration
+  notes were requested; the author confirmed there are no additional notes and
+  that the available material covers the work done. That question is closed.
 - The actual stable/unstable PC2 USB ports are not identified by an installation
   photo in this note. A later hardware page would benefit from that evidence.
 - The physical Dex3 installation and purchased JST extensions are not documented

@@ -111,3 +111,95 @@ Documentation checks: all local Markdown link targets exist, the source snapshot
 parses as JSON, all nine snapshotted source files still match their initial
 SHA-256 hashes, and `git diff --check` passes. These are documentation checks;
 none independently validate the robot software discussed in the source notes.
+
+## 2026-09-13 — Author supplied the remote G1Pilot MuJoCo source
+
+The author answered the digital-twin source question with
+`https://github.com/sri299792458/g1pilot/tree/dev`.
+
+The local checkout ends at `72acc80` (June 21). The linked branch is at
+`6b5af59` (July 1), two commits later, with `72b820f` (June 30) between them.
+Those commits add the locked-waist MuJoCo/OpenHomie backend and Dex3 integration.
+The original local scan did not cover this later code; its limited scope is now
+explicit in both reading files and the source inventory.
+
+Created a separate clone at `.sources/g1pilot-dev` inside this documentation
+workspace and ignored `.sources/` in Git. Retrieved history there to inspect
+the two added commits and the disposition of the notes. The source working
+checkout and its existing local changes were left untouched.
+
+The July 1 commit removes `running_notes.md` and ignores local notes. Its parent
+contains the exact same 1,328-line log already read (SHA-256
+`9cc8316d60d8e83f7fb68d6bf5b1bf5e9d9913eac62c1a3df91d9ea6a5378f6a`).
+No additional MuJoCo iteration record was recovered from that tracked file.
+Asked whether later notes exist on another machine or in another folder.
+That follow-up remains unanswered at this entry.
+
+Read the remote README, simulation modules, launch/environment script,
+diagnostic, and model generators completely. Saved the findings and source
+boundaries in [`research/g1pilot-mujoco-reading.md`](research/g1pilot-mujoco-reading.md)
+and commit/file provenance in
+[`research/g1pilot-dev-source.json`](research/g1pilot-dev-source.json).
+
+The substantive architecture is a MuJoCo plant that owns physics and OpenHomie
+lower-body policy execution while accepting G1Pilot arm/Dex3 intent over
+Unitree-style DDS contracts. It models the locked waist and both seven-joint
+hands. Inspecting the generated XML established 41 actuators and 89 sensor
+elements; this was an XML parse, not a simulator run.
+
+Located the July 1 release's RViz arm-control video, Dex3 open/close video, and
+reachability-map asset through the README and release API. Metadata was checked;
+media and map content have not been reviewed. Record these as available assets,
+not newly verified physical/simulation performance.
+
+The source reading also records model-shape differences in an older diagnostic
+path and interface limits to reconcile before writing runnable guides. No code
+fix, policy run, hardware command, or model-generation run was performed.
+The prototype/tabletop log readings remain pending; no final organization or
+reader-facing chapter has been drafted.
+
+## 2026-09-13 — MuJoCo scope confirmed; media storage discussed
+
+The author answered the follow-up about later MuJoCo notes: "no only that much
+was done". The available implementation and demos describe the initial work;
+there are no additional notes to recover. Closed that source-location question
+in the reading notes and inventory. Do not keep requesting missing records or
+infer a larger completed simulation-validation program.
+
+The author then asked how media should generally be stored for the documentation.
+This is a design discussion, not an instruction to upload, migrate, or publish
+assets. The recommendation offered is:
+
+- Keep optimized publication images, diagrams, video posters, and captions with
+  the documentation source so page edits and their visual evidence travel together.
+- Keep larger demonstration videos in versioned GitHub Release assets initially;
+  the existing G1Pilot media release provides a working organizational precedent.
+  Use explicit release tags and filenames. Test actual embedded playback before
+  choosing Release URLs as the site's playback source; download distribution
+  and a streaming player are different requirements.
+- Preserve original photos/videos in backed-up, lab-owned storage, separately
+  from the selected and compressed publication copies.
+- Track a small media index in Git containing each item's date, description,
+  simulation/physical context, source run where available, original location,
+  public URL, and checksum. This index is proposed, not yet created.
+- Prefer a lab-owned published-media location for continuity. The exact host,
+  ownership, naming conventions, and embedded-player choice remain undecided.
+
+Reference-site check: Spark's homepage currently embeds an MP4 from its own
+`data_pipeline/docs/assets/videos/` directory and keeps annotated images under
+`assets/images/`. That is feasible for a small curated media set; it should not
+automatically become storage for every raw recording.
+
+Official GitHub documentation checked September 13:
+
+- [Regular Git file limits](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github):
+  files above 100 MiB are blocked; large binaries can be distributed with Releases.
+- [Release quotas](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases):
+  up to 1,000 assets per release, each under 2 GiB.
+- [Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits):
+  published sites may be no larger than 1 GB.
+- [Git LFS limitations](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage):
+  GitHub documents that LFS cannot be used with GitHub Pages sites. No LFS-based
+  site workflow is proposed here.
+
+No media was uploaded, copied to a public host, or altered during this discussion.

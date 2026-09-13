@@ -1,0 +1,126 @@
+{
+  "captured_at_utc": "2026-09-13T20:55:52.846863+00:00",
+  "source_url": "https://github.com/sri299792458/g1pilot/tree/dev",
+  "head": "6b5af59b109e2ee687920fdf66ded6182725e945",
+  "local_checkout_head": "72acc803edefe583c24f53e76a21d8d4ed10ed14",
+  "additional_commits": [
+    {
+      "sha": "72b820f40d02941a9e37d7033535246cbe5cd635",
+      "date": "2026-06-30",
+      "subject": "Add locked-waist manipulation and MuJoCo simulation support"
+    },
+    {
+      "sha": "6b5af59b109e2ee687920fdf66ded6182725e945",
+      "date": "2026-07-01",
+      "subject": "Add G1 MuJoCo Dex3 simulation backend"
+    }
+  ],
+  "last_tracked_running_notes": {
+    "commit": "72b820f40d02941a9e37d7033535246cbe5cd635",
+    "lines": 1328,
+    "sha256": "9cc8316d60d8e83f7fb68d6bf5b1bf5e9d9913eac62c1a3df91d9ea6a5378f6a",
+    "identical_to_local_reading": true,
+    "removed_at_commit": "6b5af59b109e2ee687920fdf66ded6182725e945"
+  },
+  "inspection_checkout": "/home/kanth042/g1-research-docs/.sources/g1pilot-dev",
+  "files": [
+    {
+      "path": "README.md",
+      "lines": 296,
+      "sha256": "e790d9d1587e623e738b87c01e33be495bcddc1eb3b122cb5513dbcf782e479a",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/README.md",
+      "reading": "Complete sequential reading"
+    },
+    {
+      "path": ".gitignore",
+      "lines": 74,
+      "sha256": "080531f6b5c3b34c3d5f3b521ae2c82717c3bca29bf50b3f86ddbb79ad92596c",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/.gitignore",
+      "reading": "Complete sequential reading"
+    },
+    {
+      "path": "g1pilot/simulation/lowcmd_utils.py",
+      "lines": 96,
+      "sha256": "90a5482cf52a040931c2557b19214f1e5377ab1570b2211cb561e7793f7bb8c5",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/lowcmd_utils.py",
+      "reading": "Complete sequential reading"
+    },
+    {
+      "path": "g1pilot/simulation/mujoco_plant.py",
+      "lines": 741,
+      "sha256": "98e19f3305841b159967277f57c17518e1dc2fc66a1f4f563fea5e346777ec98",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py",
+      "reading": "Complete sequential reading"
+    },
+    {
+      "path": "g1pilot/simulation/openhomie_policy.py",
+      "lines": 152,
+      "sha256": "dd7e1901debdbd02a22a3240fc27780aacc021b2568a60a44ef47a4244fd6e86",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/openhomie_policy.py",
+      "reading": "Complete sequential reading"
+    },
+    {
+      "path": "launch/mujoco_openhomie_manipulation.launch.py",
+      "lines": 76,
+      "sha256": "4ab7113ec0ff88c280422e7d235e86f65fa2e9b87b766820120f678f9f1c7961",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/launch/mujoco_openhomie_manipulation.launch.py",
+      "reading": "Complete sequential reading"
+    },
+    {
+      "path": "scripts/source_g1.sh",
+      "lines": 196,
+      "sha256": "833f4e774d35f83c2dae7acd0d7983bba93a4748052e1de0e8d930a38b3f0cf6",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/scripts/source_g1.sh",
+      "reading": "Complete sequential reading"
+    },
+    {
+      "path": "scripts/diagnose_openhomie_mujoco_baseline.py",
+      "lines": 385,
+      "sha256": "d4c3cdc49d60dce1709b5fe532df9d6301ec16cef390e0fd70d9c8ddf4a13401",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/scripts/diagnose_openhomie_mujoco_baseline.py",
+      "reading": "Complete sequential reading"
+    },
+    {
+      "path": "scripts/generate_g1_lock_waist_dx3_urdf.py",
+      "lines": 124,
+      "sha256": "b3906da739b15a949cff990e94115083494952cedf080e50b0c03d797885f2d4",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/scripts/generate_g1_lock_waist_dx3_urdf.py",
+      "reading": "Complete sequential reading"
+    },
+    {
+      "path": "scripts/generate_openhomie_g1_29dof_xml.py",
+      "lines": 406,
+      "sha256": "31876ac833a5bd6adb4a76603134fa8b4d840a2b00bd6c7f039f9657558ff8bb",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/scripts/generate_openhomie_g1_29dof_xml.py",
+      "reading": "Complete sequential reading"
+    },
+    {
+      "path": "description_files/xml/openhomie_g1_29dof.xml",
+      "lines": 499,
+      "sha256": "a8b67d702ec0dcb1c2c5de98c40cd8917d446e04fc2d4d2d041297d56f7bf825",
+      "url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/description_files/xml/openhomie_g1_29dof.xml",
+      "reading": "XML structure inspected; not read line by line"
+    }
+  ],
+  "media": {
+    "release_url": "https://github.com/sri299792458/g1pilot/releases/tag/mujoco-demo-media-2026-07-01",
+    "published_at": "2026-07-01T17:01:53Z",
+    "api_metadata_verified": true,
+    "videos_viewed": false,
+    "assets_downloaded": false,
+    "assets": [
+      {
+        "name": "g1pilot-mujoco-dex3-open-close-demo.mp4",
+        "bytes": 1649508
+      },
+      {
+        "name": "g1pilot-mujoco-rviz-arm-demo.mp4",
+        "bytes": 12915563
+      },
+      {
+        "name": "g1_29dof_lock_waist_reachability.npz",
+        "bytes": 232680472
+      }
+    ]
+  }
+}
