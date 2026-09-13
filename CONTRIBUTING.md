@@ -53,8 +53,9 @@ recording directories or credentials used to access storage.
 
 ## Personal repository and later lab copy
 
-The author's personal repository is the initial development home. When the summer
-documentation is ready:
+Development currently takes place in the local Git repository. The first remote
+will be in the author's personal GitHub account; connecting it is deferred and
+does not block documentation work. When the summer documentation is ready:
 
 1. Tag the completed summer version and record its date and scope.
 2. Create the lab copy with Git history and attribution preserved.

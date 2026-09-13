@@ -27,10 +27,11 @@ The G1 documentation's organization is still open.
 
 ## Ownership and continuity
 
-Development starts in the author's personal GitHub account. Once the summer
+Development is currently local, with Git history maintained here. Connection to
+the author's personal GitHub account is deferred until later. Once the summer
 documentation is complete, a copy with its Git history will be established in
 the lab's GitHub organization for future lab members to maintain and extend.
-The personal repository will remain available as the author's portfolio record.
+The planned personal repository will remain available as the author's portfolio record.
 
 The handoff should preserve a tagged summer version, attribution, source
 references, and media access. Later lab contributions should be dated so readers

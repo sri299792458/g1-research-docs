@@ -240,3 +240,15 @@ and `.local/` plus `.sources/` are excluded from the public candidate. A targete
 scan of tracked history and current files found no GitHub token or private-key
 patterns. `git diff --check` passes. These checks prepare the files for the
 requested publication; they are not a claim that a remote upload has occurred.
+
+## 2026-09-13 — Remote connection deferred; continue locally
+
+The author instructed: "just create locally we can connect to remote later".
+The local repository already exists, so retain it and continue the collaborative
+documentation work there. GitHub repository creation, authentication, and remote
+connection are deferred; no user action on them is pending or blocking progress.
+
+The eventual personal portfolio repository and later lab copy remain the
+ownership plan. Updated the README, contribution guidance, and agent continuity
+instructions to reflect local development. No remote is configured. All prior
+reading records, source hashes, and commits are retained.
