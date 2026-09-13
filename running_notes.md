@@ -315,3 +315,39 @@ workflow. HTTPS/SSH initially lacked authentication. Installed GitHub CLI in
 the user's local tools directory after verifying the official archive checksum;
 the author completed browser authentication. Confirmed the intended account
 and a successful dry-run push. Actual publication and browser checks follow.
+
+## 2026-09-13 — First draft published and verified
+
+Pushed the complete local Git history and first-draft commit `7ed6020` to
+`sri299792458/g1-research-docs`. Enabled GitHub Pages with GitHub Actions as
+the build source. The first workflow's build passed, but deployment initially
+returned 404 because it reached Pages before site enablement completed.
+Reran only the failed job after enablement; both build and deploy succeeded.
+
+Live guide: https://sri299792458.github.io/g1-research-docs/
+
+Verification completed:
+
+- All 28 pages pass a strict Sphinx build, with warnings treated as errors.
+- All 1,427 local HTML links and asset references resolve.
+- Chromium desktop and 390 px mobile checks render the homepage and Mermaid
+  diagram; mobile document width equals viewport width. Grasp images load.
+- Search returns nine results for `watchdog`; dark mode renders correctly.
+- The public site returns HTTP 200; its diagram, assembly figures and search
+  work without browser script errors.
+- All 11 files in the local source snapshot still match their recorded hashes.
+  All three copied PNGs match the media catalog; exact public source links return 200.
+- `git diff --check` and the candidate credential-pattern scan pass. Source
+  checkouts, local tools, virtual environments and browser artifacts are ignored.
+
+Updated the source inventory to remove stale framework/publication status and
+added the June 25 tactile study to the timeline. The author asked whether MkDocs
+is simpler for Pages: acknowledged its simpler initial setup and built-in
+`gh-deploy`; the configured Sphinx site now has the same edit/push publication
+workflow. Retained Sphinx + MyST + Furo as the selected first-draft presentation.
+
+Remaining work is the intended author review, not another automatic research
+campaign: installation/JST details, physical media, source-archive handoff,
+license/attribution decisions, and deeper section-by-section correction. These
+are collected in `docs/reference/review.md`. No robot operation, calibration
+experiment, source-repository change or held investigation was performed.
