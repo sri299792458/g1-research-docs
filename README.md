@@ -14,6 +14,7 @@ The work spans hardware setup, Dex3 pressure sensing, an initial MuJoCo backend,
 AprilCube pose estimation, camera/kinematic calibration, control and safety
 tooling, grasp proposals, CuRobo planning, and recording.
 
+- [Opening page draft](docs/index.md): first prose draft, awaiting discussion with the author.
 - [Running notes](running_notes.md): author intent, decisions, corrections, and progress.
 - [Source inventory](research/source_inventory.md): reading coverage and evidence locations.
 - [Source snapshot](research/source_snapshot.json): local source revisions and file hashes.
