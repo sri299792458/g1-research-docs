@@ -351,3 +351,28 @@ campaign: installation/JST details, physical media, source-archive handoff,
 license/attribution decisions, and deeper section-by-section correction. These
 are collected in `docs/reference/review.md`. No robot operation, calibration
 experiment, source-repository change or held investigation was performed.
+
+## 2026-09-13 — Diagram tooling review
+
+The author asked whether the flowchart tooling is the best current option,
+anticipating frequent diagrams for code explanations. The published site uses
+Mermaid 11.12.1 through sphinxcontrib-mermaid. Browser inspection found an
+829.742 × 814 viewBox fitted into a 736 × 500 px viewport, making nominal
+16 px labels approximately 10 px high. The overview also combines runtime
+control with offline analysis, causing long feedback edges.
+
+Reviewed current official Mermaid layout, sequence and state documentation,
+D2 layout/install documentation, and draw.io SVG export. Mermaid's current
+documentation describes v12 with bundled/default ELK. Recommendation for
+discussion: retain editable Mermaid for code flow, sequences and state
+transitions; improve sizing and separate questions into focused diagrams.
+D2 is an alternative for architecture layouts, with an additional build tool;
+precisely arranged physical/frame illustrations can use editable vector sources
+and SVG. No renderer upgrade, diagram redesign or site-style change has been
+made as part of this tooling question.
+
+References: https://mermaid.js.org/config/layouts,
+https://mermaid.js.org/syntax/sequenceDiagram.html,
+https://mermaid.js.org/syntax/stateDiagram.html,
+https://d2lang.com/tour/layouts/,
+https://www.drawio.com/docs/manual/export/export-to-svg/.
