@@ -5,7 +5,7 @@ one Python environment recreates the ABI problems the later tools separated.
 
 | Repository | Role |
 |---|---|
-| `g1pilot` | ROS/OpenSoT integration, navigation work, MuJoCo backend |
+| `g1pilot` (`dev`) | Initial MuJoCo digital twin and its arm/hand demonstration |
 | `aprilcube` fork | Printed fiducials, rounding, detection APIs |
 | `g1-aprilcube-demo` | GraspGen-X descriptors, Isaac qualification, assembly |
 | `robot-calibration-aprilcube-prototype` | Calibration capture/analysis, Dex3 wrist markers, current V7 torso CAD and R2 fit coupons |
@@ -58,7 +58,7 @@ and hardware validation. Publishing its code did not change that status. The
 | Focused planner | Python 3.11 / Torch/Warp/CUDA | GPU work outside control |
 | Conversion | Python 3.12 / CPU Torch / LeRobot v0.6.1 | Offline encoding |
 | Early prototype | Python 3.12 / ROS Jazzy | Historical calibration work |
-| G1Pilot | Docker/Jazzy and native Humble paths | Match checkout and machine |
+| MuJoCo twin | ROS Humble/Jazzy workspace, MuJoCo, SDK and OpenHomie policy | Separate simulation environment; see the [simulation setup](../simulation/mujoco.md#set-up-the-pinned-version) |
 | This guide | Python 3.10+ / pinned docs requirements | No ROS or CUDA |
 
 From the focused source repository, the documented setup is:
@@ -87,19 +87,12 @@ Two recorded UVM failures returned error 999 even though `nvidia-smi` saw the
 GPU; reboot restored the existing environment. See
 [debugging](../reference/debugging.md) before rebuilding dependencies.
 
-## Native G1Pilot setup
+## Simulation setup
 
-After an administrator has installed system prerequisites, the per-user path is:
-
-```bash
-scripts/setup_humble_user_workspace.sh
-source ~/g1pilot_ws/env_humble.sh
-scripts/build_humble_workspace.sh --packages-up-to g1pilot
-```
-
-Keep NumPy/OpenCV/Pinocchio constraints with that revision. Running colcon with
-the wrong interpreter previously generated entry points that could not import
-the SDK in the intended environment.
+The [MuJoCo chapter](../simulation/mujoco.md#set-up-the-pinned-version) contains
+the pinned simulator checkout, dependency scripts, pretrained policy download,
+and separate plant/application launch commands. Set it up when working on the
+twin; the tabletop workflow does not require launching G1Pilot.
 
 ## Adapting to another machine
 

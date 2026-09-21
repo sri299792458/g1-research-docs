@@ -1,18 +1,21 @@
 # System map and code entry points
 
-Choose the execution path first. G1Pilot, its initial simulator, and the later
-tabletop workflows share robot interfaces but do not share a complete control
-lifecycle. A result from one does not automatically validate another.
+The manipulation pipeline connects calibrated observations to grasp selection,
+planned motion, execution and recordings. Follow the data through this map,
+then enter the code through the task you want to understand or change.
 
 ```mermaid
-flowchart LR
-  accTitle: Choose the implementation path
-  accDescr: G1Pilot provides early ROS integration and a separate MuJoCo backend. The tabletop repository provides seated manipulation, standing calibration and offline recording conversion. Each path has its own environment and validation boundary.
-  G["g1pilot"] --> R["ROS / OpenSoT<br/>integration"]
-  G --> M["Initial MuJoCo<br/>backend"]
-  T["g1-dex3-tabletop"] --> S["Seated manipulation"]
-  T --> C["Standing calibration"]
-  T --> D["Recording and<br/>offline conversion"]
+flowchart TB
+  accTitle: G1 manipulation pipeline and supporting interfaces
+  accDescr: Camera images and robot state combine with a calibration bundle to produce the scene. The scene and qualified offline grasps feed task planning. Validated routes enter execution under ownership and watchdog control. Observations, commands and outcomes are recorded for offline analysis.
+  I["Camera and<br/>robot state"] --> O["Object pose<br/>and scene"]
+  C["Calibration"] --> O
+  O --> P["Task coordinator<br/>CuRobo planner"]
+  G["Qualified<br/>offline grasps"] --> P
+  P -->|checked routes| E["Arm and Dex3<br/>execution"]
+  W["Ownership<br/>PC2 watchdog"] -.-> E
+  O -.-> R["Recording<br/>and offline analysis"]
+  E -->|state and outcome| R
 ```
 
 ## Enter through the task coordinator
@@ -22,8 +25,6 @@ flowchart LR
 | Single-cube trajectory task | `hardware_tabletop.py::run_tabletop` | [Perception](../perception/object-pose.md), [camera state](../perception/state-estimation.md), [planning](../manipulation/planning.md), [task lifecycle](../manipulation/tasks.md) |
 | Direct two-cube stack | `hardware_stack.py::run_stack` | Endpoint candidate intersection, complete transfer planning, contact checks and retained episodes in [stacking](../manipulation/tasks.md#direct-two-cube-transfer) |
 | Standing bilateral calibration | `hardware_bilateral_calibration.py::run_collect_bilateral_calibration` | [Control ownership](../control/ownership.md), [collection and fitting](../calibration/workflow.md), then [results](../calibration/results.md) |
-| Initial G1Pilot integration | `RobotState`, `G1CollisionAvoidanceNode`, `DX3Controller` | [Launch/mode boundaries and source links](../control/g1pilot.md) |
-| Initial MuJoCo backend | `G1PilotMujocoPlant.run` | [DDS bridge, command assembly and policy loop](../simulation/mujoco.md) |
 | Passive tactile study | `Dex3PressureVisualizer` | [Raw recording, baseline and spatial mapping](../sensing/pressure.md) |
 | Offline grasp generation | `run_atlas`, `build_shortlist` | [Frame contract and qualification](../manipulation/grasp-atlas.md), then [support and assembly](../manipulation/assembly.md) |
 | Raw data to LeRobot | `RawEpisodeRecorder`, `convert_episode` | [Lifecycle, completeness and alignment](../data/recording.md) |
@@ -71,8 +72,6 @@ private detailed ledger, use its completed results and operator corrections too.
 
 | Area | Result in the available record | Practical limit |
 |---|---|---|
-| G1Pilot | Environment repairs, dry-mode fixes, topic/TF integration, camera and LiDAR checks | Complete autonomous navigation was not validated |
-| MuJoCo | SDK-style arm/hand interface with locked-waist G1/Dex3 and OpenHomie legs | Initial backend; vendor locomotion and later watchdog semantics are not reproduced |
 | Printed targets | Rounded AprilCubes and bilateral dorsal marker carriers | Nominal CAD does not establish manufactured accuracy |
 | Pressure | Passive raw audit, baseline recording, mapping and RViz visualization | Raw counts; spatial probing was primarily on the right hand |
 | Grasp library | Exact-hand descriptors, Isaac qualification, contact atlases, support studies | Simulated retention does not establish a tabletop pickup |

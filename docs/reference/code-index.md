@@ -538,80 +538,80 @@ File SHA-256: `bb7b7d8ff21342b06550d66dd5ccb9e233463f023d9943344dfbf8002d79c97f`
 
 ## Code: pilot-state
 
-**Repository:** `g1pilot`. **Path:** `g1pilot/state/robot_state.py`.
+**Repository:** `g1pilot-dev`. **Path:** `g1pilot/state/robot_state.py`.
 
-[Pinned public source](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/state/robot_state.py). Revision `72acc80`.
+[Pinned public source](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/state/robot_state.py). **Branch:** `dev`. Revision `dadd88f`.
 
-File SHA-256: `f6f39e37fd58f7c6a7641a6f39f0db867d6f0ac562de02652650977ec35dbcdf`.
+File SHA-256: `7bc5d92553f4a9e3b152b9588ccfc7a94533dcbeda6ecad8595f62e000cf93a6`.
 
 | Symbol | Inspected lines |
 |---|---|
-| [`RobotState.callback_lowstate`](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/state/robot_state.py#L118) | 118–167 |
+| [`RobotState.callback_lowstate`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/state/robot_state.py#L122) | 122–171 |
 
 ## Code: pilot-arms
 
-**Repository:** `g1pilot`. **Path:** `g1pilot/manipulation/opensot_solver.py`.
+**Repository:** `g1pilot-dev`. **Path:** `g1pilot/manipulation/opensot_solver.py`.
 
-[Pinned public source](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/opensot_solver.py). Revision `72acc80`.
+[Pinned public source](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/opensot_solver.py). **Branch:** `dev`. Revision `dadd88f`.
 
-File SHA-256: `188cbcff48446d9add46e43a32d53700c10a6fac00eb21a225783278dde4ccdc`.
+File SHA-256: `7df355a7eeba83aadb97366cebff783db1d3237882a1a6a6db182abc53bad4cc`.
 
 | Symbol | Inspected lines |
 |---|---|
-| [`G1CollisionAvoidanceNode.control_loop`](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/opensot_solver.py#L782) | 782–916 |
+| [`G1CollisionAvoidanceNode.control_loop`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/opensot_solver.py#L938) | 938–1064 |
 
 ## Code: pilot-hands
 
-**Repository:** `g1pilot`. **Path:** `g1pilot/manipulation/dx3_hand.py`.
+**Repository:** `g1pilot-dev`. **Path:** `g1pilot/manipulation/dx3_hand.py`.
 
-[Pinned public source](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/dx3_hand.py). Revision `72acc80`.
+[Pinned public source](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/dx3_hand.py). **Branch:** `dev`. Revision `dadd88f`.
 
-File SHA-256: `b0016d5276078fb1f46501e16c5c8ec53e929bfff49a1b5fc93ba6fbb91cae56`.
+File SHA-256: `8936e0aaf6cf2da04777dcb7b13c91c2f975ca960e2c1411b065b63a0d8d0ccb`.
 
 | Symbol | Inspected lines |
 |---|---|
-| [`DX3Controller.initialize_hand_interfaces`](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/dx3_hand.py#L99) | 99–112 |
-| [`DX3Controller.publish_commands`](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/dx3_hand.py#L183) | 183–189 |
+| [`DX3Controller._apply_named_command`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/dx3_hand.py#L261) | 261–281 |
+| [`DX3Controller.publish_once`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/dx3_hand.py#L325) | 325–331 |
 
 ## Code: sim-plant
 
 **Repository:** `g1pilot-dev`. **Path:** `g1pilot/simulation/mujoco_plant.py`.
 
-[Pinned public source](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py). Revision `6b5af59`.
+[Pinned public source](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py). Revision `dadd88f`.
 
 File SHA-256: `98e19f3305841b159967277f57c17518e1dc2fc66a1f4f563fea5e346777ec98`.
 
 | Symbol | Inspected lines |
 |---|---|
-| [`G1PilotUnitreeBridge`](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py#L280) | 280–383 |
-| [`G1PilotMujocoPlant.build_body_command`](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py#L631) | 631–635 |
-| [`G1PilotMujocoEnv.sim_step`](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py#L592) | 592–596 |
-| [`G1PilotMujocoPlant.run`](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py#L671) | 671–704 |
+| [`G1PilotUnitreeBridge`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L280) | 280–383 |
+| [`G1PilotMujocoPlant.build_body_command`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L631) | 631–635 |
+| [`G1PilotMujocoEnv.sim_step`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L592) | 592–596 |
+| [`G1PilotMujocoPlant.run`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L671) | 671–704 |
 
 ## Code: sim-policy
 
 **Repository:** `g1pilot-dev`. **Path:** `g1pilot/simulation/openhomie_policy.py`.
 
-[Pinned public source](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/openhomie_policy.py). Revision `6b5af59`.
+[Pinned public source](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/openhomie_policy.py). Revision `dadd88f`.
 
 File SHA-256: `dd7e1901debdbd02a22a3240fc27780aacc021b2568a60a44ef47a4244fd6e86`.
 
 | Symbol | Inspected lines |
 |---|---|
-| [`compute_openhomie_observation`](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/openhomie_policy.py#L45) | 45–90 |
-| [`OpenHomiePolicy.run`](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/openhomie_policy.py#L138) | 138–152 |
+| [`compute_openhomie_observation`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/openhomie_policy.py#L45) | 45–90 |
+| [`OpenHomiePolicy.run`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/openhomie_policy.py#L138) | 138–152 |
 
 ## Code: sim-launch
 
 **Repository:** `g1pilot-dev`. **Path:** `launch/mujoco_openhomie_manipulation.launch.py`.
 
-[Pinned public source](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/launch/mujoco_openhomie_manipulation.launch.py). Revision `6b5af59`.
+[Pinned public source](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/launch/mujoco_openhomie_manipulation.launch.py). Revision `dadd88f`.
 
 File SHA-256: `4ab7113ec0ff88c280422e7d235e86f65fa2e9b87b766820120f678f9f1c7961`.
 
 | Symbol | Inspected lines |
 |---|---|
-| [`_launch_setup`](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/launch/mujoco_openhomie_manipulation.launch.py#L21) | 21–63 |
+| [`_launch_setup`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/launch/mujoco_openhomie_manipulation.launch.py#L21) | 21–63 |
 
 ## Code: test-stack
 
@@ -765,3 +765,16 @@ File SHA-256: `8c2a4259bb4c9c0ee347c813d8db8ef1433e43e546744d2f590ade18a6b5cdd7`
 [Pinned public source](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_executor_state_machine.py). **Branch:** `main`. Revision `7400aff`.
 
 File SHA-256: `bfa1e9ba8700fa215b7a7765f65bc7fcf66ba6601b6be3af78a1e5d686469308`.
+
+## Code: mujoco-model-generator
+
+**Repository:** `g1pilot-dev`. **Path:** `scripts/generate_openhomie_g1_29dof_xml.py`.
+
+[Pinned public source](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/scripts/generate_openhomie_g1_29dof_xml.py). **Branch:** `dev`. Revision `dadd88f`.
+
+File SHA-256: `31876ac833a5bd6adb4a76603134fa8b4d840a2b00bd6c7f039f9657558ff8bb`.
+
+| Symbol | Inspected lines |
+|---|---|
+| [`generate`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/scripts/generate_openhomie_g1_29dof_xml.py#L316) | 316–332 |
+| [`validate_with_mujoco`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/scripts/generate_openhomie_g1_29dof_xml.py#L335) | 335–370 |

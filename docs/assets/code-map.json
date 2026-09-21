@@ -881,65 +881,68 @@
     },
     {
       "id": "pilot-state",
-      "repository": "g1pilot",
+      "repository": "g1pilot-dev",
       "path": "g1pilot/state/robot_state.py",
-      "revision": "72acc803edefe583c24f53e76a21d8d4ed10ed14",
+      "revision": "dadd88f985bb5772f279019b8882208ec59ae4f0",
       "read_from": "git_object",
-      "sha256": "f6f39e37fd58f7c6a7641a6f39f0db867d6f0ac562de02652650977ec35dbcdf",
-      "public_url": "https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/state/robot_state.py",
+      "sha256": "7bc5d92553f4a9e3b152b9588ccfc7a94533dcbeda6ecad8595f62e000cf93a6",
+      "public_url": "https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/state/robot_state.py",
       "symbols": [
         {
           "name": "RobotState.callback_lowstate",
-          "line": 118,
-          "end_line": 167
+          "line": 122,
+          "end_line": 171
         }
-      ]
+      ],
+      "branch": "dev"
     },
     {
       "id": "pilot-arms",
-      "repository": "g1pilot",
+      "repository": "g1pilot-dev",
       "path": "g1pilot/manipulation/opensot_solver.py",
-      "revision": "72acc803edefe583c24f53e76a21d8d4ed10ed14",
+      "revision": "dadd88f985bb5772f279019b8882208ec59ae4f0",
       "read_from": "git_object",
-      "sha256": "188cbcff48446d9add46e43a32d53700c10a6fac00eb21a225783278dde4ccdc",
-      "public_url": "https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/opensot_solver.py",
+      "sha256": "7df355a7eeba83aadb97366cebff783db1d3237882a1a6a6db182abc53bad4cc",
+      "public_url": "https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/opensot_solver.py",
       "symbols": [
         {
           "name": "G1CollisionAvoidanceNode.control_loop",
-          "line": 782,
-          "end_line": 916
+          "line": 938,
+          "end_line": 1064
         }
-      ]
+      ],
+      "branch": "dev"
     },
     {
       "id": "pilot-hands",
-      "repository": "g1pilot",
+      "repository": "g1pilot-dev",
       "path": "g1pilot/manipulation/dx3_hand.py",
-      "revision": "72acc803edefe583c24f53e76a21d8d4ed10ed14",
+      "revision": "dadd88f985bb5772f279019b8882208ec59ae4f0",
       "read_from": "git_object",
-      "sha256": "b0016d5276078fb1f46501e16c5c8ec53e929bfff49a1b5fc93ba6fbb91cae56",
-      "public_url": "https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/dx3_hand.py",
+      "sha256": "8936e0aaf6cf2da04777dcb7b13c91c2f975ca960e2c1411b065b63a0d8d0ccb",
+      "public_url": "https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/dx3_hand.py",
       "symbols": [
         {
-          "name": "DX3Controller.initialize_hand_interfaces",
-          "line": 99,
-          "end_line": 112
+          "name": "DX3Controller._apply_named_command",
+          "line": 261,
+          "end_line": 281
         },
         {
-          "name": "DX3Controller.publish_commands",
-          "line": 183,
-          "end_line": 189
+          "name": "DX3Controller.publish_once",
+          "line": 325,
+          "end_line": 331
         }
-      ]
+      ],
+      "branch": "dev"
     },
     {
       "id": "sim-plant",
       "repository": "g1pilot-dev",
       "path": "g1pilot/simulation/mujoco_plant.py",
-      "revision": "6b5af59b109e2ee687920fdf66ded6182725e945",
+      "revision": "dadd88f985bb5772f279019b8882208ec59ae4f0",
       "read_from": "git_object",
       "sha256": "98e19f3305841b159967277f57c17518e1dc2fc66a1f4f563fea5e346777ec98",
-      "public_url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py",
+      "public_url": "https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py",
       "symbols": [
         {
           "name": "G1PilotUnitreeBridge",
@@ -967,10 +970,10 @@
       "id": "sim-policy",
       "repository": "g1pilot-dev",
       "path": "g1pilot/simulation/openhomie_policy.py",
-      "revision": "6b5af59b109e2ee687920fdf66ded6182725e945",
+      "revision": "dadd88f985bb5772f279019b8882208ec59ae4f0",
       "read_from": "git_object",
       "sha256": "dd7e1901debdbd02a22a3240fc27780aacc021b2568a60a44ef47a4244fd6e86",
-      "public_url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/openhomie_policy.py",
+      "public_url": "https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/openhomie_policy.py",
       "symbols": [
         {
           "name": "compute_openhomie_observation",
@@ -988,10 +991,10 @@
       "id": "sim-launch",
       "repository": "g1pilot-dev",
       "path": "launch/mujoco_openhomie_manipulation.launch.py",
-      "revision": "6b5af59b109e2ee687920fdf66ded6182725e945",
+      "revision": "dadd88f985bb5772f279019b8882208ec59ae4f0",
       "read_from": "git_object",
       "sha256": "4ab7113ec0ff88c280422e7d235e86f65fa2e9b87b766820120f678f9f1c7961",
-      "public_url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/launch/mujoco_openhomie_manipulation.launch.py",
+      "public_url": "https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/launch/mujoco_openhomie_manipulation.launch.py",
       "symbols": [
         {
           "name": "_launch_setup",
@@ -1244,6 +1247,28 @@
       "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_executor_state_machine.py",
       "symbols": [],
       "branch": "main"
+    },
+    {
+      "id": "mujoco-model-generator",
+      "repository": "g1pilot-dev",
+      "path": "scripts/generate_openhomie_g1_29dof_xml.py",
+      "revision": "dadd88f985bb5772f279019b8882208ec59ae4f0",
+      "branch": "dev",
+      "read_from": "git_object",
+      "sha256": "31876ac833a5bd6adb4a76603134fa8b4d840a2b00bd6c7f039f9657558ff8bb",
+      "public_url": "https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/scripts/generate_openhomie_g1_29dof_xml.py",
+      "symbols": [
+        {
+          "name": "generate",
+          "line": 316,
+          "end_line": 332
+        },
+        {
+          "name": "validate_with_mujoco",
+          "line": 335,
+          "end_line": 370
+        }
+      ]
     }
   ]
 }

@@ -1,8 +1,8 @@
 # First-draft review queue
 
-The first draft covers all located summer work and later corrections through
-September 13. The next step is a focused discussion of particular sections,
-with the source evidence already assembled. These gaps are visible so they
+The first draft covers the reusable summer tools and later corrections through
+September 13. G1Pilot's contribution here is the initial MuJoCo twin. Review
+particular sections with the source evidence already assembled. These gaps are visible so they
 can be resolved without inventing installation facts or performance claims.
 
 ## Author and hardware review
@@ -50,8 +50,9 @@ the hardware details these sections need.
   held calibration sweep/issue/patch are not new tasks for this documentation.
 - Independently annotate physical placement/stack success before reporting a
   success rate from the 13 completed recording boundaries.
-- Review MuJoCo video content and reconcile its older model-shape diagnostic
-  before advertising runnable simulation verification.
+- Reproduce the MuJoCo setup in a clean workspace and reconcile its older
+  model-shape diagnostic. The pretrained OpenHomie policy is linked in the
+  chapter; sampled demo frames were reviewed, without a quantitative stability test.
 
 ## Suggested review order
 

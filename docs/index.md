@@ -42,7 +42,7 @@ in the [review queue](reference/review.md).
 | Wrist targets, V7 torso mount and calibration tools | [Calibration/fixture `main`](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/f295def18bd936031fba325d4e8bdfc71fea671a) |
 | Offline grasp generation and assembly studies | [Grasp-demo `main`](https://github.com/sri299792458/g1-aprilcube-demo/tree/2b7274b11f1862ebfcd05b48ff678d995e55269e) |
 
-The [source catalog](reference/sources.md) also covers G1Pilot, MuJoCo and tactile
+The [source catalog](reference/sources.md) also covers the MuJoCo twin and tactile
 tools. Each code link pins the version being explained; September changes are
 kept separate from the physical demo baseline.
 
@@ -54,7 +54,8 @@ kept separate from the physical demo baseline.
 | Start working with the lab robot | [Hardware](hardware/robot.md), [setup](start/setup.md), and [control ownership](control/ownership.md) |
 | Understand a failed grasp or route | [Grasp atlas](manipulation/grasp-atlas.md), [planning](manipulation/planning.md), and [debugging](reference/debugging.md) |
 | Work on calibration | [Workflow](calibration/workflow.md), [results](calibration/results.md), and [investigations](calibration/investigation.md) |
-| Inspect Dex3 sensing or the initial simulator | [Pressure tools](sensing/pressure.md), [MuJoCo backend](simulation/mujoco.md) |
+| Inspect Dex3 sensing | [Pressure tools](sensing/pressure.md) |
+| Work with the initial simulator | [MuJoCo digital twin](simulation/mujoco.md) |
 | Use the recordings | [Recording and LeRobot](data/recording.md) |
 | Continue the documentation | [Maintenance](reference/maintenance.md) and [sources](reference/sources.md) |
 
@@ -81,14 +82,21 @@ Repositories and setup <start/setup>
 
 ```{toctree}
 :hidden:
-:caption: Hardware and control
+:caption: Hardware and setup
 :maxdepth: 1
 
 The lab robot <hardware/robot>
 Camera and network <hardware/camera>
+Printed targets and mounts <perception/targets>
+```
+
+```{toctree}
+:hidden:
+:caption: Control and safety
+:maxdepth: 1
+
 Ownership and safety <control/ownership>
 Operating and recovering <control/runbook>
-G1Pilot bring-up <control/g1pilot>
 ```
 
 ```{toctree}
@@ -96,7 +104,6 @@ G1Pilot bring-up <control/g1pilot>
 :caption: Perception and calibration
 :maxdepth: 1
 
-Printed targets and mounts <perception/targets>
 Object pose estimation <perception/object-pose>
 Calibration model and workflow <calibration/workflow>
 Calibration results and limits <calibration/results>
@@ -106,7 +113,7 @@ Body motion and state estimation <perception/state-estimation>
 
 ```{toctree}
 :hidden:
-:caption: Grasping and planning
+:caption: Grasping and manipulation
 :maxdepth: 1
 
 GraspGen-X and the grasp atlas <manipulation/grasp-atlas>
@@ -118,12 +125,19 @@ Moving-target MPC <manipulation/mpc>
 
 ```{toctree}
 :hidden:
-:caption: Sensing, simulation, and data
+:caption: Recording and sensing
 :maxdepth: 1
 
-Dex3 pressure <sensing/pressure>
-MuJoCo digital twin <simulation/mujoco>
 Recording and LeRobot <data/recording>
+Dex3 pressure <sensing/pressure>
+```
+
+```{toctree}
+:hidden:
+:caption: Simulation
+:maxdepth: 1
+
+MuJoCo digital twin <simulation/mujoco>
 ```
 
 ```{toctree}

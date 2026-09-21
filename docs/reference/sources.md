@@ -12,8 +12,7 @@ successful August demo and the later calibration development are separate branch
 | [Tabletop September branch](https://github.com/sri299792458/g1-dex3-tabletop/tree/59c21b1388c636176dea67ea7ed3e253f8510783) | `59c21b1` | Later calibration runtime, diagnostics, shared-control changes and regression fixtures; includes the previously uncommitted work |
 | [Calibration and fixtures `main`](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/f295def18bd936031fba325d4e8bdfc71fea671a) | `f295def` | Reusable calibration tools, bundle support, wrist markers, V7 torso structure and R2 coupons |
 | [Grasp/assembly `main`](https://github.com/sri299792458/g1-aprilcube-demo/tree/2b7274b11f1862ebfcd05b48ff678d995e55269e) | `2b7274b` | Offline GraspGen-X descriptors, qualification, support studies and assembly planning |
-| [G1Pilot June implementation](https://github.com/sri299792458/g1pilot/tree/72acc803edefe583c24f53e76a21d8d4ed10ed14) | `72acc80` | Initial ROS/OpenSoT integration and hardware bring-up |
-| [G1Pilot July simulator](https://github.com/sri299792458/g1pilot/tree/6b5af59b109e2ee687920fdf66ded6182725e945) | `6b5af59` | Initial MuJoCo/OpenHomie backend, supplied on `dev` |
+| [G1Pilot simulator `dev`](https://github.com/sri299792458/g1pilot/tree/dadd88f985bb5772f279019b8882208ec59ae4f0) | `dadd88f` | Initial MuJoCo/OpenHomie backend, supplied on `dev` |
 | [Dex3 pressure tools](https://github.com/sri299792458/dex3_pressure_tools/tree/e0b706df507160799b70732c7cc3244924ce8f5e) | `e0b706d` | Passive recording, baseline-relative visualization and taxel mapping |
 
 The tabletop demo revision preserves runtime code, tests, configuration and

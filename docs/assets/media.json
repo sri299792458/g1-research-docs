@@ -47,19 +47,25 @@
       "id": "g1pilot-mujoco-rviz-arm-demo",
       "public_url": "https://github.com/sri299792458/g1pilot/releases/download/mujoco-demo-media-2026-07-01/g1pilot-mujoco-rviz-arm-demo.mp4",
       "bytes": 12915563,
-      "sha256": null,
+      "sha256": "6c7988b5e4a8e6310b4a687ef6ffb45a3ece6aae6d01292dfe37e54d4f3cb194",
       "context": "simulation",
-      "review": "release metadata only; content and browser playback not reviewed",
-      "original_archive_location": null
+      "review": "Downloaded and hashed 2026-09-21; sampled frames at 10% and 70% inspected. Arm poses / hand open-close response visible. Not a continuous stability assessment; embedded playback not tested.",
+      "original_archive_location": null,
+      "duration_seconds": 34.2844,
+      "width": 1856,
+      "height": 1044
     },
     {
       "id": "g1pilot-mujoco-dex3-open-close-demo",
       "public_url": "https://github.com/sri299792458/g1pilot/releases/download/mujoco-demo-media-2026-07-01/g1pilot-mujoco-dex3-open-close-demo.mp4",
       "bytes": 1649508,
-      "sha256": null,
+      "sha256": "34a55a030a903bd5ff19a98ec0b569f5fd1afd60c56cdb62ccb2a50db89a3d48",
       "context": "simulation",
-      "review": "release metadata only; content and browser playback not reviewed",
-      "original_archive_location": null
+      "review": "Downloaded and hashed 2026-09-21; sampled frames at 10% and 70% inspected. Arm poses / hand open-close response visible. Not a continuous stability assessment; embedded playback not tested.",
+      "original_archive_location": null,
+      "duration_seconds": 18.4863,
+      "width": 1824,
+      "height": 1048
     },
     {
       "id": "realsense-pc2-usb-ports",

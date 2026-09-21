@@ -8,8 +8,8 @@ hardware lessons a future researcher needs to preserve.
 **[Read the guide](https://sri299792458.github.io/g1-research-docs/)** ·
 [Review queue](docs/reference/review.md) · [Contributing](CONTRIBUTING.md)
 
-This is a complete first draft awaiting the author's review. It covers G1Pilot,
-an initial MuJoCo backend, Dex3 sensing, printed targets, camera/arm calibration,
+This is a complete first draft awaiting the author's review. It covers the
+initial MuJoCo digital twin, Dex3 sensing, printed targets, camera/arm calibration,
 GraspGen-X, CuRobo, physical cube manipulation and recording/LeRobot conversion.
 The guide retains calibration corrections through September 7 and fixture-fit
 evidence through September 13. Reported offline,

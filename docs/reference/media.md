@@ -113,10 +113,19 @@ These assets are published in the existing
 - [RViz and arm demo](https://github.com/sri299792458/g1pilot/releases/download/mujoco-demo-media-2026-07-01/g1pilot-mujoco-rviz-arm-demo.mp4), 12,915,563 bytes;
 - [Dex3 open/close demo](https://github.com/sri299792458/g1pilot/releases/download/mujoco-demo-media-2026-07-01/g1pilot-mujoco-dex3-open-close-demo.mp4), 1,649,508 bytes.
 
-Release metadata was inspected; video content and embedded playback have not
-yet been reviewed for this draft. They are explicit download links, with no
-claim of browser streaming or physical-robot footage. Add a reviewed poster
-and caption when selecting them for an embedded demonstration.
+Both files were downloaded and hashed for the simulation chapter. Frames at
+10% and 70% of each clip were inspected: the arm video shows RViz beside changing
+MuJoCo arm poses; the hand video shows terminal open/close commands and different
+finger configurations. This is sampled visual evidence, not a continuous
+stability or tracking assessment. Neither file has an audio stream.
+
+| Asset | Duration / dimensions | SHA-256 |
+|---|---|---|
+| Arm demo | 34.28 s / 1856 × 1044 | `6c7988b5e4a8e6310b4a687ef6ffb45a3ece6aae6d01292dfe37e54d4f3cb194` |
+| Dex3 demo | 18.49 s / 1824 × 1048 | `34a55a030a903bd5ff19a98ec0b569f5fd1afd60c56cdb62ccb2a50db89a3d48` |
+
+These remain download links. Embedded playback of these two originals has not
+been tested; the chapter embeds the separate reviewed short clip.
 
 ## Author-supplied September media
 
@@ -129,9 +138,8 @@ reviews remain private.
 All photographs and embedded deck images were inspected, along with 326 video
 frames sampled across the eight clips and selected full-resolution stacking
 frames. Audio in the three physical recordings remains unreviewed.
-The short MuJoCo clip is a separate file; its review does not change
-the metadata-only status of the July release assets above. The deck's linked
-boot-calibration movie was not present in the folder.
+The short MuJoCo clip is a separate file from the July release assets reviewed
+above. The deck's linked boot-calibration movie was not present in the folder.
 
 ## Recreating a publication copy
 
