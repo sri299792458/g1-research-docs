@@ -8,7 +8,7 @@ one Python environment recreates the ABI problems the later tools separated.
 | `g1pilot` | ROS/OpenSoT integration, navigation work, MuJoCo backend |
 | `aprilcube` fork | Printed fiducials, rounding, detection APIs |
 | `g1-aprilcube-demo` | GraspGen-X descriptors, Isaac qualification, assembly |
-| `robot-calibration-aprilcube-prototype` | Early calibration, fixtures, commissioning |
+| `robot-calibration-aprilcube-prototype` | Calibration capture/analysis, Dex3 wrist markers, current V7 torso CAD and R2 fit coupons |
 | `g1-dex3-tabletop` | Manipulation, bilateral calibration, recording/conversion |
 | `dex3_pressure_tools` | Passive tactile inspection and RViz |
 | `spark-data-collection` | Recording and documentation reference |
@@ -16,6 +16,12 @@ one Python environment recreates the ABI problems the later tools separated.
 The [source catalog](../reference/sources.md) supplies public locations and
 identifies local-only material. The tabletop checkout includes uncommitted
 September work; Git HEAD alone does not reproduce that version.
+
+For printed mounts, start with [targets and mounts](../perception/targets.md).
+The calibration/fixture repository remains separate from the manipulation
+runtime. Opening its F3D, STEP, STL or Bambu exports does not require the ROS,
+planner or dataset-conversion environments. Use the pinned V7 links in that
+chapter; the older default branch does not contain the latest torso design.
 
 ## Environment boundaries
 

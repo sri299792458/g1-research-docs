@@ -20,6 +20,8 @@ flowchart LR
 | Dorsal mount specification | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L28) · `Dex3DorsalMountSpec` | Record dimensions and handed mounting geometry. |
 | Physical marker transform | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L221) · `palm_T_marker_face` | Compute the handed CAD marker pose. |
 | Mount artifact | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L297) · `mount_manifest` | Export geometry and metadata for the mount. |
+| Current torso structure | [build_g1_mount_v7_fusion.py](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/scripts/build_g1_mount_v7_fusion.py) · `build` | Construct the V7 crossbars and side plates inside Fusion. |
+| Torso geometry checks | [validate_g1_mount_v7.py](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/scripts/validate_g1_mount_v7.py) | Export print orientations and check mesh, tool and optical clearance. |
 
 The cube and wrist-marker branches are separate targets. Read the dimensions below before selecting a mesh or detector dictionary. For wrist visibility use the physical transform; for a selected calibration’s residuals use that fit’s registered transform.
 
@@ -98,15 +100,54 @@ calibration model. Neither should silently replace the other.
 
 ## Torso ChArUco carrier
 
-Several carrier designs explored a repeatable torso reference. The final
-documented v4 design uses one multicolor H2D carrier with four arms attached
-at external M6 holes. The active board is 6 × 9 squares, with 30 mm squares,
-22 mm markers and `5x5_50`, covering 180 × 270 mm. Earlier paper/`4x4` designs
-and obstructed screw-access arrangements are superseded.
+The current design is **V7**, kept in
+[`robot-calibration-aprilcube-prototype`](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/9ad412019107161373e5381ed81cd5c2224a1301/artifacts/g1_mount_v7).
+It uses two broad torso crossbars and two flat side plates. These support the
+accepted 210 × 300 mm multicolor carrier and its four M4 holes. The active
+board is 6 × 9 squares, with 30 mm squares, 22 mm markers and `5x5_50`,
+covering 180 × 270 mm. V7 replaces the earlier frame whose small M6 boss
+broke during support removal/handling in PLA.
 
-The notes do **not** establish a physically qualified torso extrinsic standard.
-Root fit, board flatness, screw engagement and reinstall repeatability remain
-to be checked. A rear waist fastener is not automatically an accessory datum.
+```mermaid
+flowchart TD
+  accTitle: Torso fixture files and their validation boundary
+  accDescr: Frozen carrier, shell and camera inputs define the native V7 CAD. Structural exports and compact R2 coupons have recorded geometric checks. Physical coupon trials are incomplete and do not yet establish a calibrated torso reference.
+  I["Frozen carrier, shell<br/>and camera layout"] --> C["Native V7 Fusion CAD"]
+  C --> S["Structural print files"]
+  C --> Q["Compact R2 fit coupons"]
+  S --> G["Recorded geometry checks"]
+  Q --> P["Physical fit checks<br/>lower screw reach unresolved"]
+```
+
+| Need | Exact source |
+|---|---|
+| Open or print the current structure | [V7 CAD and printing guide](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/artifacts/g1_mount_v7/README.md) |
+| Inspect native CAD or exchange geometry | [F3D and STEP files](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/9ad412019107161373e5381ed81cd5c2224a1301/artifacts/g1_mount_v7/cad) |
+| Check the four shell interfaces | [Compact R2 coupons](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/artifacts/g1_coupon_r2/README.md) |
+| Understand what physically fitted | [September 13 fit status](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/artifacts/g1_mount_v7/FIT_STATUS.md) |
+| Edit or rerun CAD checks | [Fusion and mesh script guide](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/scripts/G1_MOUNT_README.md) |
+
+The R2 coupons preserve the full contact patches, M6 bores and washer bearing
+planes while trimming the earlier coupons. Use the current `print_parts/` and
+`fit_coupons/` files. Pre-R2 meshes under `original_reference/` are retained for
+geometric comparison, rather than as another revision to print.
+
+The September 13 physical record reports that **M6 × 25 worked with the upper
+coupons but did not engage through the lower coupons**. Upper washer use and
+engagement depth were not measured; lower screw length remains unresolved.
+The earlier M6 × 20 assumption and rough 35/40 mm estimates are not a confirmed
+hardware specification. All current seats retain a nominal 12 mm stack at
+the screw axis. Full crossbar seating, assembly stiffness, board flatness and
+reinstall repeatability remain unverified.
+
+For a fixed board, the geometric relationship is
+`torso_T_camera = torso_T_board @ inverse(camera_T_board)`. V7 retains the
+nominal board center `[245, 0, 127.5]` mm in `torso_link`, with +21° pitch.
+The installed `torso_T_board` needs an independent physical check; low image
+reprojection error alone cannot establish it. Recorded CAD checks, including
+unobstructed target rays, do **not** qualify this fixture as a torso extrinsic
+standard. The V7 work has not supplied a replacement for the August wrist-based
+calibration bundle used by the stacking demo.
 
 Evidence: AprilCube July 13–15 log; prototype dorsal-marker and torso-carrier
 documents; tabletop object-profile corrections. See [sources](../reference/sources.md)
