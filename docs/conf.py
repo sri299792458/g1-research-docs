@@ -28,7 +28,10 @@ mermaid_init_config = {
     "startOnLoad": False,
     "fontFamily": "system-ui, sans-serif",
     "themeVariables": {"fontSize": "18px"},
-    "flowchart": {"curve": "linear", "nodeSpacing": 30, "rankSpacing": 42},
+    "flowchart": {
+        "curve": "linear", "nodeSpacing": 30, "rankSpacing": 32,
+        "padding": 12, "useMaxWidth": False,
+    },
 }
 html_theme = "furo"
 html_title = "Working with the G1"

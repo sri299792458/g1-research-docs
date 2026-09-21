@@ -1,9 +1,30 @@
 # Recording the G1 and exporting LeRobot
 
-The G1 recording pipeline extended the SPARK approach of preserving synchronized
-robot observations and commands. It records raw ROS evidence through task and
-cleanup, then derives training episodes offline. The raw recording and the
-derived dataset serve different purposes.
+The G1 recorder preserves raw evidence through ownership cleanup; the LeRobot converter derives a lower-rate training representation afterward. Recording completeness and task success are separate outcomes.
+
+```mermaid
+flowchart TB
+  accTitle: From ROS evidence to an audited bag and training episode
+  accDescr: The full topic contract feeds an external MCAP writer during the task and cleanup. On stop, metadata and topic checks mark the bag complete or incomplete. A retained bag may then be aligned on RGB samples and exported to LeRobot.
+  T["Expected ROS topics<br/>and message types"] --> R["External MCAP writer<br/>through cleanup"]
+  R --> A["Stop and audit<br/>metadata and messages"]
+  A --> B["Raw bag +<br/>completion manifest"]
+  B --> I["Offline RGB-timeline<br/>alignment"]
+  I --> L["LeRobot episode<br/>and conversion report"]
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Topic contract | [raw_episode_recording.py](../reference/code-index.md#code-recorder) · `tabletop_raw_topics` (local snapshot) | Choose the expected streams for the recording profile. |
+| Writer startup | [raw_episode_recording.py](../reference/code-index.md#code-recorder) · `RawEpisodeRecorder.start` (local snapshot) | Require the recorder to subscribe before continuing. |
+| Completion audit | [raw_episode_recording.py](../reference/code-index.md#code-recorder) · `RawEpisodeRecorder.stop` (local snapshot) | Check exit, MCAP metadata, message types and required nonempty streams. |
+| Offline alignment | [lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/lerobot_conversion.py#L259) · `index_and_align_episode` | Select state and active commands relative to actual RGB samples. |
+| Numeric representation | [lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/lerobot_conversion.py#L573) · `build_numeric_frame` | Construct the named joint, command, pressure and IMU arrays. |
+| Dataset export | [lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/lerobot_conversion.py#L774) · `convert_episode` | Write the derived episode and its conversion evidence. |
+
+A complete bag can contain a failed task or abnormal cleanup. An incomplete bag remains available as evidence but must not be relabelled complete because conversion or video playback works. Preserve the original bag when using the derived dataset.
 
 ## Record the full lifecycle
 
@@ -102,3 +123,7 @@ failure analysis and claims independently of a compact training export.
 
 Evidence: tabletop recording contract, conversion notes and retained episode
 audits. [Source identities](../reference/sources.md), [media/storage policy](../reference/media.md).
+
+## Checks and evidence to inspect
+
+[test_raw_episode_recording.py](../reference/code-index.md#code-test-recorder) (local snapshot) includes missing-subscription and empty-required-topic cases. [test_lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_lerobot_conversion.py) checks vector/schema agreement, terminal-command exclusion and depth-bound consistency. The September 7 bag below demonstrates successful evidence retention through a failed restoration.

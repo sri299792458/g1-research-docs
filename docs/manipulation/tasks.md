@@ -1,9 +1,30 @@
 # Physical pickup and stacking
 
-The physical milestone was a complete manipulation lifecycle: observe, acquire
-control, lift clear, plan, grasp, check retention, place, return and release.
-The notes distinguish that lifecycle from a promising grasp frame or a video
-showing only the lift.
+The single-cube and direct-stack coordinators share control and grasp checks but plan at different boundaries. The single-cube trajectory path below makes its pregrasp replan explicit.
+
+```mermaid
+flowchart TB
+  accTitle: Single-cube trajectory lifecycle
+  accDescr: The robot acquires control, lifts clear and reobserves the cube. It follows a reversible pregrasp route, replans the same-grasp remainder at pregrasp, checks contact and the achieved hand geometry, then lifts, replaces, returns and hands back control.
+  A["Acquire control;<br/>lift clear and reobserve"] --> P["Reversible route<br/>to pregrasp"]
+  P --> R["Same-grasp remainder<br/>replanned at pregrasp"]
+  R --> C["Approach, close,<br/>check contact geometry"]
+  C --> L["Retention checkpoint,<br/>lift and replace"]
+  L --> H["Complete return<br/>and ownership handback"]
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Single-cube coordinator | [hardware_tabletop.py](../reference/code-index.md#code-tabletop) · `run_tabletop` (local snapshot) | Connect observation, ownership, planning, fingers, return and recording. |
+| Pregrasp route | [tabletop_session.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_session.py#L317) · `TabletopPlanningSession.plan_pregrasp_at_clearance` | Keep a reversible pregrasp route before committing to the remainder. |
+| Pregrasp correction | [tabletop_session.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_session.py#L425) · `TabletopPlanningSession.replan_at_pregrasp` | Keep the candidate and command start while updating estimated camera state. |
+| Opposed contact | [unitree_dex3.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/transports/unitree_dex3.py#L355) · `classify_dex3_opposed_joint_obstruction` | Compare measured joints with the commissioned empty-close reference. |
+| Retention checkpoint | [unitree_dex3.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/transports/unitree_dex3.py#L1049) · `UnitreeDex3PostureController.verify_retention_at_lifted_checkpoint` | Verify retained opposed contact after the short lift. |
+| Direct-stack coordinator | [hardware_stack.py](../reference/code-index.md#code-stack) · `run_stack` (local snapshot) | Choose cube direction/arm and plan the complete transfer at clearance. |
+
+Read the single-cube and stack entry points independently. Direct stacking calls `_find_direct_stack_plan` and `_execute_pick_place`; it does not inherit the extra single-cube pregrasp replan. Both need checked recovery routes and explicit ownership handback.
 
 ## Current object and fixture profiles
 
@@ -50,8 +71,10 @@ two-second closing/opening transition.
 
 1. Observe the supported scene and acquire from measured state.
 2. Lift to clearance, allow the body to settle and reobserve the fixed cube.
-3. Plan a complete route using the qualified pool and strict collision checks.
-4. At pregrasp, propagate the camera anchor and replan the same-grasp remainder.
+3. Plan and execute a reversible pregrasp route using the qualified pool and
+   strict collision checks.
+4. At pregrasp, propagate the camera anchor and plan the complete same-grasp
+   remainder; retain the earlier exact reverse if this replan fails.
 5. Approach, close and check opposed contact; validate the actual contact fingers.
 6. Lift through the retention checkpoint, place, open and execute the complete return.
 7. Verify the ownership handoff before shutting down recording/resources.
@@ -128,3 +151,7 @@ checked against source text and were not executed during documentation.
 
 Evidence: tabletop physical runs and later Friday-baseline/direct-stack rebuild.
 [Source identities](../reference/sources.md).
+
+## Checks and evidence to inspect
+
+[test_tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_tabletop_workflow.py) and [test_stack_workflow.py](../reference/code-index.md#code-test-stack) (local snapshot) encode boundary, return and retry regressions. Inspect recorded close/retention evidence and cleanup outcome separately from task completion. The August runs below are the physical record; source tests alone cannot establish grasp success.

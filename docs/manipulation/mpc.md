@@ -1,9 +1,29 @@
 # Moving-target MPC: experimental final approach
 
-Moving-target MPC remained experimental at the end of the reviewed work.
-The commissioned trajectory path uses replanning at defined boundaries. The
-MPC experiments explain what was learned about continuous updates and why a
-seemingly valid solver output could still fail the physical approach.
+Experimental MPC updates only the final pregrasp-to-grasp approach. A solver result is a proposed future window; the command buffer must accept it before the controller uses it.
+
+```mermaid
+flowchart TB
+  accTitle: An MPC proposal crosses a checked future handoff
+  accDescr: Fresh visual and body state updates feed the worker solver. A proposed future command window reaches the buffer, which checks timing, predecessor and continuity. Acceptance queues the window; rejection preserves the existing checked tail and endpoint hold.
+  O["Fresh cube/body state<br/>and future boundary"] --> W["Worker solves<br/>future command window"]
+  W --> B["Buffer checks time,<br/>identity and continuity"]
+  B -->|accepted| Q["Queue unchanged window"]
+  B -->|rejected| H["Retain checked tail<br/>and endpoint hold"]
+  Q --> C["Fixed-rate command sampling"]
+  H --> C
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Moving target update | [tabletop_mpc.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_mpc.py#L1934) · `MovingGraspMPC.update_moving_grasp_goal` | Use the observed object with the selected grasp geometry. |
+| Worker solve | [tabletop_mpc.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_mpc.py#L2269) · `MovingGraspMPC.solve_window` | Produce predicted motion and a command window for the frozen handoff. |
+| Window acceptance | [mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/mpc_command_buffer.py#L359) · `RollingMPCCommandBuffer.install` | Reject stale, fast, discontinuous or wrong-predecessor windows. |
+| Command sampling | [mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/mpc_command_buffer.py#L540) · `RollingMPCCommandBuffer.command` | Sample the accepted window and retain its endpoint hold. |
+
+A high-level solve rejection is distinct from a low-level control fault. The diagram assumes state freshness, the control driver and watchdog remain healthy. The independent safety path still governs an actual loss of control health.
 
 ## Scope narrowed to the final approach
 
@@ -61,3 +81,7 @@ are met before claiming an improved moving-target controller.
 
 Evidence: tabletop MPC development, nonideal replay and August 21 endpoint
 analysis. [Source identities](../reference/sources.md).
+
+## Checks and evidence to inspect
+
+[test_mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_mpc_command_buffer.py) checks future boundaries, tracking-offset preservation, rejection and held endpoints. [test_tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_tabletop_workflow.py) contains the rejected-window retry cases. The physical endpoint/clearance conflict below remains unresolved; this path is not a commissioned moving-object capability.

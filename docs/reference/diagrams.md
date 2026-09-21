@@ -5,6 +5,24 @@ guide. Keep its text alongside the explanation so a future maintainer can
 review changes in Git. The diagram should answer one question that its
 surrounding paragraph makes explicit.
 
+## Connect the diagram to implementation
+
+Open a technical chapter with a diagram that answers its main implementation
+question. Follow it with a small table mapping the components to actual files
+and functions/classes. Explain the inputs, outputs and conditions in the same
+order as the graph, then give design reasons, failure cases and validation.
+The [planning chapter](../manipulation/planning.md) demonstrates this structure.
+
+Keep the graph meaningful as plain Mermaid source: use descriptive node labels
+and name what crosses important edges. Both readers and agents can use those
+relationships. Code links supply exact locations; prose supplies assumptions
+and limits that a box or arrow cannot express fully.
+
+Use the [code index](code-index.md) for exact source availability. Do not draw
+a rejected experiment as the current runtime, or merge two coordinators merely
+because they use the same planner. A component diagram is not a startup
+sequence; state explicitly which question it answers.
+
 ## Choose the diagram for the question
 
 | Question | Mermaid type | Example in the G1 work |
@@ -54,7 +72,8 @@ alone to distinguish success from failure, measured from commanded, or
 simulation from hardware.
 
 The site supplies a neutral light theme, a dark theme, readable sizing and
-an **Expand** control. Narrow screens scroll wide diagrams horizontally.
+an **Expand** control. In-page graphs retain their intrinsic dimensions;
+the expanded viewer fits the complete graph. Narrow screens scroll wide diagrams horizontally.
 Keep appearance settings in `docs/conf.py` and `assets/stylesheets/extra.css`
 instead of repeating a custom theme in each diagram.
 

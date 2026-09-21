@@ -1,8 +1,30 @@
 # CuRobo planning contracts
 
-The planning pipeline must return a route that the current controller can
-join, execute, reject and reverse. Reaching a Cartesian endpoint is only one
-part of that contract.
+The planner receives a frozen scene and command boundary, then returns checked motion and recovery routes. It runs in a separate process from the fixed-rate controller.
+
+```mermaid
+flowchart TB
+  accTitle: Planning across the control-process boundary
+  accDescr: Measured body and hand geometry plus the current arm commands form a planning request. A persistent planner process solves and checks the route. The controller verifies the immutable result and installs it without changing the active command.
+  M["Measured body<br/>and finger geometry"] --> B["Exact-command<br/>planning snapshot"]
+  C["Currently streamed<br/>arm commands"] --> B
+  B --> W["Persistent GPU<br/>planner process"]
+  W --> P["Checked task routes<br/>and frozen returns"]
+  P --> I["Verify and install<br/>at held boundary"]
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Snapshot boundary | [control_boundary.py](../reference/code-index.md#code-boundary) · `command_bound_snapshot` (local snapshot) | Keep measured body/fingers while binding both arm starts to held commands. |
+| Process boundary | [persistent_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/persistent_planner.py#L141) · `PersistentTabletopPlanner.request_payload` | Submit a request while continuing control health checks. |
+| Planning session | [tabletop_session.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_session.py#L425) · `TabletopPlanningSession.replan_at_pregrasp` | Bind a same-grasp remainder to the stored clearance request and exact start. |
+| Route planning | [tabletop_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_planner.py#L5541) · `plan_tabletop_task` | Solve the task using explicit model, scene and candidate contracts. |
+| Contact revalidation | [tabletop_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_planner.py#L4048) · `RetentionRouteValidator.validate` | Check the frozen payload route against achieved finger geometry. |
+| Plan installation | [control_boundary.py](../reference/code-index.md#code-boundary) · `install_plan_at_current_boundary` (local snapshot) | Reject a real command jump before installing or switching arms. |
+
+The snapshot field `measured_q29_rad` deserves care: `command_bound_snapshot` replaces the arm entries with active commands while retaining measured body/finger geometry. Its name alone is not enough to infer every entry is a sensor measurement. Read the constructor and boundary helper together.
 
 ## Model the measured robot
 
@@ -81,3 +103,7 @@ See [ownership](../control/ownership.md) for fixed-rate execution and
 
 Evidence: tabletop planning, strict-collision and worker-pool entries.
 [Source identities](../reference/sources.md).
+
+## Checks and evidence to inspect
+
+[test_stack_workflow.py](../reference/code-index.md#code-test-stack) (local snapshot) preserves the measured-elbow versus held-command regression. [test_tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_tabletop_workflow.py) covers real discontinuity rejection, float32 anchoring, strict collision checks, attached geometry and complete returns. The timings below are reported task-specific measurements, not benchmarks rerun for this guide.

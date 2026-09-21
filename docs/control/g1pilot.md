@@ -1,10 +1,29 @@
 # G1Pilot bring-up
 
-G1Pilot was the early integration base: robot description, state publication,
-OpenSoT arm control, Dex3 interfaces, navigation components and visualization.
-The June log records 38 issue dispositions and substantial environment repair.
-That work should be understood as a set of verified boundaries rather than a
-claim that the complete navigation/manipulation stack was commissioned.
+G1Pilot connects ROS state and task interfaces to Unitree DDS. Its state, arm and hand paths have separate ownership and launch settings.
+
+```mermaid
+flowchart TB
+  accTitle: G1Pilot state and command interfaces
+  accDescr: Robot DDS state feeds RobotState and the arm solver. ROS goals and enable signals feed OpenSoT, which may publish arm commands. Hand actions feed a separate Dex3 controller. RobotState publishes joint state for visualization.
+  D["Robot DDS state"] --> S["RobotState<br/>joint-state publication"]
+  D --> A["OpenSoT arm solver"]
+  G["ROS goals<br/>and enable signals"] --> A
+  A -->|when command output enabled| O["Arm SDK commands"]
+  H["ROS hand actions"] --> X["Dex3 controller"]
+  X -->|when hardware output enabled| C["Hand commands"]
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Body state | [robot_state.py](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/state/robot_state.py#L118) · `RobotState.callback_lowstate` | Translate measured body state into the configured ROS representation. |
+| Arm command path | [opensot_solver.py](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/opensot_solver.py#L782) · `G1CollisionAvoidanceNode.control_loop` | Read goals/state and enforce the selected command/enable mode. |
+| Hand interface setup | [dx3_hand.py](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/dx3_hand.py#L99) · `DX3Controller.initialize_hand_interfaces` | Create the hand interfaces according to the resolved mode. |
+| Hand command path | [dx3_hand.py](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/dx3_hand.py#L183) · `DX3Controller.publish_commands` | Publish the selected hand actions only through initialized outputs. |
+
+These links pin the June implementation. Follow the parent launch arguments through each child before assuming a dry-mode flag disables every publisher. The [July simulator](../simulation/mujoco.md) uses a later, separately pinned configuration. Neither path supplies the tabletop controller’s complete ownership lifecycle.
 
 ## Make offline mode real
 
@@ -80,3 +99,7 @@ Cartesian OpenSoT runtime into a discrete move/settle/capture task.
 Evidence: [pinned June journal](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/running_notes.md),
 read in full; detailed reading record in `research/g1pilot-reading.md`.
 
+
+## Checks and evidence to inspect
+
+Read the [June log](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/running_notes.md) for the 38 issue dispositions, mock/dry checks and incomplete physical checks. In particular, corrected topic names or TF do not establish complete autonomous navigation.

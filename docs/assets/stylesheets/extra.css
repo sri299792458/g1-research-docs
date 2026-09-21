@@ -15,6 +15,13 @@ article .mermaid-container > pre.mermaid {
     margin: 0;
     padding: 0;
 }
+/* Mermaid emits intrinsic dimensions; the extension otherwise stretches every
+   SVG to the article width, enlarging tall graphs and shrinking wide ones. */
+article .mermaid-container > pre.mermaid > svg {
+    width: auto;
+    height: auto;
+    max-width: none !important;
+}
 article .mermaid-container > .mermaid-fullscreen-btn {
     top: 0 !important;
     right: 0 !important;
@@ -36,5 +43,7 @@ article .mermaid-fullscreen-btn:focus-visible {
     min-width: 38rem;
 }
 .mermaid-fullscreen-modal .mermaid-container-fullscreen .mermaid svg {
-    height: auto !important;
+    height: 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }

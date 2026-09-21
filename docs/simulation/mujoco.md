@@ -1,15 +1,32 @@
 # The initial MuJoCo digital twin
 
-The G1Pilot `dev` branch contains an initial MuJoCo backend built around
-Unitree-style DDS interfaces. It allowed arm and hand intent to drive a
-simulated G1 while an OpenHomie policy supplied lower-body behavior. This was
-an early development tool; it did not reproduce Unitree's proprietary walking
-controller.
+The initial G1Pilot MuJoCo backend accepts SDK-style arm and hand intent while an OpenHomie policy supplies the leg commands. It does not reproduce Unitree’s proprietary walking controller.
 
-The author confirmed that the available implementation and demos are the full
-extent of this work. There are no later development notes to recover. The
-July 1 commit removed `running_notes.md`; its last tracked content is the
-already reviewed June 21 log.
+```mermaid
+flowchart TB
+  accTitle: G1Pilot MuJoCo command and state paths
+  accDescr: DDS arm and hand commands reach the simulation bridge. Arm intent combines with OpenHomie leg commands in the body command, while hand intent reaches the hand controller. MuJoCo advances physics and the bridge publishes simulated state for the next policy observation.
+  D["SDK arm/hand<br/>DDS intent"] --> B["Simulation bridge"]
+  B -->|arm intent| C["Body command"]
+  P["OpenHomie leg policy"] --> C
+  B -->|hand intent| M["MuJoCo physics<br/>and PD control"]
+  C --> M
+  M --> S["Simulated DDS state"]
+  S -->|next policy observation| P
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| DDS bridge | [mujoco_plant.py](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py#L280) · `G1PilotUnitreeBridge` | Latch incoming arm/hand intent and publish simulated state. |
+| Body command | [mujoco_plant.py](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py#L631) · `G1PilotMujocoPlant.build_body_command` | Combine leg-policy output with nominal or received upper-body intent. |
+| Physics step | [mujoco_plant.py](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py#L592) · `G1PilotMujocoEnv.sim_step` | Apply body/hand torques and advance the model. |
+| Loop ordering | [mujoco_plant.py](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py#L671) · `G1PilotMujocoPlant.run` | Step physics, publish state, update policy, then render. |
+| Policy observation | [openhomie_policy.py](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/openhomie_policy.py#L45) · `compute_openhomie_observation` | Build the external policy’s input representation. |
+| G1Pilot launch wiring | [mujoco_openhomie_manipulation.launch.py](https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/launch/mujoco_openhomie_manipulation.launch.py#L21) · `_launch_setup` | Wire state/manipulation nodes to the selected interface and domain. |
+
+Use the pinned July development snapshot in these links. The author confirmed this implementation and its demos are the full extent of the work; there are no later MuJoCo development notes. Model, transport and watchdog behavior must be assessed separately from the later tabletop controller.
 
 ## Model and control loop
 
@@ -78,3 +95,7 @@ the demonstrated scope.
 
 Evidence: G1Pilot `dev` at `6b5af59b109e2ee687920fdf66ded6182725e945`,
 README, backend, XML generators and diagnostic. [Source identities](../reference/sources.md).
+
+## Checks and evidence to inspect
+
+The backend, launch path, generated XML and diagnostic were inspected statically. The older diagnostic’s actuator/sensor expectations disagree with the inspected model, as detailed below. Neither the simulator nor that diagnostic was run for this documentation. Demo media remain linked with their review status.

@@ -1,10 +1,28 @@
 # GraspGen-X and offline qualification
 
-GraspGen-X supplied candidate object-relative grasps. Making them useful for
-the physical Dex3 required resolving frame conventions, descriptor semantics,
-simulation contacts, support geometry and the meaning of a closing command.
-The July grasp-demo repository records that investigation; later tabletop
-results correct several of its original hardware assumptions.
+The offline pipeline binds a hand descriptor, canonical grasp frame, generated candidate identity and simulation evidence. A proposal must survive task-specific qualification before it becomes a hardware candidate.
+
+```mermaid
+flowchart TB
+  accTitle: Offline proposals become qualified candidates
+  accDescr: A pinned Dex3 descriptor supplies the canonical frame and conditioning sweep to GraspGen-X. Raw proposals retain hashes and IDs. Isaac qualification supplies contact evidence, then task/support checks reduce the candidate set for planning.
+  D["Dex3 descriptor<br/>and canonical frame"] --> G["GraspGen-X<br/>raw proposals"]
+  G --> I["Isaac intrinsic<br/>qualification"]
+  I --> S["Support, approach<br/>and closing checks"]
+  S --> P["Task candidate pool"]
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Descriptor/frame | [build_dex3_rev1_descriptors.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/tools/build_dex3_rev1_descriptors.py#L189) · `derive_frame_and_sweep` | Derive the canonical origin and retain the exact conditioning sweep. |
+| Raw generation | [run_aprilcube_raw_grasps.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/tools/run_aprilcube_raw_grasps.py#L204) · `run_atlas` | Bind seeds, descriptor and immutable candidate identities. |
+| Qualification runner | [run_isaac_atlas_qualification.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/tools/run_isaac_atlas_qualification.py#L145) · `run_shard` | Run and retain the configured Isaac qualification evidence. |
+| Shortlist construction | [executable_shortlist.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/grasping/executable_shortlist.py#L257) · `build_shortlist` | Join candidates to contact traces and check provenance and geometry. |
+| Support analysis | [support_atlas.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/grasping/support_atlas.py#L462) · `evaluate_support` | Evaluate a declared support and approach corridor without claiming a physics pass. |
+
+The linked grasp-demo code is the historical offline implementation. Its shortlist fields are not automatically the final hardware command contract: the later stationary-cube/fixed-close qualification below supersedes use of achieved simulated finger joints as a closing target. Keep that correction when adapting this pipeline.
 
 ## The network's output is not the palm pose
 
@@ -97,3 +115,7 @@ instructions to send `isaac_closed_q` and use the tripod are superseded.
 
 Evidence: complete July/August grasp-demo log, followed by tabletop physical
 close corrections. [Source identities](../reference/sources.md).
+
+## Checks and evidence to inspect
+
+Inspect each candidate’s content hash, qualification profile and trace before comparing atlas counts. The [grasp-demo source log](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/running_notes.md) reports the descriptor ablations and simulation trials; the later tabletop record supplies the physical close failure and corrected candidate pools.

@@ -1,8 +1,27 @@
 # Assembly and support experiments
 
-The July assembly work explored how offline grasps could become complete
-multi-part plans. It also exposed a major limit: many intrinsic grasps had no
-usable pickup from the object's actual resting support.
+The assembly prototype combines observed part poses, task constraints and per-hand grasp pools into a complete kinematic plan. Support-conditioned pickup qualification is a separate filter on whether those grasps are usable.
+
+```mermaid
+flowchart TB
+  accTitle: Runtime assembly planning and replay
+  accDescr: Part observations and a compiled task enter the runtime planner together with qualified grasp pools. It explores role and grasp alternatives, plans complete pick/mate/place sequences and saves trajectories plus symbolic attachment events for replay.
+  O["Observed part poses<br/>and compiled task"] --> R["Role and grasp<br/>alternatives"]
+  G["Per-hand grasp pools"] --> R
+  R --> P["Complete pick, mate<br/>and place planning"]
+  P --> T["Trajectories + symbolic<br/>attachment events"]
+  T --> V["Kinematic replay"]
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Task, observations and alternatives | [runtime_assembly.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/planning/runtime_assembly.py#L189) · `RuntimeAssemblyPlanner` | Load the task/scene and assign holder/worker roles. |
+| Complete mode search | [runtime_assembly.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/planning/runtime_assembly.py#L189) | Follow `qualify_modes`, `_plan_complete_mode` and `execute` within the planner. |
+| Support-conditioned candidates | [support_atlas.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/grasping/support_atlas.py#L462) · `evaluate_support` | Check geometric pickup access for a specified resting support. |
+
+In `RuntimeAssemblyPlanner`, follow the scene/attachment updates as well as the accepted trajectories. A symbolic mate or drop changes planning state; it does not simulate magnetic force or verify that the real part remains attached.
 
 ## T/U/cube assembly
 
@@ -85,3 +104,7 @@ ownership, planning, contact and recovery sequence testable on the robot.
 
 Evidence: grasp-demo support, assembly and replay entries. See the
 [source catalog](../reference/sources.md) and [media catalog](../reference/media.md).
+
+## Checks and evidence to inspect
+
+The grasp-demo repository’s `tests/test_runtime_assembly.py` and `tests/test_runtime_role_assignment.py` are the software regression entry points. The support trials and replay outcomes below bound the demonstrated capability. None establishes physical G1 assembly.

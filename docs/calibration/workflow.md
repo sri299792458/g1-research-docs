@@ -1,9 +1,32 @@
 # Camera and arm calibration
 
-Calibration connected the manually pitched head camera, measured G1 joints
-and printed wrist targets. The central difficulty was that the nominal arm FK
-did not explain all observed target motion. Optimizing a camera transform alone
-could not make that inconsistency disappear.
+The bilateral pipeline turns synchronized wrist-marker measurements into a candidate camera/arm calibration. Collection, fitting, grouped validation and deployment are separate decisions.
+
+```mermaid
+flowchart TB
+  accTitle: Calibration artifacts from capture to candidate bundle
+  accDescr: A preclosed-hand core route and a live adapter govern collection. Image bursts and measured joints enter the session store. Dataset export feeds the solver and grouped validation, which may produce a candidate bundle. Hardware selection remains explicit.
+  R["Core route +<br/>live adapter"] --> C["Stationary image bursts<br/>and measured joints"]
+  C --> S["Hashed raw session"]
+  S --> D["Dataset export"]
+  D --> F["Fit declared model"]
+  F --> V["Grouped validation"]
+  V -->|eligible model| B["Candidate bundle"]
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Collection lifecycle | [hardware_bilateral_calibration.py](../reference/code-index.md#code-calibration-collect) · `run_collect_bilateral_calibration` (local snapshot) | Orchestrate frozen inputs, ownership, captures and return. |
+| Live adapter | [adapter.py](../reference/code-index.md#code-calibration-adapter) · `plan_owned_adapter` (local snapshot) | Bind the adapter to the commands actually held after acquisition. |
+| Burst evidence | [capture.py](../reference/code-index.md#code-calibration-capture) · `BilateralLiveBurstSource.capture_burst` (local snapshot) | Retain current decoded corners and measured-state evidence. |
+| Raw session and dataset | [session.py](../reference/code-index.md#code-calibration-session) · `BilateralSessionStore.build_dataset` (local snapshot) | Reconstruct accepted samples from retained, verified artifacts. |
+| Model fit | [solver.py](../reference/code-index.md#code-calibration-solve) · `solve_bilateral_dataset` (local snapshot) | Run the declared solver and independently evaluate its output. |
+| Grouped validation | [validation.py](../reference/code-index.md#code-calibration-validate) · `validate_and_select_bilateral_model` (local snapshot) | Compare models on held groups before selecting an eligible candidate. |
+| Bundle export | [bundle.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/calibration/bundle.py#L34) · `write_bilateral_calibration_bundle` | Preserve the solution and validation provenance in a separate artifact. |
+
+Read these modules in arrow order. For the pixel model, start with [projection.py](../reference/code-index.md#code-calibration-project) · `BilateralCalibrationProjection.project_side` (local snapshot). Exporting a bundle does not change the bundle selected by a hardware launcher. Before interpreting residuals, read the [results](results.md), [investigation record](investigation.md) and source investigation ledger.
 
 ## The model being fitted
 
@@ -42,7 +65,7 @@ Record rejected captures too. A summary saying “not visible” cannot later
 explain whether fingers, a cable, exposure or a stale frame caused the problem.
 This is why the later standing recorder includes the full camera streams.
 
-## How the capture workflow evolved
+## Collection and route contracts
 
 Manual GUIDE/HOLD teaching established supported and held poses, stationary
 bursts and bounded replay. GUIDE did not establish a general certified
@@ -104,3 +127,7 @@ hardware launch still selects it explicitly with `--calibration-bundle`.
 
 Evidence: prototype/tabletop logs and the calibration investigation ledger.
 [Source identities](../reference/sources.md).
+
+## Checks and evidence to inspect
+
+[test_bilateral_calibration.py](../reference/code-index.md#code-test-calibration) (local snapshot) covers hash binding, projection, grouped model selection and same-frame evidence; [test_standing_calibration_control.py](../reference/code-index.md#code-test-standing) (local snapshot) covers the ownership lifecycle. The final manually preclosed workflow has reported offline checks only. Preserve that distinction from the earlier physical collections below.

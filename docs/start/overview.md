@@ -1,12 +1,74 @@
-# Reading paths and results
+# System map and code entry points
 
-The central contribution is a research workflow around the G1: observe the
-actual machine, make physical assumptions explicit, preserve enough evidence
-to diagnose failures, and then expand the task. Bring-up, grasp generation,
-and execution live in different repositories because they have different
-dependencies and failure modes.
+Choose the execution path first. G1Pilot, its initial simulator, and the later
+tabletop workflows share robot interfaces but do not share a complete control
+lifecycle. A result from one does not automatically validate another.
 
-## What was accomplished
+```mermaid
+flowchart LR
+  accTitle: Choose the implementation path
+  accDescr: G1Pilot provides early ROS integration and a separate MuJoCo backend. The tabletop repository provides seated manipulation, standing calibration and offline recording conversion. Each path has its own environment and validation boundary.
+  G["g1pilot"] --> R["ROS / OpenSoT<br/>integration"]
+  G --> M["Initial MuJoCo<br/>backend"]
+  T["g1-dex3-tabletop"] --> S["Seated manipulation"]
+  T --> C["Standing calibration"]
+  T --> D["Recording and<br/>offline conversion"]
+```
+
+## Enter through the task coordinator
+
+| Path | First code to read | Then follow |
+|---|---|---|
+| Single-cube trajectory task | `hardware_tabletop.py::run_tabletop` | [Perception](../perception/object-pose.md), [camera state](../perception/state-estimation.md), [planning](../manipulation/planning.md), [task lifecycle](../manipulation/tasks.md) |
+| Direct two-cube stack | `hardware_stack.py::run_stack` | Endpoint candidate intersection, complete transfer planning, contact checks and retained episodes in [stacking](../manipulation/tasks.md#direct-two-cube-transfer) |
+| Standing bilateral calibration | `hardware_bilateral_calibration.py::run_collect_bilateral_calibration` | [Control ownership](../control/ownership.md), [collection and fitting](../calibration/workflow.md), then [results](../calibration/results.md) |
+| Initial G1Pilot integration | `RobotState`, `G1CollisionAvoidanceNode`, `DX3Controller` | [Launch/mode boundaries and source links](../control/g1pilot.md) |
+| Initial MuJoCo backend | `G1PilotMujocoPlant.run` | [DDS bridge, command assembly and policy loop](../simulation/mujoco.md) |
+| Passive tactile study | `Dex3PressureVisualizer` | [Raw recording, baseline and spatial mapping](../sensing/pressure.md) |
+| Offline grasp generation | `run_atlas`, `build_shortlist` | [Frame contract and qualification](../manipulation/grasp-atlas.md), then [support and assembly](../manipulation/assembly.md) |
+| Raw data to LeRobot | `RawEpisodeRecorder`, `convert_episode` | [Lifecycle, completeness and alignment](../data/recording.md) |
+
+Each linked chapter maps these names to exact file locations. The
+[code index](../reference/code-index.md) resolves local snapshots and pinned
+public versions. [Setup](setup.md) describes the separate environments.
+
+## Preserve the interfaces when extending a component
+
+| Boundary | Producer → consumer | What must survive |
+|---|---|---|
+| Object observation | Detector → planner | Object profile, rectified camera model, pose convention, accepted image hashes and measured snapshot |
+| Camera propagation | Visual anchor/body state → boundary replan | Matching timestamps, reference frame and explicit fixed-origin assumption |
+| Grasp candidate | Generator/qualifier → planner and hand controller | Immutable candidate ID, canonical frame, object geometry, fixed close intent and qualification profile |
+| Planned route | GPU worker → controller | Matching scene/model/request, exact command start, checked trajectory and complete recovery route |
+| Contact result | Hand controller → retention validator | Achieved fingers, commissioned empty-close reference and opposed-contact evidence |
+| Calibration candidate | Session/solver → hardware configuration | Raw evidence, declared parameters, grouped validation and an explicitly selected bundle |
+| Episode | Controller/recorder → analysis or training | Task outcome, ownership outcome and recording completeness as separate facts |
+
+For example, a replacement planner may improve route quality while still being
+unusable if it starts at measured arm joints instead of the currently streamed
+command. A larger grasp pool may add no usable pickups if the approach or
+closing sweep intersects the support. The chapter invariants explain these
+interfaces in detail.
+
+## Using this guide with an agent
+
+Point the agent at the subsystem's Markdown page and its source checkout.
+Have it follow the Mermaid graph into the mapped symbols, then read the
+assumptions and evidence before proposing a change. A useful task description is:
+
+```text
+Read docs/manipulation/planning.md and its mapped source functions.
+Trace how the request becomes an installed plan. Explain which values are
+measured and which are active commands, and identify the existing regression
+checks before proposing changes. Report any source-version mismatch.
+```
+
+The graph supplies relationships; the map supplies locations; the explanation
+supplies meaning and limits. For calibration, the source repository's
+`AGENTS.md` and `docs/calibration-investigation-ledger.md` also govern which
+investigations are complete, superseded or paused.
+
+## Validation by subsystem
 
 | Area | Result in the available record | Practical limit |
 |---|---|---|

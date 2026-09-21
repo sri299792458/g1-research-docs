@@ -38,6 +38,39 @@ from the appropriate reading path.
 Use Mermaid for code diagrams; the [diagram guide](diagrams.md) gives the
 shared syntax, diagram types and rendering checks.
 
+Technical chapters follow the system rather than the order of the summer's
+experiments: diagram, code map, interface/assumption explanation, then design
+lessons and evidence. Keep the timeline in the archive. Place a historical
+failure beside the rule it explains, so a reader can understand what a change
+must preserve without reading a journal first.
+
+## Maintain the code pointers
+
+The [code index](code-index.md) and `docs/assets/code-map.json` identify the
+files and symbols behind chapter maps. Public links pin a commit and were
+compared with the inspected file bytes. For uncommitted implementations,
+retain the local-snapshot label, exact repository-relative path and hash.
+Do not replace it with a convenient link to older code.
+
+When a source changes, review its diagram and contracts, update symbol line
+spans and the file hash in the JSON/index, and update affected chapter links.
+An optional static check uses an ignored location file:
+
+```json
+{"repositories": {"g1-dex3-tabletop": "/path/to/g1-dex3-tabletop"}}
+```
+
+```bash
+python3 tools/check_code_map.py --locations .local/source_locations.json \
+  --repository g1-dex3-tabletop
+```
+
+The checker reads files and parses Python syntax; it does not import robot
+modules or run hardware code. A mismatch calls for review, not automatic hash
+replacement. Building the guide requires none of these source checkouts.
+
+## Review and publish an edit
+
 Keep procedure prerequisites and expected observations near the instructions.
 Date hardware results and identify their configuration. Preserve the reason
 for a step when a failed experiment explains it. New research should update

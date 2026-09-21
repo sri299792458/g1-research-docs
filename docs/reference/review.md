@@ -47,6 +47,10 @@ hardware details these sections need.
 
 ## Suggested review order
 
+Desktop layout is the current presentation target. Review mobile navigation,
+wide code tables and diagram interaction during the final presentation pass,
+after the chapter content and desktop layout are settled.
+
 Start with [pickup and stacking](../manipulation/tasks.md) and
 [control ownership](../control/ownership.md): they contain the most reusable
 hardware lessons and the clearest end-to-end story. Then review

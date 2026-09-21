@@ -31,6 +31,7 @@ The documentation repository contains:
 - `research/tabletop-reading.md` and `research/grasp-demo-reading.md`: detailed working summaries;
 - `research/g1pilot-reading.md` and `research/g1pilot-mujoco-reading.md`: early integration and simulation evidence;
 - `research/g1pilot-dev-source.json`: exact remote implementation provenance;
+- `docs/assets/code-map.json`: code-map file hashes, symbol locations and verified public URLs;
 - `running_notes.md`: documentation decisions and author corrections.
 
 For example, the tabletop log hash is
@@ -53,7 +54,7 @@ of older experiments. Dated successful runs can supersede an earlier README's
 change caused the improvement. A proposed next step in an old note is not an
 instruction to run it now.
 
-The summer narrative includes corrections through September 7, 2026. The
+The technical guide includes corrections through September 7, 2026. The
 author has not yet finalized the historical summer cutoff. Keeping those
 corrections prevents publishing procedures already known to be obsolete.
 

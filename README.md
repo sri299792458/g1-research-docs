@@ -1,8 +1,9 @@
 # Working with the G1
 
-A practical record of [sri299792458](https://github.com/sri299792458)'s summer
-2026 work with the lab's Unitree G1: setup, internal tools, control procedures,
-experiments and lessons for the next person working with the robot.
+A practical guide to the lab's Unitree G1 research tools, developed through
+[sri299792458](https://github.com/sri299792458)'s summer 2026 work. Chapters
+connect Mermaid diagrams to source code, interfaces, procedures and the
+hardware lessons a future researcher needs to preserve.
 
 **[Read the guide](https://sri299792458.github.io/g1-research-docs/)** ·
 [Review queue](docs/reference/review.md) · [Contributing](CONTRIBUTING.md)
@@ -10,9 +11,14 @@ experiments and lessons for the next person working with the robot.
 This is a complete first draft awaiting the author's review. It covers G1Pilot,
 an initial MuJoCo backend, Dex3 sensing, printed targets, camera/arm calibration,
 GraspGen-X, CuRobo, physical cube manipulation and recording/LeRobot conversion.
-The narrative retains later corrections through September 7. Reported offline,
+The guide retains later corrections through September 7. Reported offline,
 simulation and hardware outcomes are distinguished; unresolved procedures are
 labelled at their point of use.
+
+Start with the [system map](docs/start/overview.md), then follow a chapter's
+diagram and code entry points. The [code index](docs/reference/code-index.md)
+distinguishes pinned public source from local snapshots. Authorship and the
+optional historical timeline are under [About](docs/about.md).
 
 ## Preview locally
 
@@ -36,6 +42,8 @@ dependency updates, navigation and GitHub Pages setup.
 |---|---|
 | `docs/` | Markdown chapters and site configuration |
 | `docs/assets/` | Selected images, captions/provenance catalog and minimal CSS |
+| `docs/assets/code-map.json` | Exact files, hashes, symbols and public URLs behind code maps |
+| `tools/check_code_map.py` | Optional static verification against available source checkouts |
 | `research/` | Sequential source-reading records, revisions and hashes |
 | `running_notes.md` | Documentation decisions, corrections and progress |
 | `requirements-docs.in` / `.txt` | Direct dependencies and pinned build environment |

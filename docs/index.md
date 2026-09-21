@@ -1,20 +1,27 @@
 # Working with the G1
 
-During the summer, I used the Unitree G1 to understand what it would take to
-make the robot useful for research: what it could do, where its models and
-interfaces fell short, and what tooling would let someone else build on the work.
+This guide explains the G1 research tools: how they connect, where they are
+implemented, and what must remain true when you change them. Start with a
+subsystem below, follow its diagram into the code, and use the recorded
+results and failures to understand its limits.
 
-The work grew from G1Pilot bring-up and an initial MuJoCo backend into printed
-fiducial targets, Dex3 sensing, camera and arm calibration, offline grasp
-qualification, CuRobo planning, physical cube manipulation, and continuous
-recording. Much of the effort went into the transitions between these pieces:
-acquiring control without a jump, preserving the command while planning,
-recognizing a failed grasp, and returning the robot to a known state.
+## Tabletop system at a glance
 
-This guide preserves those details. It explains the working tools and the
-experiments that changed them, including approaches that looked reasonable
-but failed on the real system. The aim is for the next lab member to start
-from that experience and extend it with confidence.
+```mermaid
+flowchart TB
+  accTitle: G1 tabletop components and their interfaces
+  accDescr: Calibration supplies the camera and arm model for observations. Observations and an offline grasp library feed planning. Checked routes feed execution, which is monitored by PC2 and recorded for analysis.
+  C["Camera and arm<br/>calibration"] -->|model| O["Robot state<br/>and object pose"]
+  O -->|scene and start state| P["CuRobo<br/>route planning"]
+  G["Offline grasp<br/>qualification"] -->|candidate pool| P
+  P -->|checked route and return| E["Fixed-rate<br/>execution"]
+  W["PC2 watchdog"] -.->|lease and recovery| E
+  E -->|state, commands and outcome| R["Raw recording<br/>and offline analysis"]
+```
+
+This is a component map, not a launch sequence. The [system map](start/overview.md)
+explains the interfaces; [ownership and safety](control/ownership.md) explains
+the control lifecycle. Select **Expand** or scroll horizontally on a narrow screen.
 
 ```{admonition} First draft · summer work with follow-up through September 7, 2026
 :class: note
@@ -26,66 +33,36 @@ remains experimental. Missing installation details and media are collected
 in the [review queue](reference/review.md).
 ```
 
-## Where to begin
+## Find the part you need
 
 | Your goal | Start with |
 |---|---|
-| Understand the summer's contributions | [Overview and results](start/overview.md), then [timeline](start/timeline.md) |
+| Locate an implementation or give an agent context | [System map](start/overview.md), then the relevant chapter's code map |
 | Start working with the lab robot | [Hardware](hardware/robot.md), [setup](start/setup.md), and [control ownership](control/ownership.md) |
 | Understand a failed grasp or route | [Grasp atlas](manipulation/grasp-atlas.md), [planning](manipulation/planning.md), and [debugging](reference/debugging.md) |
 | Work on calibration | [Workflow](calibration/workflow.md), [results](calibration/results.md), and [investigations](calibration/investigation.md) |
+| Inspect Dex3 sensing or the initial simulator | [Pressure tools](sensing/pressure.md), [MuJoCo backend](simulation/mujoco.md) |
 | Use the recordings | [Recording and LeRobot](data/recording.md) |
 | Continue the documentation | [Maintenance](reference/maintenance.md) and [sources](reference/sources.md) |
 
-## How the pieces connect
+## Read a chapter alongside its code
 
-During a manipulation task, measured robot state and object observations feed
-route planning, then the fixed-rate controller executes the checked motion.
-On a narrow screen, scroll diagrams horizontally or select **Expand**.
+Technical chapters start with a focused Mermaid diagram and a table mapping
+its parts to source files and symbols. The explanation then follows the data
+or control flow, including assumptions, rejected approaches and validation.
+Mermaid source remains in the Markdown, so an agent can read the graph too.
 
-```mermaid
-flowchart LR
-  accTitle: From observation to execution
-  accDescr: Observe the robot and scene, plan the approach and return, then execute motion and check the grasp.
-  O["Observe robot<br/>and scene"] --> P["Plan approach<br/>and return"]
-  P --> E["Execute motion<br/>and check grasp"]
-```
-
-[Calibration](calibration/workflow.md) supplies the camera/arm model;
-the [grasp library](manipulation/grasp-atlas.md) supplies qualified candidates.
-The independent [PC2 watchdog](control/ownership.md) handles its defined fault
-recovery, while the recorder preserves robot state and commands through cleanup.
-
-After the run, the retained evidence supports two separate uses:
-
-```mermaid
-flowchart LR
-  accTitle: Using the recorded evidence
-  accDescr: Raw recordings and task records support failure analysis and model or tooling improvements. An offline conversion also creates LeRobot training episodes.
-  R["Raw recordings<br/>and task records"] --> A["Analyze outcomes<br/>and failures"]
-  A --> I["Refine models<br/>and tooling"]
-  R --> D["Convert to LeRobot<br/>training episodes"]
-```
-
-The [recording chapter](data/recording.md) explains what survives conversion
-and why the raw evidence remains useful.
-
-The [G1Pilot digital twin](simulation/mujoco.md) is a separate early development
-path. It offers familiar SDK interfaces in MuJoCo; it does not reproduce the
-proprietary Unitree walking controller or certify the later tabletop pipeline.
-
-This guide follows the practical style of the earlier
-[SPARK documentation](https://rpm-lab-umn.github.io/spark-data-collection/).
-The [source catalog](reference/sources.md) explains which supporting records
-are public and which still require a lab archive.
+Public code links pin the inspected revision. **Local snapshot** links identify
+the exact path, symbol and hash when that implementation is not yet published;
+the [code index](reference/code-index.md) explains how to resolve them.
+The [About page](about.md) records authorship and project context.
 
 ```{toctree}
 :hidden:
 :caption: Start here
 :maxdepth: 1
 
-Reading paths and results <start/overview>
-Summer timeline <start/timeline>
+System map and code entry points <start/overview>
 Repositories and setup <start/setup>
 ```
 
@@ -143,8 +120,10 @@ Recording and LeRobot <data/recording>
 
 Debugging from evidence <reference/debugging>
 Sources and attribution <reference/sources>
+Code index <reference/code-index>
 Media catalog <reference/media>
 Maintaining this guide <reference/maintenance>
 Writing diagrams <reference/diagrams>
 Draft review queue <reference/review>
+About this guide <about>
 ```

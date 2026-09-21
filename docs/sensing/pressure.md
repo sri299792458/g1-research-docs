@@ -1,9 +1,27 @@
 # Exploring Dex3 pressure sensing
 
-The pressure tools made the right Dex3's raw tactile messages inspectable in
-ROS and RViz. The study established active slots, untouched noise and a usable
-visualization mapping on the physical hand marked `214-R-T`. It did not
-calibrate raw counts into force.
+The pressure tools read Dex3 state, preserve raw samples and turn valid baseline-relative counts into a spatial display. They do not publish hand commands. The physical mapping study used the right hand marked `214-R-T`.
+
+```mermaid
+flowchart TB
+  accTitle: Passive tactile recording and display
+  accDescr: HandState feeds a raw session recorder and a visualizer. The visualizer masks invalid slots, establishes an untouched baseline, computes positive deltas, then displays them at mapped taxel locations in RViz.
+  S["Dex3 HandState"] --> R["Raw session recorder"]
+  S --> V["Validity mask<br/>and untouched baseline"]
+  V --> D["Positive pressure deltas"]
+  D --> M["Named taxel mapping<br/>and RViz markers"]
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Raw recording | [session_recorder.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/session_recorder.py#L56) · `Dex3PressureSessionRecorder._state_callback` | Store pressure arrays, receipt times and motor positions. |
+| Message processing | [pressure_visualizer.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/pressure_visualizer.py#L263) · `Dex3PressureVisualizer._state_callback` | Extract slots, retain validity and compute positive baseline-relative deltas. |
+| Untouched baseline | [pressure_visualizer.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/pressure_visualizer.py#L292) · `Dex3PressureVisualizer._finish_baseline` | Estimate per-slot median and noise; choose the display threshold. |
+| Spatial display | [pressure_visualizer.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/pressure_visualizer.py#L334) · `Dex3PressureVisualizer._publish_timer_callback` | Publish mapped markers and optional visualization joint state. |
+
+The raw branch retains information that a color overlay discards. The display depends on both a valid untouched baseline and a physically checked taxel map. Counts are not forces, and this passive path is separate from the later joint-based grasp-contact gate.
 
 ## Start with the raw message
 
@@ -85,3 +103,7 @@ was not a reliable required signal for those cube contacts and placement.
 
 Evidence: `dex3_pressure_tools` README, observations, signal model and mapping
 documents at the [recorded revision](../reference/sources.md).
+
+## Checks and evidence to inspect
+
+Use the repository’s `docs/OBSERVATIONS.md`, `docs/MATH_AND_SIGNALS.md` and `docs/MAPPING_AND_MARKERS.md` at the [recorded revision](../reference/sources.md). The audit and touch results below are for the inspected right hand; no new tactile run was performed for the guide.

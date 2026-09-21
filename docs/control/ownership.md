@@ -1,8 +1,30 @@
 # Ownership and safety
 
-Robot control has two independent questions: which process is allowed to send
-commands, and which controller is actually responsible for the body. The
-summer's safety work made both explicit.
+Control ownership determines who may send commands and which controller supports the body. Read the measured-state, command and recovery paths separately.
+
+```mermaid
+flowchart TB
+  accTitle: Command execution and independent recovery
+  accDescr: A fixed-rate driver ticks the executor, which reads measured state and sends commands through the selected transport. The driver pulses an independent PC2 watchdog; a lease failure invokes the configured recovery on the robot.
+  S["Fresh measured<br/>robot state"] --> X["Pose executor"]
+  D["Fixed-rate driver"] -->|tick| X
+  X -->|position, gains, feedforward| T["Selected command<br/>transport"]
+  T --> R["G1"]
+  D -->|heartbeat| W["PC2 watchdog"]
+  W -.->|configured fault recovery| R
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Fixed-rate driver | [executor_driver.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/executor_driver.py#L187) · `ExecutorControlDriver._run` | Keep ticking and surface faults independently of planning. |
+| Pose executor | [executor_state_machine.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/executor_state_machine.py#L834) · `PoseExecutor.tick` | Validate state freshness and advance bounded commands. |
+| Seated transport | [unitree_debug_lowcmd.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/transports/unitree_debug_lowcmd.py#L236) · `UnitreeDebugLowCmdTransport.send_command` | Release AI under a guarded transition and send complete body commands. |
+| Standing transport | [unitree_arm_sdk.py](../reference/code-index.md#code-arm-sdk) · `UnitreeArmSDKTransport.send_command` (local snapshot) | Use arm-SDK blend ownership, including the measured waist hold. |
+| Independent recovery | [pc2_watchdog_agent.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/pc2_watchdog_agent.py#L343) · `run_watchdog` | Run on PC2; enforce the configured lease and terminal action. |
+
+The selected transport changes the ownership contract. The diagram does not make seated `lowcmd` and standing `arm_sdk` interchangeable. Planning runs outside this loop; it submits a route to be checked and installed at an exact command boundary.
 
 ## Three state concepts
 
@@ -96,3 +118,7 @@ first, then destroys those resources, then finalizes recording.
 Evidence: prototype control/recovery report; tabletop August 14–15 and September
 4–5 logs. See [runbook](runbook.md) and [debugging](../reference/debugging.md).
 
+
+## Checks and evidence to inspect
+
+[test_executor_state_machine.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_executor_state_machine.py) covers executor transitions. [test_standing_calibration_control.py](../reference/code-index.md#code-test-standing) (local snapshot) includes publisher/startup and recovery ordering. These are source tests to read, not tests rerun here. The startup and cleanup failures below explain why ordering matters; see the [runbook](runbook.md) before operating hardware.

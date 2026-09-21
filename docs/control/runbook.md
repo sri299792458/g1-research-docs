@@ -1,9 +1,28 @@
 # Operating and recovering
 
-This chapter explains the operator boundaries of the existing tools. It is
-not a substitute for knowing the installed robot configuration and the
-specific source revision. The latest calibration finger lifecycle has only
-offline validation; its old route files are intentionally rejected.
+A normal seated return and a seated control fault have different terminal states. This diagram describes the ownership branches; the preflight and recovery instructions below supply their conditions.
+
+```mermaid
+flowchart TB
+  accTitle: Seated handback versus fault recovery
+  accDescr: After an owned seated task, a normal supported return restores AI and verifies zero torque, Damp and seated in order. A fault instead requests or triggers verified zero torque. Publisher teardown follows confirmed takeover.
+  O["Seated control owned"] -->|normal return| S["Supported pose reached"]
+  S --> N["Restore AI<br/>verify FSM 0 → 1 → 3"]
+  O -->|control fault| F["PC2 recovery<br/>verify FSM 0"]
+  N --> C["Close body transport<br/>and ROS resources"]
+  F -->|takeover confirmed| C
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Normal return orchestration | [hardware_tabletop.py](../reference/code-index.md#code-tabletop) · `_restore_seated_control` (local snapshot) | Finish the seated handback before closing dependent resources. |
+| Verified seated handback | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/pc2_safety.py#L283) · `PC2DampingWatchdog.restore_seated` | Require the PC2 seated acknowledgement. |
+| Seated fault recovery | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/pc2_safety.py#L302) · `PC2DampingWatchdog.restore_zero_torque` | Require the PC2 zero-torque acknowledgement; do not substitute the clean seated path. |
+| Standing release | [control.py](../reference/code-index.md#code-calibration-control) · `StandingCalibrationControl.release` (local snapshot) | Separate arm-SDK lifecycle with a validated shoulder return. |
+
+The terminal state must be observed, not inferred from a process exiting or a service request returning. Standing calibration has its own release and Damp fallback; use the [ownership comparison](ownership.md#standing-and-seated-control).
 
 ## Before motion
 
@@ -90,3 +109,7 @@ SPACE. Each episode still gets a separate run directory and bag.
 
 Evidence: [source catalog](../reference/sources.md), prototype recovery report,
 current tabletop README and dated lifecycle corrections.
+
+## Checks and evidence to inspect
+
+Trace `run_tabletop` cleanup and `StandingCalibrationControl.close` when changing resource shutdown. [test_standing_calibration_control.py](../reference/code-index.md#code-test-standing) (local snapshot) checks recovery-before-transport-close. Read the August 14–15 and September 4–5 control entries in the [source records](../reference/sources.md); do not perform fault injection merely to build these docs.

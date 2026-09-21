@@ -1,9 +1,27 @@
 # Printed targets and mounts
 
-Printed targets provided an observable connection between pixels, object
-geometry and robot kinematics. Their dimensions, dictionaries and mounting
-surfaces are part of the calibration; a visually similar replacement is not
-necessarily interchangeable.
+Target geometry must stay consistent across the printed part, detector and planner. Wrist-marker CAD and fitted target registration are related but serve different purposes.
+
+```mermaid
+flowchart LR
+  accTitle: One physical target has several software representations
+  accDescr: The printed target’s dimensions, dictionary and IDs define detector corners and the matching planning geometry. A wrist mount also has a physical CAD transform for visibility. Calibration estimates an effective registration that must not replace CAD occlusion geometry.
+  P["Printed part<br/>dimensions, IDs, revision"] --> D["Detector model<br/>and marker corners"]
+  P --> M["Matching mesh<br/>and planning profile"]
+  W["Wrist mount CAD"] --> V["Physical visibility<br/>and occlusion geometry"]
+  W -->|initial registration| F["Fitted hand-to-marker<br/>transform"]
+```
+
+## Follow the code
+
+| Diagram component | Code entry point | Responsibility |
+|---|---|---|
+| Runtime cube profile | [tabletop_object.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_object.py) | Bind cube dimensions, marker profile and task geometry. |
+| Dorsal mount specification | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L28) · `Dex3DorsalMountSpec` | Record dimensions and handed mounting geometry. |
+| Physical marker transform | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L221) · `palm_T_marker_face` | Compute the handed CAD marker pose. |
+| Mount artifact | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L297) · `mount_manifest` | Export geometry and metadata for the mount. |
+
+The cube and wrist-marker branches are separate targets. Read the dimensions below before selecting a mesh or detector dictionary. For wrist visibility use the physical transform; for a selected calibration’s residuals use that fit’s registered transform.
 
 ## AprilCubes
 
@@ -84,3 +102,7 @@ to be checked. A rear waist fastener is not automatically an accessory datum.
 Evidence: AprilCube July 13–15 log; prototype dorsal-marker and torso-carrier
 documents; tabletop object-profile corrections. See [sources](../reference/sources.md)
 and the [media requests](../reference/review.md).
+
+## Checks and evidence to inspect
+
+The fork’s synthetic views establish geometry/detection checks, while the first dorsal print supplies the physical third-support correction. Installation photographs, the JST cable details and print-quality review remain in the [review queue](../reference/review.md).
