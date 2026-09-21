@@ -56,9 +56,14 @@ Desktop layout is the current presentation target. Review mobile navigation,
 wide code tables and diagram interaction during the final presentation pass,
 after the chapter content and desktop layout are settled.
 
-Start with [pickup and stacking](../manipulation/tasks.md) and
-[control ownership](../control/ownership.md): they contain the most reusable
-hardware lessons and the clearest end-to-end story. Then review
-[calibration results](../calibration/results.md), followed by installation/media.
-The author can choose a different entry point without restructuring the whole
-guide.
+The first detailed revision is [control ownership](../control/ownership.md):
+acquisition, continuous holding during planning, task rejection versus control
+fault, and verified handback. Review whether a new researcher can follow each
+responsibility into its implementation and understand the failure that led to it.
+
+Next, deepen [pickup and stacking](../manipulation/tasks.md) into a complete
+worked attempt, connecting the physical demonstration to observations, grasp
+selection, planned routes, contact checks and retained artifacts. Then review
+[calibration results](../calibration/results.md) for what the evidence permits
+another researcher to trust or change. Installation details remain a separate
+practical priority; the supplied photos and videos are now embedded.
