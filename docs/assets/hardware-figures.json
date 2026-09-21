@@ -331,6 +331,69 @@
           "detail": "detail"
         }
       ]
+    },
+    {
+      "id": "chair-support-comparison",
+      "title": "The same chair with and without its seat cushion",
+      "description": "Side-by-side photographs of the same chair with its cushion on the left and without it on the right. Rectangular crops reduce background while retaining each complete chair and the original photograph proportions.",
+      "canvas": [
+        640,
+        500
+      ],
+      "output": "assets/images/chair-support-comparison.svg",
+      "sources": {
+        "cushion": {
+          "path": "assets/images/cushioned-chair-reference.jpg",
+          "sha256": "ea3b57dd850559a1d9f7971558f1130e36bc01366c1c28f7b9a2f1bfb29f5597",
+          "pixels": [
+            3000,
+            4000
+          ],
+          "mime": "image/jpeg"
+        },
+        "bare": {
+          "path": "assets/images/rigid-chair-reference.jpg",
+          "sha256": "48efc86644d71f3b12733f5c30847c37cc0a917aa4a4ed4f44f70b3b5a3a1860",
+          "pixels": [
+            165,
+            220
+          ],
+          "mime": "image/jpeg"
+        }
+      },
+      "panels": [
+        {
+          "id": "with-cushion",
+          "source": "cushion",
+          "position": [
+            20,
+            20,
+            290
+          ],
+          "region": [
+            0.18,
+            0.2,
+            0.66,
+            0.78
+          ]
+        },
+        {
+          "id": "without-cushion",
+          "source": "bare",
+          "position": [
+            330,
+            20,
+            290
+          ],
+          "region": [
+            0.155,
+            0.205,
+            0.66,
+            0.78
+          ]
+        }
+      ],
+      "callouts": []
     }
   ]
 }

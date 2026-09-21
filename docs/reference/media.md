@@ -40,8 +40,9 @@ The originals and the PowerPoint remain separate source records.
 | `realsense-pc2-usb-ports` | [Camera troubleshooting](../hardware/camera.md) | August 3 phone photograph |
 | `realsense-head-pitch-witness-mark` | [Head-pitch reference](../hardware/camera.md#head-pitch-witness-mark) | September 21 photograph; author identifies the white witness mark |
 | `printed-target-collection` | [Printed targets](../perception/targets.md) | September 21 photograph of cubes, wrist carrier and board |
-| `cushioned-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | September 21 chair photograph |
-| `rigid-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Supplied 165 × 220 px chair thumbnail |
+| `cushioned-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Chair with its cushion; September 21 photograph |
+| `rigid-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Same chair with the cushion removed; supplied 165 × 220 px thumbnail |
+| `chair-support-comparison` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Both original chair photographs, combined side by side in one figure |
 | `dex3-connector-routing` | [Hand fitting](../hardware/robot.md#fitting-the-hand) | `Dex3 Hands.pptx`, slide 7, `ppt/media/image11.png` |
 | `dex3-hand-seated` | [Hand fitting](../hardware/robot.md#fitting-the-hand) | Same slide, `ppt/media/image10.png` |
 | `dex3-cable-routing` | [Cable routing](../hardware/robot.md#cable-routing-and-repeated-swaps) | Slides 4 and 8, `ppt/media/image2.jpg` |
@@ -59,12 +60,18 @@ small at normal page width. Keep each caption and instruction in Markdown below
 the figure. The hardware pages use editable SVG overlays, so labels, circles
 and leader arrows stay separate from the original photo pixels.
 
-The four layouts are in `docs/assets/hardware-figures.json`. Each records its
+The layouts are in `docs/assets/hardware-figures.json`. Each records its
 source image hashes, panel crops, feature positions and source photograph or
 slide. The Dex3 features were checked against rendered slides 6–8. Their
 presentation adapts the slide callouts into rings and numbered detail panels;
 it is not a screenshot of the whole slide. The head-pitch mark comes from the
 author's separately supplied reference photograph.
+
+The chair comparison uses the same layout system to place two cropped
+photographs side by side in a single image, with one Markdown caption. The
+author confirms they show the same chair with and without its cushion. Both
+complete chairs remain visible; the crops remove excess background without
+stretching either photograph.
 
 To adjust a figure, edit its layout and regenerate it:
 

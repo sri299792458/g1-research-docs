@@ -113,7 +113,7 @@
       "source_file": "cushion_seat.jpg",
       "source_sha256": "88b639182a306a46a8c5860fecd9439a3c98177c3e683033ab49f8f5cb12a331",
       "context": "hardware-photo",
-      "caption": "Reference chair with a dark seat cushion; photographed September 21.",
+      "caption": "Chair with the seat cushion; photographed September 21. The author confirms this is the same chair shown without its cushion in rigid-chair-reference.",
       "chapter": "hardware/robot.md",
       "creator": "sri299792458",
       "review": "Original visually inspected; publication decoded pixels verified identical; EXIF absent.",
@@ -133,7 +133,7 @@
       "source_file": "rigid_seat.jpg",
       "source_sha256": "0edc2c8c8a77dcc8af74daaf9a4d0061127bebaab2716a6a8b416f61bf993444",
       "context": "hardware-photo",
-      "caption": "Small reference photograph of the rigid chair; no robot or applied load is shown.",
+      "caption": "The same chair as cushioned-chair-reference with the cushion removed, as confirmed by the author; no robot or applied load is shown.",
       "chapter": "hardware/robot.md",
       "creator": "sri299792458",
       "review": "Original visually inspected; publication decoded pixels verified identical; EXIF absent.",
@@ -627,6 +627,23 @@
       "figure_layout": "assets/hardware-figures.json",
       "preparation_command": "python3 tools/build_hardware_figures.py",
       "review": "Photos preserved; source features visually checked, editable vector callouts and detail panels added; captions in Markdown."
+    },
+    {
+      "id": "chair-support-comparison",
+      "path": "assets/images/chair-support-comparison.svg",
+      "source_assets": [
+        "cushioned-chair-reference",
+        "rigid-chair-reference"
+      ],
+      "context": "hardware-photo-comparison",
+      "caption": "The same chair with the seat cushion (left) and with it removed (right).",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458",
+      "figure_layout": "assets/hardware-figures.json",
+      "preparation_command": "python3 tools/build_hardware_figures.py",
+      "review": "Original photographs visually inspected; author confirms the same chair and requests background cropping. Source bytes embedded unchanged; rectangular panel crops retain both complete chairs without stretching, segmentation or reconstruction.",
+      "sha256": "4cbbb0632aedb515590b9ef81711eb2d2fcece127b98261779baf9a46314c187",
+      "bytes": 3606353
     }
   ],
   "publication_release": {

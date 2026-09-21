@@ -144,25 +144,12 @@ A rigid seat reduced observed camera movement during arm lifts, but the
 cushion/rigid runs were not posture-matched. The result supports the practical
 choice of rigid support; it does not isolate a cushion stiffness parameter.
 
-::::{container} media-pair
+:::{figure} ../assets/images/chair-support-comparison.svg
+:alt: Side-by-side photographs of the same white chair: with a dark seat cushion on the left and with the cushion removed on the right.
+:width: 640px
 
-:::{figure} ../assets/images/cushioned-chair-reference.jpg
-:alt: White chair with a dark cushion covering the seat, photographed without the robot.
-:width: 280px
-
-Chair with a seat cushion. This September 21 reference photo makes the support
-visible without the robot covering it.
+The same chair with the seat cushion (left) and with it removed (right).
 :::
-
-:::{figure} ../assets/images/rigid-chair-reference.jpg
-:alt: Small reference photograph of a white rigid chair with metal legs and no robot on it.
-:width: 165px
-
-Rigid-chair reference. The supplied image is a small thumbnail; these photos
-identify the supports, not a controlled comparison of their compliance.
-:::
-
-::::
 
 <figure class="research-video video-portrait">
   <video controls playsinline preload="none" poster="../_static/g1-cushion-seat-setup.jpg" width="720" height="1280" aria-label="G1 seated on a cushion during arm movement" aria-describedby="seat-demo-caption">
