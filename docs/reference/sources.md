@@ -31,6 +31,8 @@ The documentation repository contains:
 - `research/tabletop-reading.md` and `research/grasp-demo-reading.md`: detailed working summaries;
 - `research/g1pilot-reading.md` and `research/g1pilot-mujoco-reading.md`: early integration and simulation evidence;
 - `research/g1pilot-dev-source.json`: exact remote implementation provenance;
+- `research/documentation-media-review.md` and `research/documentation-media-inventory.json`:
+  September media findings, original hashes and camera-launcher code identities;
 - `docs/assets/code-map.json`: code-map file hashes, symbol locations and verified public URLs;
 - `running_notes.md`: documentation decisions and author corrections.
 

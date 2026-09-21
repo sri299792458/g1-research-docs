@@ -34,6 +34,32 @@ yet been reviewed for this draft. They are explicit download links, with no
 claim of browser streaming or physical-robot footage. Add a reviewed poster
 and caption when selecting them for an embedded demonstration.
 
+## Author-supplied September media
+
+The September 21 review covers a nine-slide Dex3 installation deck, three
+photographs and six videos. The originals remain outside this repository;
+publication copies and hosting have not yet been selected. Review records are
+in [the research notes](https://github.com/sri299792458/g1-research-docs/blob/main/research/documentation-media-review.md)
+and [the source inventory](https://github.com/sri299792458/g1-research-docs/blob/main/research/documentation-media-inventory.json),
+including exact hashes, proposed captions and coverage limits.
+
+| Material | Intended use |
+|---|---|
+| Dex3 installation deck | Torso/wrist access, 4-pin 300 mm JST-GH extensions, connector routing and repeatable cable slack |
+| PC2 port photograph | RealSense USB negotiation troubleshooting |
+| Printed-target photograph | Physical cubes, wrist-marker carrier and ChArUco board |
+| Cushion-seat video and rigid-chair thumbnail | Physical-support context; not a controlled chair comparison |
+| Tactile RViz clip | Spatial pressure visualization |
+| Retention and CuRobo clips | Simulated grasp qualification and rendered stacking plan |
+| Short MuJoCo/RViz clip | Side-by-side simulation demonstration |
+| LeRobot viewer recording | Images, traces, annotations, 3D replay and dataset inspection |
+
+All photographs and embedded deck images were inspected, along with 170 video
+frames sampled across the six clips. The seat recording's audio remains
+unreviewed. The short MuJoCo clip is a separate file; its review does not change
+the metadata-only status of the July release assets above. The deck's linked
+boot-calibration movie was not present in the folder.
+
 ## Adding a new asset
 
 1. Choose a stable descriptive ID, such as `dex3-extension-routing`.
@@ -42,8 +68,9 @@ and caption when selecting them for an embedded demonstration.
    checksum to the catalog; keep an accessible caption and meaningful alt text.
 4. Explain what the asset establishes, including the phase shown and any
    outcome that happens outside the clip.
-5. Check the rendered page on desktop and mobile. For video, test playback,
-   controls and the download fallback separately.
+5. Check the rendered page on desktop during drafting; mobile presentation is
+   deferred to the final review. For video, test playback, controls and the
+   download fallback separately.
 
 Use ordinary Markdown images and simple HTML video only when needed. Avoid
 autoplay, personal cloud share tokens and expiring signed URLs. An unedited

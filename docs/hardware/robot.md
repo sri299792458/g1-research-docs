@@ -1,7 +1,7 @@
 # The lab robot
 
 The summer work used a G1 with two Dex3 hands, a head-mounted RealSense
-D435i, and an Ethernet-connected development computer referred to as PC2.
+D435i connected to the robot's onboard PC2, and an Ethernet-connected research laptop.
 Manipulation was developed with physical support and a load-bearing harness.
 The exact configuration changed during the work; a machine-mode number is
 not a substitute for inspecting the robot.
@@ -26,15 +26,37 @@ includes a photograph of the complete current arrangement.
 
 ## Dex3 installation and cable routing
 
-The author installed the Dex3 hands and bought JST extension cables as part
-of the practical setup. The available notes do not establish the connector
-series, pinout, cable length, purchased part number, or installation sequence.
+The author's nine-slide `Dex3 Hands.pptx`, supplied on September 21, records
+the physical installation and cable routing. The extensions were
+**Blue Robotics JST-GH, 4-pin, 300 mm**; the product screenshot shows
+`BR-103531-300`. They bring the two internal hand connections outside the torso,
+so later hand swaps do not require exposing the motherboard. The deck identifies
+these as USB 2.0 hand connections, separate from the RealSense USB 3 connection.
+The [vendor's extension-cable page](https://bluerobotics.com/store/comm-control-power/tether-interface/jst-gh-extension-cables/)
+describes the cable family; it does not supply the G1-specific pinout.
 
-This is a real documentation gap. A generic JST cable description is not enough
-to reproduce the connection. The installation section needs the actual cable
-and connector photographs, both mating ends, routing and strain relief, and
-the steps used when replacing the dummy hands. Those details will be added
-from the author's hardware walkthrough.
+Several practical details should survive future revisions:
+
+- Route the two wrist connectors through the gap before seating the hand.
+  The deck describes mechanically fastening the hand before mating those
+  connectors and closing the cover; excessive insertion force indicates a problem.
+- Use a protective cable sleeve and reusable zip ties. A sticker on the cable
+  records the slack to reproduce at the next installation.
+- The hand's `214-R/L-T` identity determines its left/right topic; swapping
+  physical ports does not redefine which hand it is.
+
+The deck also records damaged cover-screw threads on both wrists and a tape
+workaround on this particular robot. That is a historical maintenance condition,
+not a general substitute for the intended fasteners. Its linked Unitree manual
+describes an older G1 layout, which the author explicitly distinguishes from
+the lab robot's photographs.
+
+The photographed sequence is now available, but the finished installation
+walkthrough still needs the electrical pinout, power-isolation steps and current
+fastener condition. The deck's boot-calibration video is linked rather than
+embedded and was not included in the supplied folder. See the
+[media review](../reference/media.md#author-supplied-september-media) for source
+coverage and the remaining caption/asset work.
 
 The [dorsal marker mount](../perception/targets.md) is a separate installation:
 it attaches a printed target to the rigid hand shell. Its M3 screws do not
@@ -70,5 +92,5 @@ the vendor model can still disagree with manufactured geometry: the later
 example.
 
 Evidence: G1Pilot June log and onboard profile; tabletop August 16 and September
-standing logs; author-provided Dex3 cable context. [Source identities](../reference/sources.md).
-
+standing logs; author-provided `Dex3 Hands.pptx`, slides 1–8.
+[Source identities](../reference/sources.md).

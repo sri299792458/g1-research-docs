@@ -51,7 +51,24 @@ robot joints.
 A black WebRTC preview in June remained a separate playback issue after the
 Python/ZMQ path worked. It did not invalidate the successful camera acquisition.
 The original USB/UVC failure was resolved by moving the cable to another PC2
-port; the exact good/bad port photograph is still needed.
+port. The author supplied `PXL_20260803_142502363.jpg` to illustrate this
+troubleshooting step: try another port if the camera negotiates USB 2, then
+verify the negotiated speed. The photograph does not establish a universally
+correct socket.
+
+The inspected `tools/g1_realsense_pc2.sh:317` requires the fresh driver log to
+contain `Device USB type: 3.2`, alongside the serial and stream-profile checks.
+The standard `tools/g1_tabletop_hardware.sh:116–123` wrapper stops and starts
+the camera before tabletop, stacking, bilateral-calibration and seat-compliance
+commands, so a failed startup check prevents that wrapper from launching the
+task. This checks the commissioned driver's exact **3.2** log string, rather
+than parsing all possible USB 3 versions. Directly reusing an already-running
+node takes a different branch and does not repeat the USB check.
+
+The port photograph remains useful for resolving startup failure even though
+the standard launch path enforces the connection requirement. This is a static
+code finding, not a new hardware test; the script hashes are retained with the
+[September media review](../reference/media.md#author-supplied-september-media).
 
 ## Calibration stream semantics
 
@@ -79,4 +96,3 @@ header stamps as one synchronized clock can manufacture motion.
 
 Evidence: G1Pilot June camera postmortem/onboard audit; tabletop August 13–16
 camera and recording entries; [recording contract](../data/recording.md).
-

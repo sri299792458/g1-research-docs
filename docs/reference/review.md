@@ -9,7 +9,7 @@ can be resolved without inventing installation facts or performance claims.
 
 | Topic | Input needed | Why it matters |
 |---|---|---|
-| Dex3 installation | Actual JST extension part/series, both connector ends, pinout, length, route and replacement sequence | This tacit installation knowledge is not recoverable from the code |
+| Dex3 installation | Deck now establishes the 4-pin, 300 mm JST-GH extension and photographed routing/fitting; still need pinout, power-isolation steps, present fastener condition and linked boot video | Complete the walkthrough without generalizing this robot's damaged threads or using slide order as an operating procedure |
 | Current robot | Photograph of support, harness, hands, waist configuration and camera witness mark | The physical configuration changed between June and September |
 | Marker mounts | Final prints on both hands, third-pad contact, screw fit and target orientation | CAD dimensions alone do not prove the physical mount seats correctly |
 | Torso carrier | Which revision was printed/fitted and which checks actually passed | The documented design is not yet a qualified torso reference |
@@ -23,10 +23,12 @@ a calibration capture showing the actual markers, and a passive tactile
 visualization. For each, retain the run ID, date, source version and outcome.
 If a clip stops before return or cleanup, say so in the caption.
 
-The [media catalog](media.md) already identifies reviewed source figures and
-available MuJoCo release videos. Physical photos/videos can be added as the
-author supplies them. Synthetic replacement images would not establish the
-hardware details these sections need.
+The [media catalog](media.md) identifies reviewed source figures, available
+MuJoCo release videos and the newly reviewed September folder. Select captions
+and publication copies from those supplied photographs and recordings. The
+retention and stacking demos are rendered/simulated; keep physical success
+claims tied to physical runs. Synthetic replacement images would not establish
+the hardware details these sections need.
 
 ## Evidence and reproducibility gaps
 
