@@ -54,7 +54,7 @@ kept separate from the physical demo baseline.
 | Start working with the lab robot | [Hardware](hardware/robot.md), [setup](start/setup.md), and [control ownership](control/ownership.md) |
 | Understand a failed grasp or route | [Grasp atlas](manipulation/grasp-atlas.md), [planning](manipulation/planning.md), and [debugging](reference/debugging.md) |
 | Work on calibration | [Workflow](calibration/workflow.md), [results](calibration/results.md), and [investigations](calibration/investigation.md) |
-| Inspect Dex3 sensing | [Pressure tools](sensing/pressure.md) |
+| Understand Dex3 pressure sensors | [Pressure sensing](sensing/pressure.md) |
 | Work with the initial simulator | [MuJoCo digital twin](simulation/mujoco.md) |
 | Use the recordings | [Recording and LeRobot](data/recording.md) |
 | Continue the documentation | [Maintenance](reference/maintenance.md) and [sources](reference/sources.md) |
@@ -86,6 +86,7 @@ Repositories and setup <start/setup>
 :maxdepth: 1
 
 The lab robot <hardware/robot>
+Dex3 pressure sensing <sensing/pressure>
 Camera and network <hardware/camera>
 Printed targets and mounts <perception/targets>
 ```
@@ -117,19 +118,18 @@ Body motion and state estimation <perception/state-estimation>
 :maxdepth: 1
 
 GraspGen-X and the grasp atlas <manipulation/grasp-atlas>
-Assembly experiments <manipulation/assembly>
 CuRobo planning contracts <manipulation/planning>
 Pickup and stacking <manipulation/tasks>
+Assembly experiments <manipulation/assembly>
 Moving-target MPC <manipulation/mpc>
 ```
 
 ```{toctree}
 :hidden:
-:caption: Recording and sensing
+:caption: Recording and datasets
 :maxdepth: 1
 
 Recording and LeRobot <data/recording>
-Dex3 pressure <sensing/pressure>
 ```
 
 ```{toctree}

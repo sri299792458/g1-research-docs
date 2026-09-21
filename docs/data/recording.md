@@ -97,6 +97,10 @@ environment. Its 15 Hz timeline follows actual RGB samples. It carries:
 - 216 raw pressure slots and four Unitree IMUs;
 - RGB and a derived representation of native depth.
 
+The [Dex3 pressure sensing chapter](../sensing/pressure.md) explains active
+slots, untouched baselines and taxel locations for interpreting the raw
+pressure counts.
+
 State age is bounded at 50 ms. Commands use zero-order hold with a 500 ms age
 bound corresponding to the watchdog contract. Terminal timeout packets with
 zero blend weight are excluded from training actions. RGB/depth skew is

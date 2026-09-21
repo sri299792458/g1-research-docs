@@ -23,6 +23,10 @@ flowchart TB
 
 The raw branch retains information that a color overlay discards. The display depends on both a valid untouched baseline and a physically checked taxel map. Counts are not forces, and this passive path is separate from the later joint-based grasp-contact gate.
 
+For whole-robot episode recording, pressure arrays in LeRobot, and dataset
+downloads, see [Recording and LeRobot](../data/recording.md). This chapter
+covers how to interpret and visualize the hand's sensor readings.
+
 ## Seeing the pressure display
 
 <figure class="research-video">
@@ -115,6 +119,8 @@ Later cube manipulation explored pressure as required grasp evidence and
 replaced that gate with opposed joint shortfall relative to measured empty
 close. That result does not invalidate the sensor study. It says pressure
 was not a reliable required signal for those cube contacts and placement.
+The [pickup and stacking chapter](../manipulation/tasks.md) explains the
+grasp checks used during execution.
 
 Evidence: `dex3_pressure_tools` README, observations, signal model and mapping
 documents at the [recorded revision](../reference/sources.md).
