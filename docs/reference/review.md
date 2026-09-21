@@ -37,9 +37,9 @@ the hardware details these sections need.
 - Preserve private journals and full experimental artifacts in backed-up storage
   with an explicit lab handoff. Public implementation links now resolve to
   committed source; availability of raw experimental evidence is separate.
-- Upload the prepared stacking and calibration ZIPs to Google Drive, then
-  verify the shared download links. The stacking archive is LeRobot; calibration
-  retains its original capture format, selected fit inputs and bundle.
+- Preserve access to the published Drive datasets during the lab handoff.
+  The stacking archive is LeRobot; calibration retains its original capture
+  format, selected fit inputs and bundle.
 - Review the operator runbook against the exact intended deployment revision.
   Some setup scripts retain local workspace assumptions.
 - Keep September capture success separate from control release: September 5

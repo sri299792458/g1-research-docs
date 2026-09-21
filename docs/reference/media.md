@@ -5,11 +5,11 @@ videos in versioned release assets, and original recordings in backed-up lab
 storage. The goal is for a future maintainer to understand an asset, locate its
 source and replace its host without rewriting the explanation around it.
 
-The selected stacking dataset and calibration captures will use separate
+The selected stacking dataset and calibration captures use separate
 Google Drive downloads, listed on the [dataset page](../data/recording.md#dataset-downloads).
 They are not embedded video assets. Keep a versioned README and checksums with
 each download, and verify access without the owner's signed-in account before
-adding its link to the guide. Uploads are still pending.
+adding its link to the guide.
 
 ## Included figures
 

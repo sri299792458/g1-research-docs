@@ -130,8 +130,8 @@ failure analysis and claims independently of a compact training export.
 
 The five selected demo runs have been converted locally and reloaded for
 verification: **5 episodes, 8,272 frames, 696,652,855 bytes** (about 697 MB),
-at 15 FPS. Original recordings remain intact. Dataset publication is pending;
-a source-repository clone does not include these videos or a public dataset URL.
+at 15 FPS. Original recordings remain intact. The [Drive downloads](#dataset-downloads)
+are separate from the source clone, which does not include the dataset videos.
 
 | Episode | Source run | Exported frames |
 |---|---|---:|
@@ -149,16 +149,16 @@ raw evidence remains separately retained.
 
 ## Dataset downloads
 
-The selected datasets will be shared through Google Drive, with download links
-on this page. Uploads are pending; the sizes below describe the current local
-files and prepared ZIP downloads.
+The [shared Google Drive folder](https://drive.google.com/drive/folders/1YoTbBMbd4Xj_06keI1HKi7g21hk9IyTO) contains both versioned ZIPs,
+a [README](https://drive.google.com/file/d/18qAWWbEcFlTzVacYFhH4-JN11d3gTDmn/view) and [archive checksums](https://drive.google.com/file/d/1zlw7vlbo44AKxk2jsWGMWj6GIg_ef1_u/view).
+The table gives extracted and download sizes; choose the collection you need.
 
 | Collection | Contents | Extracted / ZIP size | Download |
 |---|---|---:|---|
-| August 25 stacking | Five LeRobot episodes, 8,272 frames, RGB/depth and state/command data | 697 / 696 MB | Pending upload |
-| August 12 calibration | Two capture sessions used by the calibration bundle; original PNG images, measurement metadata, selected fit inputs and bundle | 1.54 GB / 958 MB | Pending upload |
+| August 25 stacking | Five LeRobot episodes, 8,272 frames, RGB/depth and state/command data | 697 / 696 MB | [Stacking v1 ZIP](https://drive.google.com/file/d/1JniEt-Y8BRnyQkt_Eeo5KX-0Auv0k5nI/view) |
+| August 12 calibration | Two capture sessions used by the calibration bundle; original PNG images, measurement metadata, selected fit inputs and bundle | 1.54 GB / 958 MB | [Calibration v1 ZIP](https://drive.google.com/file/d/1WfSOw_HRhGPFTZsFUM5hRjRxLsztM8-T/view) |
 
-Both versioned ZIPs are prepared and verified. Each includes a README identifying
+Both versioned ZIPs are available for download. Each includes a README identifying
 the source sessions, code revision, format and limitations, plus SHA-256
 checksums. Calibration compression is lossless; its source files are unchanged. Keep the LeRobot
 `meta/`, `data/` and `videos/` directories together when extracting the stacking

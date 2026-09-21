@@ -117,7 +117,7 @@ recipes are in `docs/assets/media.json`. See [media maintenance](media.md#recrea
 to recreate a selected copy without changing its original. No media-preparation
 tools are required for the normal Sphinx build.
 
-The [dataset downloads](../data/recording.md#dataset-downloads) will use Google
+The [dataset downloads](../data/recording.md#dataset-downloads) use Google
 Drive links with separate README/checksum files. Before publishing a link,
 verify that readers can download it without the owner's account. Record size,
 version and format on the dataset page. Preserve these files separately from

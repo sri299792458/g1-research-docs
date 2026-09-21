@@ -53,7 +53,7 @@ dependency updates, navigation and GitHub Pages setup.
 The [source catalog](docs/reference/sources.md) identifies published code and
 validation limits. Personal research notes remain private. The five August 25
 runs are converted to LeRobot; [dataset downloads](docs/data/recording.md#dataset-downloads)
-for those runs and the calibration captures are pending upload to Google Drive.
+for those runs and the calibration captures are available on Google Drive.
 
 ## Ownership and continuity
 

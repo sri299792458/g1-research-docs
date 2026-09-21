@@ -66,9 +66,10 @@ That checked software packaging and regressions; it did not commission the final
 standing lifecycle. The documentation checks verify links, file identities,
 rendering and the site build without operating the robot.
 
-The five August 25 episodes have been converted locally to LeRobot. Their
-[release status](../data/recording.md#august-25-demonstration-export) is separate
-from code availability; no public dataset download is claimed yet.
+The five August 25 episodes are available as a LeRobot download. The August 12
+calibration archive includes original captures, selected fit inputs and the
+historical bundle. Both have [versioned downloads and checksums](../data/recording.md#dataset-downloads)
+on Google Drive, separate from the source repositories.
 
 ## Attribution and continuity
 
