@@ -17,9 +17,9 @@ flowchart TB
 
 | Diagram component | Code entry point | Responsibility |
 |---|---|---|
-| Task, observations and alternatives | [runtime_assembly.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/planning/runtime_assembly.py#L189) · `RuntimeAssemblyPlanner` | Load the task/scene and assign holder/worker roles. |
-| Complete mode search | [runtime_assembly.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/planning/runtime_assembly.py#L189) | Follow `qualify_modes`, `_plan_complete_mode` and `execute` within the planner. |
-| Support-conditioned candidates | [support_atlas.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/grasping/support_atlas.py#L462) · `evaluate_support` | Check geometric pickup access for a specified resting support. |
+| Task, observations and alternatives | [runtime_assembly.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/planning/runtime_assembly.py#L189) · `RuntimeAssemblyPlanner` | Load the task/scene and assign holder/worker roles. |
+| Complete mode search | [runtime_assembly.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/planning/runtime_assembly.py#L189) | Follow `qualify_modes`, `_plan_complete_mode` and `execute` within the planner. |
+| Support-conditioned candidates | [support_atlas.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/grasping/support_atlas.py#L462) · `evaluate_support` | Check geometric pickup access for a specified resting support. |
 
 In `RuntimeAssemblyPlanner`, follow the scene/attachment updates as well as the accepted trajectories. A symbolic mate or drop changes planning state; it does not simulate magnetic force or verify that the real part remains attached.
 
@@ -107,4 +107,4 @@ Evidence: grasp-demo support, assembly and replay entries. See the
 
 ## Checks and evidence to inspect
 
-The grasp-demo repository’s `tests/test_runtime_assembly.py` and `tests/test_runtime_role_assignment.py` are the software regression entry points. The support trials and replay outcomes below bound the demonstrated capability. None establishes physical G1 assembly.
+The grasp-demo repository’s `tests/test_runtime_assembly.py` and `tests/test_runtime_role_assignment.py` are the software regression entry points. The support trials and replay outcomes above bound the demonstrated capability. None establishes physical G1 assembly.

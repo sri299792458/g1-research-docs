@@ -108,4 +108,4 @@ README, backend, XML generators and diagnostic. [Source identities](../reference
 
 ## Checks and evidence to inspect
 
-The backend, launch path, generated XML and diagnostic were inspected statically. The older diagnostic’s actuator/sensor expectations disagree with the inspected model, as detailed below. Neither the simulator nor that diagnostic was run for this documentation. Demo media remain linked with their review status.
+The backend, launch path, generated XML and diagnostic were inspected statically. The older diagnostic’s actuator/sensor expectations disagree with the inspected model, as detailed above. Neither the simulator nor that diagnostic was run for this documentation. Demo media remain linked with their review status.

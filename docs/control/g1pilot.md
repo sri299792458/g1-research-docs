@@ -96,10 +96,13 @@ The July [MuJoCo backend](../simulation/mujoco.md) builds on this integration
 history. The later tabletop executor intentionally avoids importing G1Pilot's
 Cartesian OpenSoT runtime into a discrete move/settle/capture task.
 
-Evidence: [pinned June journal](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/running_notes.md),
-read in full; detailed reading record in `research/g1pilot-reading.md`.
+Evidence: the June implementation linked above and the author's retained
+bring-up observations, summarized in this chapter.
 
 
 ## Checks and evidence to inspect
 
-Read the [June log](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/running_notes.md) for the 38 issue dispositions, mock/dry checks and incomplete physical checks. In particular, corrected topic names or TF do not establish complete autonomous navigation.
+Inspect the pinned launch graph and the state/arm/hand entry points above when
+changing a mode or interface. The source record contains 38 issue dispositions
+and mixed mock, offline and physical checks; those counts do not establish
+complete autonomous navigation. Corrected topics or TF alone are insufficient.

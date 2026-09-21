@@ -13,14 +13,21 @@ flowchart TB
   F -->|takeover confirmed| C
 ```
 
+## Source scope
+
+Use demo `main` for the August stacking workflow. The links marked September
+show the later shared coordinator and standing lifecycle; the
+[demo coordinator](../reference/code-index.md#code-demo-tabletop) is the baseline
+reference. Keyboard and recovery behavior must match the selected checkout.
+
 ## Follow the code
 
 | Diagram component | Code entry point | Responsibility |
 |---|---|---|
-| Normal return orchestration | [hardware_tabletop.py](../reference/code-index.md#code-tabletop) · `_restore_seated_control` (local snapshot) | Finish the seated handback before closing dependent resources. |
-| Verified seated handback | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/pc2_safety.py#L283) · `PC2DampingWatchdog.restore_seated` | Require the PC2 seated acknowledgement. |
-| Seated fault recovery | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/pc2_safety.py#L302) · `PC2DampingWatchdog.restore_zero_torque` | Require the PC2 zero-torque acknowledgement; do not substitute the clean seated path. |
-| Standing release | [control.py](../reference/code-index.md#code-calibration-control) · `StandingCalibrationControl.release` (local snapshot) | Separate arm-SDK lifecycle with a validated shoulder return. |
+| Normal return orchestration | [hardware_tabletop.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_tabletop.py) · `_restore_seated_control` (September branch) | Finish the seated handback before closing dependent resources. |
+| Verified seated handback | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_safety.py#L283) · `PC2DampingWatchdog.restore_seated` | Require the PC2 seated acknowledgement. |
+| Seated fault recovery | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_safety.py#L302) · `PC2DampingWatchdog.restore_zero_torque` | Require the PC2 zero-torque acknowledgement; do not substitute the clean seated path. |
+| Standing release | [control.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/control.py) · `StandingCalibrationControl.release` (September branch) | Separate arm-SDK lifecycle with a validated shoulder return. |
 
 The terminal state must be observed, not inferred from a process exiting or a service request returning. Standing calibration has its own release and Damp fallback; use the [ownership comparison](ownership.md#standing-and-seated-control).
 
@@ -86,7 +93,7 @@ Do not assume the radio or network failed. Direct lowcmd deliberately releases
 the service that normally consumes remote requests. Inspect retained cleanup
 status to determine whether AI restoration and terminal FSM were verified.
 
-The prototype's `docs/g1_control_state_and_recovery.md` contains the
+The prototype's [control-state and recovery guide](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/f295def18bd936031fba325d4e8bdfc71fea671a/docs/g1_control_state_and_recovery.md) contains the
 operator-only raw-SDK recovery procedure and its commissioning history.
 Use that exact source with a trained operator and physical support; this guide
 does not shorten it into an unqualified “restart AI” command. Restoring a
@@ -112,4 +119,4 @@ current tabletop README and dated lifecycle corrections.
 
 ## Checks and evidence to inspect
 
-Trace `run_tabletop` cleanup and `StandingCalibrationControl.close` when changing resource shutdown. [test_standing_calibration_control.py](../reference/code-index.md#code-test-standing) (local snapshot) checks recovery-before-transport-close. Read the August 14–15 and September 4–5 control entries in the [source records](../reference/sources.md); do not perform fault injection merely to build these docs.
+Trace `run_tabletop` cleanup and `StandingCalibrationControl.close` when changing resource shutdown. [test_standing_calibration_control.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_standing_calibration_control.py) (September branch) checks recovery-before-transport-close. Read the August 14–15 and September 4–5 control entries in the [source records](../reference/sources.md); do not perform fault injection merely to build these docs.

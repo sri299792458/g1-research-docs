@@ -14,14 +14,41 @@ one Python environment recreates the ABI problems the later tools separated.
 | `spark-data-collection` | Recording and documentation reference |
 
 The [source catalog](../reference/sources.md) supplies public locations and
-identifies local-only material. The tabletop checkout includes uncommitted
-September work; Git HEAD alone does not reproduce that version.
+identifies exact revisions. The August demo and the later September work are
+now both committed and public, on separate tabletop branches.
 
 For printed mounts, start with [targets and mounts](../perception/targets.md).
 The calibration/fixture repository remains separate from the manipulation
 runtime. Opening its F3D, STEP, STL or Bambu exports does not require the ROS,
 planner or dataset-conversion environments. Use the pinned V7 links in that
-chapter; the older default branch does not contain the latest torso design.
+chapter; the consolidated `main` now includes that design and the bundle tools.
+
+## Choose a tabletop checkout
+
+For the August 25 demo baseline:
+
+```bash
+git clone --branch main https://github.com/sri299792458/g1-dex3-tabletop.git
+cd g1-dex3-tabletop
+git switch --detach 7400aff201c2f73ef2a64e546d72bd66cbe87fd6
+git submodule update --init --recursive
+```
+
+The detached commit matches this guide; use a new branch when making changes.
+For September calibration development, make a separate checkout so its changed
+runtime and route requirements stay explicit:
+
+```bash
+git clone --branch experimental/september-calibration \
+  https://github.com/sri299792458/g1-dex3-tabletop.git g1-calibration-dev
+cd g1-calibration-dev
+git switch --detach 59c21b1388c636176dea67ea7ed3e253f8510783
+git submodule update --init --recursive
+```
+
+September's final operator-preclosed lifecycle still needs new route certificates
+and hardware validation. Publishing its code did not change that status. The
+[calibration workflow](../calibration/workflow.md) describes that version.
 
 ## Environment boundaries
 

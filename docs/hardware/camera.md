@@ -65,9 +65,9 @@ is USB 2, try another port and verify the driver-reported speed. The photo
 illustrates the connection area; use the runtime check to establish USB 3.
 ```
 
-The inspected `tools/g1_realsense_pc2.sh:317` requires the fresh driver log to
+The [camera lifecycle helper](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tools/g1_realsense_pc2.sh#L317) requires the fresh driver log to
 contain `Device USB type: 3.2`, alongside the serial and stream-profile checks.
-The standard `tools/g1_tabletop_hardware.sh:116–123` wrapper stops and starts
+The [standard hardware wrapper](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tools/g1_tabletop_hardware.sh) stops and starts
 the camera before tabletop, stacking, bilateral-calibration and seat-compliance
 commands, so a failed startup check prevents that wrapper from launching the
 task. This checks the commissioned driver's exact **3.2** log string, rather

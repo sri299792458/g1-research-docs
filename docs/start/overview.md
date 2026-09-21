@@ -29,8 +29,7 @@ flowchart LR
 | Raw data to LeRobot | `RawEpisodeRecorder`, `convert_episode` | [Lifecycle, completeness and alignment](../data/recording.md) |
 
 Each linked chapter maps these names to exact file locations. The
-[code index](../reference/code-index.md) resolves local snapshots and pinned
-public versions. [Setup](setup.md) describes the separate environments.
+[code index](../reference/code-index.md) resolves pinned public versions and their branch boundaries. [Setup](setup.md) describes the separate environments.
 
 ## Preserve the interfaces when extending a component
 
@@ -64,9 +63,9 @@ checks before proposing changes. Report any source-version mismatch.
 ```
 
 The graph supplies relationships; the map supplies locations; the explanation
-supplies meaning and limits. For calibration, the source repository's
-`AGENTS.md` and `docs/calibration-investigation-ledger.md` also govern which
-investigations are complete, superseded or paused.
+supplies meaning and limits. For calibration, read the [investigation summary](../calibration/investigation.md)
+and the experimental branch's `AGENTS.md` first. If you have access to the
+private detailed ledger, use its completed results and operator corrections too.
 
 ## Validation by subsystem
 
@@ -110,4 +109,4 @@ require physical validation.
 
 A physical failure followed by an offline fix is not yet a successful physical
 retry. The chapters preserve that distinction. The [source map](../reference/sources.md)
-records complete journal coverage and the local-only evidence boundary.
+distinguishes available source code from private journals and unreleased datasets.

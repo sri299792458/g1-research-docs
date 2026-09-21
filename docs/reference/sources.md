@@ -1,88 +1,85 @@
 # Sources and attribution
 
-This guide synthesizes the author's running notes, code, experiment reports
-and corrections. Unless explicitly stated otherwise, test counts and physical
-results are **reported by those records**, not independently rerun for this
-documentation. Reading and static inspection did not send robot commands.
+The guide connects public code to recorded hardware, simulation and offline
+results. Choose the implementation version before adapting a procedure: the
+successful August demo and the later calibration development are separate branches.
 
-## Primary reading coverage
+## Published repositories
 
-| Source | Complete coverage | Identity / availability |
-|---|---:|---|
-| G1Pilot June log | 1,328 lines | `72acc803edefe583c24f53e76a21d8d4ed10ed14`; [pinned notes](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/running_notes.md) |
-| G1Pilot MuJoCo implementation | README, backend, launch/environment, generators and diagnostic | [dev snapshot](https://github.com/sri299792458/g1pilot/tree/6b5af59b109e2ee687920fdf66ded6182725e945) |
-| Grasp/assembly demo | 3,209 log lines; 204 README lines | [source snapshot](https://github.com/sri299792458/g1-aprilcube-demo/tree/f190470742f43101e9a22affaca80554722706ac); public technical reports carry the experimental findings |
-| Tabletop | 7,403 log lines | Local working tree based on `cf1b27704c82d877d23ff5a3c157df3218f02402`; includes uncommitted work |
-| Calibration prototype | 1,864 log lines | `97a78a5c9c48701400820922f0966cc3d3a9b7bc`; local inspected source |
-| Current torso fixtures | V7/R2 CAD guides, fit record and all 77 additional log lines | [V7 source](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/9ad412019107161373e5381ed81cd5c2224a1301); both remote development branches at this revision when checked |
-| Vendored AprilCube fork | 126 log lines | `g1-dex3-tabletop/third_party/aprilcube/running_notes.md`; local inspected source |
-| Calibration investigation ledger | 368 lines, 85 entries and 46 model conditions | Local `g1-dex3-tabletop/docs/calibration-investigation-ledger.md` |
-| Dex3 pressure tools | README, observations, protocols, signal model, mapping, dependencies | Local `e0b706df507160799b70732c7cc3244924ce8f5e` snapshot |
+| Repository / branch | Inspected revision | What belongs here |
+|---|---|---|
+| [Tabletop `main`](https://github.com/sri299792458/g1-dex3-tabletop/tree/7400aff201c2f73ef2a64e546d72bd66cbe87fd6) | `7400aff` | August 25 demo baseline: seated control, cube perception, grasp/planning contracts, stacking, recording and conversion |
+| [Tabletop September branch](https://github.com/sri299792458/g1-dex3-tabletop/tree/59c21b1388c636176dea67ea7ed3e253f8510783) | `59c21b1` | Later calibration runtime, diagnostics, shared-control changes and regression fixtures; includes the previously uncommitted work |
+| [Calibration and fixtures `main`](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/f295def18bd936031fba325d4e8bdfc71fea671a) | `f295def` | Reusable calibration tools, bundle support, wrist markers, V7 torso structure and R2 coupons |
+| [Grasp/assembly `main`](https://github.com/sri299792458/g1-aprilcube-demo/tree/2b7274b11f1862ebfcd05b48ff678d995e55269e) | `2b7274b` | Offline GraspGen-X descriptors, qualification, support studies and assembly planning |
+| [G1Pilot June implementation](https://github.com/sri299792458/g1pilot/tree/72acc803edefe583c24f53e76a21d8d4ed10ed14) | `72acc80` | Initial ROS/OpenSoT integration and hardware bring-up |
+| [G1Pilot July simulator](https://github.com/sri299792458/g1pilot/tree/6b5af59b109e2ee687920fdf66ded6182725e945) | `6b5af59` | Initial MuJoCo/OpenHomie backend, supplied on `dev` |
+| [Dex3 pressure tools](https://github.com/sri299792458/dex3_pressure_tools/tree/e0b706df507160799b70732c7cc3244924ce8f5e) | `e0b706d` | Passive recording, baseline-relative visualization and taxel mapping |
 
-Prototype lines 2–1,864 equal tabletop lines 359–2,221. They are inherited
-history, not independent experiments. All located primary running notes were
-read sequentially. Heading inventories alone did not count as reading.
+The tabletop demo revision preserves runtime code, tests, configuration and
+submodule pins from `d1b0103`, the commit recorded by the August 25 runs. The
+September branch is one additional commit over that clean main. It carries the
+September 4 checkpoint and later local changes together. Neither a newer branch
+nor a passing offline test replaces the demonstrated configuration.
 
-The V7 source includes the previously read 1,864-line prototype log plus 77
-additional lines, all read. Its September 13 physical fit record supersedes
-earlier torso-frame and screw-length assumptions. The V7 branch does not
-contain the local August 13 calibration-bundle addition; a newer branch date
-alone does not establish that every other branch's useful work was included.
+The fixture repository remains separate from tabletop. Its consolidated main
+includes both V7/R2 and the earlier calibration-bundle addition; there is no need
+to choose between former development branches to obtain those files. It still
+has the [documented physical fit limits](../perception/targets.md#torso-charuco-carrier).
+AprilCube and the other upstream dependencies remain pinned submodules of the
+code repositories; initialize the revisions recorded by the chosen checkout.
 
-## Recovering the exact evidence
+## Follow the implementation and its evidence
 
-The documentation repository contains:
+The [code index](code-index.md) supplies exact file URLs, hashes and Python
+symbols. Its [JSON map](../assets/code-map.json) can be consumed by an agent or
+checked against a clone. All mapped implementation files are public. A chapter
+using September-specific code labels that boundary explicitly.
 
-- `research/source_snapshot.json`: source revisions, working-tree status and SHA-256 hashes;
-- `research/source_inventory.md`: reading coverage and source boundaries;
-- `research/tabletop-reading.md` and `research/grasp-demo-reading.md`: detailed working summaries;
-- `research/g1pilot-reading.md` and `research/g1pilot-mujoco-reading.md`: early integration and simulation evidence;
-- `research/g1pilot-dev-source.json`: exact remote implementation provenance;
-- `research/documentation-media-review.md` and `research/documentation-media-inventory.json`:
-  September media findings, original hashes and camera-launcher code identities;
-- `docs/assets/code-map.json`: code-map file hashes, symbol locations and verified public URLs;
+Public technical reports live alongside their implementation—for example the
+[grasp descriptor study](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/docs/dex3_rev1_descriptor.md),
+[September runtime summary](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/docs/september-calibration.md)
+and [torso fit record](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/f295def18bd936031fba325d4e8bdfc71fea671a/artifacts/g1_mount_v7/FIT_STATUS.md).
+The [media catalog](media.md) records the selected photographs/videos and their
+review limits; captions distinguish physical footage from rendered replay.
 
-New running notes and internal design/repository-planning records are private.
-The public guide carries the resulting technical explanations and corrections.
+Personal running notes, design proposals and raw investigation records remain
+private. They informed the explanations, but this guide does not require readers
+to obtain a private journal to locate code. Raw sessions and full analysis work
+directories are separate from a source clone. When their findings are summarized,
+the chapter states the experiment, measured quantity and limits rather than
+pretending the underlying dataset is included.
 
-For example, the tabletop log hash is
-`9b159c235fd6fdb086249d9025c3083f439292fe3a884c6f6ae4ffcfddcc3d91`
-and the calibration-ledger hash is
-`1acfd5b1ec9e9a626f918cb33cbc4bc0f59763d57f2fda7c1d1557d6bd5039d8`.
-A commit alone does not reproduce their uncommitted contents. The snapshot
-identifies evidence but does not back it up. Archiving those records and their
-linked experiment artifacts is a concrete [handoff item](review.md).
+## What was checked
 
-Machine-specific checkout locations stay in ignored `.local/` files. Public
-pages do not link to sibling directories that would be absent from another
-person's clone. Where exact public evidence is available, links pin a commit.
+The draft's source reading covered the G1Pilot, grasp-demo, tabletop and
+calibration-prototype logs, the later investigation ledger and the V7 fit update.
+Inherited prototype notes were treated as shared history, not independent trials.
+Later operator corrections govern conflicting older reports. Calibration
+corrections extend through September 7 and fixture fit evidence through
+September 13, 2026.
 
-## How conflicting records are resolved
+Unless labelled as an independently rerun check, experiment results and historic
+test counts are reported from retained evidence. During source publication,
+selected September offline regressions passed **317 tests with seven skipped**.
+That checked software packaging and regressions; it did not commission the final
+standing lifecycle. The documentation checks verify links, file identities,
+rendering and the site build without operating the robot.
 
-Later operator corrections and the calibration ledger govern interpretations
-of older experiments. Dated successful runs can supersede an earlier README's
-“not yet tested” statement, but they do not prove that one intervening code
-change caused the improvement. A proposed next step in an old note is not an
-instruction to run it now.
-
-The technical guide includes calibration corrections through September 7 and
-the torso-fixture fit record through September 13, 2026. Later corrections
-prevent publishing procedures already known to be obsolete.
+The five August 25 episodes have been converted locally to LeRobot. Their
+[release status](../data/recording.md#august-25-demonstration-export) is separate
+from code availability; no public dataset download is claimed yet.
 
 ## Attribution and continuity
 
-The research and original notes are the work of
-[sri299792458](https://github.com/sri299792458), building on Unitree's SDK/models,
-AprilCube, GraspGen-X, CuRobo, Isaac/PhysX, Newton, MuJoCo, OpenHomie,
-GR00T, ROS, Pinocchio/OpenSoT and SPARK. The documentation draft was assembled
-with coding-assistant support and awaits the author's substantive review.
-Dependency inclusion does not imply original authorship of the dependency.
+The research and this guide are by
+[srinivas (`sri299792458`)](https://github.com/sri299792458), building on Unitree's
+SDK/models, AprilCube, GraspGen-X, CuRobo, Isaac/PhysX, Newton, MuJoCo, OpenHomie,
+GR00T, ROS, Pinocchio/OpenSoT and SPARK. Including a dependency does not imply
+original authorship of that dependency.
 
-The [SPARK documentation](https://rpm-lab-umn.github.io/spark-data-collection/)
-is the author's reference for practical depth and presentation. The personal
-repository will preserve the summer portfolio record; a later lab copy should
-retain history, attribution, source access and media ownership.
-
-No new blanket license has been assigned in this draft. Preserve existing
-upstream notices when copying code or assets, and settle the documentation
-license with the author before the final lab handoff.
+The author's [SPARK documentation](https://rpm-lab-umn.github.io/spark-data-collection/)
+provides the reference for practical depth. A later lab copy should preserve
+attribution, useful public history and access to published source/media.
+No blanket documentation license has been assigned yet; preserve existing
+upstream notices and settle the license before the final handoff.

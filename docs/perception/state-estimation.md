@@ -17,11 +17,11 @@ flowchart TB
 
 | Diagram component | Code entry point | Responsibility |
 |---|---|---|
-| Synchronized body sample | [camera_state_sync.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/camera_state_sync.py#L144) · `CameraStateInputBuffer.sample_at` | Select measured body inputs at the requested timestamp. |
-| Visual anchor | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/state_estimation.py#L312) · `AnchoredCameraStateEstimator.reset` | Store the reference transform and matching sample together. |
-| Hybrid propagation | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/state_estimation.py#L215) · `AnchoredCameraPoseEstimators.predict` | Combine the declared position and orientation hypotheses. |
-| Estimate consumed by planning | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/state_estimation.py#L327) · `AnchoredCameraStateEstimator.estimate` | Require an anchor and reject a sample older than it. |
-| Single-cube boundary request | [tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_workflow.py#L197) · `request_at_estimated_pregrasp` | Carry the estimated camera state into a same-grasp replan. |
+| Synchronized body sample | [camera_state_sync.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/camera_state_sync.py#L144) · `CameraStateInputBuffer.sample_at` | Select measured body inputs at the requested timestamp. |
+| Visual anchor | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/state_estimation.py#L312) · `AnchoredCameraStateEstimator.reset` | Store the reference transform and matching sample together. |
+| Hybrid propagation | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/state_estimation.py#L215) · `AnchoredCameraPoseEstimators.predict` | Combine the declared position and orientation hypotheses. |
+| Estimate consumed by planning | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/state_estimation.py#L327) · `AnchoredCameraStateEstimator.estimate` | Require an anchor and reject a sample older than it. |
+| Single-cube boundary request | [tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_workflow.py#L197) · `request_at_estimated_pregrasp` | Carry the estimated camera state into a same-grasp replan. |
 
 The output is a camera transform in the anchor reference frame, not a globally observed pelvis position. Store the synchronized anchor before waiting for the GPU planner; otherwise its matching state sample can age out of the buffer.
 
@@ -87,4 +87,4 @@ integration entries. [Source identities](../reference/sources.md).
 
 ## Checks and evidence to inspect
 
-[test_state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_state_estimation.py) checks anchor reproduction and the hybrid position/orientation split; [test_camera_state_sync.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_camera_state_sync.py) covers sample pairing. The chair and continuous-replay results below provide the recorded experimental limits. They do not establish unrestricted live odometry.
+[test_state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_state_estimation.py) checks anchor reproduction and the hybrid position/orientation split; [test_camera_state_sync.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_camera_state_sync.py) covers sample pairing. The chair and continuous-replay results above provide the recorded experimental limits. They do not establish unrestricted live odometry.

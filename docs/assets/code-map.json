@@ -1,16 +1,15 @@
 {
   "checked_on": "2026-09-21",
-  "scope": "Static file/symbol locations for chapter code maps; not a complete code audit, source backup, or runtime validation.",
+  "scope": "Commit-pinned public implementations behind chapter diagrams, with separate August demo and September experimental code. File hashes and Python symbols verified; not a hardware validation.",
   "entries": [
     {
       "id": "executor",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_aprilcube_calibration/executor_state_machine.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "403f2948fcfdd56df3f7ce1a83cac2664105bbbad1193c976fb4dc4b188b3e51",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/executor_state_machine.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_aprilcube_calibration/executor_state_machine.py",
       "symbols": [
         {
           "name": "PoseExecutor.acquire",
@@ -27,34 +26,34 @@
           "line": 572,
           "end_line": 665
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "driver",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_aprilcube_calibration/executor_driver.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "aac4efb6fe8a6ca2e44f76e074a2729bf3fae8e104e3b16d3e0edca4cda3900f",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/executor_driver.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/executor_driver.py",
       "symbols": [
         {
           "name": "ExecutorControlDriver._run",
           "line": 187,
           "end_line": 209
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "lowcmd",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_aprilcube_calibration/transports/unitree_debug_lowcmd.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "8415eb72c1c7816d1bf6f5880a400ce0379054af12e982be481f42fe662cc77a",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/transports/unitree_debug_lowcmd.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/transports/unitree_debug_lowcmd.py",
       "symbols": [
         {
           "name": "UnitreeMotionModeManager.enter_debug_guarded",
@@ -66,34 +65,34 @@
           "line": 236,
           "end_line": 279
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "arm-sdk",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_aprilcube_calibration/transports/unitree_arm_sdk.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "18e3f3cc8a0947043061d7c6d89d41e61f957e99961632f4d7e96d37bd9072c7",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_aprilcube_calibration/transports/unitree_arm_sdk.py",
       "symbols": [
         {
           "name": "UnitreeArmSDKTransport.send_command",
           "line": 360,
           "end_line": 403
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "watchdog",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_aprilcube_calibration/pc2_safety.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "e78b56dda204fa4dc1ececcf5b5c30dc274cad94b488644e141ba36bf822fed8",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/pc2_safety.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_safety.py",
       "symbols": [
         {
           "name": "PC2DampingWatchdog.start",
@@ -110,34 +109,34 @@
           "line": 302,
           "end_line": 320
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "watchdog-agent",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_aprilcube_calibration/pc2_watchdog_agent.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "8c0d344c25823c40a157218e8b3ca845c527a558f771354872ef245cb8f955c0",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/pc2_watchdog_agent.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_watchdog_agent.py",
       "symbols": [
         {
           "name": "run_watchdog",
           "line": 343,
           "end_line": 650
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "boundary",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/control_boundary.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "688e4c962163e4191e86f4a71cf612c769cad26ba571d40713f28676e6b6c675",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/control_boundary.py",
       "symbols": [
         {
           "name": "command_bound_snapshot",
@@ -149,17 +148,17 @@
           "line": 54,
           "end_line": 129
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "tabletop",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/hardware_tabletop.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "ad93824f2ea4ca8b9fae5b5e9b0be77efbaf94aa1b4811b71f8244e37095ba8e",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_tabletop.py",
       "symbols": [
         {
           "name": "run_tabletop",
@@ -171,17 +170,17 @@
           "line": 915,
           "end_line": 924
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "stack",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/hardware_stack.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "8e531ce6acca6002e2755ab10d03ef54e8daaab11f01a144bbd7dc8ee47bfbe5",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_stack.py",
       "symbols": [
         {
           "name": "run_stack",
@@ -198,17 +197,17 @@
           "line": 377,
           "end_line": 523
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "contact",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_aprilcube_calibration/transports/unitree_dex3.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "1fc3f08a292d9031cf24db65ddbedd0c0be04616c8bc3a2ac90e71e9fdf50be0",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/transports/unitree_dex3.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/transports/unitree_dex3.py",
       "symbols": [
         {
           "name": "classify_dex3_opposed_joint_obstruction",
@@ -225,17 +224,17 @@
           "line": 1049,
           "end_line": 1150
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "perception",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/tabletop_perception.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "8fc4f02598f1740e2d99bbbd8f18c924deaef07b2679850f792ca04e4d5fd2a5",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_perception.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py",
       "symbols": [
         {
           "name": "_detect_resting_pose_hypotheses",
@@ -262,45 +261,45 @@
           "line": 36,
           "end_line": 68
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "object",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/tabletop_object.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "a1a0363cc7b7852fe706ceab32b9cafd840f5016578198cec34c8795c38e5e2b",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_object.py",
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_object.py",
+      "symbols": [],
+      "branch": "main"
     },
     {
       "id": "camera-sync",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/camera_state_sync.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "5d2a2e9056f465dacf5aa7db1bc618dd0a56cc7c062d4f065c9ceaac3c542e30",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/camera_state_sync.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/camera_state_sync.py",
       "symbols": [
         {
           "name": "CameraStateInputBuffer.sample_at",
           "line": 144,
           "end_line": 203
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "camera-state",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/state_estimation.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "e3734d2abe6550b050ef380a1c997dc567829f6dc55899b1e36c50e4d0cf247a",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/state_estimation.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/state_estimation.py",
       "symbols": [
         {
           "name": "AnchoredCameraPoseEstimators.predict",
@@ -317,17 +316,17 @@
           "line": 327,
           "end_line": 344
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "requests",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/tabletop_workflow.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "b18f70403919412bcb6484b3cb69a448cc49882b2883d265727b23de879d0792",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_workflow.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_workflow.py",
       "symbols": [
         {
           "name": "build_tabletop_request",
@@ -344,17 +343,17 @@
           "line": 197,
           "end_line": 224
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "planner-process",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/persistent_planner.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "ad28588d0c7098a67b0526479e0533ec293c2e5b2c98de36606d76901616794e",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/persistent_planner.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/persistent_planner.py",
       "symbols": [
         {
           "name": "PersistentTabletopPlanner.launch",
@@ -366,17 +365,17 @@
           "line": 141,
           "end_line": 158
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "planning-session",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/planning/tabletop_session.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "19b0c619e2b9a64028f6edc8672b9fad11d7ed4daa1927fa68413d650bb38c54",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_session.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_session.py",
       "symbols": [
         {
           "name": "TabletopPlanningSession.plan_pregrasp_at_clearance",
@@ -393,17 +392,17 @@
           "line": 237,
           "end_line": 266
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "planner",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/planning/tabletop_planner.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "1b195a6830cf5d7111d5089a4aed0221909913210b34030f23160e11be24f43e",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_planner.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_planner.py",
       "symbols": [
         {
           "name": "_fresh_branch_start_state",
@@ -425,17 +424,17 @@
           "line": 4048,
           "end_line": 4161
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "mpc",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/planning/tabletop_mpc.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "a02750074407347782c0388f6ea8051ac2ed7dea8041e15783f8fc887bfd2862",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_mpc.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_mpc.py",
       "symbols": [
         {
           "name": "MovingGraspMPC.update_moving_grasp_goal",
@@ -447,17 +446,17 @@
           "line": 2269,
           "end_line": 2584
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "mpc-buffer",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/mpc_command_buffer.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "05b69c7f9b66d146c50f20778428551b0f4442a9e4beb044d4d96781a6051e42",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/mpc_command_buffer.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/mpc_command_buffer.py",
       "symbols": [
         {
           "name": "RollingMPCCommandBuffer.install",
@@ -469,17 +468,17 @@
           "line": 540,
           "end_line": 583
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "calibration-control",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/calibration/control.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "8f552ebe6f5c0a5191c55c611a1602fb5176291eeabfe672c7e5231bc4142c6f",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/control.py",
       "symbols": [
         {
           "name": "StandingCalibrationControl.acquire",
@@ -496,51 +495,51 @@
           "line": 393,
           "end_line": 439
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "calibration-adapter",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/calibration/adapter.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "43b538b0b0a59c60cd01e3ffbbe4fd35e8886b193ccf48e0985b34734d710a5d",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/adapter.py",
       "symbols": [
         {
           "name": "plan_owned_adapter",
           "line": 24,
           "end_line": 70
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "calibration-collect",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/hardware_bilateral_calibration.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "a2b130526d36a0618a8307df9288c8eb0e2fa9b641d317ee43b7a6d27c86a08a",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_bilateral_calibration.py",
       "symbols": [
         {
           "name": "run_collect_bilateral_calibration",
           "line": 198,
           "end_line": 768
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "calibration-capture",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/calibration/capture.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "34537917585aa75753c54a243afe98fb517b10f68872ca379c49ee365705c683",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/capture.py",
       "symbols": [
         {
           "name": "BilateralLiveBurstSource.capture_burst",
@@ -552,17 +551,17 @@
           "line": 361,
           "end_line": 386
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "calibration-session",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/calibration/session.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "9359efa609975c490b70049b0f112ec7129752ae879383b91f8cf15b698c9b46",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/session.py",
       "symbols": [
         {
           "name": "BilateralSessionStore.append_capture",
@@ -574,85 +573,85 @@
           "line": 593,
           "end_line": 684
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "calibration-project",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/calibration/projection.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "15334a44d48fa036f6bddf9bba7b481db8e1637456179f03d3970018829bd4c4",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/projection.py",
       "symbols": [
         {
           "name": "BilateralCalibrationProjection.project_side",
           "line": 204,
           "end_line": 243
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "calibration-solve",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/calibration/solver.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "b324ae0de2536efe3ed14b89e6dfce7223a36780d2b08411bd0d3219c9205650",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/solver.py",
       "symbols": [
         {
           "name": "solve_bilateral_dataset",
           "line": 200,
           "end_line": 324
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "calibration-validate",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/calibration/validation.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "513b845da9c03cdf531280bb8d29f0a9dc1679704d33974825fe1b36d6d5b725",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/validation.py",
       "symbols": [
         {
           "name": "validate_and_select_bilateral_model",
           "line": 342,
           "end_line": 496
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "calibration-bundle",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/calibration/bundle.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "8a8b5fca56989f2e905a0bf781b9453d4ade511a1d0c3ecd9dd6f71247848de5",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/calibration/bundle.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/calibration/bundle.py",
       "symbols": [
         {
           "name": "write_bilateral_calibration_bundle",
           "line": 34,
           "end_line": 193
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "mount",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_aprilcube_calibration/dex3_dorsal_mount.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "6e11a194253c91b15d8253b5215555c067291d663d63c824cff388b129ab845e",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/dex3_dorsal_mount.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/dex3_dorsal_mount.py",
       "symbols": [
         {
           "name": "Dex3DorsalMountSpec",
@@ -669,17 +668,17 @@
           "line": 297,
           "end_line": 352
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "recorder",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/raw_episode_recording.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "92c02eb85b726f2450d3b4b27246bee5a21c188d33ac9dd493a00c56476d6334",
-      "matches_head": false,
-      "public_url": null,
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/raw_episode_recording.py",
       "symbols": [
         {
           "name": "tabletop_raw_topics",
@@ -696,17 +695,17 @@
           "line": 447,
           "end_line": 500
         }
-      ]
+      ],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "conversion",
       "repository": "g1-dex3-tabletop",
       "path": "src/g1_dex3_tabletop/lerobot_conversion.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "df65d7f7afcbf1c6fc368c3beb64883eb180aa303261ebfcc31b41f9c8c953fd",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/lerobot_conversion.py",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/lerobot_conversion.py",
       "symbols": [
         {
           "name": "index_and_align_episode",
@@ -723,17 +722,17 @@
           "line": 774,
           "end_line": 1046
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "descriptors",
       "repository": "g1-aprilcube-demo",
       "path": "tools/build_dex3_rev1_descriptors.py",
-      "revision": "f190470742f43101e9a22affaca80554722706ac",
-      "read_from": "working_tree",
+      "revision": "2b7274b11f1862ebfcd05b48ff678d995e55269e",
+      "read_from": "git_object",
       "sha256": "f541db6c7a74b3b2acadf2e5127a4879e1df5c3f86ef6e8d50d71e6b21d6c109",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/tools/build_dex3_rev1_descriptors.py",
+      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/tools/build_dex3_rev1_descriptors.py",
       "symbols": [
         {
           "name": "derive_frame_and_sweep",
@@ -745,34 +744,34 @@
           "line": 431,
           "end_line": 468
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "raw-grasps",
       "repository": "g1-aprilcube-demo",
       "path": "tools/run_aprilcube_raw_grasps.py",
-      "revision": "f190470742f43101e9a22affaca80554722706ac",
-      "read_from": "working_tree",
+      "revision": "2b7274b11f1862ebfcd05b48ff678d995e55269e",
+      "read_from": "git_object",
       "sha256": "9a2f3ac3fbbf292024f3d98fe7c738e3f0d352ed8205e44763e9ab42bc317b09",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/tools/run_aprilcube_raw_grasps.py",
+      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/tools/run_aprilcube_raw_grasps.py",
       "symbols": [
         {
           "name": "run_atlas",
           "line": 204,
           "end_line": 441
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "qualification",
       "repository": "g1-aprilcube-demo",
       "path": "tools/run_isaac_atlas_qualification.py",
-      "revision": "f190470742f43101e9a22affaca80554722706ac",
-      "read_from": "working_tree",
+      "revision": "2b7274b11f1862ebfcd05b48ff678d995e55269e",
+      "read_from": "git_object",
       "sha256": "b15fae7093cb6001d771dd8fee43397e3b024a6802271389b31c5d1dcf2ecc38",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/tools/run_isaac_atlas_qualification.py",
+      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/tools/run_isaac_atlas_qualification.py",
       "symbols": [
         {
           "name": "validate_completed_run",
@@ -784,67 +783,67 @@
           "line": 145,
           "end_line": 265
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "shortlist",
       "repository": "g1-aprilcube-demo",
       "path": "g1_aprilcube_demo/grasping/executable_shortlist.py",
-      "revision": "f190470742f43101e9a22affaca80554722706ac",
-      "read_from": "working_tree",
+      "revision": "2b7274b11f1862ebfcd05b48ff678d995e55269e",
+      "read_from": "git_object",
       "sha256": "6b39fb95a0262d5d57035c9898e21e97a83e9fbe2db581486cfe21d5e6dd8697",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/grasping/executable_shortlist.py",
+      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/grasping/executable_shortlist.py",
       "symbols": [
         {
           "name": "build_shortlist",
           "line": 257,
           "end_line": 442
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "support-atlas",
       "repository": "g1-aprilcube-demo",
       "path": "g1_aprilcube_demo/grasping/support_atlas.py",
-      "revision": "f190470742f43101e9a22affaca80554722706ac",
-      "read_from": "working_tree",
+      "revision": "2b7274b11f1862ebfcd05b48ff678d995e55269e",
+      "read_from": "git_object",
       "sha256": "db06575db31ceaae98f42af3b0bcfb588f9fe151a5eec23b132dd3d605bf228e",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/grasping/support_atlas.py",
+      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/grasping/support_atlas.py",
       "symbols": [
         {
           "name": "evaluate_support",
           "line": 462,
           "end_line": 569
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "assembly",
       "repository": "g1-aprilcube-demo",
       "path": "g1_aprilcube_demo/planning/runtime_assembly.py",
-      "revision": "f190470742f43101e9a22affaca80554722706ac",
-      "read_from": "working_tree",
+      "revision": "2b7274b11f1862ebfcd05b48ff678d995e55269e",
+      "read_from": "git_object",
       "sha256": "e194f52f674655540c94fb19f7112568b52c813923599678e99a7d50ef482e1c",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/g1_aprilcube_demo/planning/runtime_assembly.py",
+      "public_url": "https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/planning/runtime_assembly.py",
       "symbols": [
         {
           "name": "RuntimeAssemblyPlanner",
           "line": 189,
           "end_line": 1499
         }
-      ]
+      ],
+      "branch": "main"
     },
     {
       "id": "pressure",
       "repository": "dex3_pressure_tools",
       "path": "dex3_pressure_tools/pressure_visualizer.py",
       "revision": "e0b706df507160799b70732c7cc3244924ce8f5e",
-      "read_from": "working_tree",
+      "read_from": "git_object",
       "sha256": "1745ccfc41d50233cb35e17c81072a767672cd0f290e8030025a5be2f3534789",
-      "matches_head": true,
       "public_url": "https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/pressure_visualizer.py",
       "symbols": [
         {
@@ -869,9 +868,8 @@
       "repository": "dex3_pressure_tools",
       "path": "dex3_pressure_tools/session_recorder.py",
       "revision": "e0b706df507160799b70732c7cc3244924ce8f5e",
-      "read_from": "working_tree",
+      "read_from": "git_object",
       "sha256": "bb7b7d8ff21342b06550d66dd5ccb9e233463f023d9943344dfbf8002d79c97f",
-      "matches_head": true,
       "public_url": "https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/session_recorder.py",
       "symbols": [
         {
@@ -886,9 +884,8 @@
       "repository": "g1pilot",
       "path": "g1pilot/state/robot_state.py",
       "revision": "72acc803edefe583c24f53e76a21d8d4ed10ed14",
-      "read_from": "working_tree",
+      "read_from": "git_object",
       "sha256": "f6f39e37fd58f7c6a7641a6f39f0db867d6f0ac562de02652650977ec35dbcdf",
-      "matches_head": true,
       "public_url": "https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/state/robot_state.py",
       "symbols": [
         {
@@ -903,9 +900,8 @@
       "repository": "g1pilot",
       "path": "g1pilot/manipulation/opensot_solver.py",
       "revision": "72acc803edefe583c24f53e76a21d8d4ed10ed14",
-      "read_from": "working_tree",
+      "read_from": "git_object",
       "sha256": "188cbcff48446d9add46e43a32d53700c10a6fac00eb21a225783278dde4ccdc",
-      "matches_head": true,
       "public_url": "https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/opensot_solver.py",
       "symbols": [
         {
@@ -920,9 +916,8 @@
       "repository": "g1pilot",
       "path": "g1pilot/manipulation/dx3_hand.py",
       "revision": "72acc803edefe583c24f53e76a21d8d4ed10ed14",
-      "read_from": "working_tree",
+      "read_from": "git_object",
       "sha256": "b0016d5276078fb1f46501e16c5c8ec53e929bfff49a1b5fc93ba6fbb91cae56",
-      "matches_head": true,
       "public_url": "https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/g1pilot/manipulation/dx3_hand.py",
       "symbols": [
         {
@@ -944,7 +939,6 @@
       "revision": "6b5af59b109e2ee687920fdf66ded6182725e945",
       "read_from": "git_object",
       "sha256": "98e19f3305841b159967277f57c17518e1dc2fc66a1f4f563fea5e346777ec98",
-      "matches_head": true,
       "public_url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/mujoco_plant.py",
       "symbols": [
         {
@@ -976,7 +970,6 @@
       "revision": "6b5af59b109e2ee687920fdf66ded6182725e945",
       "read_from": "git_object",
       "sha256": "dd7e1901debdbd02a22a3240fc27780aacc021b2568a60a44ef47a4244fd6e86",
-      "matches_head": true,
       "public_url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/g1pilot/simulation/openhomie_policy.py",
       "symbols": [
         {
@@ -998,7 +991,6 @@
       "revision": "6b5af59b109e2ee687920fdf66ded6182725e945",
       "read_from": "git_object",
       "sha256": "4ab7113ec0ff88c280422e7d235e86f65fa2e9b87b766820120f678f9f1c7961",
-      "matches_head": true,
       "public_url": "https://github.com/sri299792458/g1pilot/blob/6b5af59b109e2ee687920fdf66ded6182725e945/launch/mujoco_openhomie_manipulation.launch.py",
       "symbols": [
         {
@@ -1012,111 +1004,246 @@
       "id": "test-stack",
       "repository": "g1-dex3-tabletop",
       "path": "tests/test_stack_workflow.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "f7565ff664fdfb779b5787033f2a16e8fb42dd98ef736f0a499b3634ee126945",
-      "matches_head": false,
-      "public_url": null,
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_stack_workflow.py",
+      "symbols": [],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "test-tabletop",
       "repository": "g1-dex3-tabletop",
       "path": "tests/test_tabletop_workflow.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "cb723d6b30d2b804776a204475c450c499d312b8f2c19ea2f6f6c65115aa0900",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_tabletop_workflow.py",
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_tabletop_workflow.py",
+      "symbols": [],
+      "branch": "main"
     },
     {
       "id": "test-state",
       "repository": "g1-dex3-tabletop",
       "path": "tests/test_state_estimation.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "760f1a31851d6d1df7ed9cb7a5528af598991d70e3d2202492979c38a0e94a5b",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_state_estimation.py",
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_state_estimation.py",
+      "symbols": [],
+      "branch": "main"
     },
     {
       "id": "test-sync",
       "repository": "g1-dex3-tabletop",
       "path": "tests/test_camera_state_sync.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "5866802b29e39f5cbb247c9c46c8f94d7bd157a2778ae27d684fda4b253fd23e",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_camera_state_sync.py",
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_camera_state_sync.py",
+      "symbols": [],
+      "branch": "main"
     },
     {
       "id": "test-standing",
       "repository": "g1-dex3-tabletop",
       "path": "tests/test_standing_calibration_control.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "81b4f6798371c174fdb0141a3aada2724c48e6c2942f269d79f564df11dcb192",
-      "matches_head": false,
-      "public_url": null,
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_standing_calibration_control.py",
+      "symbols": [],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "test-calibration",
       "repository": "g1-dex3-tabletop",
       "path": "tests/test_bilateral_calibration.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "ef5664e06b19408e7f5090bb963695f7592091e69130ce7444f01fd173bd7214",
-      "matches_head": false,
-      "public_url": null,
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_bilateral_calibration.py",
+      "symbols": [],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "test-recorder",
       "repository": "g1-dex3-tabletop",
       "path": "tests/test_raw_episode_recording.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "a8c9a1488de65d6b2c3ef309bb48daf756a98882fb740720610a906bff369795",
-      "matches_head": false,
-      "public_url": null,
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_raw_episode_recording.py",
+      "symbols": [],
+      "branch": "experimental/september-calibration"
     },
     {
       "id": "test-conversion",
       "repository": "g1-dex3-tabletop",
       "path": "tests/test_lerobot_conversion.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "443e664ebf2efd3c1913bcee3a7c676d64c7c669191bf488cddfef78cd6f1f64",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_lerobot_conversion.py",
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_lerobot_conversion.py",
+      "symbols": [],
+      "branch": "main"
     },
     {
       "id": "test-mpc",
       "repository": "g1-dex3-tabletop",
       "path": "tests/test_mpc_command_buffer.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
       "sha256": "2a82374e09ba067c2ed2754243c321f3eaead26d7a8aa11eeb2554e62547574e",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_mpc_command_buffer.py",
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_mpc_command_buffer.py",
+      "symbols": [],
+      "branch": "main"
     },
     {
       "id": "test-executor",
       "repository": "g1-dex3-tabletop",
       "path": "tests/test_executor_state_machine.py",
-      "revision": "cf1b27704c82d877d23ff5a3c157df3218f02402",
-      "read_from": "working_tree",
+      "revision": "59c21b1388c636176dea67ea7ed3e253f8510783",
+      "read_from": "git_object",
       "sha256": "6c98ec5219f641a5660ab497d11c27a145b16a94e3aa0c8ac72fdeec9bbff8de",
-      "matches_head": true,
-      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_executor_state_machine.py",
-      "symbols": []
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_executor_state_machine.py",
+      "symbols": [],
+      "branch": "experimental/september-calibration"
+    },
+    {
+      "id": "demo-executor",
+      "repository": "g1-dex3-tabletop",
+      "path": "src/g1_aprilcube_calibration/executor_state_machine.py",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
+      "sha256": "f1a68330ceed77008219729feb6056f615876d0ed2d5c7d7dedcc4bb981cc016",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/executor_state_machine.py",
+      "symbols": [
+        {
+          "name": "PoseExecutor.acquire",
+          "line": 248,
+          "end_line": 298
+        },
+        {
+          "name": "PoseExecutor.tick",
+          "line": 836,
+          "end_line": 1081
+        },
+        {
+          "name": "PoseExecutor.install_validated_plan",
+          "line": 572,
+          "end_line": 667
+        }
+      ],
+      "branch": "main"
+    },
+    {
+      "id": "demo-tabletop",
+      "repository": "g1-dex3-tabletop",
+      "path": "src/g1_dex3_tabletop/hardware_tabletop.py",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
+      "sha256": "77bbca67f75c6ac599b0a38d614b2c7ba065a611f6c38b026c2e23845c99e101",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/hardware_tabletop.py",
+      "symbols": [
+        {
+          "name": "run_tabletop",
+          "line": 994,
+          "end_line": 2657
+        },
+        {
+          "name": "_restore_seated_control",
+          "line": 912,
+          "end_line": 921
+        }
+      ],
+      "branch": "main"
+    },
+    {
+      "id": "demo-stack",
+      "repository": "g1-dex3-tabletop",
+      "path": "src/g1_dex3_tabletop/hardware_stack.py",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
+      "sha256": "2fe7fa337fdea4fe792d213869f3b9e8081ed7748416a4698acce91c2086aec1",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/hardware_stack.py",
+      "symbols": [
+        {
+          "name": "run_stack",
+          "line": 661,
+          "end_line": 1764
+        },
+        {
+          "name": "_find_direct_stack_plan",
+          "line": 408,
+          "end_line": 465
+        },
+        {
+          "name": "_execute_pick_place",
+          "line": 468,
+          "end_line": 614
+        },
+        {
+          "name": "_command_bound_snapshot",
+          "line": 117,
+          "end_line": 128
+        },
+        {
+          "name": "_install_plan_at_current_boundary",
+          "line": 277,
+          "end_line": 353
+        }
+      ],
+      "branch": "main"
+    },
+    {
+      "id": "demo-recorder",
+      "repository": "g1-dex3-tabletop",
+      "path": "src/g1_dex3_tabletop/raw_episode_recording.py",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
+      "sha256": "b4c8626ead097bfc4d02815c4c1f0d29622b7a6364940bdfaa84b0067874b7aa",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/raw_episode_recording.py",
+      "symbols": [
+        {
+          "name": "tabletop_raw_topics",
+          "line": 132,
+          "end_line": 137
+        },
+        {
+          "name": "RawEpisodeRecorder.start",
+          "line": 313,
+          "end_line": 376
+        },
+        {
+          "name": "RawEpisodeRecorder.stop",
+          "line": 419,
+          "end_line": 472
+        }
+      ],
+      "branch": "main"
+    },
+    {
+      "id": "demo-test-stack",
+      "repository": "g1-dex3-tabletop",
+      "path": "tests/test_stack_workflow.py",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
+      "sha256": "8c2a4259bb4c9c0ee347c813d8db8ef1433e43e546744d2f590ade18a6b5cdd7",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_stack_workflow.py",
+      "symbols": [],
+      "branch": "main"
+    },
+    {
+      "id": "demo-test-executor",
+      "repository": "g1-dex3-tabletop",
+      "path": "tests/test_executor_state_machine.py",
+      "revision": "7400aff201c2f73ef2a64e546d72bd66cbe87fd6",
+      "read_from": "git_object",
+      "sha256": "bfa1e9ba8700fa215b7a7765f65bc7fcf66ba6601b6be3af78a1e5d686469308",
+      "public_url": "https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_executor_state_machine.py",
+      "symbols": [],
+      "branch": "main"
     }
   ]
 }

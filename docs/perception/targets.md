@@ -16,12 +16,12 @@ flowchart LR
 
 | Diagram component | Code entry point | Responsibility |
 |---|---|---|
-| Runtime cube profile | [tabletop_object.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_object.py) | Bind cube dimensions, marker profile and task geometry. |
-| Dorsal mount specification | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L28) · `Dex3DorsalMountSpec` | Record dimensions and handed mounting geometry. |
-| Physical marker transform | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L221) · `palm_T_marker_face` | Compute the handed CAD marker pose. |
-| Mount artifact | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L297) · `mount_manifest` | Export geometry and metadata for the mount. |
-| Current torso structure | [build_g1_mount_v7_fusion.py](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/scripts/build_g1_mount_v7_fusion.py) · `build` | Construct the V7 crossbars and side plates inside Fusion. |
-| Torso geometry checks | [validate_g1_mount_v7.py](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/scripts/validate_g1_mount_v7.py) | Export print orientations and check mesh, tool and optical clearance. |
+| Runtime cube profile | [tabletop_object.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_object.py) | Bind cube dimensions, marker profile and task geometry. |
+| Dorsal mount specification | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L28) · `Dex3DorsalMountSpec` | Record dimensions and handed mounting geometry. |
+| Physical marker transform | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L221) · `palm_T_marker_face` | Compute the handed CAD marker pose. |
+| Mount artifact | [dex3_dorsal_mount.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/dex3_dorsal_mount.py#L297) · `mount_manifest` | Export geometry and metadata for the mount. |
+| Current torso structure | [build_g1_mount_v7_fusion.py](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/f295def18bd936031fba325d4e8bdfc71fea671a/scripts/build_g1_mount_v7_fusion.py) · `build` | Construct the V7 crossbars and side plates inside Fusion. |
+| Torso geometry checks | [validate_g1_mount_v7.py](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/f295def18bd936031fba325d4e8bdfc71fea671a/scripts/validate_g1_mount_v7.py) | Export print orientations and check mesh, tool and optical clearance. |
 
 The cube and wrist-marker branches are separate targets. Read the dimensions below before selecting a mesh or detector dictionary. For wrist visibility use the physical transform; for a selected calibration’s residuals use that fit’s registered transform.
 
@@ -101,7 +101,7 @@ calibration model. Neither should silently replace the other.
 ## Torso ChArUco carrier
 
 The current design is **V7**, kept in
-[`robot-calibration-aprilcube-prototype`](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/9ad412019107161373e5381ed81cd5c2224a1301/artifacts/g1_mount_v7).
+[`robot-calibration-aprilcube-prototype`](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/f295def18bd936031fba325d4e8bdfc71fea671a/artifacts/g1_mount_v7).
 It uses two broad torso crossbars and two flat side plates. These support the
 accepted 210 × 300 mm multicolor carrier and its four M4 holes. The active
 board is 6 × 9 squares, with 30 mm squares, 22 mm markers and `5x5_50`,
@@ -121,11 +121,11 @@ flowchart TD
 
 | Need | Exact source |
 |---|---|
-| Open or print the current structure | [V7 CAD and printing guide](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/artifacts/g1_mount_v7/README.md) |
-| Inspect native CAD or exchange geometry | [F3D and STEP files](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/9ad412019107161373e5381ed81cd5c2224a1301/artifacts/g1_mount_v7/cad) |
-| Check the four shell interfaces | [Compact R2 coupons](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/artifacts/g1_coupon_r2/README.md) |
-| Understand what physically fitted | [September 13 fit status](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/artifacts/g1_mount_v7/FIT_STATUS.md) |
-| Edit or rerun CAD checks | [Fusion and mesh script guide](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/9ad412019107161373e5381ed81cd5c2224a1301/scripts/G1_MOUNT_README.md) |
+| Open or print the current structure | [V7 CAD and printing guide](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/f295def18bd936031fba325d4e8bdfc71fea671a/artifacts/g1_mount_v7/README.md) |
+| Inspect native CAD or exchange geometry | [F3D and STEP files](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/f295def18bd936031fba325d4e8bdfc71fea671a/artifacts/g1_mount_v7/cad) |
+| Check the four shell interfaces | [Compact R2 coupons](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/f295def18bd936031fba325d4e8bdfc71fea671a/artifacts/g1_coupon_r2/README.md) |
+| Understand what physically fitted | [September 13 fit status](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/f295def18bd936031fba325d4e8bdfc71fea671a/artifacts/g1_mount_v7/FIT_STATUS.md) |
+| Edit or rerun CAD checks | [Fusion and mesh script guide](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/f295def18bd936031fba325d4e8bdfc71fea671a/scripts/G1_MOUNT_README.md) |
 
 The R2 coupons preserve the full contact patches, M6 bores and washer bearing
 planes while trimming the earlier coupons. Use the current `print_parts/` and

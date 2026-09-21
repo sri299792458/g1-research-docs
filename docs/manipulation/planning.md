@@ -17,12 +17,17 @@ flowchart TB
 
 | Diagram component | Code entry point | Responsibility |
 |---|---|---|
-| Snapshot boundary | [control_boundary.py](../reference/code-index.md#code-boundary) · `command_bound_snapshot` (local snapshot) | Keep measured body/fingers while binding both arm starts to held commands. |
-| Process boundary | [persistent_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/persistent_planner.py#L141) · `PersistentTabletopPlanner.request_payload` | Submit a request while continuing control health checks. |
-| Planning session | [tabletop_session.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_session.py#L425) · `TabletopPlanningSession.replan_at_pregrasp` | Bind a same-grasp remainder to the stored clearance request and exact start. |
-| Route planning | [tabletop_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_planner.py#L5541) · `plan_tabletop_task` | Solve the task using explicit model, scene and candidate contracts. |
-| Contact revalidation | [tabletop_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_planner.py#L4048) · `RetentionRouteValidator.validate` | Check the frozen payload route against achieved finger geometry. |
-| Plan installation | [control_boundary.py](../reference/code-index.md#code-boundary) · `install_plan_at_current_boundary` (local snapshot) | Reject a real command jump before installing or switching arms. |
+| Snapshot boundary | [control_boundary.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/control_boundary.py) · `command_bound_snapshot` (September branch) | Keep measured body/fingers while binding both arm starts to held commands. |
+| Process boundary | [persistent_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/persistent_planner.py#L141) · `PersistentTabletopPlanner.request_payload` | Submit a request while continuing control health checks. |
+| Planning session | [tabletop_session.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_session.py#L425) · `TabletopPlanningSession.replan_at_pregrasp` | Bind a same-grasp remainder to the stored clearance request and exact start. |
+| Route planning | [tabletop_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_planner.py#L5541) · `plan_tabletop_task` | Solve the task using explicit model, scene and candidate contracts. |
+| Contact revalidation | [tabletop_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_planner.py#L4048) · `RetentionRouteValidator.validate` | Check the frozen payload route against achieved finger geometry. |
+| Plan installation | [control_boundary.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/control_boundary.py) · `install_plan_at_current_boundary` (September branch) | Reject a real command jump before installing or switching arms. |
+
+The shared `control_boundary.py` module is a September extraction. In demo
+`main`, the corresponding stack helpers are
+[`_command_bound_snapshot` and `_install_plan_at_current_boundary`](../reference/code-index.md#code-demo-stack).
+The command-continuity invariant already existed in the demonstrated version.
 
 The snapshot field `measured_q29_rad` deserves care: `command_bound_snapshot` replaces the arm entries with active commands while retaining measured body/finger geometry. Its name alone is not enough to infer every entry is a sensor measurement. Read the constructor and boundary helper together.
 
@@ -106,4 +111,4 @@ Evidence: tabletop planning, strict-collision and worker-pool entries.
 
 ## Checks and evidence to inspect
 
-[test_stack_workflow.py](../reference/code-index.md#code-test-stack) (local snapshot) preserves the measured-elbow versus held-command regression. [test_tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_tabletop_workflow.py) covers real discontinuity rejection, float32 anchoring, strict collision checks, attached geometry and complete returns. The timings below are reported task-specific measurements, not benchmarks rerun for this guide.
+[test_stack_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_stack_workflow.py) (September branch) preserves the measured-elbow versus held-command regression. [test_tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_tabletop_workflow.py) covers real discontinuity rejection, float32 anchoring, strict collision checks, attached geometry and complete returns. The timings above are reported task-specific measurements, not benchmarks rerun for this guide.

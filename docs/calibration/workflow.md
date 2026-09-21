@@ -14,19 +14,27 @@ flowchart TB
   V -->|eligible model| B["Candidate bundle"]
 ```
 
+## Source version
+
+This chapter's collection lifecycle is on
+[`experimental/september-calibration`](https://github.com/sri299792458/g1-dex3-tabletop/tree/59c21b1388c636176dea67ea7ed3e253f8510783).
+It includes the previously uncommitted runtime changes. Use `main` for the
+August demo; its earlier calibration code does not implement the final lifecycle
+below. Publication did not establish a new physical validation or deploy a bundle.
+
 ## Follow the code
 
 | Diagram component | Code entry point | Responsibility |
 |---|---|---|
-| Collection lifecycle | [hardware_bilateral_calibration.py](../reference/code-index.md#code-calibration-collect) · `run_collect_bilateral_calibration` (local snapshot) | Orchestrate frozen inputs, ownership, captures and return. |
-| Live adapter | [adapter.py](../reference/code-index.md#code-calibration-adapter) · `plan_owned_adapter` (local snapshot) | Bind the adapter to the commands actually held after acquisition. |
-| Burst evidence | [capture.py](../reference/code-index.md#code-calibration-capture) · `BilateralLiveBurstSource.capture_burst` (local snapshot) | Retain current decoded corners and measured-state evidence. |
-| Raw session and dataset | [session.py](../reference/code-index.md#code-calibration-session) · `BilateralSessionStore.build_dataset` (local snapshot) | Reconstruct accepted samples from retained, verified artifacts. |
-| Model fit | [solver.py](../reference/code-index.md#code-calibration-solve) · `solve_bilateral_dataset` (local snapshot) | Run the declared solver and independently evaluate its output. |
-| Grouped validation | [validation.py](../reference/code-index.md#code-calibration-validate) · `validate_and_select_bilateral_model` (local snapshot) | Compare models on held groups before selecting an eligible candidate. |
-| Bundle export | [bundle.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/calibration/bundle.py#L34) · `write_bilateral_calibration_bundle` | Preserve the solution and validation provenance in a separate artifact. |
+| Collection lifecycle | [hardware_bilateral_calibration.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_bilateral_calibration.py) · `run_collect_bilateral_calibration` (September branch) | Orchestrate frozen inputs, ownership, captures and return. |
+| Live adapter | [adapter.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/adapter.py) · `plan_owned_adapter` (September branch) | Bind the adapter to the commands actually held after acquisition. |
+| Burst evidence | [capture.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/capture.py) · `BilateralLiveBurstSource.capture_burst` (September branch) | Retain current decoded corners and measured-state evidence. |
+| Raw session and dataset | [session.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/session.py) · `BilateralSessionStore.build_dataset` (September branch) | Reconstruct accepted samples from retained, verified artifacts. |
+| Model fit | [solver.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/solver.py) · `solve_bilateral_dataset` (September branch) | Run the declared solver and independently evaluate its output. |
+| Grouped validation | [validation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/validation.py) · `validate_and_select_bilateral_model` (September branch) | Compare models on held groups before selecting an eligible candidate. |
+| Bundle export | [bundle.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/calibration/bundle.py#L34) · `write_bilateral_calibration_bundle` | Preserve the solution and validation provenance in a separate artifact. |
 
-Read these modules in arrow order. For the pixel model, start with [projection.py](../reference/code-index.md#code-calibration-project) · `BilateralCalibrationProjection.project_side` (local snapshot). Exporting a bundle does not change the bundle selected by a hardware launcher. Before interpreting residuals, read the [results](results.md), [investigation record](investigation.md) and source investigation ledger.
+Read these modules in arrow order. For the pixel model, start with [projection.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/projection.py) · `BilateralCalibrationProjection.project_side` (September branch). Exporting a bundle does not change the bundle selected by a hardware launcher. Before interpreting residuals, read the [results](results.md), [investigation record](investigation.md) and the [public runtime summary](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/docs/september-calibration.md).
 
 ## The model being fitted
 
@@ -112,7 +120,9 @@ Readiness compares all 14 measured hand joints with saved references: within
 before SPACE, after SPACE and during acquisition. Shoulder search caps were
 bounded at 0.08/0.10/0.12/0.14 rad. The source reports 635 tests with nine skips
 and a GPU preparation check with 10.4566 mm clearance against a 5 mm requirement.
-These are reported offline checks, not a completed new robot run.
+These are historical source-reported checks, not a completed new robot run.
+Separately, publication checks exercised 317 selected offline regressions with
+seven skipped; neither check set establishes physical commissioning.
 
 ## From a fit to a deployment
 
@@ -145,4 +155,4 @@ Evidence: prototype/tabletop logs and the calibration investigation ledger.
 
 ## Checks and evidence to inspect
 
-[test_bilateral_calibration.py](../reference/code-index.md#code-test-calibration) (local snapshot) covers hash binding, projection, grouped model selection and same-frame evidence; [test_standing_calibration_control.py](../reference/code-index.md#code-test-standing) (local snapshot) covers the ownership lifecycle. The final manually preclosed workflow has reported offline checks only. Preserve that distinction from the earlier physical collections below.
+[test_bilateral_calibration.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_bilateral_calibration.py) (September branch) covers hash binding, projection, grouped model selection and same-frame evidence; [test_standing_calibration_control.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_standing_calibration_control.py) (September branch) covers the ownership lifecycle. The final manually preclosed workflow has reported offline checks only. Preserve that distinction from the earlier physical collections above.

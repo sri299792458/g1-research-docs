@@ -24,6 +24,7 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-docs.txt
       - run: python -m pip install -r requirements-docs.txt
+      - run: python tools/build_code_index.py --check
       - run: sphinx-build -n -W --keep-going -b html docs site
       - uses: actions/upload-pages-artifact@v5
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

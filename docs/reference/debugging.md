@@ -31,12 +31,12 @@ implementation.
 5. Compare with the latest correction, not just the README at an earlier date.
 
 The September standing waist hold used measured slots 12–14 in mode 1 with
-`kp=300`, `kd=3`, `tau=0`. Later physical runs progressed beyond the original
-failure, while some early elbow/wrist transients remained unexplained. The
-documentation should preserve both observations instead of treating the
-configuration change as a complete physical diagnosis.
+`kp=300`, `kd=3`, `tau=0`. Its hardware response remains unverified in the final retained implementation.
+Earlier physical runs and offline replays must not be treated as validation of
+that final code path or a complete explanation of every elbow/wrist transient.
 
-For calibration, the investigation ledger is the required starting record.
+For calibration, start with the [investigation summary](../calibration/investigation.md)
+and consult the private detailed ledger when available.
 For general operation, use the [ownership chapter](../control/ownership.md)
 and [runbook](../control/runbook.md). Changing a guard to get past a symptom
 needs evidence that the guard is wrong, not merely that it rejected a run.

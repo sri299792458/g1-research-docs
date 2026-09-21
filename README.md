@@ -11,13 +11,15 @@ hardware lessons a future researcher needs to preserve.
 This is a complete first draft awaiting the author's review. It covers G1Pilot,
 an initial MuJoCo backend, Dex3 sensing, printed targets, camera/arm calibration,
 GraspGen-X, CuRobo, physical cube manipulation and recording/LeRobot conversion.
-The guide retains later corrections through September 7. Reported offline,
+The guide retains calibration corrections through September 7 and fixture-fit
+evidence through September 13. Reported offline,
 simulation and hardware outcomes are distinguished; unresolved procedures are
 labelled at their point of use.
 
 Start with the [system map](docs/start/overview.md), then follow a chapter's
 diagram and code entry points. The [code index](docs/reference/code-index.md)
-distinguishes pinned public source from local snapshots. Authorship and project
+links pinned public source and distinguishes the August demo baseline from the
+September calibration branch. Authorship and project
 context are under [About](docs/about.md). Earlier drafts remain in Git history.
 
 ## Preview locally
@@ -44,15 +46,14 @@ dependency updates, navigation and GitHub Pages setup.
 | `docs/assets/` | Selected images, captions/provenance catalog and minimal CSS |
 | `docs/assets/code-map.json` | Exact files, hashes, symbols and public URLs behind code maps |
 | `tools/check_code_map.py` | Optional static verification against available source checkouts |
-| `research/` | Sequential source-reading records, revisions and hashes |
-| `running_notes.md` | Documentation decisions, corrections and progress |
+| `tools/build_code_index.py` | Generate/check the Markdown index from the code map |
 | `requirements-docs.in` / `.txt` | Direct dependencies and pinned build environment |
 | `.github/workflows/docs.yml` | Strict build on changes; Pages deployment from main |
 
-Source reading covers all located primary running notes. Some supporting
-research is still local/uncommitted in its original repository; the
-[source catalog](docs/reference/sources.md) makes those limits explicit.
-Hashes identify that evidence but are not an archive of it.
+The [source catalog](docs/reference/sources.md) identifies published code and
+validation limits. Personal research notes remain private. The five August 25
+runs are converted to LeRobot; [dataset downloads](docs/data/recording.md#dataset-downloads)
+for those runs and the calibration captures are pending upload to Google Drive.
 
 ## Ownership and continuity
 

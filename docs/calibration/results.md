@@ -26,10 +26,12 @@ The selected model fitted a shared camera, two target transforms and seven
 joint offsets, for 25 parameters. Its grouped cross-validation error was
 5.409 px overall: 5.162 left and 5.566 right, with 4.952 px training error.
 
-The bundle is `config/calibrations/dex3_shared_20260812_selected_free.json`.
-All 13 retained completed August 21 stack requests used it. That is a useful
+The [bundle](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/config/calibrations/dex3_shared_20260812_selected_free.json)
+is included in demo `main`. It was used by the five retained August 25 demo
+runs and the earlier 13 completed August 21 stack requests. That is a useful
 deployment connection, but 13 completed recordings are not 13 independently
-scored stacking successes, and the bundle does not establish absolute FK
+scored stacking successes. The five August 25 completion records also need
+separate physical outcome annotation. The bundle does not establish absolute FK
 accuracy everywhere in the workspace.
 
 ## September 5: broader capture, export still blocked

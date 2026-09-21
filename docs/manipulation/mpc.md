@@ -18,10 +18,10 @@ flowchart TB
 
 | Diagram component | Code entry point | Responsibility |
 |---|---|---|
-| Moving target update | [tabletop_mpc.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_mpc.py#L1934) · `MovingGraspMPC.update_moving_grasp_goal` | Use the observed object with the selected grasp geometry. |
-| Worker solve | [tabletop_mpc.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/planning/tabletop_mpc.py#L2269) · `MovingGraspMPC.solve_window` | Produce predicted motion and a command window for the frozen handoff. |
-| Window acceptance | [mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/mpc_command_buffer.py#L359) · `RollingMPCCommandBuffer.install` | Reject stale, fast, discontinuous or wrong-predecessor windows. |
-| Command sampling | [mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/mpc_command_buffer.py#L540) · `RollingMPCCommandBuffer.command` | Sample the accepted window and retain its endpoint hold. |
+| Moving target update | [tabletop_mpc.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_mpc.py#L1934) · `MovingGraspMPC.update_moving_grasp_goal` | Use the observed object with the selected grasp geometry. |
+| Worker solve | [tabletop_mpc.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_mpc.py#L2269) · `MovingGraspMPC.solve_window` | Produce predicted motion and a command window for the frozen handoff. |
+| Window acceptance | [mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/mpc_command_buffer.py#L359) · `RollingMPCCommandBuffer.install` | Reject stale, fast, discontinuous or wrong-predecessor windows. |
+| Command sampling | [mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/mpc_command_buffer.py#L540) · `RollingMPCCommandBuffer.command` | Sample the accepted window and retain its endpoint hold. |
 
 A high-level solve rejection is distinct from a low-level control fault. The diagram assumes state freshness, the control driver and watchdog remain healthy. The independent safety path still governs an actual loss of control health.
 
@@ -84,4 +84,4 @@ analysis. [Source identities](../reference/sources.md).
 
 ## Checks and evidence to inspect
 
-[test_mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_mpc_command_buffer.py) checks future boundaries, tracking-offset preservation, rejection and held endpoints. [test_tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_tabletop_workflow.py) contains the rejected-window retry cases. The physical endpoint/clearance conflict below remains unresolved; this path is not a commissioned moving-object capability.
+[test_mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_mpc_command_buffer.py) checks future boundaries, tracking-offset preservation, rejection and held endpoints. [test_tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_tabletop_workflow.py) contains the rejected-window retry cases. The physical endpoint/clearance conflict above remains unresolved; this path is not a commissioned moving-object capability.

@@ -4,3 +4,5 @@ site/
 .DS_Store
 .sources/
 .local/
+/research/
+/running_notes.md

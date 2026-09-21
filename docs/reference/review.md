@@ -1,7 +1,7 @@
 # First-draft review queue
 
 The first draft covers all located summer work and later corrections through
-September 7. The next step is a focused discussion of particular sections,
+September 13. The next step is a focused discussion of particular sections,
 with the source evidence already assembled. These gaps are visible so they
 can be resolved without inventing installation facts or performance claims.
 
@@ -13,7 +13,6 @@ can be resolved without inventing installation facts or performance claims.
 | Current robot | Photograph of support, harness, hands, waist configuration and camera witness mark | The physical configuration changed between June and September |
 | Marker mounts | Final prints on both hands, third-pad contact, screw fit and target orientation | CAD dimensions alone do not prove the physical mount seats correctly |
 | Torso carrier | Lower M6 reach, measured upper engagement, and complete V7 assembly/board repeatability | V7/R2 is current; partial coupon trials and recorded CAD checks do not qualify the torso reference |
-| Summer boundaries | Final historical cutoff and preferred author name/credit | September corrections must remain even if the narrative ends in August |
 | Licensing | Documentation license and asset attribution review | A public repository is not itself a blanket reuse license |
 
 ## Demonstrations to select together
@@ -35,8 +34,12 @@ the hardware details these sections need.
 
 ## Evidence and reproducibility gaps
 
-- Archive the uncommitted tabletop log, calibration ledger and linked retained
-  artifacts under their recorded hashes. The current inventory is not a backup.
+- Preserve private journals and full experimental artifacts in backed-up storage
+  with an explicit lab handoff. Public implementation links now resolve to
+  committed source; availability of raw experimental evidence is separate.
+- Upload the prepared stacking and calibration ZIPs to Google Drive, then
+  verify the shared download links. The stacking archive is LeRobot; calibration
+  retains its original capture format, selected fit inputs and bundle.
 - Review the operator runbook against the exact intended deployment revision.
   Some setup scripts retain local workspace assumptions.
 - Keep September capture success separate from control release: September 5

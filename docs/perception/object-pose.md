@@ -17,11 +17,11 @@ flowchart TB
 
 | Diagram component | Code entry point | Responsibility |
 |---|---|---|
-| Object geometry | [tabletop_object.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_object.py) | Select dimensions, target IDs and runtime object profile together. |
-| Hypotheses and geometric gates | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_perception.py#L240) · `_detect_resting_pose_hypotheses` | Retain valid pose branches rather than trusting one planar solve. |
-| Frame consensus | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_perception.py#L129) · `_largest_hypothesis_consensus` | Choose one coherent hypothesis per accepted frame. |
-| Observation artifact | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_perception.py#L345) · `observe_resting_cube` | Bind pose/spread, snapshot, camera-profile hash and image hashes. |
-| Two-cube observation | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/tabletop_perception.py#L412) · `observe_resting_cube_pair` | Require sufficient common frames, then recompute both observations. |
+| Object geometry | [tabletop_object.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_object.py) | Select dimensions, target IDs and runtime object profile together. |
+| Hypotheses and geometric gates | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L240) · `_detect_resting_pose_hypotheses` | Retain valid pose branches rather than trusting one planar solve. |
+| Frame consensus | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L129) · `_largest_hypothesis_consensus` | Choose one coherent hypothesis per accepted frame. |
+| Observation artifact | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L345) · `observe_resting_cube` | Bind pose/spread, snapshot, camera-profile hash and image hashes. |
+| Two-cube observation | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L412) · `observe_resting_cube_pair` | Require sufficient common frames, then recompute both observations. |
 
 Follow `observe_resting_cube` first, then its two private helpers. Failure to meet a gate raises a rejection; it does not produce a lower-confidence pose for the planner. `observe_live_cube_frame` is a separate single-frame path for experimental reactive control, where a burst average would lag the moving object.
 
@@ -91,4 +91,4 @@ later corrections taking precedence. [Source identities](../reference/sources.md
 
 ## Checks and evidence to inspect
 
-[test_tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_tabletop_workflow.py) contains the pose-hypothesis, largest-three-frame-consensus and rejection cases. The 326-frame grayscale comparison and later resting-cube tilt failure explain the policy changes below. Consensus thresholds establish acceptance, not absolute accuracy.
+[test_tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_tabletop_workflow.py) contains the pose-hypothesis, largest-three-frame-consensus and rejection cases. The 326-frame grayscale comparison and later resting-cube tilt failure explain the policy changes above. Consensus thresholds establish acceptance, not absolute accuracy.

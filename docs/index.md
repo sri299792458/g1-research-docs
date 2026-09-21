@@ -23,15 +23,28 @@ This is a component map, not a launch sequence. The [system map](start/overview.
 explains the interfaces; [ownership and safety](control/ownership.md) explains
 the control lifecycle. Select **Expand** or scroll horizontally on a narrow screen.
 
-```{admonition} First draft · summer work with follow-up through September 7, 2026
+```{admonition} Working draft · summer research and subsequent corrections
 :class: note
 
-This draft awaits the author's review. Procedures and results have different
+Procedures and results have different
 evidence levels. The latest manually preclosed calibration workflow still
 needs new route generation and physical validation; moving-target MPC
 remains experimental. Missing installation details and media are collected
 in the [review queue](reference/review.md).
 ```
+
+## Choose the right source
+
+| Work | Source to use |
+|---|---|
+| August 25 cube-stacking demo | [Tabletop `main`](https://github.com/sri299792458/g1-dex3-tabletop/tree/7400aff201c2f73ef2a64e546d72bd66cbe87fd6) |
+| Later calibration development | [Tabletop September branch](https://github.com/sri299792458/g1-dex3-tabletop/tree/59c21b1388c636176dea67ea7ed3e253f8510783) — experimental, with no replacement calibration deployed |
+| Wrist targets, V7 torso mount and calibration tools | [Calibration/fixture `main`](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/f295def18bd936031fba325d4e8bdfc71fea671a) |
+| Offline grasp generation and assembly studies | [Grasp-demo `main`](https://github.com/sri299792458/g1-aprilcube-demo/tree/2b7274b11f1862ebfcd05b48ff678d995e55269e) |
+
+The [source catalog](reference/sources.md) also covers G1Pilot, MuJoCo and tactile
+tools. Each code link pins the version being explained; September changes are
+kept separate from the physical demo baseline.
 
 ## Find the part you need
 
@@ -52,9 +65,9 @@ its parts to source files and symbols. The explanation then follows the data
 or control flow, including assumptions, rejected approaches and validation.
 Mermaid source remains in the Markdown, so an agent can read the graph too.
 
-Public code links pin the inspected revision. **Local snapshot** links identify
-the exact path, symbol and hash when that implementation is not yet published;
-the [code index](reference/code-index.md) explains how to resolve them.
+All mapped implementations now have public, commit-pinned links. The
+[code index](reference/code-index.md) records the branch, file hash and symbols,
+including both demo and September versions where their code differs.
 The [About page](about.md) records authorship and project context.
 
 ```{toctree}

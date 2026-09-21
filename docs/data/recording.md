@@ -13,16 +13,21 @@ flowchart TB
   I --> L["LeRobot episode<br/>and conversion report"]
 ```
 
+The conversion implementation is available on demo `main`. The recorder links
+below use September code because this page also describes the expanded standing
+profile. The [demo recorder](../reference/code-index.md#code-demo-recorder) remains
+the reference for the August runs.
+
 ## Follow the code
 
 | Diagram component | Code entry point | Responsibility |
 |---|---|---|
-| Topic contract | [raw_episode_recording.py](../reference/code-index.md#code-recorder) · `tabletop_raw_topics` (local snapshot) | Choose the expected streams for the recording profile. |
-| Writer startup | [raw_episode_recording.py](../reference/code-index.md#code-recorder) · `RawEpisodeRecorder.start` (local snapshot) | Require the recorder to subscribe before continuing. |
-| Completion audit | [raw_episode_recording.py](../reference/code-index.md#code-recorder) · `RawEpisodeRecorder.stop` (local snapshot) | Check exit, MCAP metadata, message types and required nonempty streams. |
-| Offline alignment | [lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/lerobot_conversion.py#L259) · `index_and_align_episode` | Select state and active commands relative to actual RGB samples. |
-| Numeric representation | [lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/lerobot_conversion.py#L573) · `build_numeric_frame` | Construct the named joint, command, pressure and IMU arrays. |
-| Dataset export | [lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_dex3_tabletop/lerobot_conversion.py#L774) · `convert_episode` | Write the derived episode and its conversion evidence. |
+| Topic contract | [raw_episode_recording.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/raw_episode_recording.py) · `tabletop_raw_topics` (September branch) | Choose the expected streams for the recording profile. |
+| Writer startup | [raw_episode_recording.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/raw_episode_recording.py) · `RawEpisodeRecorder.start` (September branch) | Require the recorder to subscribe before continuing. |
+| Completion audit | [raw_episode_recording.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/raw_episode_recording.py) · `RawEpisodeRecorder.stop` (September branch) | Check exit, MCAP metadata, message types and required nonempty streams. |
+| Offline alignment | [lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/lerobot_conversion.py#L259) · `index_and_align_episode` | Select state and active commands relative to actual RGB samples. |
+| Numeric representation | [lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/lerobot_conversion.py#L573) · `build_numeric_frame` | Construct the named joint, command, pressure and IMU arrays. |
+| Dataset export | [lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/lerobot_conversion.py#L774) · `convert_episode` | Write the derived episode and its conversion evidence. |
 
 A complete bag can contain a failed task or abnormal cleanup. An incomplete bag remains available as evidence but must not be relabelled complete because conversion or video playback works. Preserve the original bag when using the derived dataset.
 
@@ -121,6 +126,67 @@ a `lerobot_replacement.json` receipt. Deletion remains an explicit operator
 decision. For lab continuity, retain original evidence needed for calibration,
 failure analysis and claims independently of a compact training export.
 
+## August 25 demonstration export
+
+The five selected demo runs have been converted locally and reloaded for
+verification: **5 episodes, 8,272 frames, 696,652,855 bytes** (about 697 MB),
+at 15 FPS. Original recordings remain intact. Dataset publication is pending;
+a source-repository clone does not include these videos or a public dataset URL.
+
+| Episode | Source run | Exported frames |
+|---|---|---:|
+| 0 | `stack_20260825T200631Z` | 2,307 |
+| 1 | `stack_20260825T200920Z` | 1,781 |
+| 2 | `stack_20260825T201125Z` | 1,371 |
+| 3 | `stack_20260825T201322Z` | 1,641 |
+| 4 | `stack_20260825T201700Z` | 1,172 |
+
+The five source run folders occupy about 31.22 GB, mostly uncompressed MCAP.
+That is their raw recording size, not the converted dataset size. RGB and native
+depth alone produce roughly 3 GB per minute at the recorded resolutions/rates.
+Public dataset releases are intended to contain the selected LeRobot exports;
+raw evidence remains separately retained.
+
+## Dataset downloads
+
+The selected datasets will be shared through Google Drive, with download links
+on this page. Uploads are pending; the sizes below describe the current local
+files and prepared ZIP downloads.
+
+| Collection | Contents | Extracted / ZIP size | Download |
+|---|---|---:|---|
+| August 25 stacking | Five LeRobot episodes, 8,272 frames, RGB/depth and state/command data | 697 / 696 MB | Pending upload |
+| August 12 calibration | Two capture sessions used by the calibration bundle; original PNG images, measurement metadata, selected fit inputs and bundle | 1.54 GB / 958 MB | Pending upload |
+
+Both versioned ZIPs are prepared and verified. Each includes a README identifying
+the source sessions, code revision, format and limitations, plus SHA-256
+checksums. Calibration compression is lossless; its source files are unchanged. Keep the LeRobot
+`meta/`, `data/` and `videos/` directories together when extracting the stacking
+dataset, then open that directory with a compatible local LeRobot viewer.
+A Drive download link is not a dataset endpoint for the web viewer.
+
+The calibration collection is a separate reproducibility download, not a
+LeRobot export. Its fitted bundle is already included in the source repository;
+downloading the capture sessions is only necessary for inspecting or refitting
+the measurements. A future lab copy should retain both downloads and update
+these links if storage ownership changes.
+
+## Calibration captures and LeRobot
+
+The August 12 calibration data used by the stacking bundle is stored differently:
+two sessions contain 735 lossless PNG images and image/state/detection metadata.
+Together they occupy about 1.54 GB: 884 MB of PNGs and 657 MB of JSON. These
+stationary capture bursts are not the continuous MCAP inputs expected by the
+stacking converter.
+
+LeRobot can represent images and measured states, but this collection needs a
+separate exporter. A reproducible calibration export must preserve original
+pixels and timestamps, measured joints, detected corners, camera/target geometry
+and pose grouping. Its encoding must be checked by exact image reload and
+calibration-data comparisons; the stacking export's lossy RGB/depth settings
+are not a calibration-preserving recipe. Such a calibration export has not yet
+been produced. The existing calibration bundle is already included with the code.
+
 ## Inspecting an exported dataset
 
 <figure class="research-video">
@@ -144,4 +210,4 @@ audits. [Source identities](../reference/sources.md), [media/storage policy](../
 
 ## Checks and evidence to inspect
 
-[test_raw_episode_recording.py](../reference/code-index.md#code-test-recorder) (local snapshot) includes missing-subscription and empty-required-topic cases. [test_lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_lerobot_conversion.py) checks vector/schema agreement, terminal-command exclusion and depth-bound consistency. The September 7 bag below demonstrates successful evidence retention through a failed restoration.
+[test_raw_episode_recording.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_raw_episode_recording.py) (September branch) includes missing-subscription and empty-required-topic cases. [test_lerobot_conversion.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tests/test_lerobot_conversion.py) checks vector/schema agreement, terminal-command exclusion and depth-bound consistency. The September 7 bag described above demonstrates successful evidence retention through a failed restoration.

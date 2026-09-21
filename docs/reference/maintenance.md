@@ -50,12 +50,14 @@ archive of earlier documentation.
 
 The [code index](code-index.md) and `docs/assets/code-map.json` identify the
 files and symbols behind chapter maps. Public links pin a commit and were
-compared with the inspected file bytes. For uncommitted implementations,
-retain the local-snapshot label, exact repository-relative path and hash.
-Do not replace it with a convenient link to older code.
+compared with the inspected file bytes. All current entries are public Git
+objects. Tabletop entries identify the demonstrated `main` or later
+`experimental/september-calibration` branch; preserve that distinction.
 
 When a source changes, review its diagram and contracts, update symbol line
-spans and the file hash in the JSON/index, and update affected chapter links.
+spans and the file hash in the JSON, and update affected chapter links.
+Regenerate the index with `python3 tools/build_code_index.py`; CI checks that
+it matches the map with `python3 tools/build_code_index.py --check`.
 An optional static check uses an ignored location file:
 
 ```json
@@ -66,6 +68,11 @@ An optional static check uses an ignored location file:
 python3 tools/check_code_map.py --locations .local/source_locations.json \
   --repository g1-dex3-tabletop
 ```
+
+The source clone must contain the recorded commits. A normal clone/fetch of
+the tabletop repository should include both published branches; a shallow
+checkout of only `main` does not contain the September objects. The checker
+reads the pinned Git objects rather than requiring a checkout of each branch.
 
 The checker reads files and parses Python syntax; it does not import robot
 modules or run hardware code. A mismatch calls for review, not automatic hash
@@ -78,7 +85,8 @@ Date hardware results and identify their configuration. Preserve the reason
 for a step when a failed experiment explains it. New research should update
 the current procedure while leaving the historical correction traceable.
 
-Run the strict build above and `git diff --check`. Sphinx treats warnings,
+Run `python3 tools/build_code_index.py --check`, the strict build above and
+`git diff --check`. Sphinx treats warnings,
 including missing internal references, as failures. The GitHub workflow runs
 the same build for pull requests and publishes successful main-branch builds
 to Pages.
@@ -108,6 +116,12 @@ are versioned release assets. Their captions, source hashes and preparation
 recipes are in `docs/assets/media.json`. See [media maintenance](media.md#recreating-a-publication-copy)
 to recreate a selected copy without changing its original. No media-preparation
 tools are required for the normal Sphinx build.
+
+The [dataset downloads](../data/recording.md#dataset-downloads) will use Google
+Drive links with separate README/checksum files. Before publishing a link,
+verify that readers can download it without the owner's account. Record size,
+version and format on the dataset page. Preserve these files separately from
+the documentation repository and include them in the lab handoff.
 
 The author created `sri299792458/g1-research-docs` for following the draft.
 The Pages workflow builds static HTML and deploys it through GitHub Actions;

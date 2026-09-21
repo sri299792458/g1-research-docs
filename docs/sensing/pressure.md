@@ -121,4 +121,4 @@ documents at the [recorded revision](../reference/sources.md).
 
 ## Checks and evidence to inspect
 
-Use the repository’s `docs/OBSERVATIONS.md`, `docs/MATH_AND_SIGNALS.md` and `docs/MAPPING_AND_MARKERS.md` at the [recorded revision](../reference/sources.md). The audit and touch results below are for the inspected right hand; no new tactile run was performed for the guide.
+Use the repository’s `docs/OBSERVATIONS.md`, `docs/MATH_AND_SIGNALS.md` and `docs/MAPPING_AND_MARKERS.md` at the [recorded revision](../reference/sources.md). The audit and touch results above are for the inspected right hand; no new tactile run was performed for the guide.

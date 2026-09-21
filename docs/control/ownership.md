@@ -21,17 +21,28 @@ flowchart TB
   W -.->|configured fault recovery| R
 ```
 
+## Source versions
+
+The seated demo baseline is [`main`](https://github.com/sri299792458/g1-dex3-tabletop/tree/7400aff201c2f73ef2a64e546d72bd66cbe87fd6).
+This chapter also explains subsequent standing-control and shared-runtime fixes.
+The later [task coordinator](../reference/code-index.md#code-tabletop) and
+[executor](../reference/code-index.md#code-executor) entries pin the September
+branch; their [demo coordinator](../reference/code-index.md#code-demo-tabletop)
+and [demo executor](../reference/code-index.md#code-demo-executor) counterparts
+remain available for comparison. September's final standing lifecycle has only
+offline validation.
+
 ## Follow the code
 
 | Diagram component | Code entry point | Responsibility |
 |---|---|---|
-| Task coordinator | [hardware_tabletop.py](../reference/code-index.md#code-tabletop) · `run_tabletop`, `_restore_seated_control` (local snapshot) | Order preview, recording, acquisition, task execution and handback. |
-| Fixed-rate driver | [executor_driver.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/executor_driver.py#L187) · `ExecutorControlDriver._run` | Keep ticking and surface faults independently of planning. |
-| Acquisition and execution | [executor_state_machine.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/executor_state_machine.py#L248) · `PoseExecutor.acquire`, `tick` | Seed acquisition from fresh measurements, then validate state and advance bounded commands. |
-| Seated transport | [unitree_debug_lowcmd.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/transports/unitree_debug_lowcmd.py#L236) · `UnitreeDebugLowCmdTransport.send_command` | Release AI under a guarded transition and send complete body commands. |
-| Standing transport | [unitree_arm_sdk.py](../reference/code-index.md#code-arm-sdk) · `UnitreeArmSDKTransport.send_command` (local snapshot) | Use arm-SDK blend ownership, including the measured waist hold. |
-| Laptop watchdog client | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/pc2_safety.py#L123) · `PC2DampingWatchdog.start`, `restore_seated`, `restore_zero_torque` | Start the remote agent, send heartbeats and require explicit recovery acknowledgements. |
-| PC2 watchdog agent | [pc2_watchdog_agent.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/src/g1_aprilcube_calibration/pc2_watchdog_agent.py#L343) · `run_watchdog` | Enforce the heartbeat deadline on the robot and verify the requested terminal state. |
+| Task coordinator | [hardware_tabletop.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_tabletop.py) · `run_tabletop`, `_restore_seated_control` (September branch) | Order preview, recording, acquisition, task execution and handback. |
+| Fixed-rate driver | [executor_driver.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/executor_driver.py#L187) · `ExecutorControlDriver._run` | Keep ticking and surface faults independently of planning. |
+| Acquisition and execution | [executor_state_machine.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_aprilcube_calibration/executor_state_machine.py#L248) · `PoseExecutor.acquire`, `tick` | Seed acquisition from fresh measurements, then validate state and advance bounded commands. |
+| Seated transport | [unitree_debug_lowcmd.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/transports/unitree_debug_lowcmd.py#L236) · `UnitreeDebugLowCmdTransport.send_command` | Release AI under a guarded transition and send complete body commands. |
+| Standing transport | [unitree_arm_sdk.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_aprilcube_calibration/transports/unitree_arm_sdk.py) · `UnitreeArmSDKTransport.send_command` (September branch) | Use arm-SDK blend ownership, including the measured waist hold. |
+| Laptop watchdog client | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_safety.py#L123) · `PC2DampingWatchdog.start`, `restore_seated`, `restore_zero_torque` | Start the remote agent, send heartbeats and require explicit recovery acknowledgements. |
+| PC2 watchdog agent | [pc2_watchdog_agent.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_watchdog_agent.py#L343) · `run_watchdog` | Enforce the heartbeat deadline on the robot and verify the requested terminal state. |
 
 The GPU worker supplies a proposed route. The control side checks and installs
 it at an exact command boundary; the worker does not publish motor commands.
@@ -110,6 +121,8 @@ hide the failure from PC2.
 
 ## Startup order is a safety property
 
+The standing example here comes from the later September investigation.
+
 The standing watchdog regression is especially instructive. Three SDK publisher
 initializations each slept about 0.2 seconds. Starting the 0.5-second PC2
 heartbeat lease first guaranteed a long enough gap for recovery to begin.
@@ -184,7 +197,7 @@ hardware masses and friction.
 Heavy planning runs in a separate process. So do PNG/session commits and raw
 MCAP writing. A Python thread did not isolate control from a 12.3 MB JSON
 serialization/hashing operation: measured interpreter stalls reached roughly
-76–90 ms. The worker now constructs and hashes the full calibration request;
+76–90 ms. In the September implementation, the worker constructs and hashes the full calibration request;
 the control process sends a small snapshot and file/hash references.
 
 ## A rejected task and a control fault need different returns
@@ -205,7 +218,7 @@ basis for continuing the planned motion.
 The distinction was earned on hardware. In `stack_20260821T164205Z`, a finger
 occluded the primary cube after a valid escape to clearance. Treating the
 perception exception as a generic failure invoked zero-torque cleanup. The
-revised workflow first checks driver health, then classifies the expected
+later checkpoint included in the September branch first checks driver health, then classifies the expected
 perception rejection so it can restore the hands and reverse the supported
 escape. Unexpected failures still take the fault path. Converting every
 exception into `TabletopTaskRejected` would remove that distinction.
@@ -247,7 +260,7 @@ Evidence: prototype control/recovery report; tabletop August 14–15 and Septemb
 
 When changing this pipeline, follow the invariant into both its implementation
 and its regression check. In
-[test_executor_state_machine.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/cf1b27704c82d877d23ff5a3c157df3218f02402/tests/test_executor_state_machine.py),
+[test_executor_state_machine.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_executor_state_machine.py),
 start with these specific examples:
 
 | Proposed change | Regression to read |
@@ -257,8 +270,10 @@ start with these specific examples:
 | Switch which arm is moving | `test_arm_plan_switch_rejects_a_changed_boundary_command` |
 | Change tick scheduling | `test_nonfaulting_scheduler_gap_uses_nominal_motion_step`, `test_control_gap_at_hard_limit_still_faults` |
 
-[test_standing_calibration_control.py](../reference/code-index.md#code-test-standing)
-(local snapshot) covers the separate standing startup and recovery order.
-These are source tests to inspect; none was rerun while writing this chapter.
+[test_standing_calibration_control.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_standing_calibration_control.py)
+(September branch) covers the separate standing startup and recovery order.
+These are source tests to inspect. Selected offline regressions were rerun during
+publication; [their scope](../reference/sources.md#what-was-checked) is separate
+from physical commissioning.
 Keep the physical observations above distinct from offline regressions and
 use the [runbook](runbook.md) before operating hardware.

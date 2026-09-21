@@ -5,10 +5,17 @@ videos in versioned release assets, and original recordings in backed-up lab
 storage. The goal is for a future maintainer to understand an asset, locate its
 source and replace its host without rewriting the explanation around it.
 
+The selected stacking dataset and calibration captures will use separate
+Google Drive downloads, listed on the [dataset page](../data/recording.md#dataset-downloads).
+They are not embedded video assets. Keep a versioned README and checksums with
+each download, and verify access without the owner's signed-in account before
+adding its link to the guide. Uploads are still pending.
+
 ## Included figures
 
 The following original PNGs were visually inspected and copied unchanged from
-`g1-aprilcube-demo` at `f190470742f43101e9a22affaca80554722706ac`:
+`g1-aprilcube-demo`; identical copies are retained in the consolidated
+`main` at `2b7274b11f1862ebfcd05b48ff678d995e55269e`:
 
 | Stable ID | Figure | What it shows |
 |---|---|---|
@@ -85,10 +92,9 @@ and caption when selecting them for an embedded demonstration.
 
 The collection now contains a nine-slide Dex3 installation deck, four
 photographs and eight videos. The originals remain outside this repository.
-Review records are
-in [the research notes](https://github.com/sri299792458/g1-research-docs/blob/main/research/documentation-media-review.md)
-and [the source inventory](https://github.com/sri299792458/g1-research-docs/blob/main/research/documentation-media-inventory.json),
-including exact hashes, proposed captions and coverage limits.
+The [public media catalog](../assets/media.json) retains original/publication
+hashes, selected source paths, captions and review limits. Detailed working
+reviews remain private.
 
 All photographs and embedded deck images were inspected, along with 326 video
 frames sampled across the eight clips and selected full-resolution stacking
@@ -131,7 +137,8 @@ asset for existing references. The helper never uploads or changes originals.
    download fallback separately.
 
 Use ordinary Markdown images and simple HTML video only when needed. Avoid
-autoplay, personal cloud share tokens and expiring signed URLs. An unedited
+autoplay, credentials and expiring signed URLs. Stable, intentionally shared
+Drive download links are appropriate for the datasets above. An unedited
 failure clip can be more informative than a polished success montage when its
 caption explains the first failure and the later correction.
 

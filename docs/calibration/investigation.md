@@ -1,10 +1,11 @@
 # Reading the calibration investigation correctly
 
 The investigation already contains many completed comparisons and operator
-corrections. Future work should start with
-`g1-dex3-tabletop/docs/calibration-investigation-ledger.md`, not repeat a
-plausible hypothesis because its result is missing from a conversation.
-The reviewed snapshot contains 85 experiment entries and 46 model conditions.
+corrections. This page summarizes the current conclusions from the private investigation
+ledger, which records 85 experiment entries and 46 model conditions. Start here
+and with the [calibration results](results.md); use the detailed ledger when
+available. An unavailable private report is not evidence that a hypothesis
+has never been tested.
 
 ## What the observations do and do not support
 
@@ -71,7 +72,7 @@ No September bundle replaced the August stacking baseline. The broader sweep,
 GitHub issue and wrist patch remained paused/unapplied in the reviewed record.
 This documentation does not reopen them.
 
-Before proposing further work, identify which ledger result would be changed
+Before proposing further work, identify which recorded result would be changed
 by the proposed measurement, what new observable it adds, and which assumptions
 it can actually distinguish. A camera overlay, a caliper photograph and a
 held-out model comparison each answer different questions.
