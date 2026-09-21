@@ -43,7 +43,7 @@ html_theme_options = {
     "light_css_variables": {"color-brand-primary": "#176b65", "color-brand-content": "#176b65"},
     "dark_css_variables": {"color-brand-primary": "#74c9bf", "color-brand-content": "#74c9bf"},
 }
-html_static_path = ["assets/stylesheets"]
+html_static_path = ["assets/stylesheets", "assets/posters"]
 html_css_files = ["extra.css"]
 html_show_sourcelink = True
 html_show_sphinx = False

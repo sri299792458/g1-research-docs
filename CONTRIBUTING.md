@@ -21,7 +21,8 @@ minimal customization. Follow the [local build instructions](README.md) and
 6. Update `running_notes.md` for material decisions and the source inventory
    when reading coverage changes.
 7. Run `.venv/bin/sphinx-build -n -W --keep-going -b html docs site` and
-   `git diff --check`; review the rendered page, including mobile-width tables/media.
+   `git diff --check`; review the rendered page on desktop. Mobile layout polish
+   is deferred to the final presentation review.
 
 Add new pages to the hidden MyST `toctree` blocks in `docs/index.md`. The CI
 workflow runs the strict build and deploys main to Pages. A documentation edit

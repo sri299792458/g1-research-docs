@@ -83,10 +83,20 @@ was run while writing this guide.
 
 ## Demonstrations
 
+<figure class="research-video">
+  <video controls playsinline preload="none" poster="../_static/mujoco-rviz-short-demo.jpg" width="1280" height="720" aria-label="RViz and the G1 MuJoCo model during arm-pose changes" aria-describedby="mujoco-demo-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/mujoco-rviz-short-demo.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the download link below.
+  </video>
+  <figcaption id="mujoco-demo-caption">RViz on the left and MuJoCo on the right during changes in arm pose. This shows the simulation interface; it does not measure tracking error or establish equivalence with the proprietary walking controller. Silent, 10 seconds.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/mujoco-rviz-short-demo.mp4">Download the short MuJoCo/RViz demo (MP4)</a></p>
+</figure>
+
 The [July 1 media release](https://github.com/sri299792458/g1pilot/releases/tag/mujoco-demo-media-2026-07-01)
 contains an RViz/arm demo and a Dex3 open/close demo. These are simulation assets,
-not footage of the physical robot. Their review status and stable links are in
-the [media catalog](../reference/media.md).
+not footage of the physical robot. Those larger originals are separate from
+the supplied short clip embedded above; their content has not yet been reviewed.
+Stable links and file identities are in the [media catalog](../reference/media.md).
 
 The useful contribution is an initial SDK-compatible development path with
 explicit model and controller boundaries. Contact identification, hardware

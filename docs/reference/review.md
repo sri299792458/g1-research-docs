@@ -18,15 +18,18 @@ can be resolved without inventing installation facts or performance claims.
 
 ## Demonstrations to select together
 
-Prioritize one complete cube manipulation run, one useful failure/correction,
-a calibration capture showing the actual markers, and a passive tactile
-visualization. For each, retain the run ID, date, source version and outcome.
-If a clip stops before return or cleanup, say so in the caption.
+The supplied physical stacking video now shows pickup, placement, release
+and hand withdrawal. Match it to the retained bag/run ID and cleanup outcome;
+the footage alone does not establish software ownership handback. The standing
+calibration video now shows the wrist markers and physical pose sequence;
+attach its exact session ID as well. A useful failure/correction clip would
+complement the embedded physical, tactile, planning, simulation and viewer demos.
+For each, retain the run ID, date, source version and outcome. If a clip stops
+before return or cleanup, say so in the caption.
 
 The [media catalog](media.md) identifies reviewed source figures, available
-MuJoCo release videos and the newly reviewed September folder. Select captions
-and publication copies from those supplied photographs and recordings. The
-retention and stacking demos are rendered/simulated; keep physical success
+MuJoCo release videos and the selected September publication copies. The
+retention and stacking-plan demos are rendered/simulated; keep physical success
 claims tied to physical runs. Synthetic replacement images would not establish
 the hardware details these sections need.
 

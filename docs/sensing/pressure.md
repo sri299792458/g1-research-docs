@@ -23,6 +23,21 @@ flowchart TB
 
 The raw branch retains information that a color overlay discards. The display depends on both a valid untouched baseline and a physically checked taxel map. Counts are not forces, and this passive path is separate from the later joint-based grasp-contact gate.
 
+## Seeing the pressure display
+
+<figure class="research-video">
+  <video controls playsinline preload="none" poster="../_static/dex3-tactile-rviz-demo.jpg" width="1280" height="720" aria-label="Dex3 tactile visualization in RViz" aria-describedby="tactile-demo-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/dex3-tactile-rviz-demo.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the download link below.
+  </video>
+  <figcaption id="tactile-demo-caption">Taxel colors change at different locations on the rendered Dex3 hand. This is the RViz display; the physical contact producing the readings is outside the frame. Colors represent pressure-count changes, not calibrated forces. Silent, 11 seconds.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/dex3-tactile-rviz-demo.mp4">Download the tactile demo (MP4)</a></p>
+</figure>
+
+Follow a changing cell back to the named taxel mapping and the raw slot. A
+display can look plausible even when a slot is misplaced or its baseline was
+captured during contact; the retained raw samples let you investigate that.
+
 ## Start with the raw message
 
 `unitree_hg/msg/HandState` contains nine pressure groups with 12 cells each:

@@ -25,6 +25,15 @@ The cube and wrist-marker branches are separate targets. Read the dimensions bel
 
 ## AprilCubes
 
+```{figure} ../assets/images/printed-target-collection.jpg
+:alt: Large and small printed marker cubes, a separate wrist-marker plate with a mounting tab, and a ChArUco board laid out on a table.
+
+The physical target collection, photographed September 21: large and small
+marker cubes, a wrist-marker carrier and a ChArUco board. The profiles below
+define dimensions and dictionaries; the photograph alone does not establish
+a fitted wrist mount or a qualified torso reference.
+```
+
 The July AprilCube fork added rounded cuboids and printable assemblies while
 keeping the flat marker coordinate planes unchanged. An early approach rounded
 each voxel separately. That left seams in T-shaped unions, so the implementation
@@ -105,4 +114,4 @@ and the [media requests](../reference/review.md).
 
 ## Checks and evidence to inspect
 
-The fork’s synthetic views establish geometry/detection checks, while the first dorsal print supplies the physical third-support correction. Installation photographs, the JST cable details and print-quality review remain in the [review queue](../reference/review.md).
+The fork’s synthetic views establish geometry/detection checks, while the first dorsal print supplies the physical third-support correction. The photograph above shows the separate parts; final mount seating, third-pad contact and print quality remain in the [review queue](../reference/review.md). Hand installation and its cable routing are covered under [hardware](../hardware/robot.md#dex3-installation-and-cable-routing).

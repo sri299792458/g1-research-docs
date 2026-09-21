@@ -21,7 +21,54 @@ source paths, commit, SHA-256, context, review status and caption. The source
 PNG labels describe their original experiments; the surrounding chapter
 supplies later corrections and scope.
 
-## Available MuJoCo videos
+## Photographs and installation figures
+
+Selected photographs from the author's September collection are included in
+Git. Their framing, dimensions and decoded pixels are unchanged; embedded
+location and other EXIF/text metadata were removed from the publication copies.
+The originals and the PowerPoint remain separate source records.
+
+| Stable ID | Where it is used | Source |
+|---|---|---|
+| `realsense-pc2-usb-ports` | [Camera troubleshooting](../hardware/camera.md) | August 3 phone photograph |
+| `printed-target-collection` | [Printed targets](../perception/targets.md) | September 21 photograph of cubes, wrist carrier and board |
+| `cushioned-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | September 21 chair photograph |
+| `rigid-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Supplied 165 × 220 px chair thumbnail |
+| `dex3-connector-routing` | [Hand fitting](../hardware/robot.md#fitting-the-hand) | `Dex3 Hands.pptx`, slide 7, `ppt/media/image11.png` |
+| `dex3-hand-seated` | [Hand fitting](../hardware/robot.md#fitting-the-hand) | Same slide, `ppt/media/image10.png` |
+| `dex3-cable-routing` | [Cable routing](../hardware/robot.md#cable-routing-and-repeated-swaps) | Slides 4 and 8, `ppt/media/image2.jpg` |
+
+The selected installation photographs illustrate connector routing and the
+fitted arrangement. They do not reproduce the deck's screw-location arrows or
+constitute the complete electrical/assembly procedure.
+
+## Embedded demonstrations
+
+The [September media release](https://github.com/sri299792458/g1-research-docs/releases/tag/media-2026-09-21)
+hosts the publication videos. Each player has native controls, a local poster,
+a descriptive caption and a separate download link. Videos load on request
+and do not autoplay. All publication copies are silent; the original seat,
+physical-stacking and calibration movies retain audio that has not been
+reviewed here.
+
+| Stable ID | Chapter | Evidence shown |
+|---|---|---|
+| `g1-physical-cube-stacking` | [Pickup and stacking](../manipulation/tasks.md#physical-demonstration) | Physical pickup, stack, release and hand withdrawal; no software handback display |
+| `g1-standing-calibration` | [Calibration capture](../calibration/workflow.md#capture-a-measurement-not-just-a-pose-estimate) | Physical pose sequence with wrist markers; no fit or cleanup result displayed |
+| `dex3-tactile-rviz-demo` | [Tactile sensing](../sensing/pressure.md#seeing-the-pressure-display) | Changing taxel visualization; not calibrated force |
+| `dex3-simulated-retention-demo` | [Grasp qualification](../manipulation/grasp-atlas.md) | Rendered Isaac/PhysX retention replay |
+| `curobo-stack-plan-demo` | [Stacking plan](../manipulation/tasks.md#plan-visualization-and-recorded-outcomes) | Rendered geometric phases through placement |
+| `mujoco-rviz-short-demo` | [MuJoCo](../simulation/mujoco.md#demonstrations) | Side-by-side RViz and simulation |
+| `g1-cushion-seat-setup` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Seated robot, harness, targets and arm movement |
+| `g1-lerobot-viewer-walkthrough` | [Dataset inspection](../data/recording.md#inspecting-an-exported-dataset) | Images, traces, 3D replay and diagnostics |
+
+The release's checksum file identifies the hosted copies. The catalog records
+each original hash separately from the publication hash, along with the
+encoding recipe and poster timestamp. The full visual duration is retained;
+the physical videos are compressed for web playback, not sped up. The viewer's
+odd source height is padded by one row for H.264 encoding.
+
+## Other available MuJoCo videos
 
 These assets are published in the existing
 [G1Pilot July 1 release](https://github.com/sri299792458/g1pilot/releases/tag/mujoco-demo-media-2026-07-01):
@@ -36,29 +83,40 @@ and caption when selecting them for an embedded demonstration.
 
 ## Author-supplied September media
 
-The September 21 review covers a nine-slide Dex3 installation deck, three
-photographs and six videos. The originals remain outside this repository;
-publication copies and hosting have not yet been selected. Review records are
+The collection now contains a nine-slide Dex3 installation deck, four
+photographs and eight videos. The originals remain outside this repository.
+Review records are
 in [the research notes](https://github.com/sri299792458/g1-research-docs/blob/main/research/documentation-media-review.md)
 and [the source inventory](https://github.com/sri299792458/g1-research-docs/blob/main/research/documentation-media-inventory.json),
 including exact hashes, proposed captions and coverage limits.
 
-| Material | Intended use |
-|---|---|
-| Dex3 installation deck | Torso/wrist access, 4-pin 300 mm JST-GH extensions, connector routing and repeatable cable slack |
-| PC2 port photograph | RealSense USB negotiation troubleshooting |
-| Printed-target photograph | Physical cubes, wrist-marker carrier and ChArUco board |
-| Cushion-seat video and rigid-chair thumbnail | Physical-support context; not a controlled chair comparison |
-| Tactile RViz clip | Spatial pressure visualization |
-| Retention and CuRobo clips | Simulated grasp qualification and rendered stacking plan |
-| Short MuJoCo/RViz clip | Side-by-side simulation demonstration |
-| LeRobot viewer recording | Images, traces, annotations, 3D replay and dataset inspection |
-
-All photographs and embedded deck images were inspected, along with 170 video
-frames sampled across the six clips. The seat recording's audio remains
-unreviewed. The short MuJoCo clip is a separate file; its review does not change
+All photographs and embedded deck images were inspected, along with 326 video
+frames sampled across the eight clips and selected full-resolution stacking
+frames. Audio in the three physical recordings remains unreviewed.
+The short MuJoCo clip is a separate file; its review does not change
 the metadata-only status of the July release assets above. The deck's linked
 boot-calibration movie was not present in the folder.
+
+## Recreating a publication copy
+
+The ordinary site build needs only this repository. To prepare media again,
+obtain the matching original collection and install `ffmpeg`/`ffprobe`, then
+run the standard-library Python helper from the repository root:
+
+```bash
+python3 tools/prepare_media.py \
+  --source-dir /path/to/originals \
+  --video-dir .local/publication-media \
+  --asset g1-physical-cube-stacking
+```
+
+Omit `--asset` to prepare every selected asset. The helper checks source hashes,
+writes selected images/posters under `docs/assets/`, puts video outputs in the
+specified directory and updates their catalog hashes. Review the resulting
+diff and playback before uploading. Encoder versions can change file bytes,
+so record the new output hash rather than expecting byte-identical transcodes.
+Use a new versioned release when changing a published video; retain the old
+asset for existing references. The helper never uploads or changes originals.
 
 ## Adding a new asset
 

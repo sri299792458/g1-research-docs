@@ -21,29 +21,76 @@ not a substitute for inspecting the robot.
 
 Do not reconcile these dates by silently selecting one “G1 configuration.”
 A new run should record the physical waist hardware, hands, camera angle,
-support, and selected model. The pending [hardware review](../reference/review.md)
-includes a photograph of the complete current arrangement.
+support, and selected model. The photographs below show particular setups;
+record the current arrangement again when those conditions change.
 
 ## Dex3 installation and cable routing
 
-The author's nine-slide `Dex3 Hands.pptx`, supplied on September 21, records
-the physical installation and cable routing. The extensions were
+The hand signal connection and wrist power connection follow separate paths.
+The lab used extensions to make the signal connection accessible during swaps:
+
+```mermaid
+flowchart TB
+  accTitle: Dex3 signal and power connections
+  accDescr: The two internal USB 2.0 hand connections are extended outside the torso with 4-pin 300 mm JST-GH cables. Each hand also has wrist power connections. Hand identity determines its left or right topic; the RealSense camera uses a separate USB connection.
+  U["Internal USB 2.0<br/>hand connections"] --> J["4-pin, 300 mm<br/>JST-GH extensions"]
+  J --> H["Left and right Dex3"]
+  P["Wrist power<br/>connections"] --> H
+  H --> I["Hand identity<br/>left/right state topics"]
+```
+
+The extensions were
 **Blue Robotics JST-GH, 4-pin, 300 mm**; the product screenshot shows
 `BR-103531-300`. They bring the two internal hand connections outside the torso,
 so later hand swaps do not require exposing the motherboard. The deck identifies
 these as USB 2.0 hand connections, separate from the RealSense USB 3 connection.
 The [vendor's extension-cable page](https://bluerobotics.com/store/comm-control-power/tether-interface/jst-gh-extension-cables/)
-describes the cable family; it does not supply the G1-specific pinout.
+describes the cable family; it does not supply the G1-specific pinout. The
+installation photographs and observations come from the lab's `Dex3 Hands.pptx`.
 
-Several practical details should survive future revisions:
+### Fitting the hand
 
-- Route the two wrist connectors through the gap before seating the hand.
-  The deck describes mechanically fastening the hand before mating those
-  connectors and closing the cover; excessive insertion force indicates a problem.
-- Use a protective cable sleeve and reusable zip ties. A sticker on the cable
-  records the slack to reproduce at the next installation.
-- The hand's `214-R/L-T` identity determines its left/right topic; swapping
-  physical ports does not redefine which hand it is.
+The recorded fitting sequence passes the two wrist connectors through the gap,
+then seats and fastens the hand before mating those connectors and closing the
+cover. Excessive insertion force was the operator's cue to stop and check the
+fit. The photographs show the connector path; they do not establish an
+electrical pinout or a complete power-isolation procedure.
+
+::::{container} media-pair
+
+:::{figure} ../assets/images/dex3-connector-routing.png
+:alt: Dex3 held beside the open wrist, with two power connectors passed through the hand mounting gap.
+
+Connectors passed through the gap before seating the hand.
+:::
+
+:::{figure} ../assets/images/dex3-hand-seated.png
+:alt: Dex3 aligned with the wrist while its two connectors remain accessible through the open cover area.
+
+Hand aligned at the wrist; the connectors remain accessible through the cover
+opening. Both photographs are from the installation notes.
+:::
+
+::::
+
+### Cable routing and repeated swaps
+
+The routing uses protective cable sleeves and reusable zip ties. A sticker on
+the cable marks the slack to reproduce at the next installation. This makes
+the routing repeatable when swapping between dummy hands and Dex3.
+
+```{figure} ../assets/images/dex3-cable-routing.jpg
+:alt: Front view of the G1 with Dex3 hands, external arm cables, protective sleeves and reusable cable ties.
+:width: 380px
+
+The lab's installed hand-cable routing. The sleeve protects the exposed wiring;
+the installation notes call for retaining the marked cable slack on reinstall.
+```
+
+The hand's `214-R/L-T` identity determines its left/right topic; swapping
+physical ports does not redefine which hand it is. After assembly, the
+[passive pressure tools](../sensing/pressure.md) provide a way to inspect hand
+state and the spatial tactile display.
 
 The deck also records damaged cover-screw threads on both wrists and a tape
 workaround on this particular robot. That is a historical maintenance condition,
@@ -51,12 +98,11 @@ not a general substitute for the intended fasteners. Its linked Unitree manual
 describes an older G1 layout, which the author explicitly distinguishes from
 the lab robot's photographs.
 
-The photographed sequence is now available, but the finished installation
-walkthrough still needs the electrical pinout, power-isolation steps and current
-fastener condition. The deck's boot-calibration video is linked rather than
-embedded and was not included in the supplied folder. See the
-[media review](../reference/media.md#author-supplied-september-media) for source
-coverage and the remaining caption/asset work.
+The finished installation walkthrough still needs the electrical pinout,
+power-isolation steps and current fastener condition. The deck's linked
+boot-calibration video remains unavailable in the supplied collection.
+[Media provenance](../reference/media.md#photographs-and-installation-figures)
+records the original deck and the figures used here.
 
 The [dorsal marker mount](../perception/targets.md) is a separate installation:
 it attaches a printed target to the rigid hand shell. Its M3 screws do not
@@ -84,6 +130,39 @@ right-hand transform does not produce a valid left-hand coordinate frame.
 A rigid seat reduced observed camera movement during arm lifts, but the
 cushion/rigid runs were not posture-matched. The result supports the practical
 choice of rigid support; it does not isolate a cushion stiffness parameter.
+
+::::{container} media-pair
+
+:::{figure} ../assets/images/cushioned-chair-reference.jpg
+:alt: White chair with a dark cushion covering the seat, photographed without the robot.
+:width: 280px
+
+Chair with a seat cushion. This September 21 reference photo makes the support
+visible without the robot covering it.
+:::
+
+:::{figure} ../assets/images/rigid-chair-reference.jpg
+:alt: Small reference photograph of a white rigid chair with metal legs and no robot on it.
+:width: 165px
+
+Rigid-chair reference. The supplied image is a small thumbnail; these photos
+identify the supports, not a controlled comparison of their compliance.
+:::
+
+::::
+
+<figure class="research-video video-portrait">
+  <video controls playsinline preload="none" poster="../_static/g1-cushion-seat-setup.jpg" width="720" height="1280" aria-label="G1 seated on a cushion during arm movement" aria-describedby="seat-demo-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-cushion-seat-setup.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the download link below.
+  </video>
+  <figcaption id="seat-demo-caption">Physical setup, August 16: the G1 sits on a cushion with harness support, wrist targets and a ChArUco board on the table. The phone camera also moves, so this clip supplies setup context rather than a camera-displacement measurement. Silent, 41 seconds.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-cushion-seat-setup.mp4">Download the seated-setup video (MP4)</a></p>
+</figure>
+
+The [body-motion chapter](../perception/state-estimation.md) explains why
+lifting the arms can change the camera/table relationship and why observations
+must be refreshed at motion boundaries.
 
 Record the chair, feet, harness, arm support and camera witness mark with a
 run. None of these is captured completely by a URDF. A model that agrees with

@@ -51,6 +51,21 @@ registrations. Constant within one run does not imply constant across runs.
 
 ## Capture a measurement, not just a pose estimate
 
+<figure class="research-video video-portrait">
+  <video controls playsinline preload="none" poster="../_static/g1-standing-calibration.jpg" width="720" height="1280" aria-label="Standing G1 calibration motions with wrist markers" aria-describedby="calibration-demo-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-standing-calibration.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the download link below.
+  </video>
+  <figcaption id="calibration-demo-caption">Physical calibration footage: the standing G1 moves its arms through different configurations, with printed wrist markers and the overhead harness visible. The recording ends during the pose sequence. Silent, 2 minutes 9 seconds.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-standing-calibration.mp4">Download the standing-calibration video (MP4)</a></p>
+</figure>
+
+The supplied file is dated September 7 in its capture metadata. It illustrates
+the physical arrangement and arm motion; it does not display the head-camera
+images, accepted-capture counts, fitted residuals or final cleanup. Its exact
+session ID still needs linking. It also does not validate the later manually
+preclosed-hand procedure described below.
+
 The capture system stores lossless seven-frame image bursts, decoded corners,
 camera profile, measured-state brackets and robust state summaries. A medoid
 is an actual retained frame rather than an invented average image. Hashes bind

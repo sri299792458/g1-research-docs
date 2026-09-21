@@ -103,6 +103,12 @@ Decision sources: [Material announcement](https://squidfunk.github.io/mkdocs-mat
 
 ## Publication and handoff
 
+Images and video posters are versioned with the Markdown; publication videos
+are versioned release assets. Their captions, source hashes and preparation
+recipes are in `docs/assets/media.json`. See [media maintenance](media.md#recreating-a-publication-copy)
+to recreate a selected copy without changing its original. No media-preparation
+tools are required for the normal Sphinx build.
+
 The author created `sri299792458/g1-research-docs` for following the draft.
 The Pages workflow builds static HTML and deploys it through GitHub Actions;
 repository Pages settings must use **GitHub Actions** as their source. The

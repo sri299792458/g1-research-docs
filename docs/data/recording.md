@@ -121,6 +121,24 @@ a `lerobot_replacement.json` receipt. Deletion remains an explicit operator
 decision. For lab continuity, retain original evidence needed for calibration,
 failure analysis and claims independently of a compact training export.
 
+## Inspecting an exported dataset
+
+<figure class="research-video">
+  <video controls playsinline preload="none" poster="../_static/g1-lerobot-viewer-walkthrough.jpg" width="1802" height="1162" aria-label="Walkthrough of a G1 dataset in the LeRobot viewer" aria-describedby="viewer-demo-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-lerobot-viewer-walkthrough.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the download link below.
+  </video>
+  <figcaption id="viewer-demo-caption">Walkthrough of the local G1 dataset: RGB/depth, joint and pressure traces, annotation tools, 3D replay, statistics, episode frames and action diagnostics. The displayed 33 episodes and 63,924 frames describe this export; they are not a count of successful manipulations. Silent, 56 seconds.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-lerobot-viewer-walkthrough.mp4">Download the dataset-viewer walkthrough (MP4)</a></p>
+</figure>
+
+Start with a known episode and compare the visible movement with its named
+state and command channels. The 3D replay helps inspect pose changes; return
+to RGB and the source recording when judging object contact or placement.
+Then inspect the conversion report for dropped samples, timing bounds and
+completion status. A functioning viewer is useful inspection tooling, but it
+does not replace those source checks.
+
 Evidence: tabletop recording contract, conversion notes and retained episode
 audits. [Source identities](../reference/sources.md), [media/storage policy](../reference/media.md).
 

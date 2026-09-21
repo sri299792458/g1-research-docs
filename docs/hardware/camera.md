@@ -56,6 +56,15 @@ troubleshooting step: try another port if the camera negotiates USB 2, then
 verify the negotiated speed. The photograph does not establish a universally
 correct socket.
 
+```{figure} ../assets/images/realsense-pc2-usb-ports.jpg
+:alt: Close-up of the G1 PC2 connection panel with the RealSense USB cable connected and adjacent ports visible.
+:width: 340px
+
+RealSense USB connection at PC2, photographed August 3. If the negotiated link
+is USB 2, try another port and verify the driver-reported speed. The photo
+illustrates the connection area; use the runtime check to establish USB 3.
+```
+
 The inspected `tools/g1_realsense_pc2.sh:317` requires the fresh driver log to
 contain `Device USB type: 3.2`, alongside the serial and stream-profile checks.
 The standard `tools/g1_tabletop_hardware.sh:116–123` wrapper stops and starts

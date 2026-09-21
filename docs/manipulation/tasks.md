@@ -26,6 +26,22 @@ flowchart TB
 
 Read the single-cube and stack entry points independently. Direct stacking calls `_find_direct_stack_plan` and `_execute_pick_place`; it does not inherit the extra single-cube pregrasp replan. Both need checked recovery routes and explicit ownership handback.
 
+## Physical demonstration
+
+<figure class="research-video">
+  <video controls playsinline preload="none" poster="../_static/g1-physical-cube-stacking.jpg" width="1920" height="1080" aria-label="Physical G1 cube pickup, stacking and hand withdrawal" aria-describedby="physical-stack-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-physical-cube-stacking.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the download link below.
+  </video>
+  <figcaption id="physical-stack-caption">The physical G1 picks up a marker cube, places it on another, opens its hand and withdraws. The stack remains standing in the final frames as the hand returns toward table support. Harness and wrist targets are visible. Silent, 91 seconds.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-physical-cube-stacking.mp4">Download the physical stacking video (MP4)</a></p>
+</figure>
+
+This clip provides visible evidence of pickup, placement and release in one
+trial. It does not display the controller's ownership state or recording
+completion. The matching bag/run ID has not yet been attached to the footage,
+so it is not used to infer a success rate or a verified software handback.
+
 ## Current object and fixture profiles
 
 Use the 40 mm or 60 mm rounded AprilCube profiles described in
@@ -103,7 +119,20 @@ One bounded physical grasp retry is allowed only after completing the frozen
 recovery, acquiring a fresh scene and excluding the failed candidate. A control
 fault is not a reason to retry automatically.
 
-## Interpreting the demonstrations
+## Plan visualization and recorded outcomes
+
+<figure class="research-video">
+  <video controls playsinline preload="none" poster="../_static/curobo-stack-plan-demo.jpg" width="1280" height="720" aria-label="Rendered CuRobo cube-stacking plan" aria-describedby="stack-plan-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/curobo-stack-plan-demo.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the download link below.
+  </video>
+  <figcaption id="stack-plan-caption">Rendered stacking sequence through approach, grasp, lift, transfer and placement. The animation ends at the displayed stack completion; the complete return and ownership handback are outside this clip. Silent, 10 seconds.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/curobo-stack-plan-demo.mp4">Download the stacking-plan visualization (MP4)</a></p>
+</figure>
+
+Use this visualization to understand the geometric phases. Measured contact,
+physical placement and normal control release require the recorded hardware
+evidence described below; a rendered plan does not establish those outcomes.
 
 The August 17 `T230114` run lifted and replaced the cube but later failed on an
 omitted return leg. The August 18 `T162801` tripod run completed its lifecycle

@@ -60,6 +60,470 @@
       "context": "simulation",
       "review": "release metadata only; content and browser playback not reviewed",
       "original_archive_location": null
+    },
+    {
+      "id": "realsense-pc2-usb-ports",
+      "path": "assets/images/realsense-pc2-usb-ports.jpg",
+      "source_file": "PXL_20260803_142502363.jpg",
+      "source_sha256": "bd2cab81d5515219d13f0c3a3f2fc6b509ff6c90133b9a82291b8d032e410c64",
+      "context": "hardware-photo",
+      "caption": "RealSense connection at PC2. Verify negotiated USB speed; this view does not identify a universally correct port.",
+      "chapter": "hardware/camera.md",
+      "creator": "sri299792458",
+      "review": "Original visually inspected; publication decoded pixels verified identical; EXIF absent.",
+      "original_archive_location": null,
+      "preparation": {
+        "kind": "image-metadata-only",
+        "note": "Remove EXIF/XMP/IPTC/text metadata; retain image samples, dimensions and framing."
+      },
+      "sha256": "48b64c1375c521b30d9c51cdcf22fcb787d61cec311a6ce66519cf9fc52e1375",
+      "bytes": 2349662,
+      "width": 3000,
+      "height": 4000
+    },
+    {
+      "id": "printed-target-collection",
+      "path": "assets/images/printed-target-collection.jpg",
+      "source_file": "PXL_20260921_105349323.jpg",
+      "source_sha256": "e1a64a1d5e5c5247f33e19b1ba62646380d6a16b252280c3e1c47b97f5aab794",
+      "context": "hardware-photo",
+      "caption": "Physical marker cubes, wrist-marker carrier and ChArUco board, photographed September 21.",
+      "chapter": "perception/targets.md",
+      "creator": "sri299792458",
+      "review": "Original visually inspected; publication decoded pixels verified identical; EXIF absent.",
+      "original_archive_location": null,
+      "preparation": {
+        "kind": "image-metadata-only",
+        "note": "Remove EXIF/XMP/IPTC/text metadata; retain image samples, dimensions and framing."
+      },
+      "sha256": "fcfa5393bd06e4172bd9d219493bec75032d8d4ace1abd2864595029358fd56b",
+      "bytes": 4260616,
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "cushioned-chair-reference",
+      "path": "assets/images/cushioned-chair-reference.jpg",
+      "source_file": "cushion_seat.jpg",
+      "source_sha256": "88b639182a306a46a8c5860fecd9439a3c98177c3e683033ab49f8f5cb12a331",
+      "context": "hardware-photo",
+      "caption": "Reference chair with a dark seat cushion; photographed September 21.",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458",
+      "review": "Original visually inspected; publication decoded pixels verified identical; EXIF absent.",
+      "original_archive_location": null,
+      "preparation": {
+        "kind": "image-metadata-only",
+        "note": "Remove EXIF/XMP/IPTC/text metadata; retain image samples, dimensions and framing."
+      },
+      "sha256": "ea3b57dd850559a1d9f7971558f1130e36bc01366c1c28f7b9a2f1bfb29f5597",
+      "bytes": 2696318,
+      "width": 3000,
+      "height": 4000
+    },
+    {
+      "id": "rigid-chair-reference",
+      "path": "assets/images/rigid-chair-reference.jpg",
+      "source_file": "rigid_seat.jpg",
+      "source_sha256": "0edc2c8c8a77dcc8af74daaf9a4d0061127bebaab2716a6a8b416f61bf993444",
+      "context": "hardware-photo",
+      "caption": "Small reference photograph of the rigid chair; no robot or applied load is shown.",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458",
+      "review": "Original visually inspected; publication decoded pixels verified identical; EXIF absent.",
+      "original_archive_location": null,
+      "preparation": {
+        "kind": "image-metadata-only",
+        "note": "Remove EXIF/XMP/IPTC/text metadata; retain image samples, dimensions and framing."
+      },
+      "sha256": "48efc86644d71f3b12733f5c30847c37cc0a917aa4a4ed4f44f70b3b5a3a1860",
+      "bytes": 7427,
+      "width": 165,
+      "height": 220
+    },
+    {
+      "id": "dex3-cable-routing",
+      "path": "assets/images/dex3-cable-routing.jpg",
+      "source_file": "Dex3 Hands.pptx",
+      "source_sha256": "74bcff9b4cfac580074d489c83374d76edcb46c8555c3ea244afa81d11748a41",
+      "context": "hardware-photo",
+      "caption": "Installed Dex3 hands with cable sleeves and reusable ties. The installation notes describe marking cable slack for repeatable routing.",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458",
+      "review": "Original visually inspected; publication decoded pixels verified identical; EXIF absent.",
+      "original_archive_location": null,
+      "preparation": {
+        "kind": "image-metadata-only",
+        "note": "Remove EXIF/XMP/IPTC/text metadata; retain image samples, dimensions and framing."
+      },
+      "source_member": "ppt/media/image2.jpg",
+      "source_member_sha256": "e4155a82249d7f746e989697a4db68f0e4e76f4c91db133530d8b1ba450aa000",
+      "sha256": "e4155a82249d7f746e989697a4db68f0e4e76f4c91db133530d8b1ba450aa000",
+      "bytes": 367912,
+      "width": 1536,
+      "height": 2048
+    },
+    {
+      "id": "dex3-connector-routing",
+      "path": "assets/images/dex3-connector-routing.png",
+      "source_file": "Dex3 Hands.pptx",
+      "source_sha256": "74bcff9b4cfac580074d489c83374d76edcb46c8555c3ea244afa81d11748a41",
+      "context": "hardware-photo",
+      "caption": "Hand held at the wrist while the two connectors pass through the mounting gap.",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458",
+      "review": "Original visually inspected; publication decoded pixels verified identical; EXIF absent.",
+      "original_archive_location": null,
+      "preparation": {
+        "kind": "image-metadata-only",
+        "note": "Remove EXIF/XMP/IPTC/text metadata; retain image samples, dimensions and framing."
+      },
+      "source_member": "ppt/media/image11.png",
+      "source_member_sha256": "5cb4ec58de9d09ae0592f8ac062ce077b2fb5883cc883dfebccc3b294a115e6b",
+      "sha256": "5cb4ec58de9d09ae0592f8ac062ce077b2fb5883cc883dfebccc3b294a115e6b",
+      "bytes": 1947341,
+      "width": 1511,
+      "height": 1133
+    },
+    {
+      "id": "dex3-hand-seated",
+      "path": "assets/images/dex3-hand-seated.png",
+      "source_file": "Dex3 Hands.pptx",
+      "source_sha256": "74bcff9b4cfac580074d489c83374d76edcb46c8555c3ea244afa81d11748a41",
+      "context": "hardware-photo",
+      "caption": "Hand aligned at the wrist with the connectors accessible through the open cover area.",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458",
+      "review": "Original visually inspected; publication decoded pixels verified identical; EXIF absent.",
+      "original_archive_location": null,
+      "preparation": {
+        "kind": "image-metadata-only",
+        "note": "Remove EXIF/XMP/IPTC/text metadata; retain image samples, dimensions and framing."
+      },
+      "source_member": "ppt/media/image10.png",
+      "source_member_sha256": "6507dd6d957c39f5a09e725b8dc743d006ae8dd3743eaec33a96f099d8ddcd08",
+      "sha256": "6507dd6d957c39f5a09e725b8dc743d006ae8dd3743eaec33a96f099d8ddcd08",
+      "bytes": 1715938,
+      "width": 1511,
+      "height": 1133
+    },
+    {
+      "id": "dex3-tactile-rviz-demo",
+      "filename": "dex3-tactile-rviz-demo.mp4",
+      "public_url": "https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/dex3-tactile-rviz-demo.mp4",
+      "source_file": "01_dex3_tactile_pressure.mp4",
+      "source_sha256": "460de2a5814d5ed645d95f103cc2a6d7630deaa422f6df5dbd4749d1cf9ca2fd",
+      "context": "visualization",
+      "caption": "RViz taxel colors change across the Dex3 fingers. Pressure counts are not calibrated forces.",
+      "chapter": "sensing/pressure.md",
+      "creator": "sri299792458; underlying software/models retain upstream attribution",
+      "review": "Source sampled across complete duration; hosted publication playback and seeking verified in Chromium on 2026-09-21.",
+      "original_archive_location": null,
+      "poster": {
+        "path": "assets/posters/dex3-tactile-rviz-demo.jpg",
+        "sha256": "56f3749676af15d618a09c47aa87ce43183b82c3a0b443e466e5ca3b0885a995",
+        "bytes": 128076
+      },
+      "preparation": {
+        "kind": "video",
+        "ffmpeg_output_args": [
+          "-c:v",
+          "copy"
+        ],
+        "poster_seconds": 9,
+        "note": "Retain H.264 stream; remove container metadata; move MP4 index to front for playback."
+      },
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 10.534,
+      "video_codec": "h264",
+      "has_audio": false,
+      "sha256": "067ff365061749fa0fb1a80566ab7e47fa37436595c8e2908d9cc772f04afa8a",
+      "bytes": 464839
+    },
+    {
+      "id": "dex3-simulated-retention-demo",
+      "filename": "dex3-simulated-retention-demo.mp4",
+      "public_url": "https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/dex3-simulated-retention-demo.mp4",
+      "source_file": "02_grasp_retention_tug_test.mp4",
+      "source_sha256": "ef78da65f81a42dc79f43626cff9e5dc396a49973838487eb3296cee88d989b8",
+      "context": "recorded-simulation-render",
+      "caption": "Rendered replay of recorded Isaac/PhysX states: closing followed by five directional disturbances and an on-screen retention pass.",
+      "chapter": "manipulation/grasp-atlas.md",
+      "creator": "sri299792458; underlying software/models retain upstream attribution",
+      "review": "Source sampled across complete duration; hosted publication playback and seeking verified in Chromium on 2026-09-21.",
+      "original_archive_location": null,
+      "poster": {
+        "path": "assets/posters/dex3-simulated-retention-demo.jpg",
+        "sha256": "8cbb3a6b397641e16f581fefe3954b6ed4201690f50640174d0e0dca318ba3f1",
+        "bytes": 49206
+      },
+      "preparation": {
+        "kind": "video",
+        "ffmpeg_output_args": [
+          "-c:v",
+          "copy"
+        ],
+        "poster_seconds": 5.5,
+        "note": "Retain H.264 stream; remove container metadata; move MP4 index to front for playback."
+      },
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 6.267,
+      "video_codec": "h264",
+      "has_audio": false,
+      "sha256": "ef78da65f81a42dc79f43626cff9e5dc396a49973838487eb3296cee88d989b8",
+      "bytes": 110655
+    },
+    {
+      "id": "curobo-stack-plan-demo",
+      "filename": "curobo-stack-plan-demo.mp4",
+      "public_url": "https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/curobo-stack-plan-demo.mp4",
+      "source_file": "03_curobo_collision_aware_plan.mp4",
+      "source_sha256": "ad700c1ac4cdca67ab0047482cd2f343b5e2537cd9fa82daf1cb8d85f6f110db",
+      "context": "planning-render",
+      "caption": "Rendered stacking plan through approach, grasp, lift, transfer and placement. The clip ends before control handback.",
+      "chapter": "manipulation/tasks.md",
+      "creator": "sri299792458; underlying software/models retain upstream attribution",
+      "review": "Source sampled across complete duration; hosted publication playback and seeking verified in Chromium on 2026-09-21.",
+      "original_archive_location": null,
+      "poster": {
+        "path": "assets/posters/curobo-stack-plan-demo.jpg",
+        "sha256": "8f33ce60e75f66a5bd0beff70df87029a01f5e443994b59c8afa85b914c52029",
+        "bytes": 49259
+      },
+      "preparation": {
+        "kind": "video",
+        "ffmpeg_output_args": [
+          "-c:v",
+          "copy"
+        ],
+        "poster_seconds": 5.5,
+        "note": "Retain H.264 stream; remove container metadata; move MP4 index to front for playback."
+      },
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 9.542,
+      "video_codec": "h264",
+      "has_audio": false,
+      "sha256": "ad700c1ac4cdca67ab0047482cd2f343b5e2537cd9fa82daf1cb8d85f6f110db",
+      "bytes": 120887
+    },
+    {
+      "id": "mujoco-rviz-short-demo",
+      "filename": "mujoco-rviz-short-demo.mp4",
+      "public_url": "https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/mujoco-rviz-short-demo.mp4",
+      "source_file": "05_mujoco_rviz_digital_twin.mp4",
+      "source_sha256": "bf686a89372046cae410a1fd70d17f8db8b96ab08d026512a9bf5a4df170ace2",
+      "context": "simulation",
+      "caption": "RViz and MuJoCo shown side by side during arm-pose changes.",
+      "chapter": "simulation/mujoco.md",
+      "creator": "sri299792458; underlying software/models retain upstream attribution",
+      "review": "Source sampled across complete duration; hosted publication playback and seeking verified in Chromium on 2026-09-21.",
+      "original_archive_location": null,
+      "poster": {
+        "path": "assets/posters/mujoco-rviz-short-demo.jpg",
+        "sha256": "0961495f017961a0ea113ed22826672ae4114739b69bdb02b2677376841ed673",
+        "bytes": 121640
+      },
+      "preparation": {
+        "kind": "video",
+        "ffmpeg_output_args": [
+          "-c:v",
+          "copy"
+        ],
+        "poster_seconds": 3,
+        "note": "Retain H.264 stream; remove container metadata; move MP4 index to front for playback."
+      },
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 10.034,
+      "video_codec": "h264",
+      "has_audio": false,
+      "sha256": "4450552d39fe97ae2c9afdb8c9fc90ffaab6c858b0ca90db9a8127457b9f89e1",
+      "bytes": 2197973
+    },
+    {
+      "id": "g1-cushion-seat-setup",
+      "filename": "g1-cushion-seat-setup.mp4",
+      "public_url": "https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-cushion-seat-setup.mp4",
+      "source_file": "cushion_seat.mp4",
+      "source_sha256": "55aabdb45cbdcfcec98d474a0f2c4adf8f305bbbee887927c926a2f682adb602",
+      "context": "physical-robot",
+      "caption": "Physical G1 seated on a cushion with wrist targets, a table-mounted board and harness support during arm movement. Silent publication copy.",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458; underlying software/models retain upstream attribution",
+      "review": "Source sampled across complete duration; hosted publication playback and seeking verified in Chromium on 2026-09-21.",
+      "original_archive_location": null,
+      "poster": {
+        "path": "assets/posters/g1-cushion-seat-setup.jpg",
+        "sha256": "f60da0a151fbbee310be253207d9c3310d638626950f89a73a83200f2376075f",
+        "bytes": 100988
+      },
+      "preparation": {
+        "kind": "video",
+        "ffmpeg_output_args": [
+          "-vf",
+          "scale=-2:1280",
+          "-c:v",
+          "libx264",
+          "-preset",
+          "medium",
+          "-crf",
+          "23",
+          "-pix_fmt",
+          "yuv420p",
+          "-threads",
+          "4"
+        ],
+        "poster_seconds": 29,
+        "note": "Auto-rotate portrait source; scale to 720x1280; encode H.264; omit unreviewed audio and source metadata; retain full visual duration."
+      },
+      "width": 720,
+      "height": 1280,
+      "duration_seconds": 40.7,
+      "video_codec": "h264",
+      "has_audio": false,
+      "sha256": "b5b6c3ea19643458b1fe82b9b288636d884a3e2c312aba3800b74825ce23868b",
+      "bytes": 6778474
+    },
+    {
+      "id": "g1-lerobot-viewer-walkthrough",
+      "filename": "g1-lerobot-viewer-walkthrough.mp4",
+      "public_url": "https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-lerobot-viewer-walkthrough.mp4",
+      "source_file": "g1_lerobot_viewer-1.webm",
+      "source_sha256": "58bc9942b2b92919204cc322fdfea765f814facd34f913231bc82faec99c08b4",
+      "context": "dataset-viewer",
+      "caption": "G1 dataset-viewer walkthrough: images, joint traces, annotations, 3D replay, statistics and action diagnostics.",
+      "chapter": "data/recording.md",
+      "creator": "sri299792458; underlying software/models retain upstream attribution",
+      "review": "Source sampled across complete duration; hosted publication playback and seeking verified in Chromium on 2026-09-21.",
+      "original_archive_location": null,
+      "poster": {
+        "path": "assets/posters/g1-lerobot-viewer-walkthrough.jpg",
+        "sha256": "163854846add7a0a1a31c5c063c3358922afbc56c1590f2a5035846e28c765e2",
+        "bytes": 246528
+      },
+      "preparation": {
+        "kind": "video",
+        "ffmpeg_output_args": [
+          "-vf",
+          "pad=ceil(iw/2)*2:ceil(ih/2)*2",
+          "-c:v",
+          "libx264",
+          "-preset",
+          "medium",
+          "-crf",
+          "20",
+          "-pix_fmt",
+          "yuv420p",
+          "-threads",
+          "4",
+          "-vsync",
+          "vfr"
+        ],
+        "poster_seconds": 0,
+        "note": "Encode VP8 as H.264; pad one row for even height; preserve variable frame timing; strip metadata."
+      },
+      "width": 1802,
+      "height": 1162,
+      "duration_seconds": 55.587,
+      "video_codec": "h264",
+      "has_audio": false,
+      "sha256": "91087321903ab003c8e3d1f20fd17d77809127eabdd1ff97c47a47d3901601aa",
+      "bytes": 7324404
+    },
+    {
+      "id": "g1-physical-cube-stacking",
+      "filename": "g1-physical-cube-stacking.mp4",
+      "public_url": "https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-physical-cube-stacking.mp4",
+      "source_file": "cube_stacking.MOV",
+      "source_sha256": "6b5eee39a8f7bfb60b55cca981a858db00592906835db46515b0cea07372a149",
+      "context": "physical-robot",
+      "caption": "Physical G1 cube pickup, stacking, release and hand withdrawal. The stack remains standing in the final frames. Software ownership handback is not visible. Silent publication copy.",
+      "chapter": "manipulation/tasks.md",
+      "creator": "sri299792458",
+      "review": "91 sampled frames and selected full-resolution frames inspected; hosted publication playback and seeking verified in Chromium on 2026-09-21.",
+      "original_archive_location": null,
+      "poster": {
+        "path": "assets/posters/g1-physical-cube-stacking.jpg",
+        "sha256": "d09dfaaaf104eec5f8fde77f45a4d6e656594393c41fa9aad1684c934aaa4c61",
+        "bytes": 279433
+      },
+      "preparation": {
+        "kind": "video",
+        "ffmpeg_output_args": [
+          "-c:v",
+          "libx264",
+          "-preset",
+          "medium",
+          "-crf",
+          "22",
+          "-pix_fmt",
+          "yuv420p",
+          "-threads",
+          "4"
+        ],
+        "poster_seconds": 75,
+        "note": "Retain 1920x1080 framing and full visual duration; recompress H.264; omit unreviewed audio, metadata and phone data streams; fast-start MP4."
+      },
+      "width": 1920,
+      "height": 1080,
+      "duration_seconds": 91.067,
+      "video_codec": "h264",
+      "has_audio": false,
+      "sha256": "2999cf0720a33e724fdc6fe40eaba0d88113ead2b92a2036bbbe4c37132bba3f",
+      "bytes": 39950563
+    },
+    {
+      "id": "g1-standing-calibration",
+      "filename": "g1-standing-calibration.mp4",
+      "public_url": "https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-standing-calibration.mp4",
+      "source_file": "calibration.mp4",
+      "source_sha256": "002f070d5e921ca68650e59558a1b542e47d787f8e223eaae407f8914602eeb3",
+      "context": "physical-robot",
+      "caption": "Standing G1 arm-pose sequence with printed wrist markers and harness support. The clip ends during the sequence; it does not show accepted-capture counts, calibration accuracy or cleanup. Silent publication copy.",
+      "chapter": "calibration/workflow.md",
+      "creator": "sri299792458",
+      "review": "65 frames sampled across the source duration; hosted publication playback and seeking verified in Chromium on 2026-09-21.",
+      "original_archive_location": null,
+      "poster": {
+        "path": "assets/posters/g1-standing-calibration.jpg",
+        "sha256": "548ae09d15485bf39be3b5372419258eea5b257c1bde5964573cf1134d443b94",
+        "bytes": 130611
+      },
+      "preparation": {
+        "kind": "video",
+        "ffmpeg_output_args": [
+          "-vf",
+          "scale=-2:1280",
+          "-c:v",
+          "libx264",
+          "-preset",
+          "medium",
+          "-crf",
+          "23",
+          "-pix_fmt",
+          "yuv420p",
+          "-threads",
+          "4"
+        ],
+        "poster_seconds": 46,
+        "note": "Auto-rotate portrait source and scale to 720x1280; encode H.264; omit unreviewed audio, metadata and data stream; retain full visual duration."
+      },
+      "width": 720,
+      "height": 1280,
+      "duration_seconds": 129.467,
+      "video_codec": "h264",
+      "has_audio": false,
+      "sha256": "0759b5840fce3bae07ef47d07458ff8080d74dd9ce5828fd97505c8cc1560bef",
+      "bytes": 13806433
     }
-  ]
+  ],
+  "publication_release": {
+    "tag": "media-2026-09-21",
+    "url": "https://github.com/sri299792458/g1-research-docs/releases/tag/media-2026-09-21",
+    "ffmpeg_version": "ffmpeg version 4.4.2-0ubuntu0.22.04.1 Copyright (c) 2000-2021 the FFmpeg developers",
+    "verification": "All eight release asset sizes and SHA-256 digests match the prepared files; embedded playback and seeking pass in Chromium on 2026-09-21."
+  }
 }

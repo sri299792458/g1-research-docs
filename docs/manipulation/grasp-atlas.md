@@ -69,6 +69,20 @@ Early Newton hand-only tests prescribed the root through the table. Those
 tests could not judge intrinsic grasp quality, and an ejected object reaching
 height was not a valid lift. Later evaluation separated these questions.
 
+<figure class="research-video">
+  <video controls playsinline preload="none" poster="../_static/dex3-simulated-retention-demo.jpg" width="1280" height="720" aria-label="Simulated Dex3 grasp retention under five disturbances" aria-describedby="retention-demo-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/dex3-simulated-retention-demo.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the download link below.
+  </video>
+  <figcaption id="retention-demo-caption">Rendered replay labelled as recorded Isaac/PhysX states: grasp pose, close/settle, five directional disturbances, then an on-screen retention pass. This is a simulated tug test. Silent, 6 seconds.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/dex3-simulated-retention-demo.mp4">Download the simulated retention demo (MP4)</a></p>
+</figure>
+
+The clip illustrates the retention question. Its on-screen pass does not
+establish table clearance, arm reachability or hardware grasp success. The
+specific replay's candidate ID and generating report have not yet been linked,
+so do not use it to reconstruct or extend the aggregate counts below.
+
 ## Physics configuration changed the result
 
 A USD self-collision regression made repeated identical grasps unstable.
