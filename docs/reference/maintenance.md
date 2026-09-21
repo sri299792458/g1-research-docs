@@ -40,9 +40,11 @@ shared syntax, diagram types and rendering checks.
 
 Technical chapters follow the system rather than the order of the summer's
 experiments: diagram, code map, interface/assumption explanation, then design
-lessons and evidence. Keep the timeline in the archive. Place a historical
-failure beside the rule it explains, so a reader can understand what a change
-must preserve without reading a journal first.
+lessons and evidence. Place a historical failure beside the rule it explains,
+so a reader can understand what a change must preserve without reading a
+journal first. Commit revisions normally: Git retains superseded pages and
+drafts, including deleted files. The current site does not need a separate
+archive of earlier documentation.
 
 ## Maintain the code pointers
 

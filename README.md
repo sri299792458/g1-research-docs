@@ -17,8 +17,8 @@ labelled at their point of use.
 
 Start with the [system map](docs/start/overview.md), then follow a chapter's
 diagram and code entry points. The [code index](docs/reference/code-index.md)
-distinguishes pinned public source from local snapshots. Authorship and the
-optional historical timeline are under [About](docs/about.md).
+distinguishes pinned public source from local snapshots. Authorship and project
+context are under [About](docs/about.md). Earlier drafts remain in Git history.
 
 ## Preview locally
 

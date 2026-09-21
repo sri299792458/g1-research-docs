@@ -10,8 +10,8 @@ minimal customization. Follow the [local build instructions](README.md) and
    records coverage; the [snapshot](research/source_snapshot.json) records identity.
 2. Keep the change focused on one procedure, result, correction or topic.
    Technical chapters begin with a Mermaid diagram and verified file/symbol
-   map, followed by interfaces, assumptions, lessons and validation. Keep the
-   summer timeline in the archive rather than the main reading path.
+   map, followed by interfaces, assumptions, lessons and validation. Git history
+   preserves superseded drafts; the current site presents the current guide.
 3. State prerequisites and expected observations. Preserve the reason for a
    step when a previous failure explains it.
 4. Distinguish proposals, static inspection, offline tests, simulation, physical
