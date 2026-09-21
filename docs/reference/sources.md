@@ -11,7 +11,7 @@ documentation. Reading and static inspection did not send robot commands.
 |---|---:|---|
 | G1Pilot June log | 1,328 lines | `72acc803edefe583c24f53e76a21d8d4ed10ed14`; [pinned notes](https://github.com/sri299792458/g1pilot/blob/72acc803edefe583c24f53e76a21d8d4ed10ed14/running_notes.md) |
 | G1Pilot MuJoCo implementation | README, backend, launch/environment, generators and diagnostic | [dev snapshot](https://github.com/sri299792458/g1pilot/tree/6b5af59b109e2ee687920fdf66ded6182725e945) |
-| Grasp/assembly demo | 3,209 log lines; 204 README lines | [pinned notes](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/running_notes.md) |
+| Grasp/assembly demo | 3,209 log lines; 204 README lines | [source snapshot](https://github.com/sri299792458/g1-aprilcube-demo/tree/f190470742f43101e9a22affaca80554722706ac); public technical reports carry the experimental findings |
 | Tabletop | 7,403 log lines | Local working tree based on `cf1b27704c82d877d23ff5a3c157df3218f02402`; includes uncommitted work |
 | Calibration prototype | 1,864 log lines | `97a78a5c9c48701400820922f0966cc3d3a9b7bc`; local inspected source |
 | Current torso fixtures | V7/R2 CAD guides, fit record and all 77 additional log lines | [V7 source](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/9ad412019107161373e5381ed81cd5c2224a1301); both remote development branches at this revision when checked |

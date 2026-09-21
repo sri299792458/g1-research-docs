@@ -132,4 +132,4 @@ close corrections. [Source identities](../reference/sources.md).
 
 ## Checks and evidence to inspect
 
-Inspect each candidate’s content hash, qualification profile and trace before comparing atlas counts. The [grasp-demo source log](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/running_notes.md) reports the descriptor ablations and simulation trials; the later tabletop record supplies the physical close failure and corrected candidate pools.
+Inspect each candidate’s content hash, qualification profile and trace before comparing atlas counts. The [descriptor report](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/docs/dex3_rev1_descriptor.md) explains the ablations, and the [upright pickup replay report](https://github.com/sri299792458/g1-aprilcube-demo/blob/f190470742f43101e9a22affaca80554722706ac/docs/u_legs_upright_supported_pickup_replay1.md) records the simulated support result. The later tabletop record supplies the physical close failure and corrected candidate pools.
