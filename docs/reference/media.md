@@ -41,7 +41,7 @@ The originals and the PowerPoint remain separate source records.
 | `realsense-head-pitch-witness-mark` | [Head-pitch reference](../hardware/camera.md#head-pitch-witness-mark) | September 21 photograph; author identifies the white witness mark |
 | `printed-target-collection` | [Printed targets](../perception/targets.md) | September 21 photograph of cubes, wrist carrier and board |
 | `cushioned-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Chair with its cushion; September 21 photograph |
-| `rigid-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Same chair with the cushion removed; supplied 165 × 220 px thumbnail |
+| `rigid-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Same chair with the cushion removed; author-supplied 850 × 1133 px photograph |
 | `chair-support-comparison` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Both original chair photographs, combined side by side in one figure |
 | `dex3-connector-routing` | [Hand fitting](../hardware/robot.md#fitting-the-hand) | `Dex3 Hands.pptx`, slide 7, `ppt/media/image11.png` |
 | `dex3-hand-seated` | [Hand fitting](../hardware/robot.md#fitting-the-hand) | Same slide, `ppt/media/image10.png` |

@@ -129,23 +129,23 @@
     },
     {
       "id": "rigid-chair-reference",
-      "path": "assets/images/rigid-chair-reference.jpg",
-      "source_file": "rigid_seat.jpg",
-      "source_sha256": "0edc2c8c8a77dcc8af74daaf9a4d0061127bebaab2716a6a8b416f61bf993444",
+      "path": "assets/images/rigid-chair-reference.png",
+      "source_file": "Author-supplied photograph (chat attachment)",
+      "source_sha256": "4871cf7528e94f8cfc3dd6307d8684fec1e9fdc4487db220ac464f3c50c233cc",
       "context": "hardware-photo",
       "caption": "The same chair as cushioned-chair-reference with the cushion removed, as confirmed by the author; no robot or applied load is shown.",
       "chapter": "hardware/robot.md",
       "creator": "sri299792458",
-      "review": "Original visually inspected; publication decoded pixels verified identical; EXIF absent.",
+      "review": "Author-supplied higher-resolution photograph visually inspected and copied byte-for-byte. PNG has no EXIF or text metadata. Replaces the earlier 165 by 220 thumbnail in the comparison.",
       "original_archive_location": null,
       "preparation": {
-        "kind": "image-metadata-only",
-        "note": "Remove EXIF/XMP/IPTC/text metadata; retain image samples, dimensions and framing."
+        "kind": "copied-unchanged",
+        "note": "Use the supplied 850 by 1133 PNG without resampling or pixel edits; comparison cropping is in the SVG layout."
       },
-      "sha256": "48efc86644d71f3b12733f5c30847c37cc0a917aa4a4ed4f44f70b3b5a3a1860",
-      "bytes": 7427,
-      "width": 165,
-      "height": 220
+      "sha256": "4871cf7528e94f8cfc3dd6307d8684fec1e9fdc4487db220ac464f3c50c233cc",
+      "bytes": 786376,
+      "width": 850,
+      "height": 1133
     },
     {
       "id": "dex3-cable-routing",
@@ -642,8 +642,8 @@
       "figure_layout": "assets/hardware-figures.json",
       "preparation_command": "python3 tools/build_hardware_figures.py",
       "review": "Original photographs visually inspected; author confirms the same chair and requests background cropping. Source bytes embedded unchanged; rectangular panel crops retain both complete chairs without stretching, segmentation or reconstruction.",
-      "sha256": "4cbbb0632aedb515590b9ef81711eb2d2fcece127b98261779baf9a46314c187",
-      "bytes": 3606353
+      "sha256": "00684117517e74498ab409fc9633d920a2f94b411a7ae17e0af91df383e047f7",
+      "bytes": 4644943
     }
   ],
   "publication_release": {
