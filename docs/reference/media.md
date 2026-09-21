@@ -38,16 +38,46 @@ The originals and the PowerPoint remain separate source records.
 | Stable ID | Where it is used | Source |
 |---|---|---|
 | `realsense-pc2-usb-ports` | [Camera troubleshooting](../hardware/camera.md) | August 3 phone photograph |
+| `realsense-head-pitch-witness-mark` | [Head-pitch reference](../hardware/camera.md#head-pitch-witness-mark) | September 21 photograph; author identifies the white witness mark |
 | `printed-target-collection` | [Printed targets](../perception/targets.md) | September 21 photograph of cubes, wrist carrier and board |
 | `cushioned-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | September 21 chair photograph |
 | `rigid-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Supplied 165 × 220 px chair thumbnail |
 | `dex3-connector-routing` | [Hand fitting](../hardware/robot.md#fitting-the-hand) | `Dex3 Hands.pptx`, slide 7, `ppt/media/image11.png` |
 | `dex3-hand-seated` | [Hand fitting](../hardware/robot.md#fitting-the-hand) | Same slide, `ppt/media/image10.png` |
 | `dex3-cable-routing` | [Cable routing](../hardware/robot.md#cable-routing-and-repeated-swaps) | Slides 4 and 8, `ppt/media/image2.jpg` |
+| `dex3-wrist-fasteners` | [Hand fitting](../hardware/robot.md#fitting-the-hand) | Slide 6, `ppt/media/image5.jpg` |
 
-The selected installation photographs illustrate connector routing and the
-fitted arrangement. They do not reproduce the deck's screw-location arrows or
-constitute the complete electrical/assembly procedure.
+The installation figures now retain the features indicated by the slide
+annotations, with overview photographs, enlarged details and numbered callouts.
+They identify hardware and the recorded fitting sequence; the electrical pinout
+and complete power-isolation procedure still need author review.
+
+## Annotated hardware figures
+
+Use an overview to locate a feature and a close-up when the detail would be too
+small at normal page width. Keep each caption and instruction in Markdown below
+the figure. The hardware pages use editable SVG overlays, so labels, circles
+and leader arrows stay separate from the original photo pixels.
+
+The four layouts are in `docs/assets/hardware-figures.json`. Each records its
+source image hashes, panel crops, feature positions and source photograph or
+slide. The Dex3 features were checked against rendered slides 6–8. Their
+presentation adapts the slide callouts into rings and numbered detail panels;
+it is not a screenshot of the whole slide. The head-pitch mark comes from the
+author's separately supplied reference photograph.
+
+To adjust a figure, edit its layout and regenerate it:
+
+```bash
+python3 tools/build_hardware_figures.py
+python3 tools/build_hardware_figures.py --check
+```
+
+This standard-library helper uses the checked-in publication photographs;
+neither PowerPoint nor LibreOffice is required. It verifies their hashes before
+rendering. SVGs embed those photos, so a downloaded SVG is self-contained.
+Review feature placement, magnification, alt text and the Markdown caption on
+desktop after a change. The CI check catches stale generated figures.
 
 ## Embedded demonstrations
 
@@ -90,7 +120,7 @@ and caption when selecting them for an embedded demonstration.
 
 ## Author-supplied September media
 
-The collection now contains a nine-slide Dex3 installation deck, four
+The collection now contains a nine-slide Dex3 installation deck, five
 photographs and eight videos. The originals remain outside this repository.
 The [public media catalog](../assets/media.json) retains original/publication
 hashes, selected source paths, captions and review limits. Detailed working

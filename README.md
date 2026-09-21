@@ -47,6 +47,7 @@ dependency updates, navigation and GitHub Pages setup.
 | `docs/assets/code-map.json` | Exact files, hashes, symbols and public URLs behind code maps |
 | `tools/check_code_map.py` | Optional static verification against available source checkouts |
 | `tools/build_code_index.py` | Generate/check the Markdown index from the code map |
+| `tools/build_hardware_figures.py` | Generate/check editable annotated figures from photos and layout JSON |
 | `requirements-docs.in` / `.txt` | Direct dependencies and pinned build environment |
 | `.github/workflows/docs.yml` | Strict build on changes; Pages deployment from main |
 

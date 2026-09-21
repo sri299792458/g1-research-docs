@@ -37,6 +37,8 @@ from the appropriate reading path.
 
 Use Mermaid for code diagrams; the [diagram guide](diagrams.md) gives the
 shared syntax, diagram types and rendering checks.
+For hardware photographs, use [editable annotated figures](media.md#annotated-hardware-figures)
+with captions in Markdown. Their small generation helper needs only Python.
 
 Technical chapters follow the system rather than the order of the summer's
 experiments: diagram, code map, interface/assumption explanation, then design
@@ -90,6 +92,9 @@ Run `python3 tools/build_code_index.py --check`, the strict build above and
 including missing internal references, as failures. The GitHub workflow runs
 the same build for pull requests and publishes successful main-branch builds
 to Pages.
+
+After changing annotated figures, also run
+`python3 tools/build_hardware_figures.py --check` and inspect the rendered page.
 
 ## Why this framework
 

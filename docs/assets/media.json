@@ -518,6 +518,109 @@
       "has_audio": false,
       "sha256": "0759b5840fce3bae07ef47d07458ff8080d74dd9ce5828fd97505c8cc1560bef",
       "bytes": 13806433
+    },
+    {
+      "id": "dex3-wrist-fasteners",
+      "path": "assets/images/dex3-wrist-fasteners.jpg",
+      "source_file": "Dex3 Hands.pptx",
+      "source_sha256": "74bcff9b4cfac580074d489c83374d76edcb46c8555c3ea244afa81d11748a41",
+      "source_member": "ppt/media/image5.jpg",
+      "source_member_sha256": "de1ed359de70431a7aacab0db3cb90ef299650ddfbca8ad2bebf6e9de671bbc9",
+      "sha256": "de1ed359de70431a7aacab0db3cb90ef299650ddfbca8ad2bebf6e9de671bbc9",
+      "bytes": 320830,
+      "context": "hardware-photo",
+      "caption": "Wrist attachment screws identified in slide 6; used by the annotated figure.",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458",
+      "review": "Source slide rendered with LibreOffice and visually inspected; original image samples retained.",
+      "preparation": {
+        "kind": "image-metadata-only"
+      }
+    },
+    {
+      "id": "realsense-head-pitch-witness-mark",
+      "path": "assets/images/realsense-head-pitch-witness-mark.jpg",
+      "source_file": "PXL_20260921_221948907.jpg",
+      "source_sha256": "f89dbb424874bccc04f14de4d05656c91054fa69a25b1bc30122cea6b5741784",
+      "sha256": "7fd86a5e22ea008ba8417c0cc7b8e41ac9ba10594712e2e743fb5ed474a9a269",
+      "bytes": 2481057,
+      "context": "hardware-photo",
+      "caption": "White witness mark identified by the author as the reference for calibrated head pitch; September 21 reference photograph.",
+      "chapter": "hardware/camera.md",
+      "creator": "sri299792458",
+      "review": "Visually inspected; metadata removed and decoded image samples verified unchanged. The author identified the mark; no numerical pitch or bundle identity inferred.",
+      "preparation": {
+        "kind": "image-metadata-only"
+      }
+    },
+    {
+      "id": "dex3-wrist-fasteners-annotated",
+      "path": "assets/images/dex3-wrist-fasteners-annotated.svg",
+      "source_file": "Dex3 Hands.pptx",
+      "source_sha256": "74bcff9b4cfac580074d489c83374d76edcb46c8555c3ea244afa81d11748a41",
+      "sha256": "ba25c996ede091b8897ee80ba9ae642cce1ba646309bada63fdba80dd7ef5884",
+      "bytes": 429833,
+      "context": "annotated-hardware-photo",
+      "caption": "Overview and magnified view of the two wrist screws marked in slide 6. The rings preserve the indicated screw locations; procedural text is in the page caption.",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458",
+      "figure_layout": "assets/hardware-figures.json",
+      "preparation_command": "python3 tools/build_hardware_figures.py",
+      "review": "Photos preserved; source features visually checked, editable vector callouts and detail panels added; captions in Markdown.",
+      "source_slides": [
+        6
+      ]
+    },
+    {
+      "id": "dex3-connector-routing-annotated",
+      "path": "assets/images/dex3-connector-routing-annotated.svg",
+      "source_file": "Dex3 Hands.pptx",
+      "source_sha256": "74bcff9b4cfac580074d489c83374d76edcb46c8555c3ea244afa81d11748a41",
+      "sha256": "ac952eb4122c46c0abd25dab90bb956daf16d6272b44f5b92a33c468a2f07500",
+      "bytes": 4886765,
+      "context": "annotated-hardware-photo",
+      "caption": "Overview with the connector gap marked, a magnified view numbered 1, and the seated hand numbered 2. The gap location follows slide 7; the original photos are unchanged.",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458",
+      "figure_layout": "assets/hardware-figures.json",
+      "preparation_command": "python3 tools/build_hardware_figures.py",
+      "review": "Photos preserved; source features visually checked, editable vector callouts and detail panels added; captions in Markdown.",
+      "source_slides": [
+        7
+      ]
+    },
+    {
+      "id": "dex3-cable-routing-annotated",
+      "path": "assets/images/dex3-cable-routing-annotated.svg",
+      "source_file": "Dex3 Hands.pptx",
+      "source_sha256": "74bcff9b4cfac580074d489c83374d76edcb46c8555c3ea244afa81d11748a41",
+      "sha256": "d22c547e958661022ed26187e3cf8c44796fa8b080f904d3b37b522e371502ac",
+      "bytes": 494270,
+      "context": "annotated-hardware-photo",
+      "caption": "Overview of the installed hands with three magnified details: 1 protective cable sleeve, 2 reusable zip ties, and 3 the sticker marking cable slack. Feature positions are taken from slide 8.",
+      "chapter": "hardware/robot.md",
+      "creator": "sri299792458",
+      "figure_layout": "assets/hardware-figures.json",
+      "preparation_command": "python3 tools/build_hardware_figures.py",
+      "review": "Photos preserved; source features visually checked, editable vector callouts and detail panels added; captions in Markdown.",
+      "source_slides": [
+        8
+      ]
+    },
+    {
+      "id": "head-pitch-witness-mark-annotated",
+      "path": "assets/images/head-pitch-witness-mark-annotated.svg",
+      "source_file": "PXL_20260921_221948907.jpg",
+      "source_sha256": "f89dbb424874bccc04f14de4d05656c91054fa69a25b1bc30122cea6b5741784",
+      "sha256": "881f3fd1423be25cab5be110d0182fe91fb6cf88eccd8f9c3e46263d7f90b55c",
+      "bytes": 3309964,
+      "context": "annotated-hardware-photo",
+      "caption": "Overview of the head support with the white witness mark circled, linked to an enlarged detail numbered 1. The author identifies this mark as the reference for calibrated head pitch.",
+      "chapter": "hardware/camera.md",
+      "creator": "sri299792458",
+      "figure_layout": "assets/hardware-figures.json",
+      "preparation_command": "python3 tools/build_hardware_figures.py",
+      "review": "Photos preserved; source features visually checked, editable vector callouts and detail panels added; captions in Markdown."
     }
   ],
   "publication_release": {

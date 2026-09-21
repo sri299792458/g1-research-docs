@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "note": "Editable layouts over unchanged photos, with source provenance per figure. Dex3 slide feature positions were checked against native slide rendering. Captions and instructions remain in Markdown.",
+  "figures": [
+    {
+      "id": "dex3-wrist-fasteners-annotated",
+      "title": "Dex3 wrist attachment screws",
+      "description": "Overview and magnified view of the two wrist screws marked in slide 6. The rings preserve the indicated screw locations; procedural text is in the page caption.",
+      "canvas": [
+        1200,
+        600
+      ],
+      "output": "assets/images/dex3-wrist-fasteners-annotated.svg",
+      "source_slides": [
+        6
+      ],
+      "sources": {
+        "fasteners": {
+          "path": "assets/images/dex3-wrist-fasteners.jpg",
+          "sha256": "de1ed359de70431a7aacab0db3cb90ef299650ddfbca8ad2bebf6e9de671bbc9",
+          "pixels": [
+            2048,
+            1536
+          ],
+          "mime": "image/jpeg"
+        }
+      },
+      "panels": [
+        {
+          "id": "overview",
+          "source": "fasteners",
+          "position": [
+            20,
+            25,
+            730
+          ]
+        },
+        {
+          "id": "detail",
+          "source": "fasteners",
+          "position": [
+            800,
+            210,
+            380
+          ],
+          "region": [
+            0.36,
+            0.46,
+            0.34,
+            0.23
+          ],
+          "badge": "1"
+        }
+      ],
+      "callouts": [
+        {
+          "panel": "overview",
+          "feature": [
+            0.4427216391240935,
+            0.5680687374810708
+          ],
+          "radius": 14,
+          "detail": "detail"
+        },
+        {
+          "panel": "overview",
+          "feature": [
+            0.6438989605838391,
+            0.5333384074099253
+          ],
+          "radius": 14
+        }
+      ],
+      "source_file": "Dex3 Hands.pptx",
+      "source_sha256": "74bcff9b4cfac580074d489c83374d76edcb46c8555c3ea244afa81d11748a41"
+    },
+    {
+      "id": "dex3-connector-routing-annotated",
+      "title": "Route the connectors before seating the Dex3 hand",
+      "description": "Overview with the connector gap marked, a magnified view numbered 1, and the seated hand numbered 2. The gap location follows slide 7; the original photos are unchanged.",
+      "canvas": [
+        1200,
+        640
+      ],
+      "output": "assets/images/dex3-connector-routing-annotated.svg",
+      "source_slides": [
+        7
+      ],
+      "sources": {
+        "gap": {
+          "path": "assets/images/dex3-connector-routing.png",
+          "sha256": "5cb4ec58de9d09ae0592f8ac062ce077b2fb5883cc883dfebccc3b294a115e6b",
+          "pixels": [
+            1511,
+            1133
+          ],
+          "mime": "image/png"
+        },
+        "seated": {
+          "path": "assets/images/dex3-hand-seated.png",
+          "sha256": "6507dd6d957c39f5a09e725b8dc743d006ae8dd3743eaec33a96f099d8ddcd08",
+          "pixels": [
+            1511,
+            1133
+          ],
+          "mime": "image/png"
+        }
+      },
+      "panels": [
+        {
+          "id": "overview",
+          "source": "gap",
+          "position": [
+            20,
+            70,
+            700
+          ]
+        },
+        {
+          "id": "detail",
+          "source": "gap",
+          "position": [
+            810,
+            20,
+            360
+          ],
+          "region": [
+            0.24,
+            0.18,
+            0.3,
+            0.3
+          ],
+          "badge": "1"
+        },
+        {
+          "id": "seated",
+          "source": "seated",
+          "position": [
+            810,
+            340,
+            360
+          ],
+          "badge": "2"
+        }
+      ],
+      "callouts": [
+        {
+          "panel": "overview",
+          "feature": [
+            0.3926995936636195,
+            0.3603182660187756
+          ],
+          "radius": 27,
+          "detail": "detail"
+        }
+      ],
+      "source_file": "Dex3 Hands.pptx",
+      "source_sha256": "74bcff9b4cfac580074d489c83374d76edcb46c8555c3ea244afa81d11748a41"
+    },
+    {
+      "id": "dex3-cable-routing-annotated",
+      "title": "Dex3 cable routing and reinstall markers",
+      "description": "Overview of the installed hands with three magnified details: 1 protective cable sleeve, 2 reusable zip ties, and 3 the sticker marking cable slack. Feature positions are taken from slide 8.",
+      "canvas": [
+        1160,
+        780
+      ],
+      "output": "assets/images/dex3-cable-routing-annotated.svg",
+      "source_slides": [
+        8
+      ],
+      "sources": {
+        "routing": {
+          "path": "assets/images/dex3-cable-routing.jpg",
+          "sha256": "e4155a82249d7f746e989697a4db68f0e4e76f4c91db133530d8b1ba450aa000",
+          "pixels": [
+            1536,
+            2048
+          ],
+          "mime": "image/jpeg"
+        }
+      },
+      "panels": [
+        {
+          "id": "overview",
+          "source": "routing",
+          "position": [
+            20,
+            46,
+            520
+          ]
+        },
+        {
+          "id": "sleeve",
+          "source": "routing",
+          "position": [
+            740,
+            20,
+            390
+          ],
+          "region": [
+            0.64,
+            0.48,
+            0.36,
+            0.15
+          ],
+          "badge": "1"
+        },
+        {
+          "id": "ties",
+          "source": "routing",
+          "position": [
+            740,
+            280,
+            390
+          ],
+          "region": [
+            0.64,
+            0.57,
+            0.36,
+            0.15
+          ],
+          "badge": "2"
+        },
+        {
+          "id": "slack",
+          "source": "routing",
+          "position": [
+            740,
+            540,
+            390
+          ],
+          "region": [
+            0.64,
+            0.66,
+            0.36,
+            0.15
+          ],
+          "badge": "3"
+        }
+      ],
+      "callouts": [
+        {
+          "panel": "overview",
+          "feature": [
+            0.87061215030916,
+            0.5469493678263303
+          ],
+          "radius": 18,
+          "detail": "sleeve"
+        },
+        {
+          "panel": "overview",
+          "feature": [
+            0.7904598119551053,
+            0.6463768589179495
+          ],
+          "radius": 18,
+          "detail": "ties"
+        },
+        {
+          "panel": "overview",
+          "feature": [
+            0.8358232110149635,
+            0.7276021544620851
+          ],
+          "radius": 18,
+          "detail": "slack"
+        }
+      ],
+      "source_file": "Dex3 Hands.pptx",
+      "source_sha256": "74bcff9b4cfac580074d489c83374d76edcb46c8555c3ea244afa81d11748a41"
+    },
+    {
+      "id": "head-pitch-witness-mark-annotated",
+      "title": "White witness mark for calibrated head pitch",
+      "description": "Overview of the head support with the white witness mark circled, linked to an enlarged detail numbered 1. The author identifies this mark as the reference for calibrated head pitch.",
+      "canvas": [
+        1200,
+        760
+      ],
+      "output": "assets/images/head-pitch-witness-mark-annotated.svg",
+      "source_file": "PXL_20260921_221948907.jpg",
+      "source_sha256": "f89dbb424874bccc04f14de4d05656c91054fa69a25b1bc30122cea6b5741784",
+      "sources": {
+        "head": {
+          "path": "assets/images/realsense-head-pitch-witness-mark.jpg",
+          "sha256": "7fd86a5e22ea008ba8417c0cc7b8e41ac9ba10594712e2e743fb5ed474a9a269",
+          "pixels": [
+            3000,
+            4000
+          ],
+          "mime": "image/jpeg"
+        }
+      },
+      "panels": [
+        {
+          "id": "overview",
+          "source": "head",
+          "position": [
+            20,
+            20,
+            540
+          ]
+        },
+        {
+          "id": "detail",
+          "source": "head",
+          "position": [
+            760,
+            185,
+            400
+          ],
+          "region": [
+            0.41,
+            0.5,
+            0.28,
+            0.2
+          ],
+          "badge": "1"
+        }
+      ],
+      "callouts": [
+        {
+          "panel": "overview",
+          "feature": [
+            0.525,
+            0.577
+          ],
+          "radius": 21,
+          "detail": "detail"
+        }
+      ]
+    }
+  ]
+}

@@ -10,7 +10,7 @@ can be resolved without inventing installation facts or performance claims.
 | Topic | Input needed | Why it matters |
 |---|---|---|
 | Dex3 installation | Deck now establishes the 4-pin, 300 mm JST-GH extension and photographed routing/fitting; still need pinout, power-isolation steps, present fastener condition and linked boot video | Complete the walkthrough without generalizing this robot's damaged threads or using slide order as an operating procedure |
-| Current robot | Photograph of support, harness, hands, waist configuration and camera witness mark | The physical configuration changed between June and September |
+| Current robot | Head-pitch witness mark now photographed; still record the complete intended support, harness, hands and waist configuration together | The physical configuration changed between June and September |
 | Marker mounts | Final prints on both hands, third-pad contact, screw fit and target orientation | CAD dimensions alone do not prove the physical mount seats correctly |
 | Torso carrier | Lower M6 reach, measured upper engagement, and complete V7 assembly/board repeatability | V7/R2 is current; partial coupon trials and recorded CAD checks do not qualify the torso reference |
 | Licensing | Documentation license and asset attribution review | A public repository is not itself a blanket reuse license |

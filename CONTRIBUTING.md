@@ -54,6 +54,9 @@ reported evidence and write in a direct lab-guide voice.
 
 Add selected publication images with meaningful alt text and captions. Update
 `docs/assets/media.json` with the source, context, review status and checksum.
+For annotated hardware photos, edit `docs/assets/hardware-figures.json` and
+run `python3 tools/build_hardware_figures.py`. Keep captions and instructions
+in Markdown; review that each callout still identifies the intended feature.
 Keep larger videos in versioned releases and originals in backed-up lab storage.
 Test playback independently from download links. Do not commit raw bags,
 credentials or expiring share URLs.

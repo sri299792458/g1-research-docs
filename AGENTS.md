@@ -25,6 +25,9 @@
 - Update docs/assets/code-map.json deliberately and regenerate the code index
   with `python3 tools/build_code_index.py`. Run its `--check`, the strict Sphinx
   build, `git diff --check` and desktop browser checks for affected content.
+- Hardware photo annotations use editable SVG layouts in
+  docs/assets/hardware-figures.json. Keep captions/instructions in Markdown.
+  Regenerate with tools/build_hardware_figures.py and run its --check after edits.
 - Keep datasets outside Git. Selected Drive downloads have separate README and
   checksums. Do not claim a public link exists before the upload is verified.
 - Keep the personal portfolio and eventual lab-maintained copy attributable,

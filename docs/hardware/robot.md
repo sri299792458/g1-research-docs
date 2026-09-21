@@ -50,28 +50,33 @@ installation photographs and observations come from the lab's `Dex3 Hands.pptx`.
 
 ### Fitting the hand
 
+```{figure} ../assets/images/dex3-wrist-fasteners-annotated.svg
+:name: dex3-wrist-fasteners
+:figclass: annotated-figure
+:alt: Wrist overview with rings around the two attachment screws identified in the installation slides, and a magnified view marked 1.
+
+**Wrist attachment screws.** The two rings identify the screws marked in the
+author's installation slide; detail **1** enlarges that part of the wrist.
+These are distinct from the cover-plate screws discussed below.
+```
+
 The recorded fitting sequence passes the two wrist connectors through the gap,
 then seats and fastens the hand before mating those connectors and closing the
 cover. Excessive insertion force was the operator's cue to stop and check the
 fit. The photographs show the connector path; they do not establish an
 electrical pinout or a complete power-isolation procedure.
 
-::::{container} media-pair
+```{figure} ../assets/images/dex3-connector-routing-annotated.svg
+:name: dex3-connector-routing
+:figclass: annotated-figure
+:alt: Dex3 held beside the wrist, with the connector gap circled and enlarged in detail 1; detail 2 shows the hand seated with the connectors still accessible.
 
-:::{figure} ../assets/images/dex3-connector-routing.png
-:alt: Dex3 held beside the open wrist, with two power connectors passed through the hand mounting gap.
-
-Connectors passed through the gap before seating the hand.
-:::
-
-:::{figure} ../assets/images/dex3-hand-seated.png
-:alt: Dex3 aligned with the wrist while its two connectors remain accessible through the open cover area.
-
-Hand aligned at the wrist; the connectors remain accessible through the cover
-opening. Both photographs are from the installation notes.
-:::
-
-::::
+**Route first, then seat the hand.** Detail **1** shows the two connectors
+passing through the gap indicated in the original slide. Detail **2** shows
+the seated hand with the connectors accessible through the cover opening.
+The installation notes place mating the connectors after seating and fastening
+the hand. Stop and check alignment if insertion requires excessive force.
+```
 
 ### Cable routing and repeated swaps
 
@@ -79,12 +84,16 @@ The routing uses protective cable sleeves and reusable zip ties. A sticker on
 the cable marks the slack to reproduce at the next installation. This makes
 the routing repeatable when swapping between dummy hands and Dex3.
 
-```{figure} ../assets/images/dex3-cable-routing.jpg
-:alt: Front view of the G1 with Dex3 hands, external arm cables, protective sleeves and reusable cable ties.
-:width: 380px
+```{figure} ../assets/images/dex3-cable-routing-annotated.svg
+:name: dex3-cable-routing
+:figclass: annotated-figure
+:alt: Installed hand-cable routing with three circled features and enlarged numbered details: protective sleeve, reusable zip ties, and the sticker marking cable slack.
 
-The lab's installed hand-cable routing. The sleeve protects the exposed wiring;
-the installation notes call for retaining the marked cable slack on reinstall.
+**Cable routing for repeated hand swaps.** **1 — Sleeve:** protects the exposed
+wires. **2 — Reusable zip ties:** secure the routing. **3 — Slack marker:**
+the sticker records how much cable to leave when reinstalling. The callouts
+follow the author's marks in the installation slide; the inset photographs
+enlarge the same source image.
 ```
 
 The hand's `214-R/L-T` identity determines its left/right topic; swapping
@@ -97,6 +106,10 @@ workaround on this particular robot. That is a historical maintenance condition,
 not a general substitute for the intended fasteners. Its linked Unitree manual
 describes an older G1 layout, which the author explicitly distinguishes from
 the lab robot's photographs.
+
+The annotated figures preserve the features indicated in the installation
+slides. Captions and instructions remain page text; the editable figure layouts
+are described in [media maintenance](../reference/media.md#annotated-hardware-figures).
 
 The finished installation walkthrough still needs the electrical pinout,
 power-isolation steps and current fastener condition. The deck's linked

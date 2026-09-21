@@ -92,6 +92,26 @@ head makes a nominal URDF camera transform an initialization, not a measured
 extrinsic. Mark and preserve the head angle within a dataset; after adjustment,
 obtain a new camera registration.
 
+### Head-pitch witness mark
+
+The white witness mark is the lab's physical reference for the calibrated head
+pitch, identified by the author in the photograph below. Include this view when
+recording a setup so another researcher can recognize the intended position.
+
+```{figure} ../assets/images/head-pitch-witness-mark-annotated.svg
+:name: head-pitch-witness-mark
+:figclass: annotated-figure
+:alt: Head and support with a ring around the white witness mark; enlarged detail 1 shows the mark beside the adjustable head support.
+
+**Reference for calibrated head pitch.** Detail **1** shows the white witness
+mark on the head support. Reference photograph supplied September 21.
+```
+
+Match the physical head position to the setup recorded for the selected bundle.
+The mark helps reproduce that position, but it does not measure how accurately
+the camera returned to it. If the head has been adjusted, obtain a new camera
+registration before relying on the old robot-to-camera transform.
+
 ## Freshness and pairing
 
 Keep the sensor header timestamp, local monotonic receipt time, complete

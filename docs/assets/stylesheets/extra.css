@@ -4,6 +4,9 @@ article img { height: auto; }
 article table { font-size: 0.91rem; }
 
 /* Native video controls and ordinary figures keep media easy to maintain. */
+article figure.annotated-figure { margin: 1.5rem 0; }
+article figure.annotated-figure img { display: block; width: 100%; height: auto; }
+article figure.annotated-figure figcaption { text-align: left; margin-top: 0.75rem; line-height: 1.6; }
 article .research-video { margin: 1.5rem 0; }
 article .research-video figcaption { margin-top: 0.6rem; }
 article .research-video .video-download { margin-top: 0.5rem; font-size: 0.9rem; }
