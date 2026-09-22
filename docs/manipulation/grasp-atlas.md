@@ -1,28 +1,40 @@
 # GraspGen-X and offline qualification
 
-The offline pipeline binds a hand descriptor, canonical grasp frame, generated candidate identity and simulation evidence. A proposal must survive task-specific qualification before it becomes a hardware candidate.
+GraspGen-X supplies candidate hand poses; it does not decide whether a G1 can
+pick an object off a table. The work here adapts its Dex3 conditioning, tests
+retention in simulation and reduces the proposals to candidates the task
+planner can use.
 
-```mermaid
-flowchart TB
-  accTitle: Offline proposals become qualified candidates
-  accDescr: A pinned Dex3 descriptor supplies the canonical frame and conditioning sweep to GraspGen-X. Raw proposals retain hashes and IDs. Isaac qualification supplies contact evidence, then task/support checks reduce the candidate set for planning.
-  D["Dex3 descriptor<br/>and canonical frame"] --> G["GraspGen-X<br/>raw proposals"]
-  G --> I["Isaac intrinsic<br/>qualification"]
-  I --> S["Support, approach<br/>and closing checks"]
-  S --> P["Task candidate pool"]
-```
+For the demonstrated cubes, begin with the [runtime object profiles](../perception/targets.md#use-the-profile-that-matches-the-physical-cube)
+and their matched shortlists. Use this chapter when changing the hand,
+object or qualification procedure, or diagnosing why a simulated grasp failed
+on hardware. Regenerating proposals alone does not replace those checks.
 
-## Follow the code
+## Three different questions
 
-| Diagram component | Code entry point | Responsibility |
+| Qualification | Question | What a pass does not establish |
 |---|---|---|
-| Descriptor/frame | [build_dex3_rev1_descriptors.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/tools/build_dex3_rev1_descriptors.py#L189) · `derive_frame_and_sweep` | Derive the canonical origin and retain the exact conditioning sweep. |
-| Raw generation | [run_aprilcube_raw_grasps.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/tools/run_aprilcube_raw_grasps.py#L204) · `run_atlas` | Bind seeds, descriptor and immutable candidate identities. |
-| Qualification runner | [run_isaac_atlas_qualification.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/tools/run_isaac_atlas_qualification.py#L145) · `run_shard` | Run and retain the configured Isaac qualification evidence. |
-| Shortlist construction | [executable_shortlist.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/grasping/executable_shortlist.py#L257) · `build_shortlist` | Join candidates to contact traces and check provenance and geometry. |
-| Support analysis | [support_atlas.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/grasping/support_atlas.py#L462) · `evaluate_support` | Evaluate a declared support and approach corridor without claiming a physics pass. |
+| Intrinsic retention | Can this hand/object/contact setup retain the object? | Table access or robot reachability |
+| Supported pickup | Can it approach and close from this resting pose? | A collision-free whole-arm route |
+| Robot execution | Can the measured robot execute and recover the complete task? | Generalization to every object/support |
 
-The linked grasp-demo code is the historical offline implementation. Its shortlist fields are not automatically the final hardware command contract: the later stationary-cube/fixed-close qualification below supersedes use of achieved simulated finger joints as a closing target. Keep that correction when adapting this pipeline.
+Early Newton hand-only tests prescribed the root through the table. Those
+tests could not judge intrinsic grasp quality, and an ejected object reaching
+height was not a valid lift. Later evaluation separated these questions.
+
+<figure class="research-video">
+  <video controls playsinline preload="none" poster="../_static/dex3-simulated-retention-demo.jpg" width="1280" height="720" aria-label="Simulated Dex3 grasp retention under five disturbances" aria-describedby="retention-demo-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/dex3-simulated-retention-demo.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the download link below.
+  </video>
+  <figcaption id="retention-demo-caption">Rendered replay labelled as recorded Isaac/PhysX states: grasp pose, close/settle, five directional disturbances, then an on-screen retention pass. This is a simulated tug test. Silent, 6 seconds.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/dex3-simulated-retention-demo.mp4">Download the simulated retention demo (MP4)</a></p>
+</figure>
+
+The clip illustrates the retention question. Its on-screen pass does not
+establish table clearance, arm reachability or hardware grasp success. The
+specific replay's candidate ID and generating report have not yet been linked,
+so do not use it to reconstruct or extend the aggregate counts below.
 
 ## The network's output is not the palm pose
 
@@ -56,32 +68,6 @@ The retained descriptor therefore acts as learned conditioning, not a literal
 physical enclosure. Its open extents/center were `[0.10, 0.06, 0.04]` and
 `[0, 0, 0.07]` metres; half-close values were `[0.04, 0.06, 0.04]` and
 `[0.007, 0, 0.06]`. Exact physical geometry still governs evaluation.
-
-## Three different questions
-
-| Qualification | Question | What a pass does not establish |
-|---|---|---|
-| Intrinsic retention | Can this hand/object/contact setup retain the object? | Table access or robot reachability |
-| Supported pickup | Can it approach and close from this resting pose? | A collision-free whole-arm route |
-| Robot execution | Can the measured robot execute and recover the complete task? | Generalization to every object/support |
-
-Early Newton hand-only tests prescribed the root through the table. Those
-tests could not judge intrinsic grasp quality, and an ejected object reaching
-height was not a valid lift. Later evaluation separated these questions.
-
-<figure class="research-video">
-  <video controls playsinline preload="none" poster="../_static/dex3-simulated-retention-demo.jpg" width="1280" height="720" aria-label="Simulated Dex3 grasp retention under five disturbances" aria-describedby="retention-demo-caption">
-    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/dex3-simulated-retention-demo.mp4" type="video/mp4">
-    Your browser cannot play this video. Use the download link below.
-  </video>
-  <figcaption id="retention-demo-caption">Rendered replay labelled as recorded Isaac/PhysX states: grasp pose, close/settle, five directional disturbances, then an on-screen retention pass. This is a simulated tug test. Silent, 6 seconds.</figcaption>
-  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/dex3-simulated-retention-demo.mp4">Download the simulated retention demo (MP4)</a></p>
-</figure>
-
-The clip illustrates the retention question. Its on-screen pass does not
-establish table clearance, arm reachability or hardware grasp success. The
-specific replay's candidate ID and generating report have not yet been linked,
-so do not use it to reconstruct or extend the aggregate counts below.
 
 ## Physics configuration changed the result
 
@@ -124,11 +110,23 @@ a stationary cube and the fixed close admitted five 40 mm grasps. Later
 of 5.008–15.988 mm against a 5 mm floor.
 
 The controller now evaluates contact relative to commissioned measured
-empty-close postures. See [pickup and stacking](tasks.md). Older grasp-demo
+empty-close postures. See [contact interpretation](planning.md#interpreting-contact-before-using-a-payload-route). Older grasp-demo
 instructions to send `isaac_closed_q` and use the tripod are superseded.
 
 Evidence: complete July/August grasp-demo log, followed by tabletop physical
 close corrections. [Source identities](../reference/sources.md).
+
+## Follow the code
+
+| Implementation concern | Code entry point | Responsibility |
+|---|---|---|
+| Descriptor/frame | [build_dex3_rev1_descriptors.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/tools/build_dex3_rev1_descriptors.py#L189) · `derive_frame_and_sweep` | Derive the canonical origin and retain the exact conditioning sweep. |
+| Raw generation | [run_aprilcube_raw_grasps.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/tools/run_aprilcube_raw_grasps.py#L204) · `run_atlas` | Bind seeds, descriptor and immutable candidate identities. |
+| Qualification runner | [run_isaac_atlas_qualification.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/tools/run_isaac_atlas_qualification.py#L145) · `run_shard` | Run and retain the configured Isaac qualification evidence. |
+| Shortlist construction | [executable_shortlist.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/grasping/executable_shortlist.py#L257) · `build_shortlist` | Join candidates to contact traces and check provenance and geometry. |
+| Support analysis | [support_atlas.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/grasping/support_atlas.py#L462) · `evaluate_support` | Evaluate a declared support and approach corridor without claiming a physics pass. |
+
+The linked grasp-demo code is the historical offline implementation. Its shortlist fields are not automatically the final hardware command contract: the later stationary-cube/fixed-close qualification below supersedes use of achieved simulated finger joints as a closing target. Keep that correction when adapting this pipeline.
 
 ## Checks and evidence to inspect
 

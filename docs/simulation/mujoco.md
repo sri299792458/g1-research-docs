@@ -15,6 +15,19 @@ This chapter covers that initial backend and its arm/hand demonstrations.
 The later tabletop controller has its own [ownership and recovery lifecycle](../control/ownership.md);
 the cube-stacking pipeline has not been validated against this backend.
 
+## Choose a reading path
+
+- To run the arm/hand demonstration, use [setup](#set-up-the-pinned-version)
+  and [launch instructions](#run-the-arm-and-hand-demonstration).
+- To change the simulator, read the command/feedback map below, the
+  [bridge contracts](#command-and-state-contracts) and [code entry points](#follow-the-code).
+- To judge what was demonstrated, see the [videos](#demonstrations) and
+  [limits](#limits-and-useful-extension-points).
+
+The diagram shows the feedback loop: OpenHomie updates the legs from simulated
+state while the application supplies upper-body and hand intent through DDS.
+The plant combines those inputs before stepping physics.
+
 ```mermaid
 flowchart TB
   accTitle: MuJoCo command and feedback paths
@@ -27,26 +40,6 @@ flowchart TB
   S -->|local observation| P
   S -->|DDS feedback| A
 ```
-
-## Follow the code
-
-All links below refer to G1Pilot `dev` at
-[`dadd88f`](https://github.com/sri299792458/g1pilot/tree/dadd88f985bb5772f279019b8882208ec59ae4f0).
-Start with the plant's `run()` method, then follow a command through to the
-state returned to the application.
-
-| Component | Entry point | Responsibility |
-|---|---|---|
-| Main loop | [mujoco_plant.py · `G1PilotMujocoPlant.run`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L671) | Order command assembly, physics, state publication and policy updates. |
-| DDS bridge | [mujoco_plant.py · `G1PilotUnitreeBridge`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L280) | Store incoming commands and pack outgoing state. |
-| Command assembly | [mujoco_plant.py · `build_body_command`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L631) | Combine policy leg targets with waist-yaw/arm intent. Hands have a separate command path. |
-| Physics | [mujoco_plant.py · `G1PilotMujocoEnv.sim_step`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L592) | Compute body/hand torques and call `mujoco.mj_step`. |
-| Policy input | [openhomie_policy.py · `compute_openhomie_observation`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/openhomie_policy.py#L45) | Construct one observation; the plant stacks history and schedules inference. |
-| Application wiring | [mujoco_openhomie_manipulation.launch.py · `_launch_setup`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/launch/mujoco_openhomie_manipulation.launch.py#L21) | Start the ROS state, RViz, OpenSoT and Dex3 path on the selected DDS interface/domain. |
-| Arm intent | [opensot_solver.py · `control_loop`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/opensot_solver.py#L938) | Turn enabled arm goals into `rt/arm_sdk` commands. |
-| Hand intent | [dx3_hand.py · `_apply_named_command`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/dx3_hand.py#L261), [`publish_once`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/dx3_hand.py#L325) | Convert named hand commands into joint targets and publish smoothed intent. |
-| ROS state | [robot_state.py · `callback_lowstate`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/state/robot_state.py#L122) | Convert body DDS feedback to ROS joint and IMU messages. |
-| Physical model | [generate_openhomie_g1_29dof_xml.py · `generate`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/scripts/generate_openhomie_g1_29dof_xml.py#L316) | Generate the locked-waist model with active Dex3 fingers, actuators and sensors. |
 
 ## What the backend owns
 
@@ -339,3 +332,23 @@ The code, model structure and sampled demo frames were reviewed for this
 chapter. No simulator, model generator or diagnostic was executed for the guide.
 A clean-workspace reproduction and measured simulation results remain useful
 next steps for extending this initial backend.
+
+## Follow the code
+
+All links below refer to G1Pilot `dev` at
+[`dadd88f`](https://github.com/sri299792458/g1pilot/tree/dadd88f985bb5772f279019b8882208ec59ae4f0).
+Start with the plant's `run()` method, then follow a command through to the
+state returned to the application.
+
+| Component | Entry point | Responsibility |
+|---|---|---|
+| Main loop | [mujoco_plant.py · `G1PilotMujocoPlant.run`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L671) | Order command assembly, physics, state publication and policy updates. |
+| DDS bridge | [mujoco_plant.py · `G1PilotUnitreeBridge`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L280) | Store incoming commands and pack outgoing state. |
+| Command assembly | [mujoco_plant.py · `build_body_command`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L631) | Combine policy leg targets with waist-yaw/arm intent. Hands have a separate command path. |
+| Physics | [mujoco_plant.py · `G1PilotMujocoEnv.sim_step`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/mujoco_plant.py#L592) | Compute body/hand torques and call `mujoco.mj_step`. |
+| Policy input | [openhomie_policy.py · `compute_openhomie_observation`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/simulation/openhomie_policy.py#L45) | Construct one observation; the plant stacks history and schedules inference. |
+| Application wiring | [mujoco_openhomie_manipulation.launch.py · `_launch_setup`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/launch/mujoco_openhomie_manipulation.launch.py#L21) | Start the ROS state, RViz, OpenSoT and Dex3 path on the selected DDS interface/domain. |
+| Arm intent | [opensot_solver.py · `control_loop`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/opensot_solver.py#L938) | Turn enabled arm goals into `rt/arm_sdk` commands. |
+| Hand intent | [dx3_hand.py · `_apply_named_command`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/dx3_hand.py#L261), [`publish_once`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/manipulation/dx3_hand.py#L325) | Convert named hand commands into joint targets and publish smoothed intent. |
+| ROS state | [robot_state.py · `callback_lowstate`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/g1pilot/state/robot_state.py#L122) | Convert body DDS feedback to ROS joint and IMU messages. |
+| Physical model | [generate_openhomie_g1_29dof_xml.py · `generate`](https://github.com/sri299792458/g1pilot/blob/dadd88f985bb5772f279019b8882208ec59ae4f0/scripts/generate_openhomie_g1_29dof_xml.py#L316) | Generate the locked-waist model with active Dex3 fingers, actuators and sensors. |

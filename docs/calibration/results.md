@@ -1,23 +1,13 @@
 # Calibration results and limits
 
-The summer produced useful effective calibration and substantial evidence
-about where the model disagreed with the robot. Pixel residuals, successful
-capture and completed manipulation are different outcomes; this page keeps
-their conditions visible.
+The **August 12 bundle remains the demonstrated manipulation reference**.
+Later collections helped investigate the model's errors but did not supply a
+deployed replacement.
 
-## Early effective corrections
-
-The manual session contained 39 observations and 273 images. A camera/target
-extrinsic fit gave approximately 8.205 px residual. Adding an effective
-shoulder-roll correction of +4.346° reduced it to 4.875 px; allowing all offsets
-gave 4.363 px. The extra parameters did not by themselves identify a physical
-cause. Capture 028 was later confirmed to involve stream lag, not demonstrated
-compliance. Removing it barely changed the shoulder correction.
-
-In a right-hand 62-primary study, fixing the marker at its CAD transform gave
-23.045 px holdout error versus 9.737 px when it was free. The effective marker
-correction was 13.638 mm and 4.621°. Those are fitted compensation values,
-not measurements of how far the printed mount was misplaced.
+Use pixel residuals to compare declared models on the same retained data and
+split. Use capture/cleanup status to judge the collection, and separately
+observed task outcomes to judge manipulation. These three results answer
+different questions.
 
 ## The August 12 stacking baseline
 
@@ -33,6 +23,20 @@ deployment connection, but 13 completed recordings are not 13 independently
 scored stacking successes. The five August 25 completion records also need
 separate physical outcome annotation. The bundle does not establish absolute FK
 accuracy everywhere in the workspace.
+
+## Early effective corrections
+
+The manual session contained 39 observations and 273 images. A camera/target
+extrinsic fit gave approximately 8.205 px residual. Adding an effective
+shoulder-roll correction of +4.346° reduced it to 4.875 px; allowing all offsets
+gave 4.363 px. The extra parameters did not by themselves identify a physical
+cause. Capture 028 was later confirmed to involve stream lag, not demonstrated
+compliance. Removing it barely changed the shoulder correction.
+
+In a right-hand 62-primary study, fixing the marker at its CAD transform gave
+23.045 px holdout error versus 9.737 px when it was free. The effective marker
+correction was 13.638 mm and 4.621°. Those are fitted compensation values,
+not measurements of how far the printed mount was misplaced.
 
 ## September 5: broader capture, export still blocked
 

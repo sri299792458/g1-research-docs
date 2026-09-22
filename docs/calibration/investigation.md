@@ -1,11 +1,22 @@
 # Reading the calibration investigation correctly
 
-The investigation already contains many completed comparisons and operator
-corrections. This page summarizes the current conclusions from the private investigation
-ledger, which records 85 experiment entries and 46 model conditions. Start here
-and with the [calibration results](results.md); use the detailed ledger when
-available. An unavailable private report is not evidence that a hypothesis
-has never been tested.
+Read this before proposing another explanation for the remaining calibration
+error. It preserves the completed comparisons that most affect the next
+engineering decision. The public conclusions below are usable without the
+private working ledger; consult that ledger when available for the full
+experiment trail and operator corrections.
+
+| Proposed direction | What has already been learned |
+|---|---|
+| Add poses or depth | Broad arm excitation and one/two-run RGB-D fits were already tested; depth did not consistently improve held-out RGB results |
+| Attribute differences between September sessions to camera drift | The camera was deliberately repositioned; each session needs its own registration |
+| Replace measured joints with ideal command tracking | Calibration already uses measured state; ordinary tracking error does not explain the remaining model discrepancy |
+| Change wrist spacing from 46 to 51 mm | Broad fits favored it, but the controlled August refit improved only about 7%; changing geometry without refitting made error worse |
+
+The camera explanation was treated as excluded in the retained investigation;
+that is the scope of this diagnosis, not a claim that cameras can never be a
+source of error. The [results page](results.md) separates the deployed bundle
+from later research.
 
 ## What the observations do and do not support
 

@@ -5,23 +5,33 @@ guide. Keep its text alongside the explanation so a future maintainer can
 review changes in Git. The diagram should answer one question that its
 surrounding paragraph makes explicit.
 
-## Connect the diagram to implementation
+## Decide whether a diagram helps
 
-Open a technical chapter with a diagram that answers its main implementation
-question. Follow it with a small table mapping the components to actual files
-and functions/classes. Explain the inputs, outputs and conditions in the same
-order as the graph, then give design reasons, failure cases and validation.
-The [planning chapter](../manipulation/planning.md) demonstrates this structure.
+First write the question the reader needs answered. If the diagram adds only
+boxes around terms already listed in a paragraph, omit it. A chapter does not
+need a diagram at its start, or anywhere else.
 
-Keep the graph meaningful as plain Mermaid source: use descriptive node labels
-and name what crosses important edges. Both readers and agents can use those
-relationships. Code links supply exact locations; prose supplies assumptions
-and limits that a box or arrow cannot express fully.
+For example, a reader choosing a wrist mount needs the right/left print files,
+marker IDs and an assembly view. A graph from “CAD” to “physical geometry”
+does not help them fit the part. A reader changing control ownership does need
+to see which process can recover the robot if the laptop stops responding.
 
-Use the [code index](code-index.md) for exact source availability. Do not draw
-a rejected experiment as the current runtime, or merge two coordinators merely
-because they use the same planner. A component diagram is not a startup
-sequence; state explicitly which question it answers.
+Use a table for choices or parameter comparisons, a numbered procedure for
+operator actions, and photographs or CAD views for physical identification.
+Keep a diagram when it explains branching, concurrency, a feedback path or
+a spatial relationship that is harder to follow in prose.
+
+## Connect a useful diagram to implementation
+
+Explain its question and scope immediately before it. Introduce unfamiliar
+terms and state what arrows mean. Follow with the relevant behavior and code
+links; a separate code table is useful when readers need several entry points,
+but is not a mandatory companion to every visual.
+
+Use the [code index](code-index.md) for exact source versions. Do not draw a
+rejected experiment as the current runtime, or merge two coordinators merely
+because they use the same planner. Keep significant conditions in the prose
+so the page remains useful without viewing the rendered graph.
 
 ## Choose the diagram for the question
 
@@ -82,7 +92,8 @@ instead of repeating a custom theme in each diagram.
 Run the normal strict Sphinx build, then open the changed page in a browser.
 Mermaid renders in JavaScript, so a successful Sphinx build alone does not
 prove that a diagram parses or lays out correctly. Check labels, arrow
-endpoints, light/dark mode, a narrow viewport, and the Expand/Escape controls.
+endpoints, light/dark mode and the Expand/Escape controls. Desktop review is the current
+priority; check smaller screens when revisiting responsive layout.
 
 Do not describe an offline check as a physical transition that was tested.
 When drawing control or recovery sequences, trace the exact source ordering

@@ -27,18 +27,7 @@ record the current arrangement again when those conditions change.
 ## Dex3 installation and cable routing
 
 The hand signal connection and wrist power connection follow separate paths.
-The lab used extensions to make the signal connection accessible during swaps:
-
-```mermaid
-flowchart TB
-  accTitle: Dex3 signal and power connections
-  accDescr: The two internal USB 2.0 hand connections are extended outside the torso with 4-pin 300 mm JST-GH cables. Each hand also has wrist power connections. Hand identity determines its left or right topic; the RealSense camera uses a separate USB connection.
-  U["Internal USB 2.0<br/>hand connections"] --> J["4-pin, 300 mm<br/>JST-GH extensions"]
-  J --> H["Left and right Dex3"]
-  P["Wrist power<br/>connections"] --> H
-  H --> I["Hand identity<br/>left/right state topics"]
-```
-
+The lab used extensions to make the signal connection accessible during swaps.
 The extensions were
 **Blue Robotics JST-GH, 4-pin, 300 mm**; the product screenshot shows
 `BR-103531-300`. They bring the two internal hand connections outside the torso,
@@ -47,6 +36,14 @@ these as USB 2.0 hand connections, separate from the RealSense USB 3 connection.
 The [vendor's extension-cable page](https://bluerobotics.com/store/comm-control-power/tether-interface/jst-gh-extension-cables/)
 describes the cable family; it does not supply the G1-specific pinout. The
 installation photographs and observations come from the lab's `Dex3 Hands.pptx`.
+
+### Before using the fitting photographs
+
+This section preserves the lab's mechanical sequence and cable routing. The
+G1-specific electrical pinout, power-isolation procedure and present condition
+of the wrist fasteners still need confirmation; the photographs alone are not
+a complete electrical installation procedure. The [review queue](../reference/review.md)
+tracks those specific gaps.
 
 ### Fitting the hand
 

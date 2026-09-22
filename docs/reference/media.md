@@ -23,6 +23,14 @@ The following original PNGs were visually inspected and copied unchanged from
 | `u-support-orientations` | [U supports](../manipulation/assembly.md) | Six geometric support orientations; printed counts are geometric candidates |
 | `assembly-scene` | [Assembly scene](../manipulation/assembly.md) | A rendered G1/table/part planning scene, not a photograph |
 
+Two additional CAD views are copied unchanged from the fixture repository at
+`f295def18bd936031fba325d4e8bdfc71fea671a`:
+
+| Stable ID | Figure | What it shows |
+|---|---|---|
+| `dex3-dorsal-mount-cad` | [Wrist-marker placement](../perception/targets.md#dex3-dorsal-markers) | Right-hand plate, screw arrangement and support pads; a CAD view, not a physical fit measurement |
+| `g1-torso-v7-cad` | [V7 torso structure](../perception/targets.md#torso-charuco-carrier) | Modeled crossbars, side plates and board; the assembly still has unresolved fit checks |
+
 The machine-readable catalog is `docs/assets/media.json`. It records exact
 source paths, commit, SHA-256, context, review status and caption. The source
 PNG labels describe their original experiments; the surrounding chapter
@@ -161,7 +169,10 @@ python3 tools/prepare_media.py \
   --asset g1-physical-cube-stacking
 ```
 
-Omit `--asset` to prepare every selected asset. The helper checks source hashes,
+Omit `--asset` to prepare all assets that have a `preparation` recipe in the
+catalog. Unchanged source-repository figures are copied from their pinned
+source paths; generated SVG layouts use the separate figure helper above.
+The preparation helper checks source hashes,
 writes selected images/posters under `docs/assets/`, puts video outputs in the
 specified directory and updates their catalog hashes. Review the resulting
 diff and playback before uploading. Encoder versions can change file bytes,

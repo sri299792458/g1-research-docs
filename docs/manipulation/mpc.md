@@ -1,6 +1,15 @@
 # Moving-target MPC: experimental final approach
 
-Experimental MPC updates only the final pregrasp-to-grasp approach. A solver result is a proposed future window; the command buffer must accept it before the controller uses it.
+This is an experimental attempt to update the last approach as a cube moves.
+It has not established a commissioned moving-object capability. The physical
+trial exposed a conflict between command-space table clearance and endpoint
+tolerance under tracking error; the [constraint analysis](#the-unresolved-physical-constraint-conflict)
+below is the starting point for further development.
+
+The reusable implementation is an asynchronous handoff: the solver proposes a
+future segment while control continues on an already checked segment. The
+diagram answers **what happens if that replacement is accepted, late or rejected?**
+It assumes the low-level controller, state stream and watchdog remain healthy.
 
 ```mermaid
 flowchart TB
@@ -13,17 +22,6 @@ flowchart TB
   Q --> C["Fixed-rate command sampling"]
   H --> C
 ```
-
-## Follow the code
-
-| Diagram component | Code entry point | Responsibility |
-|---|---|---|
-| Moving target update | [tabletop_mpc.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_mpc.py#L1934) · `MovingGraspMPC.update_moving_grasp_goal` | Use the observed object with the selected grasp geometry. |
-| Worker solve | [tabletop_mpc.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_mpc.py#L2269) · `MovingGraspMPC.solve_window` | Produce predicted motion and a command window for the frozen handoff. |
-| Window acceptance | [mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/mpc_command_buffer.py#L359) · `RollingMPCCommandBuffer.install` | Reject stale, fast, discontinuous or wrong-predecessor windows. |
-| Command sampling | [mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/mpc_command_buffer.py#L540) · `RollingMPCCommandBuffer.command` | Sample the accepted window and retain its endpoint hold. |
-
-A high-level solve rejection is distinct from a low-level control fault. The diagram assumes state freshness, the control driver and watchdog remain healthy. The independent safety path still governs an actual loss of control health.
 
 ## Scope narrowed to the final approach
 
@@ -81,6 +79,17 @@ are met before claiming an improved moving-target controller.
 
 Evidence: tabletop MPC development, nonideal replay and August 21 endpoint
 analysis. [Source identities](../reference/sources.md).
+
+## Follow the code
+
+| Implementation concern | Code entry point | Responsibility |
+|---|---|---|
+| Moving target update | [tabletop_mpc.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_mpc.py#L1934) · `MovingGraspMPC.update_moving_grasp_goal` | Use the observed object with the selected grasp geometry. |
+| Worker solve | [tabletop_mpc.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_mpc.py#L2269) · `MovingGraspMPC.solve_window` | Produce predicted motion and a command window for the frozen handoff. |
+| Window acceptance | [mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/mpc_command_buffer.py#L359) · `RollingMPCCommandBuffer.install` | Reject stale, fast, discontinuous or wrong-predecessor windows. |
+| Command sampling | [mpc_command_buffer.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/mpc_command_buffer.py#L540) · `RollingMPCCommandBuffer.command` | Sample the accepted window and retain its endpoint hold. |
+
+A high-level solve rejection is distinct from a low-level control fault. The diagram assumes state freshness, the control driver and watchdog remain healthy. The independent safety path still governs an actual loss of control health.
 
 ## Checks and evidence to inspect
 

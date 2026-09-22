@@ -5,9 +5,15 @@ the robot's normal controller to the research program, then back again. The
 program must keep the body and hands controlled while perception and planning
 run, and complete that handoff even when the task cannot continue.
 
-This chapter traces those responsibilities through the implementation. Start
-with the seated path below; standing calibration uses a different ownership
-mechanism. The [runbook](runbook.md) covers operator preparation and recovery.
+There are three separate responsibilities: the laptop controller continuously
+holds and moves the robot, the GPU worker proposes plans, and the PC2 watchdog
+requests recovery if the controller stops renewing its lease. Keeping the
+planner alive is not enough to establish that control is healthy.
+
+The diagram answers **what keeps running while the planner is busy, and who
+can recover if laptop control stops?** Start with the seated path below;
+standing calibration uses a different ownership mechanism. The
+[runbook](runbook.md) covers operator preparation and recovery.
 
 ```mermaid
 flowchart TB
@@ -21,6 +27,27 @@ flowchart TB
   W -.->|configured fault recovery| R
 ```
 
+## Reuse the lifecycle in another experiment
+
+The task-specific planner can change; the responsibilities below remain.
+The existing coordinators are examples of how the components are composed,
+not a general-purpose API that automatically makes a new task commissioned.
+
+| Responsibility | What an application must preserve | Implementation to read |
+|---|---|---|
+| Enter control | Fresh measured state, matching seated/standing mode, explicit authorization and armed recovery | `PoseExecutor.acquire` and the selected transport |
+| Continue holding | Fixed-rate checks/commands independent of planning, storage and user-interface latency | `ExecutorControlDriver._run` |
+| Install motion | Matching model/scene, current command boundary and complete checked returns | [Planning boundary](../manipulation/planning.md) |
+| Abandon a task | Keep healthy control while following an already checked return | Task coordinator and frozen reverse routes |
+| Handle a control fault | Stop treating the task as recoverable through normal motion; invoke the commissioned PC2 fallback | `PC2DampingWatchdog` and its remote agent |
+| Finish | Observe the required terminal state before closing transport, camera, ROS and recording resources | [Handback and outcome checks](runbook.md) |
+
+The transport choice is fundamental: seated `lowcmd` takes responsibility for
+the complete body, while standing `arm_sdk` shares ownership with firmware.
+Choose that mode before adapting a coordinator. A new planner should return
+motion proposals; it should not create its own competing motor publisher.
+Exact source links appear in [Follow the code](#follow-the-code).
+
 ## Source versions
 
 The seated demo baseline is [`main`](https://github.com/sri299792458/g1-dex3-tabletop/tree/7400aff201c2f73ef2a64e546d72bd66cbe87fd6).
@@ -31,22 +58,6 @@ branch; their [demo coordinator](../reference/code-index.md#code-demo-tabletop)
 and [demo executor](../reference/code-index.md#code-demo-executor) counterparts
 remain available for comparison. September's final standing lifecycle has only
 offline validation.
-
-## Follow the code
-
-| Diagram component | Code entry point | Responsibility |
-|---|---|---|
-| Task coordinator | [hardware_tabletop.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_tabletop.py) · `run_tabletop`, `_restore_seated_control` (September branch) | Order preview, recording, acquisition, task execution and handback. |
-| Fixed-rate driver | [executor_driver.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/executor_driver.py#L187) · `ExecutorControlDriver._run` | Keep ticking and surface faults independently of planning. |
-| Acquisition and execution | [executor_state_machine.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_aprilcube_calibration/executor_state_machine.py#L248) · `PoseExecutor.acquire`, `tick` | Seed acquisition from fresh measurements, then validate state and advance bounded commands. |
-| Seated transport | [unitree_debug_lowcmd.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/transports/unitree_debug_lowcmd.py#L236) · `UnitreeDebugLowCmdTransport.send_command` | Release AI under a guarded transition and send complete body commands. |
-| Standing transport | [unitree_arm_sdk.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_aprilcube_calibration/transports/unitree_arm_sdk.py) · `UnitreeArmSDKTransport.send_command` (September branch) | Use arm-SDK blend ownership, including the measured waist hold. |
-| Laptop watchdog client | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_safety.py#L123) · `PC2DampingWatchdog.start`, `restore_seated`, `restore_zero_torque` | Start the remote agent, send heartbeats and require explicit recovery acknowledgements. |
-| PC2 watchdog agent | [pc2_watchdog_agent.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_watchdog_agent.py#L343) · `run_watchdog` | Enforce the heartbeat deadline on the robot and verify the requested terminal state. |
-
-The GPU worker supplies a proposed route. The control side checks and installs
-it at an exact command boundary; the worker does not publish motor commands.
-See [planning contracts](../manipulation/planning.md) for that interface.
 
 ## Three state concepts
 
@@ -225,8 +236,8 @@ exception into `TabletopTaskRejected` would remove that distinction.
 
 The precise reverse depends on the phase. A failed low retention lift returns
 to support while keeping the hand closed, then opens there; it cannot use an
-arbitrary straight retreat. [Pickup and stacking](../manipulation/tasks.md)
-describes those phase-specific routes.
+arbitrary straight retreat. [Operating and recovering](runbook.md#what-a-normal-seated-run-does)
+describes those phase-specific returns.
 
 ## Finish control before tearing down resources
 
@@ -255,6 +266,22 @@ the next episode; see [recording boundaries](../data/recording.md).
 Evidence: prototype control/recovery report; tabletop August 14–15 and September
 4–5 logs. See [runbook](runbook.md) and [debugging](../reference/debugging.md).
 
+
+## Follow the code
+
+| Implementation concern | Code entry point | Responsibility |
+|---|---|---|
+| Task coordinator | [hardware_tabletop.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_tabletop.py) · `run_tabletop`, `_restore_seated_control` (September branch) | Order preview, recording, acquisition, task execution and handback. |
+| Fixed-rate driver | [executor_driver.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/executor_driver.py#L187) · `ExecutorControlDriver._run` | Keep ticking and surface faults independently of planning. |
+| Acquisition and execution | [executor_state_machine.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_aprilcube_calibration/executor_state_machine.py#L248) · `PoseExecutor.acquire`, `tick` | Seed acquisition from fresh measurements, then validate state and advance bounded commands. |
+| Seated transport | [unitree_debug_lowcmd.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/transports/unitree_debug_lowcmd.py#L236) · `UnitreeDebugLowCmdTransport.send_command` | Release AI under a guarded transition and send complete body commands. |
+| Standing transport | [unitree_arm_sdk.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_aprilcube_calibration/transports/unitree_arm_sdk.py) · `UnitreeArmSDKTransport.send_command` (September branch) | Use arm-SDK blend ownership, including the measured waist hold. |
+| Laptop watchdog client | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_safety.py#L123) · `PC2DampingWatchdog.start`, `restore_seated`, `restore_zero_torque` | Start the remote agent, send heartbeats and require explicit recovery acknowledgements. |
+| PC2 watchdog agent | [pc2_watchdog_agent.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_watchdog_agent.py#L343) · `run_watchdog` | Enforce the heartbeat deadline on the robot and verify the requested terminal state. |
+
+The GPU worker supplies a proposed route. The control side checks and installs
+it at an exact command boundary; the worker does not publish motor commands.
+See [planning contracts](../manipulation/planning.md) for that interface.
 
 ## Checks and evidence to inspect
 

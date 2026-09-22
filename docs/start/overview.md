@@ -1,8 +1,13 @@
 # System map and code entry points
 
-The manipulation pipeline connects calibrated observations to grasp selection,
-planned motion, execution and recordings. Follow the data through this map,
-then enter the code through the task you want to understand or change.
+Use this page when changing the tabletop code. The central question is:
+**what must pass from a camera observation to a robot command, and which
+component is responsible for each step?** For physical setup or operation,
+start with the [hardware](../hardware/robot.md) or [runbook](../control/runbook.md).
+
+The map below describes the demonstrated manipulation pipeline. It is a data
+flow, not a startup sequence. Calibration is loaded as a model; grasp candidates
+are generated offline. Neither is recomputed for each robot command.
 
 ```mermaid
 flowchart TB
@@ -18,19 +23,22 @@ flowchart TB
   E -->|state and outcome| R
 ```
 
-## Enter through the task coordinator
+## Enter through the component you want to reuse
 
-| Path | First code to read | Then follow |
+| Component | Implementation entry points | Read alongside the code |
 |---|---|---|
-| Single-cube trajectory task | `hardware_tabletop.py::run_tabletop` | [Perception](../perception/object-pose.md), [camera state](../perception/state-estimation.md), [planning](../manipulation/planning.md), [task lifecycle](../manipulation/tasks.md) |
-| Direct two-cube stack | `hardware_stack.py::run_stack` | Endpoint candidate intersection, complete transfer planning, contact checks and retained episodes in [stacking](../manipulation/tasks.md#direct-two-cube-transfer) |
-| Standing bilateral calibration | `hardware_bilateral_calibration.py::run_collect_bilateral_calibration` | [Control ownership](../control/ownership.md), [collection and fitting](../calibration/workflow.md), then [results](../calibration/results.md) |
-| Passive tactile study | `Dex3PressureVisualizer` | [Raw recording, baseline and spatial mapping](../sensing/pressure.md) |
-| Offline grasp generation | `run_atlas`, `build_shortlist` | [Frame contract and qualification](../manipulation/grasp-atlas.md), then [support and assembly](../manipulation/assembly.md) |
-| Raw data to LeRobot | `RawEpisodeRecorder`, `convert_episode` | [Lifecycle, completeness and alignment](../data/recording.md) |
+| Control and recovery | `PoseExecutor`, `ExecutorControlDriver`, `PC2DampingWatchdog` | [Ownership modes, continuous holding and verified handback](../control/ownership.md) |
+| Recording and conversion | `RawEpisodeRecorder`, `convert_episode` | [Signals, lifecycle, completeness and alignment](../data/recording.md) |
+| Perception and camera state | `observe_resting_cube`, `AnchoredCameraStateEstimator` | [Observation acceptance](../perception/object-pose.md), [body-motion correction](../perception/state-estimation.md) |
+| Motion planning | `PersistentTabletopPlanner`, `TabletopPlanningSession` | [Measured geometry, commanded starts and recoverable routes](../manipulation/planning.md) |
+| Grasp qualification | `run_atlas`, `build_shortlist` | [Frames and qualification stages](../manipulation/grasp-atlas.md) |
+| Experimental calibration | `run_collect_bilateral_calibration`, `solve_bilateral_dataset` | [Model, retained evidence and collection limits](../calibration/workflow.md) |
+| Passive tactile inspection | `Dex3PressureVisualizer` | [Raw slots, baseline and spatial mapping](../sensing/pressure.md) |
 
-Each linked chapter maps these names to exact file locations. The
-[code index](../reference/code-index.md) resolves pinned public versions and their branch boundaries. [Setup](setup.md) describes the separate environments.
+Each linked chapter maps these names to exact files. The
+[code index](../reference/code-index.md) supplies pinned versions; [setup](setup.md)
+describes separate environments. To see components composed into an application,
+use `hardware_stack.py::run_stack` in the [cube-stacking case study](../manipulation/tasks.md).
 
 ## Preserve the interfaces when extending a component
 
@@ -53,8 +61,8 @@ interfaces in detail.
 ## Using this guide with an agent
 
 Point the agent at the subsystem's Markdown page and its source checkout.
-Have it follow the Mermaid graph into the mapped symbols, then read the
-assumptions and evidence before proposing a change. A useful task description is:
+Have it read the purpose, assumptions and evidence, then trace the mapped
+symbols before proposing a change. A useful task description is:
 
 ```text
 Read docs/manipulation/planning.md and its mapped source functions.
@@ -63,8 +71,8 @@ measured and which are active commands, and identify the existing regression
 checks before proposing changes. Report any source-version mismatch.
 ```
 
-The graph supplies relationships; the map supplies locations; the explanation
-supplies meaning and limits. For calibration, read the [investigation summary](../calibration/investigation.md)
+Where present, a diagram supplies relationships. Code links supply locations;
+the explanation supplies meaning and limits. For calibration, read the [investigation summary](../calibration/investigation.md)
 and the experimental branch's `AGENTS.md` first. If you have access to the
 private detailed ledger, use its completed results and operator corrections too.
 
@@ -82,14 +90,14 @@ private detailed ledger, use its completed results and operator corrections too.
 | State estimation | Chair-motion study, hybrid observer, stationary-boundary integration | Fixed pelvis-origin assumption; no global position observability |
 | Data | Raw MCAP and verified LeRobot conversion | Conversion loses full-rate ROS information |
 
-## Three reading paths
+## Reading paths for a new project
 
 For a new operator, read the hardware, camera, ownership, and runbook chapters.
 Understand why seated direct control temporarily removes the normal controller
 before running motion. Inspect an existing run and its recording manifest.
 
-For an algorithm developer, start with object frames, grasp qualification,
-CuRobo contracts, and task execution. A replacement planner must preserve the
+For an algorithm developer, first identify the control and recording boundaries
+your experiment needs, then read the relevant perception, grasp or planner contracts. A replacement planner must preserve the
 measured-versus-commanded distinction and supply recoverable routes. A new
 grasp generator must define its frame and finger command.
 

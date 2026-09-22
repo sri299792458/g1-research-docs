@@ -1,9 +1,9 @@
-# First-draft review queue
+# Remaining review needs
 
-The first draft covers the reusable summer tools and later corrections through
-September 13. G1Pilot's contribution here is the initial MuJoCo twin. Review
-particular sections with the source evidence already assembled. These gaps are visible so they
-can be resolved without inventing installation facts or performance claims.
+This page tracks specific gaps that the source and available media cannot yet
+resolve. The guide's structure follows reusable systems; the next revision
+should improve a concrete explanation or supply missing evidence, rather than
+expand every experiment into an operating tutorial.
 
 ## Author and hardware review
 
@@ -54,20 +54,19 @@ the hardware details these sections need.
   model-shape diagnostic. The pretrained OpenHomie policy is linked in the
   chapter; sampled demo frames were reviewed, without a quantitative stability test.
 
-## Suggested review order
+## Continuing the review
 
-Desktop layout is the current presentation target. Review mobile navigation,
-wide code tables and diagram interaction during the final presentation pass,
-after the chapter content and desktop layout are settled.
+Prioritize missing facts that prevent a researcher from reproducing the setup
+or understanding the control/recording interfaces. The installation pinout and
+power procedure, final mount fit and exact media-to-run associations above
+need hardware or author evidence. An editorial rewrite cannot fill them.
 
-The first detailed revision is [control ownership](../control/ownership.md):
-acquisition, continuous holding during planning, task rejection versus control
-fault, and verified handback. Review whether a new researcher can follow each
-responsibility into its implementation and understand the failure that led to it.
+For each technical revision, check that the reader can identify the inputs,
+expected output, constraints, failure behavior and relevant implementation.
+Keep task-specific examples when they explain those points. Review the
+[control lifecycle](../control/ownership.md) and [recording contract](../data/recording.md)
+against the intended application before extending either.
 
-Next, deepen [pickup and stacking](../manipulation/tasks.md) into a complete
-worked attempt, connecting the physical demonstration to observations, grasp
-selection, planned routes, contact checks and retained artifacts. Then review
-[calibration results](../calibration/results.md) for what the evidence permits
-another researcher to trust or change. Installation details remain a separate
-practical priority; the supplied photos and videos are now embedded.
+Desktop layout remains the current presentation target. Revisit mobile
+navigation, wide tables and diagram interaction during the final presentation
+pass after the chapter content is settled.

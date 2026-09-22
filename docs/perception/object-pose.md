@@ -1,6 +1,16 @@
 # Estimating object pose
 
-A resting-cube observation combines several fresh images into one accepted pose, with the camera profile and source-frame hashes retained.
+The planner needs a cube pose it can use at a particular robot state. Seeing
+an AprilTag is only the first step: a planar marker can yield competing pose
+solutions, and a plausible pose can still use the wrong physical scale.
+
+Start with the [profile matching the printed cube](targets.md#aprilcubes) and
+rectified camera images with their CameraInfo. The observation routine either
+returns one accepted resting-cube pose with supporting frames and robot state,
+or rejects the observation. It does not send a weak fallback pose to planning.
+
+The diagram shows where hypotheses are filtered and combined. The acceptance
+thresholds below specify consistency checks, not absolute position accuracy.
 
 ```mermaid
 flowchart TB
@@ -12,18 +22,6 @@ flowchart TB
   G --> C["Largest consistent<br/>frame subset"]
   C --> O["TabletopObservation<br/>or rejection"]
 ```
-
-## Follow the code
-
-| Diagram component | Code entry point | Responsibility |
-|---|---|---|
-| Object geometry | [tabletop_object.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_object.py) | Select dimensions, target IDs and runtime object profile together. |
-| Hypotheses and geometric gates | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L240) · `_detect_resting_pose_hypotheses` | Retain valid pose branches rather than trusting one planar solve. |
-| Frame consensus | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L129) · `_largest_hypothesis_consensus` | Choose one coherent hypothesis per accepted frame. |
-| Observation artifact | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L345) · `observe_resting_cube` | Bind pose/spread, snapshot, camera-profile hash and image hashes. |
-| Two-cube observation | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L412) · `observe_resting_cube_pair` | Require sufficient common frames, then recompute both observations. |
-
-Follow `observe_resting_cube` first, then its two private helpers. Failure to meet a gate raises a rejection; it does not produce a lower-confidence pose for the planner. `observe_live_cube_frame` is a separate single-frame path for experimental reactive control, where a burst average would lag the moving object.
 
 ## Keep pixels and geometry consistent
 
@@ -88,6 +86,18 @@ and [pickup/stacking](../manipulation/tasks.md) for the separate execution paths
 
 Evidence: tabletop August 17–24 perception and reobservation entries, with
 later corrections taking precedence. [Source identities](../reference/sources.md).
+
+## Follow the code
+
+| Implementation concern | Code entry point | Responsibility |
+|---|---|---|
+| Object geometry | [tabletop_object.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_object.py) | Select dimensions, target IDs and runtime object profile together. |
+| Hypotheses and geometric gates | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L240) · `_detect_resting_pose_hypotheses` | Retain valid pose branches rather than trusting one planar solve. |
+| Frame consensus | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L129) · `_largest_hypothesis_consensus` | Choose one coherent hypothesis per accepted frame. |
+| Observation artifact | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L345) · `observe_resting_cube` | Bind pose/spread, snapshot, camera-profile hash and image hashes. |
+| Two-cube observation | [tabletop_perception.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_perception.py#L412) · `observe_resting_cube_pair` | Require sufficient common frames, then recompute both observations. |
+
+Follow `observe_resting_cube` first, then its two private helpers. Failure to meet a gate raises a rejection; it does not produce a lower-confidence pose for the planner. `observe_live_cube_frame` is a separate single-frame path for experimental reactive control, where a burst average would lag the moving object.
 
 ## Checks and evidence to inspect
 

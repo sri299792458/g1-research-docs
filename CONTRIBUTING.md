@@ -9,10 +9,13 @@ minimal customization. Follow the [local build instructions](README.md) and
 1. Read the relevant page and its [source catalog](docs/reference/sources.md)
    and [code index](docs/reference/code-index.md). Choose the demonstrated main
    or the September experimental branch explicitly before changing a procedure.
-2. Keep the change focused on one procedure, result, correction or topic.
-   Technical chapters begin with a Mermaid diagram and verified file/symbol
-   map, followed by interfaces, assumptions, lessons and validation. Git history
-   preserves superseded drafts; the current site presents the current guide.
+2. Keep the change focused on one reader task, question or correction. Explain
+   the purpose, prerequisites and useful result before internal implementation
+   details. Choose a photograph, table, procedure or diagram according to what
+   needs explaining; no diagram or opening code table is required. Keep verified
+   file/symbol links where they help the reader extend or diagnose the behavior.
+   Git history preserves superseded drafts; the current site presents the
+   current guide.
 3. State prerequisites and expected observations. Preserve the reason for a
    step when a previous failure explains it.
 4. Distinguish proposals, static inspection, offline tests, simulation, physical

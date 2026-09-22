@@ -1,6 +1,18 @@
 # Body motion and camera state
 
-The local camera observer propagates a synchronized visual anchor using measured body orientation and waist joints. Its fixed-origin assumption limits what motion it can explain.
+Lifting the arms from the table changes the load on a seated G1. The head
+camera can move relative to a stationary cube even though the head joint was
+not adjusted. A cube pose taken before the lift can therefore be stale by the
+time the fingers approach it.
+
+The single-cube workflow first observes again at clearance, then estimates
+camera motion up to pregrasp. This chapter explains that local correction,
+its measured benefit and the motion it cannot observe.
+
+## A local hybrid observer
+
+The observer divides the estimate into position and orientation. The arrows
+show the measured inputs for each; neither branch observes global translation.
 
 ```mermaid
 flowchart TB
@@ -13,19 +25,6 @@ flowchart TB
   H --> E["Camera pose at<br/>the planning boundary"]
 ```
 
-## Follow the code
-
-| Diagram component | Code entry point | Responsibility |
-|---|---|---|
-| Synchronized body sample | [camera_state_sync.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/camera_state_sync.py#L144) · `CameraStateInputBuffer.sample_at` | Select measured body inputs at the requested timestamp. |
-| Visual anchor | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/state_estimation.py#L312) · `AnchoredCameraStateEstimator.reset` | Store the reference transform and matching sample together. |
-| Hybrid propagation | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/state_estimation.py#L215) · `AnchoredCameraPoseEstimators.predict` | Combine the declared position and orientation hypotheses. |
-| Estimate consumed by planning | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/state_estimation.py#L327) · `AnchoredCameraStateEstimator.estimate` | Require an anchor and reject a sample older than it. |
-| Single-cube boundary request | [tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_workflow.py#L197) · `request_at_estimated_pregrasp` | Carry the estimated camera state into a same-grasp replan. |
-
-The output is a camera transform in the anchor reference frame, not a globally observed pelvis position. Store the synchronized anchor before waiting for the GPU planner; otherwise its matching state sample can age out of the buffer.
-
-## A local hybrid observer
 
 The observer combines a visual anchor, pelvis orientation, all three measured
 waist joints and torso IMU orientation. Pelvis/waist FK supplies position;
@@ -84,6 +83,18 @@ the final approach and has a different validation status.
 
 Evidence: tabletop August 16 support/observer study, later replay and trajectory
 integration entries. [Source identities](../reference/sources.md).
+
+## Follow the code
+
+| Implementation concern | Code entry point | Responsibility |
+|---|---|---|
+| Synchronized body sample | [camera_state_sync.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/camera_state_sync.py#L144) · `CameraStateInputBuffer.sample_at` | Select measured body inputs at the requested timestamp. |
+| Visual anchor | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/state_estimation.py#L312) · `AnchoredCameraStateEstimator.reset` | Store the reference transform and matching sample together. |
+| Hybrid propagation | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/state_estimation.py#L215) · `AnchoredCameraPoseEstimators.predict` | Combine the declared position and orientation hypotheses. |
+| Estimate consumed by planning | [state_estimation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/state_estimation.py#L327) · `AnchoredCameraStateEstimator.estimate` | Require an anchor and reject a sample older than it. |
+| Single-cube boundary request | [tabletop_workflow.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/tabletop_workflow.py#L197) · `request_at_estimated_pregrasp` | Carry the estimated camera state into a same-grasp replan. |
+
+The output is a camera transform in the anchor reference frame, not a globally observed pelvis position. Store the synchronized anchor before waiting for the GPU planner; otherwise its matching state sample can age out of the buffer.
 
 ## Checks and evidence to inspect
 

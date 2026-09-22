@@ -1,75 +1,48 @@
 # Working with the G1
 
-This guide explains the G1 research tools: how they connect, where they are
-implemented, and what must remain true when you change them. Start with a
-subsystem below, follow its diagram into the code, and use the recorded
-results and failures to understand its limits.
+This guide explains the tools and practical knowledge developed while working
+with the G1: controlling the robot, recording experiments, understanding its
+sensors and geometry, and building planning or simulation on those foundations.
+The aim is to help another researcher build a different experiment without
+having to rediscover the same failures.
 
-## Tabletop system at a glance
+## Start with the reusable systems
 
-```mermaid
-flowchart TB
-  accTitle: G1 tabletop components and their interfaces
-  accDescr: Calibration supplies the camera and arm model for observations. Observations and an offline grasp library feed planning. Checked routes feed execution, which is monitored by PC2 and recorded for analysis.
-  C["Camera and arm<br/>calibration"] -->|model| O["Robot state<br/>and object pose"]
-  O -->|scene and start state| P["CuRobo<br/>route planning"]
-  G["Offline grasp<br/>qualification"] -->|candidate pool| P
-  P -->|checked route and return| E["Fixed-rate<br/>execution"]
-  W["PC2 watchdog"] -.->|lease and recovery| E
-  E -->|state, commands and outcome| R["Raw recording<br/>and offline analysis"]
-```
-
-This is a component map, not a launch sequence. The [system map](start/overview.md)
-explains the interfaces; [ownership and safety](control/ownership.md) explains
-the control lifecycle. Select **Expand** or scroll horizontally on a narrow screen.
-
-```{admonition} Working draft · summer research and subsequent corrections
-:class: note
-
-Procedures and results have different
-evidence levels. The latest manually preclosed calibration workflow still
-needs new route generation and physical validation; moving-target MPC
-remains experimental. Missing installation details and media are collected
-in the [review queue](reference/review.md).
-```
-
-## Choose the right source
-
-| Work | Source to use |
+| What you need | Start here |
 |---|---|
-| August 25 cube-stacking demo | [Tabletop `main`](https://github.com/sri299792458/g1-dex3-tabletop/tree/7400aff201c2f73ef2a64e546d72bd66cbe87fd6) |
-| Later calibration development | [Tabletop September branch](https://github.com/sri299792458/g1-dex3-tabletop/tree/59c21b1388c636176dea67ea7ed3e253f8510783) — experimental, with no replacement calibration deployed |
-| Wrist targets, V7 torso mount and calibration tools | [Calibration/fixture `main`](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/f295def18bd936031fba325d4e8bdfc71fea671a) |
-| Offline grasp generation and assembly studies | [Grasp-demo `main`](https://github.com/sri299792458/g1-aprilcube-demo/tree/2b7274b11f1862ebfcd05b48ff678d995e55269e) |
+| Acquire control, hold during slow work and recover from failures | [Control ownership and safety](control/ownership.md), [operating and recovering](control/runbook.md) |
+| Record an experiment and inspect the result | [Recording, signals and LeRobot conversion](data/recording.md), [dataset downloads](data/recording.md#dataset-downloads) |
+| Prepare the robot and its sensors | [Hardware and hand installation](hardware/robot.md), [camera/network](hardware/camera.md), [pressure sensing](sensing/pressure.md) |
+| Understand or improve camera/arm geometry | [Targets and mounts](perception/targets.md), [calibration](calibration/workflow.md), [completed investigations](calibration/investigation.md) |
+| Add grasping or motion planning | [Grasp qualification](manipulation/grasp-atlas.md), [CuRobo integration](manipulation/planning.md) |
+| Develop against a simulated robot | [Initial MuJoCo digital twin](simulation/mujoco.md) |
 
-The [source catalog](reference/sources.md) also covers the MuJoCo twin and tactile
-tools. Each code link pins the version being explained; September changes are
-kept separate from the physical demo baseline.
+The [cube-stacking demonstration](manipulation/tasks.md) is an integration
+example, showing how several of these systems were exercised together.
+Assembly and moving-target experiments record further lessons and unresolved
+limits for extending the system.
 
-## Find the part you need
+The demonstrated manipulation code and later experimental calibration code
+remain distinct. Use [repositories and setup](start/setup.md) to choose an
+environment and the [source catalog](reference/sources.md) to identify its revision.
 
-| Your goal | Start with |
-|---|---|
-| Locate an implementation or give an agent context | [System map](start/overview.md), then the relevant chapter's code map |
-| Start working with the lab robot | [Hardware](hardware/robot.md), [setup](start/setup.md), and [control ownership](control/ownership.md) |
-| Understand a failed grasp or route | [Grasp atlas](manipulation/grasp-atlas.md), [planning](manipulation/planning.md), and [debugging](reference/debugging.md) |
-| Work on calibration | [Workflow](calibration/workflow.md), [results](calibration/results.md), and [investigations](calibration/investigation.md) |
-| Understand Dex3 pressure sensors | [Pressure sensing](sensing/pressure.md) |
-| Work with the initial simulator | [MuJoCo digital twin](simulation/mujoco.md) |
-| Use the recordings | [Recording and LeRobot](data/recording.md) |
-| Continue the documentation | [Maintenance](reference/maintenance.md) and [sources](reference/sources.md) |
+## How to use the guide
 
-## Read a chapter alongside its code
+Hardware pages pair photographs or CAD views with files and fitting details.
+Operating pages explain prerequisites, actions and outcomes. Implementation
+pages explain the design, failures that shaped it and the code to change.
+Diagrams appear where a sequence or relationship needs a visual explanation.
 
-Technical chapters start with a focused Mermaid diagram and a table mapping
-its parts to source files and symbols. The explanation then follows the data
-or control flow, including assumptions, rejected approaches and validation.
-Mermaid source remains in the Markdown, so an agent can read the graph too.
+For code work, start with the [system map and entry points](start/overview.md)
+and the relevant chapter. The [code index](reference/code-index.md) supplies
+commit-pinned files, symbols and file hashes for readers and coding agents.
+The prose records assumptions and evidence that a file list alone cannot convey.
 
-All mapped implementations now have public, commit-pinned links. The
-[code index](reference/code-index.md) records the branch, file hash and symbols,
-including both demo and September versions where their code differs.
-The [About page](about.md) records authorship and project context.
+This is a working draft. Remaining gaps include parts of the electrical
+installation procedure, some physical fit checks and run-to-video associations;
+see the [review queue](reference/review.md). To improve a chapter, follow
+[Maintaining this guide](reference/maintenance.md). [About](about.md) records
+authorship and project context.
 
 ```{toctree}
 :hidden:
@@ -102,6 +75,14 @@ Operating and recovering <control/runbook>
 
 ```{toctree}
 :hidden:
+:caption: Recording and datasets
+:maxdepth: 1
+
+Recording and LeRobot <data/recording>
+```
+
+```{toctree}
+:hidden:
 :caption: Perception and calibration
 :maxdepth: 1
 
@@ -118,18 +99,10 @@ Body motion and state estimation <perception/state-estimation>
 :maxdepth: 1
 
 GraspGen-X and the grasp atlas <manipulation/grasp-atlas>
-CuRobo planning contracts <manipulation/planning>
-Pickup and stacking <manipulation/tasks>
+CuRobo integration <manipulation/planning>
+Cube stacking: integration example <manipulation/tasks>
 Assembly experiments <manipulation/assembly>
 Moving-target MPC <manipulation/mpc>
-```
-
-```{toctree}
-:hidden:
-:caption: Recording and datasets
-:maxdepth: 1
-
-Recording and LeRobot <data/recording>
 ```
 
 ```{toctree}
@@ -151,6 +124,6 @@ Code index <reference/code-index>
 Media catalog <reference/media>
 Maintaining this guide <reference/maintenance>
 Writing diagrams <reference/diagrams>
-Draft review queue <reference/review>
+Remaining review needs <reference/review>
 About this guide <about>
 ```

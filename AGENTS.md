@@ -3,7 +3,12 @@
 - Read README.md, CONTRIBUTING.md and the source catalog before editing.
   If private `.local/maintainer-context.md` and `running_notes.md` are available,
   read them for author decisions and continuity; they are not publication inputs.
-- Organize by subsystem/task, with Mermaid diagrams and commit-pinned code maps.
+- Organize by the reader's subsystem or task. Start by explaining what the
+  reader can do or decide, the relevant setup and the demonstrated scope.
+  Use photographs for physical identification, tables for choices, procedures
+  for actions, and Mermaid only when a relationship or sequence needs a diagram.
+  Diagrams and code maps are not mandatory chapter openings. Keep pinned code
+  pointers beside the behavior they explain or in a focused implementation section.
   Preserve interfaces, invariants, practical lessons and validation limits.
 - Keep the demonstrated August tabletop main distinct from the September
   experimental calibration branch. Match links to the inspected file bytes.

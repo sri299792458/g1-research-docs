@@ -1,40 +1,34 @@
 # Camera and arm calibration
 
-The bilateral pipeline turns synchronized wrist-marker measurements into a candidate camera/arm calibration. Collection, fitting, grouped validation and deployment are separate decisions.
+The calibration connects head-camera measurements to the arm model used for
+manipulation. It compensates for disagreement between nominal FK and observed
+wrist targets, but it does not establish a uniquely correct mechanical model.
 
-```mermaid
-flowchart TB
-  accTitle: Calibration artifacts from capture to candidate bundle
-  accDescr: A preclosed-hand core route and a live adapter govern collection. Image bursts and measured joints enter the session store. Dataset export feeds the solver and grouped validation, which may produce a candidate bundle. Hardware selection remains explicit.
-  R["Core route +<br/>live adapter"] --> C["Stationary image bursts<br/>and measured joints"]
-  C --> S["Hashed raw session"]
-  S --> D["Dataset export"]
-  D --> F["Fit declared model"]
-  F --> V["Grouped validation"]
-  V -->|eligible model| B["Candidate bundle"]
-```
+## Start with the demonstrated bundle
 
-## Source version
+The August stacking system uses
+[`dex3_shared_20260812_selected_free.json`](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/config/calibrations/dex3_shared_20260812_selected_free.json)
+from demo `main`. It contains the selected shared-camera, bilateral-target and
+seven-offset fit. Keep the matching robot model, fitted parameters, target
+registrations and camera configuration together. The [results page](results.md#the-august-12-stacking-baseline)
+connects that bundle to its data and physical use.
 
-This chapter's collection lifecycle is on
-[`experimental/september-calibration`](https://github.com/sri299792458/g1-dex3-tabletop/tree/59c21b1388c636176dea67ea7ed3e253f8510783).
-It includes the previously uncommitted runtime changes. Use `main` for the
-August demo; its earlier calibration code does not implement the final lifecycle
-below. Publication did not establish a new physical validation or deploy a bundle.
+Check the [head-pitch witness mark](../hardware/camera.md) before reusing it.
+Changing the head pose or remounting a wrist marker changes the geometry;
+a saved bundle is not automatically valid for a newly assembled robot.
 
-## Follow the code
+## Choose the relevant workflow
 
-| Diagram component | Code entry point | Responsibility |
+| Your task | Use | Status |
 |---|---|---|
-| Collection lifecycle | [hardware_bilateral_calibration.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_bilateral_calibration.py) · `run_collect_bilateral_calibration` (September branch) | Orchestrate frozen inputs, ownership, captures and return. |
-| Live adapter | [adapter.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/adapter.py) · `plan_owned_adapter` (September branch) | Bind the adapter to the commands actually held after acquisition. |
-| Burst evidence | [capture.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/capture.py) · `BilateralLiveBurstSource.capture_burst` (September branch) | Retain current decoded corners and measured-state evidence. |
-| Raw session and dataset | [session.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/session.py) · `BilateralSessionStore.build_dataset` (September branch) | Reconstruct accepted samples from retained, verified artifacts. |
-| Model fit | [solver.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/solver.py) · `solve_bilateral_dataset` (September branch) | Run the declared solver and independently evaluate its output. |
-| Grouped validation | [validation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/validation.py) · `validate_and_select_bilateral_model` (September branch) | Compare models on held groups before selecting an eligible candidate. |
-| Bundle export | [bundle.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/calibration/bundle.py#L34) · `write_bilateral_calibration_bundle` | Preserve the solution and validation provenance in a separate artifact. |
+| Understand/reproduce the stacking baseline | August bundle and demo `main` | Used by the documented physical manipulation runs |
+| Reanalyse retained measurements | Session artifacts, a declared model and grouped validation | Offline analysis; retain candidate outputs separately |
+| Develop the later automated collector | [September branch](https://github.com/sri299792458/g1-dex3-tabletop/tree/59c21b1388c636176dea67ea7ed3e253f8510783) and collection contracts below | Latest preclosed-hand lifecycle needs regenerated routes and physical validation |
 
-Read these modules in arrow order. For the pixel model, start with [projection.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/projection.py) · `BilateralCalibrationProjection.project_side` (September branch). Exporting a bundle does not change the bundle selected by a hardware launcher. Before interpreting residuals, read the [results](results.md), [investigation record](investigation.md) and the [public runtime summary](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/docs/september-calibration.md).
+No September candidate replaced the deployed August bundle. Before proposing
+new experiments, read the [results](results.md) and [completed investigations](investigation.md).
+The collection code described below is the September implementation, not the
+procedure that originally produced the August bundle.
 
 ## The model being fitted
 
@@ -88,7 +82,7 @@ Record rejected captures too. A summary saying “not visible” cannot later
 explain whether fingers, a cable, exposure or a stale frame caused the problem.
 This is why the later standing recorder includes the full camera streams.
 
-## Collection and route contracts
+## Experimental collection and route contracts
 
 Manual GUIDE/HOLD teaching established supported and held poses, stationary
 bursts and bounded replay. GUIDE did not establish a general certified
@@ -126,6 +120,14 @@ seven skipped; neither check set establishes physical commissioning.
 
 ## From a fit to a deployment
 
+| Artifact | What it establishes | What it does not establish |
+|---|---|---|
+| Raw session | Images, decoded corners, measured joints and rejected attempts | A valid model fit |
+| Exported dataset | Samples passed the export rules and retain their identities | Correctness of those rules under every noise condition |
+| Solver output and grouped report | A declared model's fit and held-pose error | Unique physical cause or task accuracy |
+| Candidate bundle | A reproducible model/configuration artifact | Automatic approval or selection for hardware |
+
+
 Retain the raw session and grouped validation report with every candidate
 bundle. Compare the same data split and model parameterization before treating
 a lower pixel number as an improvement. Review anchor consistency, active-pose
@@ -152,6 +154,21 @@ hardware launch still selects it explicitly with `--calibration-bundle`.
 
 Evidence: prototype/tabletop logs and the calibration investigation ledger.
 [Source identities](../reference/sources.md).
+
+## Follow the code
+
+| Implementation concern | Code entry point | Responsibility |
+|---|---|---|
+| Collection lifecycle | [hardware_bilateral_calibration.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_bilateral_calibration.py) · `run_collect_bilateral_calibration` (September branch) | Orchestrate frozen inputs, ownership, captures and return. |
+| Live adapter | [adapter.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/adapter.py) · `plan_owned_adapter` (September branch) | Bind the adapter to the commands actually held after acquisition. |
+| Burst evidence | [capture.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/capture.py) · `BilateralLiveBurstSource.capture_burst` (September branch) | Retain current decoded corners and measured-state evidence. |
+| Raw session and dataset | [session.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/session.py) · `BilateralSessionStore.build_dataset` (September branch) | Reconstruct accepted samples from retained, verified artifacts. |
+| Model fit | [solver.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/solver.py) · `solve_bilateral_dataset` (September branch) | Run the declared solver and independently evaluate its output. |
+| Grouped validation | [validation.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/validation.py) · `validate_and_select_bilateral_model` (September branch) | Compare models on held groups before selecting an eligible candidate. |
+| Bundle export | [bundle.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/calibration/bundle.py#L34) · `write_bilateral_calibration_bundle` | Preserve the solution and validation provenance in a separate artifact. |
+
+For collector changes, start at the coordinator, then follow capture, session,
+solver and validation according to the concern you are changing. For the pixel model, start with [projection.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/projection.py) · `BilateralCalibrationProjection.project_side` (September branch). Exporting a bundle does not change the bundle selected by a hardware launcher. Before interpreting residuals, read the [results](results.md), [investigation record](investigation.md) and the [public runtime summary](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/docs/september-calibration.md).
 
 ## Checks and evidence to inspect
 

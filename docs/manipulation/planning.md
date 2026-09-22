@@ -1,35 +1,40 @@
 # CuRobo planning contracts
 
-The planner receives a frozen scene and command boundary, then returns checked motion and recovery routes. It runs in a separate process from the fixed-rate controller.
+The planner must return a route the currently controlled robot can enter,
+execute and leave safely. Finding an IK solution or a collision-free forward
+motion is only part of that job: the start must match the command being sent,
+and the task needs checked return paths.
+
+Read this chapter when replacing a planner, adding a task phase or debugging
+a rejected route. [Cube stacking](tasks.md) shows these contracts exercised in one physical task.
+
+## Measured state and commanded state are different inputs
+
+Measured state defines geometry and contact. The exact active command defines
+the join to an already streaming trajectory. Approximately 0.02 rad of physical
+tracking error is not permission to insert that difference as a command jump.
+Frozen joins were checked to 1e-9 where exact command continuity was required;
+float32 anchoring only addresses scale-dependent numerical roundoff.
+
+For example, suppose an arm joint is commanded to 0.50 rad but measures
+0.48 rad. Starting a new command trajectory at 0.48 rad would insert a 0.02 rad
+command step. The next route must join the 0.50 rad command already being sent;
+measured body and finger state still matter when evaluating geometry. These
+numbers illustrate the distinction, rather than describing another robot run.
+
+The diagram shows how those two inputs meet at the planner boundary. The GPU
+worker returns a proposal; the controller checks it before installation.
 
 ```mermaid
 flowchart TB
   accTitle: Planning across the control-process boundary
   accDescr: Measured body and hand geometry plus the current arm commands form a planning request. A persistent planner process solves and checks the route. The controller verifies the immutable result and installs it without changing the active command.
-  M["Measured body<br/>and finger geometry"] --> B["Exact-command<br/>planning snapshot"]
+  M["Measured body<br/>and finger geometry"] --> B["Request with<br/>held arm commands"]
   C["Currently streamed<br/>arm commands"] --> B
   B --> W["Persistent GPU<br/>planner process"]
   W --> P["Checked task routes<br/>and frozen returns"]
   P --> I["Verify and install<br/>at held boundary"]
 ```
-
-## Follow the code
-
-| Diagram component | Code entry point | Responsibility |
-|---|---|---|
-| Snapshot boundary | [control_boundary.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/control_boundary.py) · `command_bound_snapshot` (September branch) | Keep measured body/fingers while binding both arm starts to held commands. |
-| Process boundary | [persistent_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/persistent_planner.py#L141) · `PersistentTabletopPlanner.request_payload` | Submit a request while continuing control health checks. |
-| Planning session | [tabletop_session.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_session.py#L425) · `TabletopPlanningSession.replan_at_pregrasp` | Bind a same-grasp remainder to the stored clearance request and exact start. |
-| Route planning | [tabletop_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_planner.py#L5541) · `plan_tabletop_task` | Solve the task using explicit model, scene and candidate contracts. |
-| Contact revalidation | [tabletop_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_planner.py#L4048) · `RetentionRouteValidator.validate` | Check the frozen payload route against achieved finger geometry. |
-| Plan installation | [control_boundary.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/control_boundary.py) · `install_plan_at_current_boundary` (September branch) | Reject a real command jump before installing or switching arms. |
-
-The shared `control_boundary.py` module is a September extraction. In demo
-`main`, the corresponding stack helpers are
-[`_command_bound_snapshot` and `_install_plan_at_current_boundary`](../reference/code-index.md#code-demo-stack).
-The command-continuity invariant already existed in the demonstrated version.
-
-The snapshot field `measured_q29_rad` deserves care: `command_bound_snapshot` replaces the arm entries with active commands while retaining measured body/finger geometry. Its name alone is not enough to infer every entry is a sensor measurement. Read the constructor and boundary helper together.
 
 ## Model the measured robot
 
@@ -76,13 +81,28 @@ The cube payload uses 27 circumscribed cells to preserve conservative coverage.
 An alternative attachment path silently retained only two of 16 proposed
 spheres, illustrating why the attached model must be inspected after creation.
 
-## Measured state and commanded state are different inputs
+## Interpreting contact before using a payload route
 
-Measured state defines geometry and contact. The exact active command defines
-the join to an already streaming trajectory. Approximately 0.02 rad of physical
-tracking error is not permission to insert that difference as a command jump.
-Frozen joins were checked to 1e-9 where exact command continuity was required;
-float32 anchoring only addresses scale-dependent numerical roundoff.
+The initial simulated achieved joint vector was replaced by the descriptor's
+fixed close command. Grasp checks then evolved through single-joint stall and
+opposed-pressure gates to commissioned **measured empty-close** references.
+
+The current criterion requires a closing-direction shortfall of at least
+0.05 rad on the thumb and an opposing closing joint, relative to that hand's
+empty close. The hand must settle over 0.5 s within 0.01 rad spread, and the
+criterion includes evidence that closing was commanded. The same opposed
+contact check runs after a 30 mm retention checkpoint during the 100 mm lift.
+
+This is a joint-based contact heuristic for the commissioned grasp family.
+Pressure, effort and velocity remain recorded diagnostics; they are not
+calibrated force estimates or the primary required cube-contact signal.
+Left/right empty-close references are commissioned separately.
+
+Empty **open** is another reference. The task measures the run-local posture
+achieved by the descriptor's zero/open target. It does not assume the arbitrary
+initial hand posture is open, or require achieved physical joints to equal
+zero exactly. Finger changes use the bounded ramp, including the documented
+two-second closing/opening transition.
 
 A physical table strike led to a 5 mm motion clearance floor. Contact changes
 the fingers, so the payload path is checked again with achieved contact
@@ -108,6 +128,26 @@ See [ownership](../control/ownership.md) for fixed-rate execution and
 
 Evidence: tabletop planning, strict-collision and worker-pool entries.
 [Source identities](../reference/sources.md).
+
+## Follow the code
+
+| Implementation concern | Code entry point | Responsibility |
+|---|---|---|
+| Snapshot boundary | [control_boundary.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/control_boundary.py) · `command_bound_snapshot` (September branch) | Keep measured body/fingers while binding both arm starts to held commands. |
+| Process boundary | [persistent_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/persistent_planner.py#L141) · `PersistentTabletopPlanner.request_payload` | Submit a request while continuing control health checks. |
+| Planning session | [tabletop_session.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_session.py#L425) · `TabletopPlanningSession.replan_at_pregrasp` | Bind a same-grasp remainder to the stored clearance request and exact start. |
+| Route planning | [tabletop_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_planner.py#L5541) · `plan_tabletop_task` | Solve the task using explicit model, scene and candidate contracts. |
+| Opposed contact | [unitree_dex3.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/transports/unitree_dex3.py#L355) · `classify_dex3_opposed_joint_obstruction` | Compare measured joints with the commissioned empty-close reference. |
+| Retention checkpoint | [unitree_dex3.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/transports/unitree_dex3.py#L1049) · `UnitreeDex3PostureController.verify_retention_at_lifted_checkpoint` | Verify retained opposed contact after the short lift. |
+| Contact revalidation | [tabletop_planner.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_dex3_tabletop/planning/tabletop_planner.py#L4048) · `RetentionRouteValidator.validate` | Check the frozen payload route against achieved finger geometry. |
+| Plan installation | [control_boundary.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/control_boundary.py) · `install_plan_at_current_boundary` (September branch) | Reject a real command jump before installing or switching arms. |
+
+The shared `control_boundary.py` module is a September extraction. In demo
+`main`, the corresponding stack helpers are
+[`_command_bound_snapshot` and `_install_plan_at_current_boundary`](../reference/code-index.md#code-demo-stack).
+The command-continuity invariant already existed in the demonstrated version.
+
+The snapshot field `measured_q29_rad` deserves care: `command_bound_snapshot` replaces the arm entries with active commands while retaining measured body/finger geometry. Its name alone is not enough to infer every entry is a sensor measurement. Read the constructor and boundary helper together.
 
 ## Checks and evidence to inspect
 

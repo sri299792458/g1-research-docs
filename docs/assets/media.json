@@ -644,6 +644,36 @@
       "review": "Original photographs visually inspected; author confirms the same chair and requests background cropping. Source bytes embedded unchanged; rectangular panel crops retain both complete chairs without stretching, segmentation or reconstruction.",
       "sha256": "00684117517e74498ab409fc9633d920a2f94b411a7ae17e0af91df383e047f7",
       "bytes": 4644943
+    },
+    {
+      "id": "dex3-dorsal-mount-cad",
+      "path": "assets/images/dex3-dorsal-mount-cad.png",
+      "source_repository": "https://github.com/sri299792458/robot-calibration-aprilcube-prototype",
+      "source_commit": "f295def18bd936031fba325d4e8bdfc71fea671a",
+      "source_path": "renders/dex3_dorsal_aruco_mount.png",
+      "sha256": "70d014387bc80a98157787457320aaadc64da7ccdd072ececd205c971edb6c4f",
+      "bytes": 640208,
+      "context": "render",
+      "caption": "Rendered right-hand dorsal marker placement, screw spacing and support pads; not a photograph of a seated print.",
+      "chapter": "perception/targets.md",
+      "creator": "sri299792458; underlying Unitree models retain upstream attribution",
+      "review": "Visually inspected; copied unchanged from the pinned published fixture repository.",
+      "original_archive_location": null
+    },
+    {
+      "id": "g1-torso-v7-cad",
+      "path": "assets/images/g1-torso-v7-cad.png",
+      "source_repository": "https://github.com/sri299792458/robot-calibration-aprilcube-prototype",
+      "source_commit": "f295def18bd936031fba325d4e8bdfc71fea671a",
+      "source_path": "artifacts/g1_mount_v7/renders/fusion_assembly.png",
+      "sha256": "98156ecf0b555779fd297660d2f2d6cf2e6816a816e5740071f5df4727fd8806",
+      "bytes": 643094,
+      "context": "render",
+      "caption": "Native V7 CAD assembly showing torso crossbars, side plates and carrier; full physical fit remains unverified.",
+      "chapter": "perception/targets.md",
+      "creator": "sri299792458; underlying Unitree models retain upstream attribution",
+      "review": "Visually inspected; copied unchanged from the pinned published fixture repository.",
+      "original_archive_location": null
     }
   ],
   "publication_release": {

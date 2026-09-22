@@ -2,7 +2,15 @@
 
 The camera must be a dependable measurement source before it can support
 calibration or planning. USB acquisition, service ownership, DDS discovery,
-image freshness, and geometric calibration are separate checks.
+image freshness, and geometric calibration are separate checks. A working
+preview proves only one part of that path.
+
+| What fails | Check first |
+|---|---|
+| Camera cannot start or required streams are absent | [Device ownership](#one-camera-owner), then the [USB/profile check](#profiles-used-at-different-stages) |
+| Camera works but robot streams are empty | DDS-to-ROS names and message workspace in [recorded topology](#recorded-topology) |
+| Image arrives but measurements do not match the model | Rectification/CameraInfo and [head position](#calibration-stream-semantics) |
+| Image and joint measurements appear out of phase | [Freshness and clock pairing](#freshness-and-pairing) |
 
 ## Recorded topology
 

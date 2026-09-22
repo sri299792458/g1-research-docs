@@ -21,6 +21,13 @@ implementation.
 | Calibration anchors appear to drift | Independent planar PnP estimates amplify corner uncertainty | Do not interpret inferred span directly as physical camera travel |
 | MPC windows are valid but never finish | Clearance shift exceeds endpoint tolerance under tracking offset | Valid-window count does not establish task feasibility |
 
+For acquisition, timing or cleanup failures, use the [control lifecycle](../control/ownership.md).
+For command-boundary or reachability failures, use [planning](../manipulation/planning.md).
+For missing signals, check the [recording contract](../data/recording.md#record-the-full-lifecycle)
+before interpreting an empty plot. [Camera ownership](../hardware/camera.md#one-camera-owner),
+[pose acceptance](../perception/object-pose.md) and [calibration results](../calibration/results.md)
+cover the corresponding sensing symptoms.
+
 ## A practical reading sequence
 
 1. Identify the run, exact source/model hashes, hardware support and task mode.

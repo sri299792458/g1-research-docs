@@ -1,17 +1,9 @@
 # Operating and recovering
 
-A normal seated return and a seated control fault have different terminal states. This diagram describes the ownership branches; the preflight and recovery instructions below supply their conditions.
-
-```mermaid
-flowchart TB
-  accTitle: Seated handback versus fault recovery
-  accDescr: After an owned seated task, a normal supported return restores AI and verifies zero torque, Damp and seated in order. A fault instead requests or triggers verified zero torque. Publisher teardown follows confirmed takeover.
-  O["Seated control owned"] -->|normal return| S["Supported pose reached"]
-  S --> N["Restore AI<br/>verify FSM 0 → 1 → 3"]
-  O -->|control fault| F["PC2 recovery<br/>verify FSM 0"]
-  N --> C["Close body transport<br/>and ROS resources"]
-  F -->|takeover confirmed| C
-```
+Use this checklist before operating a supported tabletop task and when
+interpreting its exit status. It assumes the robot and PC2 recovery service
+have already been commissioned for the selected mode. It does not replace
+the [ownership design](ownership.md) or the source launcher instructions.
 
 ## Source scope
 
@@ -19,17 +11,6 @@ Use demo `main` for the August stacking workflow. The links marked September
 show the later shared coordinator and standing lifecycle; the
 [demo coordinator](../reference/code-index.md#code-demo-tabletop) is the baseline
 reference. Keyboard and recovery behavior must match the selected checkout.
-
-## Follow the code
-
-| Diagram component | Code entry point | Responsibility |
-|---|---|---|
-| Normal return orchestration | [hardware_tabletop.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_tabletop.py) · `_restore_seated_control` (September branch) | Finish the seated handback before closing dependent resources. |
-| Verified seated handback | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_safety.py#L283) · `PC2DampingWatchdog.restore_seated` | Require the PC2 seated acknowledgement. |
-| Seated fault recovery | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_safety.py#L302) · `PC2DampingWatchdog.restore_zero_torque` | Require the PC2 zero-torque acknowledgement; do not substitute the clean seated path. |
-| Standing release | [control.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/control.py) · `StandingCalibrationControl.release` (September branch) | Separate arm-SDK lifecycle with a validated shoulder return. |
-
-The terminal state must be observed, not inferred from a process exiting or a service request returning. Standing calibration has its own release and Damp fallback; use the [ownership comparison](ownership.md#standing-and-seated-control).
 
 ## Before motion
 
@@ -52,9 +33,9 @@ The source's typed acknowledgement is deliberately explicit:
 I CONFIRM THE G1 IS SECURED BY THE LOAD-BEARING HARNESS AND THE WORKSPACE IS CLEAR
 ```
 
-The task lifecycle and configuration are described in
-[pickup and stacking](../manipulation/tasks.md) and
-[calibration](../calibration/workflow.md). Use the matching source revision's
+The [stacking example](../manipulation/tasks.md) records the demonstrated
+configuration; the [calibration chapter](../calibration/workflow.md) describes
+the separate experimental collector. Use the matching source revision's
 launcher and argument documentation; none was executed while writing this guide.
 
 ## What a normal seated run does
@@ -72,6 +53,24 @@ restored before supported return.
 At normal final handback, PC2 restores AI and verifies FSM 0 → Damp 1 →
 Seated 3 before the lowcmd publisher closes. Fault recovery stops at verified
 zero torque instead of automatically continuing that normal seating sequence.
+
+### Normal return and fault recovery take different paths
+
+The arrows below describe the seated ownership lifecycle. A normal return
+reaches support before handback; a control fault requests verified zero torque.
+Closing a terminal or observing a service acknowledgement is not a substitute
+for observing that terminal robot state.
+
+```mermaid
+flowchart TB
+  accTitle: Seated handback versus fault recovery
+  accDescr: After an owned seated task, a normal supported return restores AI and verifies zero torque, Damp and seated in order. A fault instead requests or triggers verified zero torque. Publisher teardown follows confirmed takeover.
+  O["Seated control owned"] -->|normal return| S["Supported pose reached"]
+  S --> N["Restore AI<br/>verify FSM 0 → 1 → 3"]
+  O -->|control fault| F["PC2 recovery<br/>verify FSM 0"]
+  N --> C["Close body transport<br/>and ROS resources"]
+  F -->|takeover confirmed| C
+```
 
 ## Keys have context
 
@@ -116,6 +115,17 @@ SPACE. Each episode still gets a separate run directory and bag.
 
 Evidence: [source catalog](../reference/sources.md), prototype recovery report,
 current tabletop README and dated lifecycle corrections.
+
+## Follow the code
+
+| Implementation concern | Code entry point | Responsibility |
+|---|---|---|
+| Normal return orchestration | [hardware_tabletop.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/hardware_tabletop.py) · `_restore_seated_control` (September branch) | Finish the seated handback before closing dependent resources. |
+| Verified seated handback | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_safety.py#L283) · `PC2DampingWatchdog.restore_seated` | Require the PC2 seated acknowledgement. |
+| Seated fault recovery | [pc2_safety.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/src/g1_aprilcube_calibration/pc2_safety.py#L302) · `PC2DampingWatchdog.restore_zero_torque` | Require the PC2 zero-torque acknowledgement; do not substitute the clean seated path. |
+| Standing release | [control.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/src/g1_dex3_tabletop/calibration/control.py) · `StandingCalibrationControl.release` (September branch) | Separate arm-SDK lifecycle with a validated shoulder return. |
+
+The terminal state must be observed, not inferred from a process exiting or a service request returning. Standing calibration has its own release and Damp fallback; use the [ownership comparison](ownership.md#standing-and-seated-control).
 
 ## Checks and evidence to inspect
 

@@ -40,13 +40,30 @@ shared syntax, diagram types and rendering checks.
 For hardware photographs, use [editable annotated figures](media.md#annotated-hardware-figures)
 with captions in Markdown. Their small generation helper needs only Python.
 
-Technical chapters follow the system rather than the order of the summer's
-experiments: diagram, code map, interface/assumption explanation, then design
-lessons and evidence. Place a historical failure beside the rule it explains,
-so a reader can understand what a change must preserve without reading a
-journal first. Commit revisions normally: Git retains superseded pages and
-drafts, including deleted files. The current site does not need a separate
-archive of earlier documentation.
+## Review for reader value
+
+Keep the subsystem structure stable. Before expanding a chapter, identify the
+question it answers and what a researcher can use afterward: a setup, an
+interface, a diagnosis, a checked result or a clear limit.
+
+- Introduce the physical item or engineering problem before internal names.
+- Explain inputs, outputs and conditions before listing implementation details.
+- Keep code links close to the behavior they implement, or collect several
+  entry points in a focused section after the explanation.
+- Use a diagram only when it clarifies a relationship, sequence or branch.
+  A target-selection table and an assembly photograph can be more useful.
+- Keep experiment details that explain a decision or establish its limits.
+  A task-specific walkthrough is useful only when reproducing that task is
+  the reader's goal; an integration example should not become a second manual
+  for every component it uses.
+
+Control, recording, hardware, calibration, grasping and simulation each have
+reusable contributions. Do not remove a subsystem merely because another is
+more immediately useful. Place a historical failure beside the rule it
+explains, and preserve specific counterexamples to prevent repeated mistakes.
+
+Git retains superseded pages and drafts, including deleted files. The current
+site does not need a separate archive of earlier documentation.
 
 ## Maintain the code pointers
 
@@ -56,7 +73,7 @@ compared with the inspected file bytes. All current entries are public Git
 objects. Tabletop entries identify the demonstrated `main` or later
 `experimental/september-calibration` branch; preserve that distinction.
 
-When a source changes, review its diagram and contracts, update symbol line
+When a source changes, review the explanation, any diagrams and the contracts, update symbol line
 spans and the file hash in the JSON, and update affected chapter links.
 Regenerate the index with `python3 tools/build_code_index.py`; CI checks that
 it matches the map with `python3 tools/build_code_index.py --check`.
@@ -96,23 +113,12 @@ to Pages.
 After changing annotated figures, also run
 `python3 tools/build_hardware_figures.py --check` and inspect the rendered page.
 
-## Why this framework
+## Keep the build simple
 
-Material for MkDocs matched SPARK, but its maintainers announced maintenance
-mode and a move toward Zensical. Zensical preserves much of that authoring
-experience but was still labelled alpha when reviewed on September 13, 2026.
-The author also pointed to UW Lab and cuRobo: both use Sphinx; UW Lab uses
-Sphinx Book Theme, and cuRobo uses Furo. Both enable MyST Markdown.
-
-For this project, the selected tradeoff is an established Python documentation
-builder, Markdown authoring and minimal theme customization. Furo gives a
-compact technical reading layout and Sphinx can add API references later.
-There is no need to install every extension used by those much larger projects.
-
-Decision sources: [Material announcement](https://squidfunk.github.io/mkdocs-material/blog/2025/11/11/insiders-now-free-for-everyone/),
-[Zensical status](https://zensical.org/about/roadmap/),
-[UW Lab configuration](https://github.com/uw-lab/UWLab/blob/main/docs/conf.py),
-[cuRobo configuration](https://github.com/NVlabs/curobo/blob/main/docs/conf.py).
+Sphinx builds the site, MyST lets maintainers write Markdown, and Furo provides
+the reading layout. The selected stack supports the current guide without
+requiring a custom frontend. Add an extension only for a concrete authoring
+need, and keep ordinary page edits possible without robot dependencies.
 
 ## Publication and handoff
 

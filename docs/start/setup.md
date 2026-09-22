@@ -23,6 +23,17 @@ runtime. Opening its F3D, STEP, STL or Bambu exports does not require the ROS,
 planner or dataset-conversion environments. Use the pinned V7 links in that
 chapter; the consolidated `main` now includes that design and the bundle tools.
 
+## Install only what your task needs
+
+| Task | Environment to prepare |
+|---|---|
+| Read the guide or download data | Browser; no robot software |
+| Print or edit a fixture | Slicer or CAD application and the linked fixture files |
+| Inspect recorded episodes | Dataset viewer, or the separate conversion environment when converting raw bags |
+| Develop tabletop planning/execution | Focused control and planner environments below, plus their model/message dependencies |
+| Explore the simulator | The independent [MuJoCo setup](../simulation/mujoco.md#set-up-the-pinned-version) |
+| Inspect hand pressure | The pressure repository's ROS workspace and [passive launch](../sensing/pressure.md#topic-rate-changes-what-you-can-observe) |
+
 ## Choose a tabletop checkout
 
 For the August 25 demo baseline:
@@ -72,8 +83,14 @@ git submodule update --init --recursive
 ./tools/g1_tabletop.sh inspect
 ```
 
-This is transcribed from the inspected source, not a fresh-machine installation
-test. The hardware launcher also expects the commissioned PC2 watchdog, SSH
+`inspect` loads the selected calibration bundle and checks the local model
+revisions against the recorded provenance. Its JSON includes
+`commands_robot: false` and the bundle/model identities. A successful result
+checks those local artifacts; it does not test state freshness, camera transport
+or watchdog recovery on a connected robot.
+
+These commands are transcribed from the inspected source, not a fresh-machine
+installation test. The hardware launcher also expects the commissioned PC2 watchdog, SSH
 access, camera lifecycle helper, and official `unitree_hg` message support.
 The lab's `g1pilot_ws` supplied message definitions without launching G1Pilot.
 

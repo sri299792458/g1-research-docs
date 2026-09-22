@@ -2,31 +2,6 @@
 
 The pressure tools read Dex3 state, preserve raw samples and turn valid baseline-relative counts into a spatial display. They do not publish hand commands. The physical mapping study used the right hand marked `214-R-T`.
 
-```mermaid
-flowchart TB
-  accTitle: Passive tactile recording and display
-  accDescr: HandState feeds a raw session recorder and a visualizer. The visualizer masks invalid slots, establishes an untouched baseline, computes positive deltas, then displays them at mapped taxel locations in RViz.
-  S["Dex3 HandState"] --> R["Raw session recorder"]
-  S --> V["Validity mask<br/>and untouched baseline"]
-  V --> D["Positive pressure deltas"]
-  D --> M["Named taxel mapping<br/>and RViz markers"]
-```
-
-## Follow the code
-
-| Diagram component | Code entry point | Responsibility |
-|---|---|---|
-| Raw recording | [session_recorder.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/session_recorder.py#L56) · `Dex3PressureSessionRecorder._state_callback` | Store pressure arrays, receipt times and motor positions. |
-| Message processing | [pressure_visualizer.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/pressure_visualizer.py#L263) · `Dex3PressureVisualizer._state_callback` | Extract slots, retain validity and compute positive baseline-relative deltas. |
-| Untouched baseline | [pressure_visualizer.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/pressure_visualizer.py#L292) · `Dex3PressureVisualizer._finish_baseline` | Estimate per-slot median and noise; choose the display threshold. |
-| Spatial display | [pressure_visualizer.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/pressure_visualizer.py#L334) · `Dex3PressureVisualizer._publish_timer_callback` | Publish mapped markers and optional visualization joint state. |
-
-The raw branch retains information that a color overlay discards. The display depends on both a valid untouched baseline and a physically checked taxel map. Counts are not forces, and this passive path is separate from the later joint-based grasp-contact gate.
-
-For whole-robot episode recording, pressure arrays in LeRobot, and dataset
-downloads, see [Recording and LeRobot](../data/recording.md). This chapter
-covers how to interpret and visualize the hand's sensor readings.
-
 ## Seeing the pressure display
 
 <figure class="research-video">
@@ -43,6 +18,11 @@ display can look plausible even when a slot is misplaced or its baseline was
 captured during contact; the retained raw samples let you investigate that.
 
 ## Start with the raw message
+
+A **taxel** is one tactile sensing cell. A message slot is only a location in
+the raw array: many slots on this hand are unused. Establish which slots respond
+to touch before interpreting a colored hand model.
+
 
 `unitree_hg/msg/HandState` contains nine pressure groups with 12 cells each:
 108 raw pressure slots per hand. Each group also contains temperature values,
@@ -82,8 +62,8 @@ ros2 launch dex3_pressure_tools dex3_pressure_visualizer.launch.py
 ```
 
 If an existing launch already owns robot description and joint-state defaults,
-use the documented flags to avoid duplicate publishers. See the repository
-README and `docs/LAB_PROTOCOLS.md` for the complete launch context.
+use the documented flags to avoid duplicate publishers. See the pinned [README](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/README.md) and
+[lab protocols](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/docs/LAB_PROTOCOLS.md) for the complete launch context.
 
 ## Baseline and display model
 
@@ -119,11 +99,26 @@ Later cube manipulation explored pressure as required grasp evidence and
 replaced that gate with opposed joint shortfall relative to measured empty
 close. That result does not invalidate the sensor study. It says pressure
 was not a reliable required signal for those cube contacts and placement.
-The [pickup and stacking chapter](../manipulation/tasks.md) explains the
-grasp checks used during execution.
+The [contact-check explanation](../manipulation/planning.md#interpreting-contact-before-using-a-payload-route)
+describes how achieved fingers constrain the carried route.
 
 Evidence: `dex3_pressure_tools` README, observations, signal model and mapping
 documents at the [recorded revision](../reference/sources.md).
+
+## Follow the code
+
+| Implementation concern | Code entry point | Responsibility |
+|---|---|---|
+| Raw recording | [session_recorder.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/session_recorder.py#L56) · `Dex3PressureSessionRecorder._state_callback` | Store pressure arrays, receipt times and motor positions. |
+| Message processing | [pressure_visualizer.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/pressure_visualizer.py#L263) · `Dex3PressureVisualizer._state_callback` | Extract slots, retain validity and compute positive baseline-relative deltas. |
+| Untouched baseline | [pressure_visualizer.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/pressure_visualizer.py#L292) · `Dex3PressureVisualizer._finish_baseline` | Estimate per-slot median and noise; choose the display threshold. |
+| Spatial display | [pressure_visualizer.py](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/dex3_pressure_tools/pressure_visualizer.py#L334) · `Dex3PressureVisualizer._publish_timer_callback` | Publish mapped markers and optional visualization joint state. |
+
+The raw recorder retains information that a color overlay discards. The display depends on both a valid untouched baseline and a physically checked taxel map. Counts are not forces, and this passive path is separate from the later joint-based grasp-contact gate.
+
+For whole-robot episode recording, pressure arrays in LeRobot, and dataset
+downloads, see [Recording and LeRobot](../data/recording.md). This chapter
+covers how to interpret and visualize the hand's sensor readings.
 
 ## Checks and evidence to inspect
 

@@ -1,7 +1,8 @@
 # Code index
 
-Start with a chapter's diagram and code map. Every entry here links to a public,
-commit-pinned file; SHA-256 values and Python symbol spans identify the inspected
+Start with the relevant chapter's explanation and code pointers. Each entry
+links to a public, commit-pinned file; SHA-256 values and Python symbol spans
+identify the inspected
 implementation. These are source identities, not claims of hardware validation.
 
 ## Choose the version before editing
@@ -13,8 +14,9 @@ Entries label their branch; `demo-` entries supply the baseline counterparts
 where a chapter also discusses the later version. The [source catalog](sources.md)
 explains repository roles and validation boundaries.
 
-For an agent, read the Mermaid source, mapped functions, invariants and evidence
-together. Use the exact revision in the [machine-readable map](../assets/code-map.json).
+For an agent, read the chapter, mapped functions, invariants and evidence
+together, including diagram source where present. Use the exact revision in
+the [machine-readable map](../assets/code-map.json).
 `tools/check_code_map.py` reads those Git objects and parses Python without
 importing robot software. The site build needs only this documentation repository.
 Private working notes are not a prerequisite for resolving any code link.

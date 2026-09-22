@@ -2,7 +2,7 @@
 
 A practical guide to the lab's Unitree G1 research tools, developed through
 [sri299792458](https://github.com/sri299792458)'s summer 2026 work. Chapters
-connect Mermaid diagrams to source code, interfaces, procedures and the
+explain how to use and extend the tools, with source code, procedures and the
 hardware lessons a future researcher needs to preserve.
 
 **[Read the guide](https://sri299792458.github.io/g1-research-docs/)** ·
@@ -17,7 +17,7 @@ simulation and hardware outcomes are distinguished; unresolved procedures are
 labelled at their point of use.
 
 Start with the [system map](docs/start/overview.md), then follow a chapter's
-diagram and code entry points. The [code index](docs/reference/code-index.md)
+explanation and code entry points. The [code index](docs/reference/code-index.md)
 links pinned public source and distinguishes the August demo baseline from the
 September calibration branch. Authorship and project
 context are under [About](docs/about.md). Earlier drafts remain in Git history.
