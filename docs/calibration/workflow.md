@@ -32,6 +32,8 @@ procedure that originally produced the August bundle.
 
 ## The model being fitted
 
+Here `A_T_B` maps coordinates expressed in frame B into frame A; `F(q)` is
+forward kinematics (FK) evaluated at joint positions `q`.
 Let `X = base_T_camera`, `F(q) = base_T_palm(q)` and
 `Y = palm_T_marker`. The predicted target in camera coordinates is
 
@@ -111,12 +113,10 @@ has offline checks; this latest lifecycle has not been physically validated.
 
 Readiness compares all 14 measured hand joints with saved references: within
 0.08 rad, stationary over 0.5 s with at most 0.01 rad spread. It is checked
-before SPACE, after SPACE and during acquisition. Shoulder search caps were
-bounded at 0.08/0.10/0.12/0.14 rad. The source reports 635 tests with nine skips
-and a GPU preparation check with 10.4566 mm clearance against a 5 mm requirement.
-These are historical source-reported checks, not a completed new robot run.
-Separately, publication checks exercised 317 selected offline regressions with
-seven skipped; neither check set establishes physical commissioning.
+before SPACE, after SPACE and during acquisition. The
+[standing-control tests](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_standing_calibration_control.py)
+exercise the software lifecycle. Passing those checks or obtaining a collision-free
+route does not establish a successful physical return with the new procedure.
 
 ## From a fit to a deployment
 

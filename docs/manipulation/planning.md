@@ -117,11 +117,10 @@ boundary replan fails, an already frozen reverse must remain executable. The
 August 17 lift/replacement exposed an omitted `return_to_pregrasp` leg; the
 object action happened, but the lifecycle failed afterward.
 
-One GPU strict-collision implementation reduced a reported task from 295.81 s
-to 39.05 s with the same decisions and bit-identical path. A compatible warm
-pool reduced another solve from 15.29 s cold to 1.85 s warm; small GPU
-differences remained. These are task-specific timings, not whole-robot cycle
-times or universal CuRobo performance claims.
+Keep compatible planner workers warm and avoid rebuilding GPU collision state
+for every request. Recorded optimizations reduced planning time while preserving
+the strict acceptance checks. Worker reuse must still bind the current scene,
+model and request; cached state is not permission to accept a stale plan.
 
 See [ownership](../control/ownership.md) for fixed-rate execution and
 [MPC](mpc.md) for the experimental future-window contract.

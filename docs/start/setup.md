@@ -29,12 +29,20 @@ chapter; the consolidated `main` now includes that design and the bundle tools.
 |---|---|
 | Read the guide or download data | Browser; no robot software |
 | Print or edit a fixture | Slicer or CAD application and the linked fixture files |
-| Inspect recorded episodes | Dataset viewer, or the separate conversion environment when converting raw bags |
+| Inspect recorded episodes | [Local browser viewer](../data/viewing.md); conversion software only when starting from raw bags |
 | Develop tabletop planning/execution | Focused control and planner environments below, plus their model/message dependencies |
 | Explore the simulator | The independent [MuJoCo setup](../simulation/mujoco.md#set-up-the-pinned-version) |
 | Inspect hand pressure | The pressure repository's ROS workspace and [passive launch](../sensing/pressure.md#topic-rate-changes-what-you-can-observe) |
 
 ## Choose a tabletop checkout
+
+The tabletop baseline has one known public-dependency gap: its pinned AprilCube
+commit is not currently available from the configured GitHub fork. See
+[source availability](../reference/sources.md#aprilcube-runtime-pin-availability).
+The checkout commands below identify the intended versions, but recursive
+submodule setup cannot finish on a fresh machine until that pin is restored or
+replaced with a tested version. Downloading the public fixture files or viewing
+the datasets does not depend on this runtime setup.
 
 For the August 25 demo baseline:
 
@@ -72,16 +80,29 @@ and hardware validation. Publishing its code did not change that status. The
 | MuJoCo twin | ROS Humble/Jazzy workspace, MuJoCo, SDK and OpenHomie policy | Separate simulation environment; see the [simulation setup](../simulation/mujoco.md#set-up-the-pinned-version) |
 | This guide | Python 3.10+ / pinned docs requirements | No ROS or CUDA |
 
-From the focused source repository, the documented setup is:
+### Tabletop control, planning and recording
+
+Start from the selected tabletop checkout above, with `uv`, ROS Humble and
+the planner's CUDA dependencies available. The commissioned control environment
+uses Python 3.10. Select Humble explicitly if the machine also has Jazzy;
+automatic ROS discovery in the scripts prefers Jazzy.
 
 ```bash
-git submodule update --init --recursive
-./tools/setup_control_env.sh
+G1_TABLETOP_ROS_PREFIX=/opt/ros/humble ./tools/setup_control_env.sh
 ./tools/setup_planner_env.sh
-./tools/install_robot_calibration_local.sh
-./tools/setup_recording_benchmark.sh
+ROS_DISTRO=humble ./tools/setup_recording_benchmark.sh
 ./tools/g1_tabletop.sh inspect
 ```
+
+| Setup script | Result | When needed |
+|---|---|---|
+| `setup_control_env.sh` | `.venv`, Python 3.10, Unitree bindings and a local CycloneDDS prefix | Tabletop control and inspection |
+| `setup_planner_env.sh` | `.venv-planner`, Python 3.11 and GPU planning dependencies | Planning; kept outside the control interpreter |
+| `setup_recording_benchmark.sh` | MCAP storage plugin under `deps/rosbag2_mcap_prefix/` | Raw episode recording; despite its name, this script installs the plugin rather than running the benchmark |
+
+The recording installer downloads and extracts ROS packages into the checkout;
+it does not install them system-wide. These environments do not start the camera
+or establish robot ownership.
 
 `inspect` loads the selected calibration bundle and checks the local model
 revisions against the recorded provenance. Its JSON includes
@@ -89,10 +110,9 @@ revisions against the recorded provenance. Its JSON includes
 checks those local artifacts; it does not test state freshness, camera transport
 or watchdog recovery on a connected robot.
 
-These commands are transcribed from the inspected source, not a fresh-machine
-installation test. The hardware launcher also expects the commissioned PC2 watchdog, SSH
-access, camera lifecycle helper, and official `unitree_hg` message support.
-The lab's `g1pilot_ws` supplied message definitions without launching G1Pilot.
+These commands are source-checked, not a fresh-machine installation test.
+The hardware launcher additionally needs the message workspace, camera access
+and PC2 runtime described below.
 
 Check CUDA independently:
 
@@ -103,6 +123,56 @@ Check CUDA independently:
 Two recorded UVM failures returned error 999 even though `nvidia-smi` saw the
 GPU; reboot restored the existing environment. See
 [debugging](../reference/debugging.md) before rebuilding dependencies.
+
+### Optional solver and conversion environments
+
+`./tools/install_robot_calibration_local.sh` builds the native calibration solver.
+Prepare it when fitting a calibration; consuming the saved August bundle does
+not require a new fit. [Calibration](../calibration/workflow.md) distinguishes
+offline solving from collection and deployment.
+
+Raw-to-LeRobot conversion uses a separate Python 3.12 environment and local
+SPARK/LeRobot checkouts. Follow [conversion and retention](../data/recording.md#conversion-and-retention)
+only when converting raw recordings. Downloaded LeRobot episodes need a viewer,
+not the control, planner or calibration solver environments.
+
+## Connect the software to the lab setup
+
+The [hardware wrapper](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tools/g1_tabletop_hardware.sh)
+sets up ROS, DDS, message definitions and recording before invoking the task.
+The shorter `g1_tabletop.sh` command does not perform that network setup.
+
+| Setting | Commissioned default or requirement | What to check on another machine |
+|---|---|---|
+| `G1_TABLETOP_ROS_PREFIX` | `/opt/ros/humble` for the Python 3.10 control environment | Interpreter and ROS Python ABI must agree |
+| `G1_TABLETOP_UNITREE_ROS_SETUP` | `../g1pilot_ws/install/setup.bash` | Source the workspace containing the official `unitree_hg` definitions; launching G1Pilot is unnecessary |
+| `--network-interface` | Required real laptop interface | Identify the connected adapter with `ip -brief address`; do not copy the lab interface name |
+| `--domain-id` | `0` | Match all participants; the commissioned camera helper separately hardcodes domain 0 |
+| `RMW_IMPLEMENTATION`, `CYCLONEDDS_URI` | CycloneDDS; wrapper builds an interface configuration if unset | Existing values are respected, so a stale shell can retain the wrong middleware or interface |
+
+After sourcing the matching ROS and message workspaces in a terminal,
+`ros2 interface show unitree_hg/msg/LowState` checks message availability.
+Seeing a topic in `ros2 topic list` does not establish that its messages can be
+decoded or are fresh. Unitree `rt/lowstate` appears as ROS `/lowstate`, without
+an extra `/rt` prefix. Continue with the [camera checks](../hardware/camera.md)
+and [operating checklist](../control/runbook.md) for the connected system.
+
+### Prepare PC2 recovery separately from arming it
+
+PC2 needs its own watchdog Python runtime. The fixture repository's
+[runtime installer](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/blob/f295def18bd936031fba325d4e8bdfc71fea671a/tools/install_pc2_watchdog_runtime.sh)
+provisions a versioned environment and selects it through
+`/home/unitree/.local/share/g1-aprilcube-watchdog/current/venv/bin/python`.
+It expects commissioned SSH access, a clean pinned Unitree SDK checkout,
+CycloneDDS build artifacts, and PC2's Python 3.8/build prerequisites. Read its
+preflight checks before using it; cloning the tabletop submodules alone does
+not supply all these dependencies.
+
+Provisioning checks imports and dependencies. It does **not** arm recovery or
+start a permanent watchdog service. During a hardware session the laptop
+launches the remote agent, waits for readiness and arms the lease at the
+defined ownership boundary. [Ownership and safety](../control/ownership.md)
+explains those states and the required recovery acknowledgements.
 
 ## Simulation setup
 

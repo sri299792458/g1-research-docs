@@ -38,10 +38,21 @@ so do not use it to reconstruct or extend the aggregate counts below.
 
 ## The network's output is not the palm pose
 
-The output is an object/point-cloud-from-canonical-grasp transform. Compose
-the descriptor's fixed grasp-to-palm transform exactly once to obtain the
-palm target. Pregrasp is another constructed pose, not an alternative name
-for that output frame.
+For a point cloud expressed in frame `F`, each proposal is `F_T_G`, mapping
+the canonical grasp frame `G` into `F`. The descriptor supplies a fixed
+`G_T_palm` transform. Following the [verified frame contract](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/docs/graspgenx_contract.md):
+
+```text
+F_T_palm = F_T_G @ G_T_palm
+base_T_palm = base_T_F @ F_T_palm
+```
+
+Use the descriptor transform once, without inverting it. If the point cloud
+is object-local, `base_T_F` is the observed object pose. If the planner controls
+another tool link, obtain that additional fixed transform from the robot model.
+Pregrasp is a separately constructed approach pose. The network returns pose
+candidates and confidence scores; it does not return arm IK, a collision-free
+route or seven candidate-specific finger commands.
 
 The network consumes 12 sweep-volume descriptor values. It does not read the
 current URDF or predict an object's final physical finger joint state. The
@@ -126,7 +137,7 @@ close corrections. [Source identities](../reference/sources.md).
 | Shortlist construction | [executable_shortlist.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/grasping/executable_shortlist.py#L257) · `build_shortlist` | Join candidates to contact traces and check provenance and geometry. |
 | Support analysis | [support_atlas.py](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/g1_aprilcube_demo/grasping/support_atlas.py#L462) · `evaluate_support` | Evaluate a declared support and approach corridor without claiming a physics pass. |
 
-The linked grasp-demo code is the historical offline implementation. Its shortlist fields are not automatically the final hardware command contract: the later stationary-cube/fixed-close qualification below supersedes use of achieved simulated finger joints as a closing target. Keep that correction when adapting this pipeline.
+The linked grasp-demo code is the historical offline implementation. Its shortlist fields are not automatically the final hardware command contract: the stationary-cube/fixed-close qualification described above supersedes use of achieved simulated finger joints as a closing target. Keep that correction when adapting this pipeline.
 
 ## Checks and evidence to inspect
 

@@ -9,24 +9,39 @@ successful August demo and the later calibration development are separate branch
 | Repository / branch | Inspected revision | What belongs here |
 |---|---|---|
 | [Tabletop `main`](https://github.com/sri299792458/g1-dex3-tabletop/tree/7400aff201c2f73ef2a64e546d72bd66cbe87fd6) | `7400aff` | August 25 demo baseline: seated control, cube perception, grasp/planning contracts, stacking, recording and conversion |
-| [Tabletop September branch](https://github.com/sri299792458/g1-dex3-tabletop/tree/59c21b1388c636176dea67ea7ed3e253f8510783) | `59c21b1` | Later calibration runtime, diagnostics, shared-control changes and regression fixtures; includes the previously uncommitted work |
+| [Tabletop September branch](https://github.com/sri299792458/g1-dex3-tabletop/tree/59c21b1388c636176dea67ea7ed3e253f8510783) | `59c21b1` | Later calibration runtime, diagnostics, shared-control changes and regression fixtures |
 | [Calibration and fixtures `main`](https://github.com/sri299792458/robot-calibration-aprilcube-prototype/tree/f295def18bd936031fba325d4e8bdfc71fea671a) | `f295def` | Reusable calibration tools, bundle support, wrist markers, V7 torso structure and R2 coupons |
 | [Grasp/assembly `main`](https://github.com/sri299792458/g1-aprilcube-demo/tree/2b7274b11f1862ebfcd05b48ff678d995e55269e) | `2b7274b` | Offline GraspGen-X descriptors, qualification, support studies and assembly planning |
 | [G1Pilot simulator `dev`](https://github.com/sri299792458/g1pilot/tree/dadd88f985bb5772f279019b8882208ec59ae4f0) | `dadd88f` | Initial MuJoCo/OpenHomie backend, supplied on `dev` |
 | [Dex3 pressure tools](https://github.com/sri299792458/dex3_pressure_tools/tree/e0b706df507160799b70732c7cc3244924ce8f5e) | `e0b706d` | Passive recording, baseline-relative visualization and taxel mapping |
+| [AprilCube published fork](https://github.com/sri299792458/aprilcube/tree/80ed7c72ed00aef6dc70f77d8169a199e9a612cd) | `80ed7c7` | Public print files and geometry documentation; see runtime pin availability below |
 
 The tabletop demo revision preserves runtime code, tests, configuration and
 submodule pins from `d1b0103`, the commit recorded by the August 25 runs. The
-September branch is one additional commit over that clean main. It carries the
-September 4 checkpoint and later local changes together. Neither a newer branch
+September revision listed here is one implementation commit over that baseline.
+It carries the September 4 checkpoint and later development together. The branch
+heads also contain subsequent README edits; the links here pin the inspected
+runtime rather than following those heads. Neither a newer branch
 nor a passing offline test replaces the demonstrated configuration.
 
 The fixture repository remains separate from tabletop. Its consolidated main
 includes both V7/R2 and the earlier calibration-bundle addition; there is no need
 to choose between former development branches to obtain those files. It still
 has the [documented physical fit limits](../perception/targets.md#torso-charuco-carrier).
-AprilCube and the other upstream dependencies remain pinned submodules of the
-code repositories; initialize the revisions recorded by the chosen checkout.
+
+### AprilCube runtime pin availability
+
+The tabletop baseline pins AprilCube `9381a52b936059a977e6c4e6fb4de60eae33129b`.
+On September 24, GitHub could not resolve that commit in the configured fork,
+although it remains in the local source checkout. A fresh recursive tabletop
+checkout therefore cannot currently obtain that dependency as pinned.
+
+The [target chapter](../perception/targets.md) links the public `80ed7c7` print
+files, detector configuration and design notes. Those linked files were compared
+with the runtime pin and are byte-identical; this does not establish equivalence
+of the entire library. Restoring the required dependency or deliberately updating
+and testing the submodule pin is still needed. Other dependencies should likewise
+use the revisions recorded by the selected source checkout.
 
 ## Follow the implementation and its evidence
 

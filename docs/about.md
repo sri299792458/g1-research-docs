@@ -10,10 +10,6 @@ path alone does not explain a cable choice, a failed handoff, a camera movement
 or a command that differs from the measured joints. The guide keeps those
 lessons next to the subsystem they affect.
 
-The chapters are organized by system and task. Personal source journals and working notes remain private evidence and
-maintenance records; the public chapters carry the technical explanation. Earlier
-versions of the guide are preserved in the repository's Git history.
-
 The earlier [SPARK documentation](https://rpm-lab-umn.github.io/spark-data-collection/)
 provided the reference for practical depth. The [source catalog](reference/sources.md)
 records upstream attribution, source availability and the limits of this draft.

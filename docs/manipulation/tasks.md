@@ -34,12 +34,13 @@ so it is not used to infer a success rate or a verified software handback.
 
 ## August 25 demo baseline
 
-The author dates the demo to approximately 3 PM Minnesota time on August 25.
-Five retained runs span 15:06–15:17 and record source commit `d1b0103`. The
+Five retained August 25 runs span 15:06–15:17 Minnesota time and record source
+commit `d1b0103`. The
 published [`main`](https://github.com/sri299792458/g1-dex3-tabletop/tree/7400aff201c2f73ef2a64e546d72bd66cbe87fd6)
 preserves that commit's runtime code, tests, configuration and dependency pins.
-The recorded dirty-worktree flag also counts untracked files; it does not by
-itself prove that robot code differed during the demonstration.
+The run metadata also flags a dirty worktree without identifying a runtime-code
+change, so the recorded commit is a baseline rather than proof of every file’s
+bytes during execution.
 
 All five run records report completed episodes, supported returns and complete
 recording, with control retained between episodes. Those statuses do not supply

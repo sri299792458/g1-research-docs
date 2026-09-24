@@ -15,6 +15,23 @@ This chapter covers that initial backend and its arm/hand demonstrations.
 The later tabletop controller has its own [ownership and recovery lifecycle](../control/ownership.md);
 the cube-stacking pipeline has not been validated against this backend.
 
+## Demonstrations
+
+<figure class="research-video">
+  <video controls playsinline preload="none" poster="../_static/mujoco-rviz-short-demo.jpg" width="1280" height="720" aria-label="RViz and the G1 MuJoCo model during arm-pose changes" aria-describedby="mujoco-demo-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/mujoco-rviz-short-demo.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the download link below.
+  </video>
+  <figcaption id="mujoco-demo-caption">RViz on the left and MuJoCo on the right during arm-pose changes. This illustrates the application-to-simulator interface; it does not measure tracking error. Silent, 10 seconds.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/mujoco-rviz-short-demo.mp4">Download the short MuJoCo/RViz demo (MP4)</a></p>
+</figure>
+
+The July release also contains a [34-second arm demo](https://github.com/sri299792458/g1pilot/releases/download/mujoco-demo-media-2026-07-01/g1pilot-mujoco-rviz-arm-demo.mp4)
+and an [18-second Dex3 open/close demo](https://github.com/sri299792458/g1pilot/releases/download/mujoco-demo-media-2026-07-01/g1pilot-mujoco-dex3-open-close-demo.mp4).
+Sampled frames show arm-pose changes beside RViz and a hand response to the
+terminal's open/close commands. These are simulation recordings. Their hashes,
+dimensions and review scope are in the [media catalog](../reference/media.md#other-available-mujoco-videos).
+
 ## Choose a reading path
 
 - To run the arm/hand demonstration, use [setup](#set-up-the-pinned-version)
@@ -289,23 +306,6 @@ Inspect the reported simulation time, base position, velocity norm and control
 norm. This is a bounded observation command: normal exit does not assert that
 the robot remained upright or tracked an arm goal. `--allow-zero-policy` is a
 diagnostic fallback for nominal leg targets, not policy-controlled standing.
-
-## Demonstrations
-
-<figure class="research-video">
-  <video controls playsinline preload="none" poster="../_static/mujoco-rviz-short-demo.jpg" width="1280" height="720" aria-label="RViz and the G1 MuJoCo model during arm-pose changes" aria-describedby="mujoco-demo-caption">
-    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/mujoco-rviz-short-demo.mp4" type="video/mp4">
-    Your browser cannot play this video. Use the download link below.
-  </video>
-  <figcaption id="mujoco-demo-caption">RViz on the left and MuJoCo on the right during arm-pose changes. This illustrates the application-to-simulator interface; it does not measure tracking error. Silent, 10 seconds.</figcaption>
-  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/mujoco-rviz-short-demo.mp4">Download the short MuJoCo/RViz demo (MP4)</a></p>
-</figure>
-
-The July release also contains a [34-second arm demo](https://github.com/sri299792458/g1pilot/releases/download/mujoco-demo-media-2026-07-01/g1pilot-mujoco-rviz-arm-demo.mp4)
-and an [18-second Dex3 open/close demo](https://github.com/sri299792458/g1pilot/releases/download/mujoco-demo-media-2026-07-01/g1pilot-mujoco-dex3-open-close-demo.mp4).
-Sampled frames show arm-pose changes beside RViz and a hand response to the
-terminal's open/close commands. These are simulation recordings. Their hashes,
-dimensions and review scope are in the [media catalog](../reference/media.md#other-available-mujoco-videos).
 
 ## Limits and useful extension points
 

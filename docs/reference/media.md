@@ -134,10 +134,12 @@ MuJoCo arm poses; the hand video shows terminal open/close commands and differen
 finger configurations. This is sampled visual evidence, not a continuous
 stability or tracking assessment. Neither file has an audio stream.
 
-| Asset | Duration / dimensions | SHA-256 |
-|---|---|---|
-| Arm demo | 34.28 s / 1856 × 1044 | `6c7988b5e4a8e6310b4a687ef6ffb45a3ece6aae6d01292dfe37e54d4f3cb194` |
-| Dex3 demo | 18.49 s / 1824 × 1048 | `34a55a030a903bd5ff19a98ec0b569f5fd1afd60c56cdb62ccb2a50db89a3d48` |
+| Asset | Duration / dimensions |
+|---|---|
+| Arm demo | 34.28 s / 1856 × 1044 |
+| Dex3 demo | 18.49 s / 1824 × 1048 |
+
+Exact hashes are retained in the [machine-readable catalog](../assets/media.json).
 
 These remain download links. Embedded playback of these two originals has not
 been tested; the chapter embeds the separate reviewed short clip.
@@ -150,9 +152,8 @@ The [public media catalog](../assets/media.json) retains original/publication
 hashes, selected source paths, captions and review limits. Detailed working
 reviews remain private.
 
-All photographs and embedded deck images were inspected, along with 326 video
-frames sampled across the eight clips and selected full-resolution stacking
-frames. Audio in the three physical recordings remains unreviewed.
+Photographs, embedded deck images and sampled video frames were inspected.
+Audio in the three physical recordings remains unreviewed.
 The short MuJoCo clip is a separate file from the July release assets reviewed
 above. The deck's linked boot-calibration movie was not present in the folder.
 
@@ -205,10 +206,8 @@ The lab copy must either retain access to those assets or copy them to a
 lab-owned release and update catalog URLs. A repository copy alone does not
 copy another repository's release assets.
 
-GitHub currently blocks regular Git files over 100 MiB; Pages sites have a
-1 GB published-size limit, and Git LFS is not supported directly by Pages.
-These constraints reinforce keeping raw bags and full media collections out
-of the documentation repository. Check the current limits when changing hosts:
+Keep raw bags and full media collections outside the documentation build.
+Before changing storage, check the host’s current file-size, Pages and LFS rules:
 [large files](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github),
 [Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits),
 [LFS restrictions](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage).

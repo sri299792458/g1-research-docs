@@ -1,8 +1,9 @@
 # Operating and recovering
 
 Use this checklist before operating a supported tabletop task and when
-interpreting its exit status. It assumes the robot and PC2 recovery service
-have already been commissioned for the selected mode. It does not replace
+interpreting its exit status. It assumes the robot and PC2 recovery path
+have already been commissioned for the selected mode; [setup](../start/setup.md#prepare-pc2-recovery-separately-from-arming-it)
+distinguishes runtime installation from an armed session. It does not replace
 the [ownership design](ownership.md) or the source launcher instructions.
 
 ## Source scope
@@ -102,16 +103,28 @@ and repeated calls after verified restoration are not useful.
 ## Inspect the outcome
 
 Read `status.json`, the planner log, contact/retention evidence, and
-`raw_episode/episode_manifest.json` together. Distinguish:
+`raw_episode/episode_manifest.json` together. In the August tabletop path:
 
-- task completed or rejected;
-- control returned normally or required fault recovery;
-- recording complete or incomplete;
-- physical placement independently observed or unscored.
+| Question | Field or artifact | Interpretation |
+|---|---|---|
+| What ended the task? | `status.json`: `status`, then `reason` or `error`/`error_type` when present | `completed`, `task_rejected` and `failed` describe different task paths |
+| Did recovery itself fail? | `status.json`: `cleanup_errors`, plus terminal-action/return evidence for the relevant path | Inspect each cleanup stage independently of the primary task error |
+| Did this process command motion? | `status.json`: `commands_robot` | A failed preview can exit before commands exist |
+| Is the raw recording complete? | Manifest: `capture.complete`, `capture.problems`, `capture.recorder_exit_code` and `recorded_topics` | Require the writer audit, expected types and nonempty required streams |
+| Was physical placement successful? | RGB or external footage tied to this run, with an explicit annotation | Program completion alone is not an independently scored placement |
+
+Field names and outcome structure vary between coordinators and revisions;
+use the matching source when parsing them. Preserve the first error as well as
+later cleanup errors. [Debugging from evidence](../reference/debugging.md#worked-example-a-cleanup-stall)
+shows why their order matters.
 
 For retained-control stack sessions, one episode ending does not mean ownership
 has been handed back; the process remains in its supported wait for the next
 SPACE. Each episode still gets a separate run directory and bag.
+
+After final handback, [release the ROS camera](../hardware/camera.md#inspect-acquire-and-release-the-camera)
+when it is no longer needed. Robot handback and camera-service restoration are
+separate lifecycle steps.
 
 Evidence: [source catalog](../reference/sources.md), prototype recovery report,
 current tabletop README and dated lifecycle corrections.
@@ -129,4 +142,4 @@ The terminal state must be observed, not inferred from a process exiting or a se
 
 ## Checks and evidence to inspect
 
-Trace `run_tabletop` cleanup and `StandingCalibrationControl.close` when changing resource shutdown. [test_standing_calibration_control.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_standing_calibration_control.py) (September branch) checks recovery-before-transport-close. Read the August 14–15 and September 4–5 control entries in the [source records](../reference/sources.md); do not perform fault injection merely to build these docs.
+Trace `run_tabletop` cleanup and `StandingCalibrationControl.close` when changing resource shutdown. [test_standing_calibration_control.py](https://github.com/sri299792458/g1-dex3-tabletop/blob/59c21b1388c636176dea67ea7ed3e253f8510783/tests/test_standing_calibration_control.py) (September branch) checks recovery-before-transport-close. The [ownership chapter](ownership.md) explains the observed acquisition and cleanup failures that motivated this ordering.

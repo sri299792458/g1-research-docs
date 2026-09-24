@@ -13,7 +13,9 @@ planner alive is not enough to establish that control is healthy.
 The diagram answers **what keeps running while the planner is busy, and who
 can recover if laptop control stops?** Start with the seated path below;
 standing calibration uses a different ownership mechanism. The
-[runbook](runbook.md) covers operator preparation and recovery.
+[runbook](runbook.md) covers operator preparation and recovery;
+[PC2 setup](../start/setup.md#prepare-pc2-recovery-separately-from-arming-it)
+distinguishes installing the remote runtime from arming its per-session agent.
 
 ```mermaid
 flowchart TB

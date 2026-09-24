@@ -90,22 +90,6 @@ private detailed ledger, use its completed results and operator corrections too.
 | State estimation | Chair-motion study, hybrid observer, stationary-boundary integration | Fixed pelvis-origin assumption; no global position observability |
 | Data | Raw MCAP and verified LeRobot conversion | Conversion loses full-rate ROS information |
 
-## Reading paths for a new project
-
-For a new operator, read the hardware, camera, ownership, and runbook chapters.
-Understand why seated direct control temporarily removes the normal controller
-before running motion. Inspect an existing run and its recording manifest.
-
-For an algorithm developer, first identify the control and recording boundaries
-your experiment needs, then read the relevant perception, grasp or planner contracts. A replacement planner must preserve the
-measured-versus-commanded distinction and supply recoverable routes. A new
-grasp generator must define its frame and finger command.
-
-For a calibration researcher, read the results and investigation record before
-proposing experiments. Broad pose coverage, measured-joint inputs, RGB-D fitting,
-and many axis/link hypotheses were already examined. The camera was deliberately
-adjusted between September datasets. These facts change what the residual means.
-
 ## Evidence labels
 
 **Physical** means a real robot or hand experiment is recorded. **Simulation**

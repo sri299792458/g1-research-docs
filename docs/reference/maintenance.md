@@ -25,7 +25,12 @@ uv pip install --python .venv/bin/python -r requirements-docs.txt
 
 The dependency input is `requirements-docs.in`; `requirements-docs.txt` pins
 the resolved build. Update deliberately, rebuild and review before committing
-a new lock. The first draft was built with Python 3.10.
+a new lock.
+
+After changing navigation, configuration or extensions, force a fresh build
+with `.venv/bin/sphinx-build -E -a -n -W --keep-going -b html docs site`.
+This rereads every page and avoids carrying an old sidebar through an
+incremental preview.
 
 ## Edit a page
 
@@ -134,7 +139,6 @@ verify that readers can download it without the owner's account. Record size,
 version and format on the dataset page. Preserve these files separately from
 the documentation repository and include them in the lab handoff.
 
-The author created `sri299792458/g1-research-docs` for following the draft.
 The Pages workflow builds static HTML and deploys it through GitHub Actions;
 repository Pages settings must use **GitHub Actions** as their source. The
 README records the live link once publication is verified.
@@ -144,3 +148,9 @@ version. Update `html_baseurl` and repository/edit links in `docs/conf.py`,
 enable Pages, and check media access. Link the personal portfolio version
 and the lab's maintained version from both READMEs. Date later lab additions
 so the original summer contribution remains identifiable.
+
+Keep each implementation repository's README linked to its relevant chapter
+and the full guide. If a README uses a video poster, retain the poster's source
+and timestamp in the media catalog, and keep its caption explicit about physical
+footage versus simulation. README-only changes do not require moving the guide's
+runtime source pins.

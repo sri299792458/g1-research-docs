@@ -1,4 +1,4 @@
-# Reading the calibration investigation correctly
+# Calibration investigations: what was tested
 
 Read this before proposing another explanation for the remaining calibration
 error. It preserves the completed comparisons that most affect the next
@@ -79,9 +79,9 @@ not uniquely locate an as-built error.
 
 ## Current disposition
 
-No September bundle replaced the August stacking baseline. The broader sweep,
-GitHub issue and wrist patch remained paused/unapplied in the reviewed record.
-This documentation does not reopen them.
+No September bundle replaced the August stacking baseline, and the candidate
+wrist-spacing change was not deployed. The retained comparisons establish a
+model discrepancy without uniquely identifying the robot's physical geometry.
 
 Before proposing further work, identify which recorded result would be changed
 by the proposed measurement, what new observable it adds, and which assumptions

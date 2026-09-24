@@ -60,8 +60,8 @@ These are distinct from the cover-plate screws discussed below.
 The recorded fitting sequence passes the two wrist connectors through the gap,
 then seats and fastens the hand before mating those connectors and closing the
 cover. Excessive insertion force was the operator's cue to stop and check the
-fit. The photographs show the connector path; they do not establish an
-electrical pinout or a complete power-isolation procedure.
+fit. Use the photographs to identify that connector path alongside the
+installation prerequisites above.
 
 ```{figure} ../assets/images/dex3-connector-routing-annotated.svg
 :name: dex3-connector-routing
@@ -104,13 +104,7 @@ not a general substitute for the intended fasteners. Its linked Unitree manual
 describes an older G1 layout, which the author explicitly distinguishes from
 the lab robot's photographs.
 
-The annotated figures preserve the features indicated in the installation
-slides. Captions and instructions remain page text; the editable figure layouts
-are described in [media maintenance](../reference/media.md#annotated-hardware-figures).
-
-The finished installation walkthrough still needs the electrical pinout,
-power-isolation steps and current fastener condition. The deck's linked
-boot-calibration video remains unavailable in the supplied collection.
+The deck’s linked boot-calibration video remains unavailable in the supplied collection.
 [Media provenance](../reference/media.md#photographs-and-installation-figures)
 records the original deck and the figures used here.
 

@@ -9,6 +9,11 @@ The reusable lessons concern access to a supported object, paired arm goals
 and consistent attachment geometry. Start here when extending beyond cubes;
 use [pickup and stacking](tasks.md) for the demonstrated hardware workflow.
 
+The source includes implementation, configuration and selected reports, but
+large generated grasp pools and replay inputs are separate artifacts. Check
+the repository's [input availability](https://github.com/sri299792458/g1-aprilcube-demo/blob/2b7274b11f1862ebfcd05b48ff678d995e55269e/docs/runtime-assembly.md#input-availability)
+before attempting a replay. A clone alone is not a complete reproduction bundle.
+
 | Experiment | Useful result | Boundary of the evidence |
 |---|---|---|
 | T/U/cube assembly | Role/alternative search and complete pick/mate/place planning | Attachment events are symbolic |
@@ -42,8 +47,7 @@ assembly capability.
 
 The right-hand U atlas had 675 intrinsic passes, yet only four were open-hand
 clear in the early flat-support test, and none passed the native pickup.
-Six support orientations made the resting geometry explicit. A broad
-42-physics-trial test still produced no passes.
+Six support orientations made the resting geometry explicit.
 
 ```{figure} ../assets/images/u_legs_six_tabletop_supports.png
 :alt: Six U-shape resting orientations, including flat, upright, inverted and either outer leg down.
@@ -53,17 +57,16 @@ are geometric candidates, not simulated or physical successes.
 [Provenance](../reference/media.md).
 ```
 
-Upright support was more productive: 1,837 tested candidates led to 405
-discovery passes and 365 replay passes, with 13/14 passing in one visual review.
-The larger broad-support search generated 100,000 raw proposals from 391 seeds;
-983 cleared the geometric approach corridor, but none passed physical
-simulation. One apparent near-lift involved about 203 N of hand/table contact
-and was rejected.
+| Study | Result | What changed the decision |
+|---|---|---|
+| Upright support | 405 discovery passes from 1,837 candidates; 365 replay passes | Resting orientation can make an intrinsically qualified grasp accessible |
+| Broad support search | 983 geometric approach candidates from 100,000 proposals; no simulated pickup passes | A larger pool did not remove the support/contact problem |
+| Pose-plus-joint proposals with LightningGrasp | 14 eligible simulation trials; no passes | Adding candidate finger solutions did not resolve the tested pickup |
 
-An additional LightningGrasp adaptation produced pose plus joint solutions:
-287 solutions, 574 support pairs, 14 eligible physical tests and zero passes.
-Twenty overclosure tests also failed. This constrained the tested approach;
-it does not prove that every possible U pickup strategy is impossible.
+These use different supports and qualification stages, so their counts are not
+a controlled ranking of grasp generators. One apparent near-lift involved about
+203 N of hand/table contact and was rejected. The studies constrain these tested
+approaches; they do not prove that every possible U pickup strategy is impossible.
 
 ## CuRobo integration lessons
 

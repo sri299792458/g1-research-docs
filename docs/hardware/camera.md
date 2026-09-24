@@ -46,6 +46,38 @@ Use the repository's ownership helper rather than starting several camera
 applications. Its actions change PC2 services even though they do not command
 robot joints.
 
+### Inspect, acquire and release the camera
+
+From the tabletop checkout on the laptop, with the commissioned SSH key available:
+
+```bash
+./tools/g1_realsense_pc2.sh status
+```
+
+`status` reports the factory service, tracked ROS process and recent profile log
+lines. It does not establish that new frames are arriving. The helper accepts
+`G1_PC2_HOST` and `G1_PC2_SSH_IDENTITY`; its defaults are
+`unitree@192.168.123.164` and `$HOME/.ssh/g1_pc2_ed25519`.
+
+| Action | Effect | Evidence to inspect |
+|---|---|---|
+| `./tools/g1_realsense_pc2.sh start` | Locks the ownership change, stops `video_hub_pc4`, starts the ROS driver and verifies serial/profile/USB log output | `/tmp/g1-calibration-realsense.log` on PC2; then fresh image and CameraInfo messages on the laptop |
+| `./tools/g1_realsense_pc2.sh status` | Inspects service and tracked process without starting a driver | A live PID is necessary but insufficient; check advancing image timestamps separately |
+| `./tools/g1_realsense_pc2.sh stop` | Stops the tracked driver and restores the factory service | Reported service state, rather than the service command's exit code alone |
+
+The helper refuses an unrelated tracked PID or an untracked competing ROS
+driver. A failed fresh start attempts to stop its driver and restore the factory
+service. Preserve the log before retrying a failure.
+
+Camera-dependent task wrappers perform a stop/start before entering the task.
+They have no exit trap that restores the factory camera automatically. After
+the task has resolved robot ownership and no other researcher needs the ROS
+camera, use `stop` to return camera ownership explicitly.
+
+The commissioned helper fixes the PC2 ROS paths, serial, profiles and DDS
+domain 0 in its source. Changing a task's domain argument does not change these
+camera settings. Check them when adapting the setup.
+
 ## Profiles used at different stages
 
 | Stage | Profile and evidence |
@@ -56,13 +88,10 @@ robot joints.
 | Motion streams | Separate raw gyro and accelerometer; no synthesized orientation |
 | Offline alignment | Depth/color intrinsics and factory static transforms retained |
 
-A black WebRTC preview in June remained a separate playback issue after the
-Python/ZMQ path worked. It did not invalidate the successful camera acquisition.
-The original USB/UVC failure was resolved by moving the cable to another PC2
-port. The author supplied `PXL_20260803_142502363.jpg` to illustrate this
-troubleshooting step: try another port if the camera negotiates USB 2, then
-verify the negotiated speed. The photograph does not establish a universally
-correct socket.
+Moving the cable to another PC2 port resolved a USB/UVC acquisition failure.
+If the camera negotiates USB 2, try another port and verify the driver-reported
+speed. The photograph identifies the connection area, not a universally correct
+socket. Check acquisition independently of browser preview playback.
 
 ```{figure} ../assets/images/realsense-pc2-usb-ports.jpg
 :alt: Close-up of the G1 PC2 connection panel with the RealSense USB cable connected and adjacent ports visible.
@@ -81,11 +110,6 @@ commands, so a failed startup check prevents that wrapper from launching the
 task. This checks the commissioned driver's exact **3.2** log string, rather
 than parsing all possible USB 3 versions. Directly reusing an already-running
 node takes a different branch and does not repeat the USB check.
-
-The port photograph remains useful for resolving startup failure even though
-the standard launch path enforces the connection requirement. This is a static
-code finding, not a new hardware test; the script hashes are retained with the
-[September media review](../reference/media.md#author-supplied-september-media).
 
 ## Calibration stream semantics
 

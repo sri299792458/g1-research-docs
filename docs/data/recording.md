@@ -23,6 +23,8 @@ checksums. Calibration compression is lossless; its source files are unchanged. 
 `meta/`, `data/` and `videos/` directories together when extracting the stacking
 dataset, then open that directory with a compatible local LeRobot viewer.
 A Drive download link is not a dataset endpoint for the web viewer.
+Follow [Inspect the shared datasets](viewing.md) for extraction checks and
+the local browser-viewer setup.
 
 The calibration collection is a separate reproducibility download, not a
 LeRobot export. Its fitted bundle is already included in the source repository;
@@ -33,7 +35,7 @@ these links if storage ownership changes.
 ## August 25 demonstration export
 
 The five selected demo runs have been converted locally and reloaded for
-verification: **5 episodes, 8,272 frames, 696,652,855 bytes** (about 697 MB),
+verification: **5 episodes, 8,272 frames, about 697 MB**,
 at 15 FPS. Original recordings remain intact. The [Drive downloads](#dataset-downloads)
 are separate from the source clone, which does not include the dataset videos.
 
@@ -68,6 +70,10 @@ to RGB and the source recording when judging object contact or placement.
 Then inspect the conversion report for dropped samples, timing bounds and
 completion status. A functioning viewer is useful inspection tooling, but it
 does not replace those source checks.
+
+The walkthrough includes local viewer extensions and a larger export. The
+[public-viewer instructions](viewing.md) describe the reproducible RGB/depth
+inspection path for the five downloadable demo episodes.
 
 ## Calibration captures and LeRobot
 
@@ -132,6 +138,28 @@ produce a separate bag for each task while keeping the control process alive.
 The six-topic September 5 standing bag predates full camera recording, so its
 failed views cannot be reconstructed afterward.
 
+### Reuse the recorder in another task
+
+Keep the recorder owned by the task coordinator, with this order:
+
+1. Select the profile and output directory; retain source/model/configuration
+   provenance with the episode.
+2. Start the external writer and require its subscriptions before acquiring
+   command ownership.
+3. Keep it alive during motion, rejection, return and fault recovery.
+4. Resolve ownership, then stop the writer and inspect the completion manifest.
+
+The August body command is ROS `/lowcmd`; the later standing profile uses
+`/arm_sdk`. Both retain `/lowstate`, `/secondary_imu`, both Dex3 state/command
+pairs, the color/depth image and CameraInfo pairs, raw camera gyro/acceleration
+and `/tf_static`. Copy the selected source's `TopicSpec` definitions, not just a
+list of topic names: type, required status and timestamp meaning are part of
+the contract. See [source entry points](#follow-the-code).
+
+Save application decisions alongside the bag. A new task's inferred object
+pose, selected action or rejection reason will not appear in raw state topics
+unless the application records it explicitly.
+
 ## Keep writing away from control
 
 An external writer stores uncompressed MCAP. Per-task JSON records interpretation,
@@ -151,6 +179,23 @@ but not a hard timing guarantee for hardware operation.
 The skip-camera profile removes four image/CameraInfo topics while retaining
 gyro, acceleration and static TF. Perception may still run. Use it only when
 the missing image evidence is an intentional recording choice.
+
+### Check recording load without the robot
+
+After preparing the [control and MCAP environment](../start/setup.md#tabletop-control-planning-and-recording),
+the synthetic benchmark compares no recording, state/command recording and
+state/command plus RGB recording:
+
+```bash
+./tools/g1_recording_benchmark.sh --duration-s 15 --trials 3 \
+  --output-root /path/to/new-benchmark-output
+```
+
+The [benchmark wrapper](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/tools/g1_recording_benchmark.sh)
+uses localhost-only DDS, default domain 221 and synthetic benchmark topics.
+Inspect the timestamped `report.json` for loop gaps and recording results.
+This tests software/storage load with synthetic messages; it does not test
+real sensor transport, the complete depth workload or hardware recovery.
 
 ## Time and completeness
 
@@ -214,11 +259,10 @@ and reload, the tool prints the dataset episode index, published frame count,
 an episode before using the export. This command is a source-checked example;
 it was not run against a new recording while editing the guide.
 
-Indexing selects aligned messages before decoding images. A reported scan
-improved from 325.31 s to 11.67 s while retaining identical numerical results
-in a 196-frame state/action check. A 12.95 GiB, 3,447-frame conversion took
-74.61 s and was reloaded for verification. These are recorded machine/workload
-measurements, not a throughput specification.
+Indexing selects aligned messages before decoding images. This avoids decoding
+frames that will be discarded. Preserve numerical alignment and reload checks
+when optimizing this stage; a faster encoder does not establish an equivalent
+state/action dataset.
 
 Completed tasks are the default conversion input. Including failed runs needs
 an explicit override and visible outcome labels. Appending a dataset is an

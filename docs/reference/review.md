@@ -1,9 +1,8 @@
 # Remaining review needs
 
-This page tracks specific gaps that the source and available media cannot yet
-resolve. The guide's structure follows reusable systems; the next revision
-should improve a concrete explanation or supply missing evidence, rather than
-expand every experiment into an operating tutorial.
+This page tracks missing facts and reproduction checks. It distinguishes
+information an author or hardware inspection must supply from software checks
+that another contributor can carry out.
 
 ## Author and hardware review
 
@@ -15,57 +14,51 @@ expand every experiment into an operating tutorial.
 | Torso carrier | Lower M6 reach, measured upper engagement, and complete V7 assembly/board repeatability | V7/R2 is current; partial coupon trials and recorded CAD checks do not qualify the torso reference |
 | Licensing | Documentation license and asset attribution review | A public repository is not itself a blanket reuse license |
 
-## Demonstrations to select together
+## Connect demonstrations to their source runs
 
 The supplied physical stacking video now shows pickup, placement, release
 and hand withdrawal. Match it to the retained bag/run ID and cleanup outcome;
 the footage alone does not establish software ownership handback. The standing
 calibration video now shows the wrist markers and physical pose sequence;
-attach its exact session ID as well. A useful failure/correction clip would
-complement the embedded physical, tactile, planning, simulation and viewer demos.
+attach its exact session ID as well. The simulated retention clip also needs its
+candidate ID and generating report.
 For each, retain the run ID, date, source version and outcome. If a clip stops
 before return or cleanup, say so in the caption.
 
-The [media catalog](media.md) identifies reviewed source figures, available
-MuJoCo release videos and the selected September publication copies. The
-retention and stacking-plan demos are rendered/simulated; keep physical success
-claims tied to physical runs. Synthetic replacement images would not establish
-the hardware details these sections need.
+The [media catalog](media.md) identifies source figures and publication copies.
+The retention and stacking-plan demos are rendered/simulated; keep physical
+success claims tied to physical runs.
 
 ## Evidence and reproducibility gaps
 
-- Preserve private journals and full experimental artifacts in backed-up storage
-  with an explicit lab handoff. Public implementation links now resolve to
-  committed source; availability of raw experimental evidence is separate.
-- Preserve access to the published Drive datasets during the lab handoff.
-  The stacking archive is LeRobot; calibration retains its original capture
-  format, selected fit inputs and bundle.
+- Restore the [missing AprilCube runtime pin](sources.md#aprilcube-runtime-pin-availability)
+  or update it through a tested source change. Public print files are available,
+  but this currently blocks a fresh recursive tabletop checkout.
 - Review the operator runbook against the exact intended deployment revision.
-  Some setup scripts retain local workspace assumptions.
-- Keep September capture success separate from control release: September 5
-  returned normally; September 7 accepted captures but failed finger restoration.
+  Test installation in a clean workspace; the setup chapter identifies remaining
+  lab paths, message dependencies and PC2 prerequisites.
 - The newest manually preclosed calibration workflow needs regenerated cores
-  and physical validation. Old closed-route geometry is not reusable as-is.
-- Moving-target MPC remains experimental. The rejected padding approach and
-  held calibration sweep/issue/patch are not new tasks for this documentation.
+  and physical validation before it can be an operating procedure. Old closed-route
+  geometry is not reusable as-is; this is a capability limit, not a documentation
+  instruction to run an experiment.
 - Independently annotate physical placement/stack success before reporting a
-  success rate from the 13 completed recording boundaries.
+  success rate from the August 21 or August 25 completion records.
 - Reproduce the MuJoCo setup in a clean workspace and reconcile its older
   model-shape diagnostic. The pretrained OpenHomie policy is linked in the
   chapter; sampled demo frames were reviewed, without a quantitative stability test.
+- The [public dataset viewer](../data/viewing.md) loads the five demo episodes
+  and both video streams. Its clean dependency installation still needs a separate
+  reproduction; the walkthrough's additional local viewer changes are not all public.
+- Assembly reproduction needs the generated assets and qualification pools
+  listed by the source. Published scripts and selected reports are not a full
+  historical experiment archive.
 
-## Continuing the review
+## Handoff and presentation
 
-Prioritize missing facts that prevent a researcher from reproducing the setup
-or understanding the control/recording interfaces. The installation pinout and
-power procedure, final mount fit and exact media-to-run associations above
-need hardware or author evidence. An editorial rewrite cannot fill them.
-
-For each technical revision, check that the reader can identify the inputs,
-expected output, constraints, failure behavior and relevant implementation.
-Keep task-specific examples when they explain those points. Review the
-[control lifecycle](../control/ownership.md) and [recording contract](../data/recording.md)
-against the intended application before extending either.
+Preserve private experimental records separately, retain access to the Drive
+datasets and release videos, and resolve the license/attribution review before
+the lab handoff. [Maintenance](maintenance.md#publication-and-handoff) describes
+the required repository, storage and ownership updates.
 
 Desktop layout remains the current presentation target. Revisit mobile
 navigation, wide tables and diagram interaction during the final presentation

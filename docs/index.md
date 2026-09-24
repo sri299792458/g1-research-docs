@@ -28,7 +28,7 @@ a different experiment on the G1.
 | How an application acquires control, keeps holding during planning and returns control after a run | [Control ownership and safety](control/ownership.md), [operating and recovering](control/runbook.md) |
 | How the camera, printed targets and arm model establish where objects are | [Camera and network](hardware/camera.md), [targets and mounts](perception/targets.md), [object pose](perception/object-pose.md), [calibration](calibration/workflow.md) |
 | How grasp proposals are qualified and used in checked motion plans | [Grasp qualification](manipulation/grasp-atlas.md), [CuRobo integration](manipulation/planning.md) |
-| What was recorded, how it becomes LeRobot data and how to inspect it | [Recording and LeRobot](data/recording.md), [five demo episodes and calibration downloads](data/recording.md#dataset-downloads) |
+| What was recorded, how it becomes LeRobot data and how to inspect it | [Recording and LeRobot](data/recording.md), [download and inspect the datasets](data/viewing.md) |
 
 For physical setup, start with [the lab robot](hardware/robot.md).
 [Repositories and setup](start/setup.md) helps you choose the code and environment
@@ -107,6 +107,7 @@ Operating and recovering <control/runbook>
 :maxdepth: 1
 
 Recording and LeRobot <data/recording>
+Inspect the shared datasets <data/viewing>
 ```
 
 ```{toctree}
@@ -117,7 +118,7 @@ Recording and LeRobot <data/recording>
 Object pose estimation <perception/object-pose>
 Calibration model and workflow <calibration/workflow>
 Calibration results and limits <calibration/results>
-Investigation record <calibration/investigation>
+Calibration investigations <calibration/investigation>
 Body motion and state estimation <perception/state-estimation>
 ```
 

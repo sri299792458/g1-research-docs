@@ -54,10 +54,9 @@ deadline must not independently drop torque ownership.
 
 Nominal joint progress could report advancement while missing a moving goal.
 An object-relative criterion improved a simulated 5 mm target-movement case:
-81 windows over 20 s reached 3.704 mm and 0.954° terminal error. Reusing the
-worker reduced one post-grasp continuation solve to 2.01 s from roughly 14 s.
-These are specific replay/planning results, not successful moving-target
-hardware commissioning.
+81 windows over 20 s reached 3.704 mm and 0.954° terminal error. This supports
+using object-relative progress in that replay; it does not establish successful
+moving-target hardware operation.
 
 ## The unresolved physical constraint conflict
 
@@ -68,8 +67,7 @@ the 5 mm target tolerance.
 
 A tested padding workaround produced 194 valid windows without satisfying
 termination; error remained about 6.27 mm. The workaround was removed. It did
-not solve the incompatibility, and the notes do not authorize another physical
-attempt using that padding. A related corrected offset test exposed a real
+not solve the incompatibility. A related corrected offset test exposed a real
 0.06 mm self-collision and was rejected rather than hidden by a tolerance.
 
 The useful result is a clearer execution and rejection contract, together with

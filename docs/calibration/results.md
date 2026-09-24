@@ -9,6 +9,21 @@ split. Use capture/cleanup status to judge the collection, and separately
 observed task outcomes to judge manipulation. These three results answer
 different questions.
 
+## How to read the reported errors
+
+A reprojection residual is the distance in pixels between an observed marker
+corner and the corner predicted by the declared camera/arm model. Radial pixel
+RMS combines both image axes: `sqrt(mean(du² + dv²))`; it is not a direct
+millimetre error at the hand.
+
+**Training error** measures the samples used to fit parameters. **Grouped
+cross-validation (CV)** fits without a held pose group and evaluates that group;
+frames from the same stationary burst stay together. **Active-pose error**
+isolates the excited arm configurations instead of averaging them with easier
+stationary anchors. Compare the same metric, groups and model freedom. A lower
+number from a different session or a more flexible model is not sufficient
+evidence of a better deployed calibration.
+
 ## The August 12 stacking baseline
 
 The original bilateral dataset contained 41 left and 62 right observations.

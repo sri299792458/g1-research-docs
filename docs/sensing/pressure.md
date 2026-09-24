@@ -88,6 +88,27 @@ Rebaseline while untouched. Do not let an existing contact become the zero
 reference. Preserve raw arrays and validity masks alongside the display; a
 color overlay alone cannot reveal an unused slot or baseline mistake.
 
+### Save an untouched baseline
+
+With the pressure package built and its ROS/message workspace sourced, the
+[session recorder](https://github.com/sri299792458/dex3_pressure_tools/blob/e0b706df507160799b70732c7cc3244924ce8f5e/docs/LAB_PROTOCOLS.md)
+can record a baseline without a following touch session:
+
+```bash
+ros2 run dex3_pressure_tools dex3_pressure_session_recorder --ros-args \
+  -p baseline_seconds:=20.0 \
+  -p record_seconds:=0.0 \
+  -p prefix:=dex3_pressure_baseline \
+  -p output_dir:=/path/to/new-recording-directory
+```
+
+Keep the hand untouched and press Enter when prompted. The output includes
+JSON statistics and compressed NPZ samples with timing and motor positions.
+Check inactive slots, valid sample counts and per-taxel noise before using
+the result as a reference. The default topic is `/lf/dex3/right/state`; select
+`state_topic` explicitly when evaluating the higher-rate stream. This is a
+passive recording procedure; it does not close the hand.
+
 ## Mapping the fingers
 
 Physical RViz checks established right-hand motor order as thumb 0/1/2,

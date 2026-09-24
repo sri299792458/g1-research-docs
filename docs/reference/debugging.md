@@ -37,10 +37,33 @@ cover the corresponding sensing symptoms.
    failed-view image cannot be recreated from a successful capture thumbnail.
 5. Compare with the latest correction, not just the README at an earlier date.
 
-The September standing waist hold used measured slots 12–14 in mode 1 with
-`kp=300`, `kd=3`, `tau=0`. Its hardware response remains unverified in the final retained implementation.
-Earlier physical runs and offline replays must not be treated as validation of
-that final code path or a complete explanation of every elbow/wrist transient.
+## Worked example: a cleanup stall
+
+A local callback stream appeared to stop while the task was shutting down.
+Treating that symptom as a robot-side LowState failure would have targeted the
+wrong component. The independent recording still contained healthy LowState
+messages while the local teardown paused for about 209 ms.
+
+| Evidence | What it distinguishes |
+|---|---|
+| Task status and cleanup errors | The original failure from additional shutdown failures |
+| Independent `/lowstate` recording | A robot/network publication gap from a stalled subscriber in the control process |
+| Local timing around resource destruction | Whether control resources were torn down while ownership was still active |
+| PC2 terminal-state acknowledgement | Recovery completion from an attempted service call |
+
+The resulting rule is to resolve ownership before destroying dependent ROS and
+transport resources. The bag supports the diagnosis because it observes the
+stream independently; another log line from the stalled process would not
+provide the same evidence.
+
+Apply this method to a new run by first checking
+`raw_episode/episode_manifest.json`: was `/lowstate` actually recorded, and is
+the capture complete? Then compare the relevant receipt-time intervals with
+the task/cleanup timeline. Keep sensor header time distinct from bag receipt
+and local monotonic time; align clocks explicitly before comparing gaps.
+The [runbook's artifact table](../control/runbook.md#inspect-the-outcome)
+identifies the fields, and [recording](../data/recording.md#time-and-completeness)
+explains the clock limits.
 
 For calibration, start with the [investigation summary](../calibration/investigation.md)
 and consult the private detailed ledger when available.

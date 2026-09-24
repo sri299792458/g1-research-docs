@@ -37,9 +37,9 @@ marker cubes, a wrist-marker carrier and a ChArUco board. Use the sections below
 | `cube60-r3-secondary` | 20–25 | [60 mm secondary profile](https://github.com/sri299792458/g1-dex3-tabletop/blob/7400aff201c2f73ef2a64e546d72bd66cbe87fd6/config/tabletop/objects/cube60-r3-secondary.yaml) |
 
 For the 40 mm cube, the pinned AprilCube fork includes the
-[multicolor 3MF](https://github.com/sri299792458/aprilcube/blob/9381a52b936059a977e6c4e6fb4de60eae33129b/models/dex3_safe_cube/cube.3mf),
-[detector configuration](https://github.com/sri299792458/aprilcube/blob/9381a52b936059a977e6c4e6fb4de60eae33129b/models/dex3_safe_cube/config.json) and
-[print settings](https://github.com/sri299792458/aprilcube/blob/9381a52b936059a977e6c4e6fb4de60eae33129b/models/dex3_safe_cube/README.md).
+[multicolor 3MF](https://github.com/sri299792458/aprilcube/blob/80ed7c72ed00aef6dc70f77d8169a199e9a612cd/models/dex3_safe_cube/cube.3mf),
+[detector configuration](https://github.com/sri299792458/aprilcube/blob/80ed7c72ed00aef6dc70f77d8169a199e9a612cd/models/dex3_safe_cube/config.json) and
+[print settings](https://github.com/sri299792458/aprilcube/blob/80ed7c72ed00aef6dc70f77d8169a199e9a612cd/models/dex3_safe_cube/README.md).
 Use 100% scale. The documented starting settings are a 0.4 mm nozzle,
 0.20 mm layers, four walls and 15–20% gyroid infill. Keep supports and the seam
 away from the marker planes, and remove support material without sanding the
@@ -52,7 +52,7 @@ grasp pool but uses its own detector IDs. A visually similar cube with another
 size or dictionary does not match these profiles.
 
 For a new size or marker layout, use the pinned fork's
-[target generator](https://github.com/sri299792458/aprilcube/blob/9381a52b936059a977e6c4e6fb4de60eae33129b/README.md#generate-a-target) and retain the resulting
+[target generator](https://github.com/sri299792458/aprilcube/blob/80ed7c72ed00aef6dc70f77d8169a199e9a612cd/README.md#generate-a-target) and retain the resulting
 3MF, `config.json` and mesh together. Review the generated dimensions and IDs
 before printing, then create a matching runtime profile and qualify its grasp
 pool. The runtime configuration is not a slicer project.
@@ -64,17 +64,18 @@ grasp-generation study used 45 mm geometry before the physical runtime was
 corrected to 40 mm. These are different experiments. New 40 mm proposals were
 generated and qualified; scaling the 45 mm atlas would change contact geometry.
 
-The fork notes report 48/48 successful synthetic views and 14 focused tests.
-An unrelated `AuxCamera` import failure was excluded from those checks. This
-establishes the reported geometry/detection checks, not print quality for every
-physical target. A pit in a white marker cell was suspected to involve a nozzle
-change; the notes proposed repair and rechecking without confirming that cause
-or a completed repair.
+The fork reports 48/48 successful synthetic views and 14 focused tests.
+These check generated geometry and detection. Physical print defects still need
+inspection: a damaged white cell or softened marker edge changes the image the
+detector sees.
 
 The fork rounds the complete solid union rather than each voxel separately;
 the earlier per-voxel construction left seams in T-shaped parts. Marker planes
-stay flat while the printable, rendered and collision geometry share the
-rounded construction.
+stay flat. The printable 3MF and visual mesh share the rounded geometry;
+the MuJoCo collision boxes retain a conservative sharp envelope, as described
+in the [cube design](https://github.com/sri299792458/aprilcube/blob/80ed7c72ed00aef6dc70f77d8169a199e9a612cd/docs/dex3_safe_cube_design.md).
+Check the collision representation used by the task separately from the
+appearance of its rendered mesh.
 
 For a replacement target, preserve the mesh, marker corner coordinates,
 dictionary, IDs, scale and print revision together. Inspect the printed edges
