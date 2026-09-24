@@ -1,26 +1,31 @@
 # Working with the G1
 
-A practical guide to the lab's Unitree G1 research tools, developed through
-[sri299792458](https://github.com/sri299792458)'s summer 2026 work. Chapters
-explain how to use and extend the tools, with source code, procedures and the
-hardware lessons a future researcher needs to preserve.
+A practical guide to research tools and hardware lessons from work on the Unitree G1.
+
+[![Physical G1 cube stacking](docs/assets/posters/g1-physical-cube-stacking.jpg)](https://sri299792458.github.io/g1-research-docs/manipulation/tasks.html#physical-demonstration)
+
+*Watch the physical pickup, stacking and release demonstration in the guide.*
 
 **[Read the guide](https://sri299792458.github.io/g1-research-docs/)** ·
-[Review queue](docs/reference/review.md) · [Contributing](CONTRIBUTING.md)
+[Repositories and setup](https://sri299792458.github.io/g1-research-docs/start/setup.html) ·
+[Code index](https://sri299792458.github.io/g1-research-docs/reference/code-index.html) ·
+[Contributing](CONTRIBUTING.md)
 
-This is a complete first draft awaiting the author's review. It covers the
-initial MuJoCo digital twin, Dex3 sensing, printed targets, camera/arm calibration,
-GraspGen-X, CuRobo, physical cube manipulation and recording/LeRobot conversion.
-The guide retains calibration corrections through September 7 and fixture-fit
-evidence through September 13. Reported offline,
-simulation and hardware outcomes are distinguished; unresolved procedures are
-labelled at their point of use.
+Cube stacking brings together the work on calibrated perception, grasp
+qualification, CuRobo planning, control and recording. The guide explains those
+systems so another researcher can adapt them to a different experiment. It also
+covers the initial MuJoCo digital twin, Dex3 pressure sensing and printable
+targets and mounts, with photographs, demonstrations and pinned source links.
 
-Start with the [system map](docs/start/overview.md), then follow a chapter's
-explanation and code entry points. The [code index](docs/reference/code-index.md)
-links pinned public source and distinguishes the August demo baseline from the
-September calibration branch. Authorship and project
-context are under [About](docs/about.md). Earlier drafts remain in Git history.
+This repository contains the documentation; the
+[source catalog](docs/reference/sources.md) identifies the implementation
+repositories. Demonstrated August code and September calibration development
+remain distinct. Chapters distinguish physical trials, simulation and offline
+checks, and explain the limits of each result.
+
+The guide is a working draft by [srinivas](https://github.com/sri299792458).
+[About](docs/about.md) records the project context;
+the [review queue](docs/reference/review.md) lists the remaining gaps.
 
 ## Preview locally
 

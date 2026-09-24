@@ -245,7 +245,20 @@
       "video_codec": "h264",
       "has_audio": false,
       "sha256": "067ff365061749fa0fb1a80566ab7e47fa37436595c8e2908d9cc772f04afa8a",
-      "bytes": 464839
+      "bytes": 464839,
+      "additional_uses": [
+        {
+          "repository": "https://github.com/sri299792458/g1-research-docs",
+          "path": "docs/index.md",
+          "role": "linked poster"
+        },
+        {
+          "repository": "https://github.com/sri299792458/dex3_pressure_tools",
+          "branch": "main",
+          "path": "README.md",
+          "role": "linked poster"
+        }
+      ]
     },
     {
       "id": "dex3-simulated-retention-demo",
@@ -279,7 +292,15 @@
       "video_codec": "h264",
       "has_audio": false,
       "sha256": "ef78da65f81a42dc79f43626cff9e5dc396a49973838487eb3296cee88d989b8",
-      "bytes": 110655
+      "bytes": 110655,
+      "additional_uses": [
+        {
+          "repository": "https://github.com/sri299792458/g1-aprilcube-demo",
+          "branch": "main",
+          "path": "README.md",
+          "role": "linked poster"
+        }
+      ]
     },
     {
       "id": "curobo-stack-plan-demo",
@@ -347,7 +368,20 @@
       "video_codec": "h264",
       "has_audio": false,
       "sha256": "4450552d39fe97ae2c9afdb8c9fc90ffaab6c858b0ca90db9a8127457b9f89e1",
-      "bytes": 2197973
+      "bytes": 2197973,
+      "additional_uses": [
+        {
+          "repository": "https://github.com/sri299792458/g1-research-docs",
+          "path": "docs/index.md",
+          "role": "linked poster"
+        },
+        {
+          "repository": "https://github.com/sri299792458/g1pilot",
+          "branch": "dev",
+          "path": "README.md",
+          "role": "linked poster"
+        }
+      ]
     },
     {
       "id": "g1-cushion-seat-setup",
@@ -479,7 +513,25 @@
       "video_codec": "h264",
       "has_audio": false,
       "sha256": "2999cf0720a33e724fdc6fe40eaba0d88113ead2b92a2036bbbe4c37132bba3f",
-      "bytes": 39950563
+      "bytes": 39950563,
+      "additional_uses": [
+        {
+          "repository": "https://github.com/sri299792458/g1-research-docs",
+          "path": "docs/index.md",
+          "role": "video"
+        },
+        {
+          "repository": "https://github.com/sri299792458/g1-research-docs",
+          "path": "README.md",
+          "role": "linked poster"
+        },
+        {
+          "repository": "https://github.com/sri299792458/g1-dex3-tabletop",
+          "branch": "main",
+          "path": "README.md",
+          "role": "linked poster"
+        }
+      ]
     },
     {
       "id": "g1-standing-calibration",
@@ -658,7 +710,15 @@
       "chapter": "perception/targets.md",
       "creator": "sri299792458; underlying Unitree models retain upstream attribution",
       "review": "Visually inspected; copied unchanged from the pinned published fixture repository.",
-      "original_archive_location": null
+      "original_archive_location": null,
+      "additional_uses": [
+        {
+          "repository": "https://github.com/sri299792458/robot-calibration-aprilcube-prototype",
+          "branch": "main",
+          "path": "README.md",
+          "role": "existing source image"
+        }
+      ]
     },
     {
       "id": "g1-torso-v7-cad",

@@ -1,48 +1,76 @@
 # Working with the G1
 
-This guide explains the tools and practical knowledge developed while working
-with the G1: controlling the robot, recording experiments, understanding its
-sensors and geometry, and building planning or simulation on those foundations.
-The aim is to help another researcher build a different experiment without
-having to rediscover the same failures.
+Tools and practical lessons for building research experiments on the Unitree G1.
 
-## Start with the reusable systems
+<figure class="research-video">
+  <video controls playsinline preload="none" poster="_static/g1-physical-cube-stacking.jpg" width="1920" height="1080" aria-label="Physical G1 cube pickup, stacking and hand withdrawal" aria-describedby="home-stacking-caption">
+    <source src="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-physical-cube-stacking.mp4" type="video/mp4">
+    Your browser cannot play this video. Use the MP4 link below.
+  </video>
+  <figcaption id="home-stacking-caption">The G1 picks up a marker cube, stacks it on another, releases it and withdraws its hand. Physical robot demonstration, 91 seconds; silent.</figcaption>
+  <p class="video-download"><a href="https://github.com/sri299792458/g1-research-docs/releases/download/media-2026-09-21/g1-physical-cube-stacking.mp4">Open or download the video (MP4, 40 MB)</a></p>
+</figure>
 
-| What you need | Start here |
+Cube stacking brought together the main parts of this work: camera and arm
+calibration, object pose estimation, offline grasp qualification, CuRobo planning,
+robot control and experiment recording. The
+[demonstration chapter](manipulation/tasks.md) explains how those pieces fit
+together and connects the result to its implementation and recorded evidence.
+
+This guide explains the engineering behind that result, including the failures
+that shaped the tools. Use it to understand the demonstrated system or to build
+a different experiment on the G1.
+
+## Behind the demonstration
+
+| What you want to understand or reuse | Read next |
 |---|---|
-| Acquire control, hold during slow work and recover from failures | [Control ownership and safety](control/ownership.md), [operating and recovering](control/runbook.md) |
-| Record an experiment and inspect the result | [Recording, signals and LeRobot conversion](data/recording.md), [dataset downloads](data/recording.md#dataset-downloads) |
-| Prepare the robot and its sensors | [Hardware and hand installation](hardware/robot.md), [camera/network](hardware/camera.md), [pressure sensing](sensing/pressure.md) |
-| Understand or improve camera/arm geometry | [Targets and mounts](perception/targets.md), [calibration](calibration/workflow.md), [completed investigations](calibration/investigation.md) |
-| Add grasping or motion planning | [Grasp qualification](manipulation/grasp-atlas.md), [CuRobo integration](manipulation/planning.md) |
-| Develop against a simulated robot | [Initial MuJoCo digital twin](simulation/mujoco.md) |
+| How an application acquires control, keeps holding during planning and returns control after a run | [Control ownership and safety](control/ownership.md), [operating and recovering](control/runbook.md) |
+| How the camera, printed targets and arm model establish where objects are | [Camera and network](hardware/camera.md), [targets and mounts](perception/targets.md), [object pose](perception/object-pose.md), [calibration](calibration/workflow.md) |
+| How grasp proposals are qualified and used in checked motion plans | [Grasp qualification](manipulation/grasp-atlas.md), [CuRobo integration](manipulation/planning.md) |
+| What was recorded, how it becomes LeRobot data and how to inspect it | [Recording and LeRobot](data/recording.md), [five demo episodes and calibration downloads](data/recording.md#dataset-downloads) |
 
-The [cube-stacking demonstration](manipulation/tasks.md) is an integration
-example, showing how several of these systems were exercised together.
-Assembly and moving-target experiments record further lessons and unresolved
-limits for extending the system.
+For physical setup, start with [the lab robot](hardware/robot.md).
+[Repositories and setup](start/setup.md) helps you choose the code and environment
+for the part you want to use. When something fails,
+[debugging from evidence](reference/debugging.md) connects symptoms to the
+observations that changed the implementation.
 
-The demonstrated manipulation code and later experimental calibration code
-remain distinct. Use [repositories and setup](start/setup.md) to choose an
-environment and the [source catalog](reference/sources.md) to identify its revision.
+## Simulation and hand sensing
 
-## How to use the guide
+These investigations have their own setups and results. The initial MuJoCo
+backend supports the G1Pilot arm and hand interfaces. The pressure tools inspect
+Dex3 sensor readings without publishing hand commands.
 
-Hardware pages pair photographs or CAD views with files and fitting details.
-Operating pages explain prerequisites, actions and outcomes. Implementation
-pages explain the design, failures that shaped it and the code to change.
-Diagrams appear where a sequence or relationship needs a visual explanation.
+<div class="media-pair">
+  <figure>
+    <a href="simulation/mujoco.html#demonstrations"><img src="_static/mujoco-rviz-short-demo.jpg" width="1280" height="720" loading="lazy" alt="RViz arm-pose controls beside the G1 in MuJoCo"></a>
+    <figcaption><a href="simulation/mujoco.html">Initial MuJoCo digital twin</a> — arm and hand demonstrations, model choices and the SDK-facing simulation backend.</figcaption>
+  </figure>
+  <figure>
+    <a href="sensing/pressure.html#seeing-the-pressure-display"><img src="_static/dex3-tactile-rviz-demo.jpg" width="1280" height="720" loading="lazy" alt="Dex3 taxel locations and changing pressure-count colors in RViz"></a>
+    <figcaption><a href="sensing/pressure.html">Dex3 pressure sensing</a> — raw readings, baseline-relative visualization and the physical mapping study.</figcaption>
+  </figure>
+</div>
 
-For code work, start with the [system map and entry points](start/overview.md)
-and the relevant chapter. The [code index](reference/code-index.md) supplies
-commit-pinned files, symbols and file hashes for readers and coding agents.
-The prose records assumptions and evidence that a file list alone cannot convey.
+[Assembly and support experiments](manipulation/assembly.md) and
+[moving-target MPC](manipulation/mpc.md) explain further planning studies and
+their unresolved limits.
 
-This is a working draft. Remaining gaps include parts of the electrical
-installation procedure, some physical fit checks and run-to-video associations;
-see the [review queue](reference/review.md). To improve a chapter, follow
-[Maintaining this guide](reference/maintenance.md). [About](about.md) records
-authorship and project context.
+## Working with the code
+
+The [system map](start/overview.md) explains the component boundaries; the
+[code index](reference/code-index.md) links the files and functions discussed
+in the chapters. Use the chapter's assumptions and failure behavior alongside
+those links when working with a coding agent.
+
+The guide distinguishes the demonstrated August tabletop code from September
+calibration development. [Sources and attribution](reference/sources.md)
+identifies the published revisions and upstream work.
+
+This is a working draft. [Remaining review needs](reference/review.md) records
+specific gaps. [About](about.md) describes authorship and project context;
+[maintaining the guide](reference/maintenance.md) explains how to extend it.
 
 ```{toctree}
 :hidden:
