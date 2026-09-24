@@ -31,9 +31,6 @@ success claims tied to physical runs.
 
 ## Evidence and reproducibility gaps
 
-- Restore the [missing AprilCube runtime pin](sources.md#aprilcube-runtime-pin-availability)
-  or update it through a tested source change. Public print files are available,
-  but this currently blocks a fresh recursive tabletop checkout.
 - Review the operator runbook against the exact intended deployment revision.
   Test installation in a clean workspace; the setup chapter identifies remaining
   lab paths, message dependencies and PC2 prerequisites.

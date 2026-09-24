@@ -36,20 +36,18 @@ chapter; the consolidated `main` now includes that design and the bundle tools.
 
 ## Choose a tabletop checkout
 
-The tabletop baseline has one known public-dependency gap: its pinned AprilCube
-commit is not currently available from the configured GitHub fork. See
-[source availability](../reference/sources.md#aprilcube-runtime-pin-availability).
-The checkout commands below identify the intended versions, but recursive
-submodule setup cannot finish on a fresh machine until that pin is restored or
-replaced with a tested version. Downloading the public fixture files or viewing
-the datasets does not depend on this runtime setup.
+The checkouts below include the published AprilCube dependency. Its detector
+implementation, tests and assets match the original local version used by
+tabletop; the [source catalog](../reference/sources.md#aprilcube-dependency-revisions)
+records the dependency revision change. Use these checkout commits when
+installing, even where a code link points to an earlier, unchanged source file.
 
 For the August 25 demo baseline:
 
 ```bash
 git clone --branch main https://github.com/sri299792458/g1-dex3-tabletop.git
 cd g1-dex3-tabletop
-git switch --detach 7400aff201c2f73ef2a64e546d72bd66cbe87fd6
+git switch --detach 61890c022f5d4130a08d3ae85321637576d47107
 git submodule update --init --recursive
 ```
 
@@ -61,7 +59,7 @@ runtime and route requirements stay explicit:
 git clone --branch experimental/september-calibration \
   https://github.com/sri299792458/g1-dex3-tabletop.git g1-calibration-dev
 cd g1-calibration-dev
-git switch --detach 59c21b1388c636176dea67ea7ed3e253f8510783
+git switch --detach 5d3dbed464f4bd4f3e8f1078409e3fc40a7e1f32
 git submodule update --init --recursive
 ```
 
