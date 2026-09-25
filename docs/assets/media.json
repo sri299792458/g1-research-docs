@@ -734,6 +734,26 @@
       "creator": "sri299792458; underlying Unitree models retain upstream attribution",
       "review": "Visually inspected; copied unchanged from the pinned published fixture repository.",
       "original_archive_location": null
+    },
+    {
+      "id": "g1-wrist-spacing-caliper",
+      "path": "assets/images/g1-wrist-spacing-caliper.png",
+      "source_file": "Author-supplied photograph (chat attachment, supplied September 24, 2026)",
+      "source_sha256": "d69c4a1a063609ca77df748c652aeb86db2f339edcc0fe647f0db2e9766e1894",
+      "sha256": "d69c4a1a063609ca77df748c652aeb86db2f339edcc0fe647f0db2e9766e1894",
+      "bytes": 1303926,
+      "width": 850,
+      "height": 1133,
+      "context": "hardware-photo",
+      "caption": "Physical wrist-spacing check with a caliper display reading 51.38 mm. Operator-confirmed measurement direction supports the near-51 mm hypothesis; the photograph alone does not establish joint-axis datums, both-wrist dimensions or motor identity.",
+      "chapter": "calibration/investigation.md",
+      "creator": "sri299792458",
+      "review": "Original attachment visually inspected and copied byte-for-byte. PNG has no EXIF or text metadata. Context checked against the retained September 7 measurement record and investigation ledger G03–G04; the displayed reading was not imposed on the calibration fits.",
+      "original_archive_location": null,
+      "preparation": {
+        "kind": "copied-unchanged",
+        "note": "Use the supplied 850 by 1133 PNG without cropping, resampling, annotation or pixel edits."
+      }
     }
   ],
   "publication_release": {

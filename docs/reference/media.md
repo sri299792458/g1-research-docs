@@ -47,6 +47,7 @@ The originals and the PowerPoint remain separate source records.
 |---|---|---|
 | `realsense-pc2-usb-ports` | [Camera troubleshooting](../hardware/camera.md) | August 3 phone photograph |
 | `realsense-head-pitch-witness-mark` | [Head-pitch reference](../hardware/camera.md#head-pitch-witness-mark) | September 21 photograph; author identifies the white witness mark |
+| `g1-wrist-spacing-caliper` | [Wrist-spacing investigation](../calibration/investigation.md#the-46-mm-versus-51-mm-wrist-spacing) | Author-supplied original photograph; caliper display reads 51.38 mm; the chapter distinguishes that reading from verified joint-axis spacing |
 | `printed-target-collection` | [Printed targets](../perception/targets.md) | September 21 photograph of cubes, wrist carrier and board |
 | `cushioned-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Chair with its cushion; September 21 photograph |
 | `rigid-chair-reference` | [Physical support](../hardware/robot.md#physical-support-is-part-of-the-experiment) | Same chair with the cushion removed; author-supplied 850 × 1133 px photograph |

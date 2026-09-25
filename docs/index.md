@@ -61,8 +61,8 @@ their unresolved limits.
 
 The [system map](start/overview.md) explains the component boundaries; the
 [code index](reference/code-index.md) links the files and functions discussed
-in the chapters. Use the chapter's assumptions and failure behavior alongside
-those links when working with a coding agent.
+in the chapters. **[For agents reading this guide](start/overview.md#for-agents-reading-this-guide)**
+gives the reading order, source-version conventions and evidence requirements.
 
 The guide distinguishes the demonstrated August tabletop code from September
 calibration development. [Sources and attribution](reference/sources.md)

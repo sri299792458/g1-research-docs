@@ -58,23 +58,34 @@ command. A larger grasp pool may add no usable pickups if the approach or
 closing sweep intersects the support. The chapter invariants explain these
 interfaces in detail.
 
-## Using this guide with an agent
+(using-this-guide-with-an-agent)=
+## For agents reading this guide
 
-Point the agent at the subsystem's Markdown page and its source checkout.
-Have it read the purpose, assumptions and evidence, then trace the mapped
-symbols before proposing a change. A useful task description is:
+Start with the [homepage](../index.md) for the scope of the work, then use the
+[component table](#enter-through-the-component-you-want-to-reuse) to select the
+relevant chapter. Read its explanation, figure captions and limitations together.
 
-```text
-Read docs/manipulation/planning.md and its mapped source functions.
-Trace how the request becomes an installed plan. Explain which values are
-measured and which are active commands, and identify the existing regression
-checks before proposing changes. Report any source-version mismatch.
-```
+1. **Identify the source version.** The August demonstration and September
+   calibration development are separate tabletop branches. Consult
+   [sources](../reference/sources.md) and use the [setup revisions](setup.md)
+   for installation; a code link may identify an earlier, unchanged file.
+2. **Follow the implementation.** Use the chapter's code links and the
+   [code index](../reference/code-index.md), or its
+   [JSON map](../assets/code-map.json), to locate files, symbols and revisions.
+   Check any available checkout against those references before describing its
+   behavior. Read the linked tests for what they actually establish.
+3. **Keep the evidence attached to the claim.** Distinguish physical trials,
+   simulation, offline checks and unvalidated implementations. A diagram explains
+   relationships; a photograph shows the visible setup. Neither supplies missing
+   measurements, an exact source-run association or a successful hardware test.
+4. **Read completed investigations before recommending experiments.** For
+   calibration, consult [what was tested](../calibration/investigation.md) and
+   [the reported results](../calibration/results.md). An unresolved error does
+   not mean the listed hypotheses remain untested.
 
-Where present, a diagram supplies relationships. Code links supply locations;
-the explanation supplies meaning and limits. For calibration, read the [investigation summary](../calibration/investigation.md)
-and the experimental branch's `AGENTS.md` first. If you have access to the
-private detailed ledger, use its completed results and operator corrections too.
+When evidence is missing, identify the missing fact and the conclusion it limits.
+The public chapters supply the reading context; private working notes are not
+a prerequisite. Reading a procedure does not authorize operating the robot.
 
 ## Validation by subsystem
 

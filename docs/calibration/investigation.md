@@ -36,11 +36,33 @@ uncertainties.
 
 ## The 46 mm versus 51 mm wrist spacing
 
-A caliper measurement was approximately 51 mm in the direction parallel to
-the gold CAD line; the reviewed photograph appeared to show 51.38 mm. The
-precise side-specific value, repeated-measurement uncertainty and motor variant
-were not established. A manual version number and `mode_machine=5` do not
-identify a 4010 or 5010 motor.
+The quantity under investigation is the shortest distance between the
+wrist-pitch and wrist-yaw rotation axes. The
+[baseline model](https://github.com/sri299792458/g1-dex3-tabletop/blob/61890c022f5d4130a08d3ae85321637576d47107/config/urdf/g1_29dof_rev_1_0_g1pilot_collision.urdf#L945)
+places the wrist-yaw origin **46 mm** along the wrist-pitch frame's X direction;
+the inspected [vendor 5010 model](https://github.com/unitreerobotics/unitree_ros/blob/f3772ce54c56ef2d34c6aee8100bc768896c7d19/robots/g1_description/g1_29dof_mode_13.urdf#L949)
+uses **51 mm**. This model dimension is distinct from an arbitrary distance
+between points on the outside covers.
+
+The operator measured the wrist after consulting the CAD reference and reported
+a value closer to 51 mm, with the measurement direction confirmed along the
+connecting link. The supplied photograph records that physical check:
+
+```{figure} ../assets/images/g1-wrist-spacing-caliper.png
+:name: wrist-spacing-caliper
+:alt: Digital caliper held at the G1 wrist during the spacing check, with both jaws and the display reading 51.38 mm visible.
+:width: 460px
+
+**Physical wrist-spacing check.** The caliper display reads **51.38 mm**.
+```
+
+The operator's measurement supports the near-51 mm geometric hypothesis.
+The displayed value is not, by itself, a verified axis-to-axis dimension:
+the jaw contact locations must be related to the joint-axis datums. The retained
+record does not establish the wrist side, repeated-measurement uncertainty or
+both wrists' dimensions. It also does not establish the installed motor variant;
+neither the manual version nor `mode_machine=5` supplies that identification.
+The photograph's reading was not imposed as a constraint on the fits below.
 
 The two-run geometry study used 46 conditions over 104 holds and 208
 observations, with pose families withheld across sessions. Shared geometry
